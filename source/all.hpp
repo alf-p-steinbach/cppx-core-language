@@ -5,4 +5,5 @@
 #include <cppx-core-language/tmp/all.hpp>
 #include <cppx-core-language/syntax/all.hpp>
 #include <cppx-core-language/system/all.hpp>
+#include <cppx-core-language/type-checking/all.hpp>
 #include <cppx-core-language/types/all.hpp>
