@@ -20,9 +20,11 @@
 ///     const C_str s = "Blah";
 ///
 /// Of course, for this particular example it would be silly to throw away the string
-/// length information, so one should better use `std::string_view` and write
+/// length information, so one should better just reference the string data,
 ///
-///     constexpr string_view s = "Blah";
+///     constexpr auto& s = "Blah";
+///
+/// ... which supports compile time construction of a `string_view`, if desired.
 
 #include <cppx-core-language/syntax/type-builders.hpp>      // cppx::(Type_)
 #include <cppx-core-language/tmp/type-mutators.hpp>         // cppx::(Const_, Unconst_)
