@@ -5,5 +5,5 @@
 #include <cppx-core-language/meta-macro/macro-invoke_macro.hpp>
 #include <cppx-core-language/meta-macro/macro-joined.hpp>
 #include <cppx-core-language/meta-macro/macro-n_arguments.hpp>
-#include <cppx-core-language/meta-macro/macro-repeat.hpp>
+#include <cppx-core-language/meta-macro/macro-duplicate.hpp>
 #include <cppx-core-language/meta-macro/only_lvalue_ref_to.hpp>
