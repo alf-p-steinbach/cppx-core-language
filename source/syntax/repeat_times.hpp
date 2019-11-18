@@ -10,8 +10,7 @@ namespace cppx
     template< class Func, class... Args >
     inline void repeat_times( const Size n, const Func& f, Args&&... args )
     {
-        for( Index i = 0; i < n; ++i )
-        {
+        for( Index i = 0; i < n; ++i ) {
             f( forward<Args>( args )... );
         }
     }

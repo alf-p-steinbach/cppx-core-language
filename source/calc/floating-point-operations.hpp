@@ -20,13 +20,10 @@ namespace cppx
             double weight = base;
             for( int n = exponent; n != 0; weight *= weight )
             {
-                if( is_odd( n ) )
-                {
+                if( is_odd( n ) ) {
                     result *= weight;
                     --n;
-                }
-                else
-                {
+                } else {
                     n /= 2;
                 }
             }
