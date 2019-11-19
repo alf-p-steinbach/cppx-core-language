@@ -1,13 +1,15 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
+#include <cppx-core-language/syntax/Sequence_.hpp>      // cppx::zero_to
 #include <cppx-core-language/system/size-types.hpp>     // cppx::Index
 
 #ifndef CPPX_NO_DOLLARS_PLEASE
 #   define $repeat_times    CPPX_REPEAT_TIMES   ///< \dollarname{repeat_times}
 #endif
 
-// An ordinary counting loop avoids sillywarnings about unused loop variable, and
-// if needed also allows access to the iteration count and limit.
+
+// Using a range based loop allows the loop index variable to be `const`.
 //
 #define CPPX_REPEAT_TIMES( n ) \
-    for( cppx::Index _i = 0, _i_beyond = n; _i < _i_beyond; ++_i )
+    if( const cppx::Index _n [[maybe_unused]] = n; false ) {} else \
+        for( const cppx::Index _i [[maybe_unused]]: cppx::zero_to( _n ) )
