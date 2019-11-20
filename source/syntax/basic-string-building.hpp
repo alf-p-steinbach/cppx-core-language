@@ -69,7 +69,7 @@ namespace cppx
         template< class Type >
         inline auto operator<<( string&& s, Type const& value )
             -> string&&
-        { return  move( operator<<( s, value ) ); }
+        { return move( operator<<( s, value ) ); }
 
     }  // namespace basic_string_building
 
