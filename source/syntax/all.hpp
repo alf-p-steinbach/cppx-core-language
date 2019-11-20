@@ -1,5 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
+#include <cppx-core-language/syntax/basic-string-building.hpp>
 #include <cppx-core-language/syntax/hopefully-or-fail.hpp>
 #include <cppx-core-language/syntax/macro-define_tag.hpp>
 #include <cppx-core-language/syntax/macro-items_of.hpp>

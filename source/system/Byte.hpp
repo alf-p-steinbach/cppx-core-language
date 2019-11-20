@@ -27,6 +27,8 @@ namespace cppx
     using Byte              = unsigned char;
     using Signed_byte       = signed char;
 
+    constexpr auto max_byte = static_cast<Byte>( -1 );
+
     /// \brief The number of bytes per instance of a type.
     template< class Type > constexpr Size bytes_per_ = sizeof( Type );
 

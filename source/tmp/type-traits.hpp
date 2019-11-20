@@ -10,8 +10,15 @@
 /// \make_name_ref{cppx,is_fixed_point_},
 /// \make_name_ref{cppx,is_floating_point_},
 /// \make_name_ref{cppx,is_integral_},
-/// \make_name_ref{cppx,is_integral_} and
-/// \make_name_ref{cppx,is_unsigned_}.
+/// \make_name_ref{cppx,is_signed_},
+/// \make_name_ref{cppx,is_unsigned_},
+/// \make_name_ref{cppx,is_arithmetic_},
+/// \make_name_ref{cppx,is_enum_},
+/// \make_name_ref{cppx,is_nullpointer_},
+/// \make_name_ref{cppx,is_pointer_},
+/// \make_name_ref{cppx,is_scalar_},
+/// \make_name_ref{cppx,is_a_basic_char_type_} and
+/// \make_name_ref{cppx,is_a_char_type_}.
 ///
 /// `is_based_and_derived_` clarifies the roles of the template arguments, which are not
 /// apparent in `std::is_base_of_t`. `is_based_and_derived_` is also more clean regarded
@@ -70,12 +77,28 @@ namespace cppx
     constexpr Truth is_enum_                = std::is_enum_v<T>;
 
     template< class T >
-    constexpr Truth is_null_pointer_        = std::is_null_pointer_v<T>;
+    constexpr Truth is_nullpointer_         = std::is_null_pointer_v<T>;
 
     template< class T >
     constexpr Truth is_pointer_             = std::is_pointer_v<T>;
 
     template< class T >
     constexpr Truth is_scalar_              = std::is_scalar_v<T>;
+
+    //----------------------------------------------------------------------------------------------
+
+    template< class Char >
+    constexpr Truth is_a_byte_char_type_ =
+        is_same_type_<Char, char> or
+        is_same_type_<Char, unsigned char> or
+        is_same_type_<Char, signed char>;
+
+    template< class Char >
+    constexpr Truth is_a_char_type_ =
+        is_a_byte_char_type_<Char> or
+        is_same_type_<Char, wchar_t> or
+        is_same_type_<Char, char16_t> or
+        is_same_type_<Char, char32_t>;
+        // For C++20 maybe add `char8_t` Ada-ish monstrosity to the list.
 
 }  // namespace cppx
