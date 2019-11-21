@@ -26,7 +26,7 @@ Each main area of functionality is a sub-folder in the library.
 
 # 2. Installation.
 
-After cloning, checking out or downloading library:
+After cloning, checking out or downloading the library:
 
 1. Make the source code available via C++ include path &ldquo;`cppx-core-language/`&rdquo;.  
    For example, `#include <cppx-core-language/all.hpp>` should now work in C++ source code.  
