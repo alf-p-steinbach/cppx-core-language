@@ -1,0 +1,3 @@
+[submodule "dependencies\\C-header-wrappers"]
+	path = dependencies\\C-header-wrappers
+	url = https://github.com/alf-p-steinbach/C-header-wrappers
