@@ -4,7 +4,7 @@
 #include <cppx-core-language/calc/integer-operations.hpp>
 #include <cppx-core-language/calc/named-numbers.hpp>
 #include <cppx-core-language/calc/number-type-properties.hpp>
-#include <cppx-core-language/calc/std-calc.hpp>
+#include <cppx-core-language/calc/stdlib-headers.hpp>
 
 namespace cppx
 {
