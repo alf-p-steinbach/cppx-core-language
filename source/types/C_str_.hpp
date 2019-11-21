@@ -26,17 +26,14 @@
 ///
 /// ... which supports compile time construction of a `string_view`, if desired.
 
-#include <cppx-core-language/syntax/type-builders.hpp>      // cppx::(Type_)
-#include <cppx-core-language/tmp/type-modifiers.hpp>        // cppx::(Const_, Unconst_)
-
 namespace cppx
 {
     template< class Char >
-    using C_str_            = Type_<const Char*>;
+    using C_str_            = const Char*;
 
     // Note: Unconst_ introduces an indirection that foils template arg deduction.
     template< class Char >
-    using Mutable_c_str_    = Type_<Char*>;
+    using Mutable_c_str_    = Char*;
 
     using C_str                 = C_str_<char>;             // Effectively `char const*`.
     using Wide_c_str            = C_str_<wchar_t>;          // Effectively `wchar_t const*`.
