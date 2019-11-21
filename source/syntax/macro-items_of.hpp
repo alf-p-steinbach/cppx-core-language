@@ -3,7 +3,7 @@
 /// \brief `$items_of` eases use of standard library functions, e.g.
 /// `sort( $items_of( numbers ) )`.
 
-#include <cppx-core-language/meta-macro/only_lvalue_ref_to.hpp>  // cppx::only_lvalue_ref_to
+#include <cppx-core-language/meta-macro/lvalue_ref_to.hpp>  // cppx::lvalue_ref_to
 
 #include <iterator>         // std::(begin, end)
 
@@ -21,4 +21,4 @@
 /// Don't call this macro with an lvalue expression that has side effects.
 
 #define CPPX_ITEMS_OF( c ) \
-    std::begin( cppx::only_lvalue_ref_to( c ) ), std::end( c )
+    std::begin( cppx::lvalue_ref_to( c ) ), std::end( c )
