@@ -1,8 +1,8 @@
 # The cppx-core-language micro library
 
-Originally a sub-folder in the *cppx-core* project, the ***cppx-core-language*** header only micro-library provides workarounds for various shortcomings of the C++ core language.
+Originally a sub-folder in the *cppx-core* project, the ***cppx-core-language*** header micro-library provides workarounds for various shortcomings of the C++ core language.
 
-For example, the C++ `bool` type converts implicitly to any built-in type, and built-in types and pointers convert implicitly to `bool`. These all-directions implicit conversions sometimes cause problems with overload resolution, such as the infamous case of iostreams output of a function pointer resulting in the text “1”. *cppx-core-language* therefore offers the type `cppx::Truth`, which converts implicitly only to and from `bool`, as a drop-in replacement for `bool`.
+For example, the all-directions implicit conversions for the built-in `bool` type sometimes cause problems with overload resolution. One infamous case is that of iostreams output of a function pointer resulting in the text “1”, via an unexpected conversion to `bool`. *cppx-core-language* therefore offers the alternative `cppx::Truth`, which converts implicitly only to and from `bool`, as a drop-in replacement.
 
 Even if you don&rsquo;t use it for anything else you may find it useful to use a `vector<Truth>` instead of `vector<bool>`, because with the `vector<Truth>` you can have a reference or pointer to an item.
 
