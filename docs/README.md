@@ -12,7 +12,7 @@ Each main area of functionality is a sub-folder in the library.
 
 |Folder:     | Is about:  |
 |------------|------------|
-|[ascii](../source/ascii)    | ASCII text handling support, such as names of control characters (plus the name `bad_char` defined as `DEL`), ASCII range checking, widening, uppercasing and lowercasing, and whitespace checking and other classification functions. The C standard library defines some of this but in a form that&rsquo;s difficult to use correctly and easy to use incorrectly. For example, the *cppx-core-language* library's single code overload of `ascii::is_whitespace` (1) checks whether the code is in the ASCII range, and if so (2) casts it to unsigned `Byte` before passing it to the C library&rsquo;s `isspace`, because that function has UB for negative values other than `EOF`.
+|[ascii](../source/ascii)    | ASCII text handling support, such as names of control characters (plus the name `bad_char` defined as `DEL`), ASCII range checking, widening, uppercasing and lowercasing, and whitespace checking and other classification functions. The C standard library defines some of this but in a form that&rsquo;s difficult to use correctly. For example, the *cppx-core-language* library's single code overload of `ascii::is_whitespace` (1) checks whether the code is in the ASCII range, and if so (2) casts it to unsigned `Byte` before passing it to the C library&rsquo;s `isspace`, because that function has UB for negative values other than `EOF`, and (3) casts the result from `int` to `char`.
 |[bit‑level](../source/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)). |
 |[calc](../source/calc)        | Calculations. Here is a header `<cppx-core-language/calc/stdlib-headers.hpp>` that includes all the relevant standard library calculation stuff, here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest absolute value of `T`.
 |[meta‑macro](../source/meta%2Dmacro)  | Mainly support for defining macros with lists of arguments. For example, `CPPX_APPLY` invokes a specified single-argument macro with each argument in an arbitrarily long argument list (or, OK, up to 63 arguments). For convenience, although `$` in a name is formally non-standard, `CPPX_APPLY` can also be written as `$apply`, and ditto for other macros. |
@@ -21,6 +21,20 @@ Each main area of functionality is a sub-folder in the library.
 |[tmp](../source/tmp)         | Template meta-programming support, or just, support for defining templates. A number of type traits such as `is_integral_`, type modifiers such as `Unref_` and `Unsigned_`, and the class templates `Enable_if_`, `Type_choice_` and `Type_carrier_`. The two first templates are simple wrappers around `std::enable_if_t` and `std::conditional_t`, mostly for readability. |
 |[type‑checking](../source/type%2Dchecking) | `downcasted_to` guarantees a downcast as opposed to a sideways cast, using a safe `dynamic_cast`; `is_of_derived_class` checks whether a pure downcast is possible; and `array_size_of` and `length_of_literal` do compile time size checking.  |
 |[types](../source/types)        | The `Truth` type is a boolean that doesn't implicitly convert to or from anything other than `bool`; the `Int_` template alias lets you specify an integral type via its bit width; `C_str` and family are type names for simple `char` pointers, indicating use for C strings; and `No_copy` and `No_copy_or_move` can be used as base classes with the properties indicated by the names. Essentially these are types and names that are missing in the core language as of C++17.   |
+
+---
+
+# 2. Installation.
+
+After cloning, checking out or downloading library:
+
+1. Make the source code available via C++ include path &ldquo;`cppx-core-language/`&rdquo;.  
+   For example, `#include <cppx-core-language/all.hpp>` should now work in C++ source code.  
+   ***Practical command info***: in Windows I prefer to use junctions in a common include folder, e.g., in that folder I&rsquo;d use the command `mklink /j cppx-core-language c:\somewhere\cppx-core-language\source`. And in \*nix a symbolic link would be natural. But just copying the source folder is also fine.
+
+2. Ditto, make the &ldquo;C header wrappers&rdquo; source code available via path &ldquo;`c/`&rdquo;.  
+   For example, `#include <c/stdio.hpp>` should work.  
+   &ldquo;C header wrappers&rdquo; is a project that *cppx-core-language* depends on. You find it as a GIT sub-module in the folder &ldquo;dependencies&rdquo;.
 
 
 ----
