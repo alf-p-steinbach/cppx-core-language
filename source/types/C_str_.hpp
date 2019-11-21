@@ -31,12 +31,12 @@
 
 namespace cppx
 {
-    // Enable_if_<is_a_cpp03_char_type_<Unconst_<Char>>>
     template< class Char >
-    using C_str_            = Type_<Const_<Char>*>;
+    using C_str_            = Type_<const Char*>;
 
+    // Note: Unconst_ introduces an indirection that foils template arg deduction.
     template< class Char >
-    using Mutable_c_str_    = Type_<Unconst_<Char>*>;
+    using Mutable_c_str_    = Type_<Char*>;
 
     using C_str                 = C_str_<char>;             // Effectively `char const*`.
     using Wide_c_str            = C_str_<wchar_t>;          // Effectively `wchar_t const*`.
