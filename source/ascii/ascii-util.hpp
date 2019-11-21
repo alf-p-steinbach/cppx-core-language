@@ -6,7 +6,6 @@
 #include <cppx-core-language/system/Byte.hpp>                   // cppx::Byte
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 #include <cppx-core-language/syntax/Span_.hpp>                  // cppx::span_of
-#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::(R_, P_)
 #include <cppx-core-language/tmp/type-traits.hpp>               // cppx::(is_integral_, is_a_char_type_)
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::(Unsigned_)
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
@@ -110,7 +109,7 @@ namespace cppx::ascii
     }
 
     template< class Char >
-    inline auto to_wide( const P_<const Char> s )
+    inline auto to_wide( const C_str_<Char> s )
         -> wstring
     {
         static_assert( is_a_char_type_<Char> );
