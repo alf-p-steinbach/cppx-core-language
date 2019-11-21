@@ -39,9 +39,8 @@ namespace cppx
     ///
     /// Essentially this is Horner's rule adapted to calculating a power, so that the
     /// number of floating point multiplications is at worst O(log2(n)).
-    template< class Number = double >
-    inline auto intpow( const Number base, const int exponent )
-        -> Number
+    inline auto intpow( const double base, const int exponent )
+        -> double
     {
         return (0?0
             : exponent == 0?        1.0

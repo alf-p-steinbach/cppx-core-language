@@ -21,7 +21,7 @@ namespace cppx
 
     /// \brief The number of 1-bits in an unsigned value.
     template< class Unsigned >
-    inline auto sum_of_bits( const uint16_t x ) noexcept
+    inline auto sum_of_bits( const Unsigned x ) noexcept
         -> int
     {
         static_assert( std::is_unsigned_v<Unsigned> );
