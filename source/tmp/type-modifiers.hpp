@@ -45,10 +45,10 @@ namespace cppx
     template< class Some_type >
     using Unconst_      = std::remove_const_t< Some_type >;
 
-    namespace type_mutators
+    namespace type_modifiers
     {
         CPPX_USE_CPPX(
             Unptr_, Unref_, Signed_, Unsigned_, Const_, Unconst_
         );
-    }  // namespace type_mutators
+    }  // namespace type_modifiers
 }  // namespace cppx

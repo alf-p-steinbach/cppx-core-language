@@ -27,7 +27,7 @@
 /// ... which supports compile time construction of a `string_view`, if desired.
 
 #include <cppx-core-language/syntax/type-builders.hpp>      // cppx::(Type_)
-#include <cppx-core-language/tmp/type-mutators.hpp>         // cppx::(Const_, Unconst_)
+#include <cppx-core-language/tmp/type-modifiers.hpp>        // cppx::(Const_, Unconst_)
 
 namespace cppx
 {
