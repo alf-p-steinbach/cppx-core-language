@@ -28,11 +28,12 @@ Each main area of functionality is a sub-folder in the library.
 
 <img align="right" style="padding-left: 1em" src="images/under-construction.25-pct.png">
 
-Further work on this library is expected to be additions.
+The library is still evolving, which means that *if* one wants to use the latest version, *and* one has used this library extensively, *and* e.g. a name changes in a new version, then there can be some cost of updating the client source code.
 
-Major changes in file locations or names, or of C++ identifiers, will probably not happen.
+Use in student projects is fine.
 
-However, the library is still evolving, which means that heavy use of it *can* incur some cost of updating the client source code when something changes, if it does.
+Further work on this library is expected to be additions. Major changes in file locations or file names, or of C++ identifiers, will probably not happen.
+
 
 ---
 
