@@ -22,9 +22,8 @@ Each main area of functionality is a sub-folder in the library.
 |[type‑checking](../source/type%2Dchecking) | `downcasted_to` guarantees a downcast as opposed to a sideways cast, using a safe `dynamic_cast`; `is_of_derived_class` checks whether a pure downcast is possible; and `array_size_of` and `length_of_literal` do compile time size checking.  |
 |[types](../source/types)        | The `Truth` type is a boolean that doesn't implicitly convert to or from anything other than `bool`; the `Int_` template alias lets you specify an integral type via its bit width; `C_str` and family are type names for simple `char` pointers, indicating use for C strings; and `No_copy` and `No_copy_or_move` can be used as base classes with the properties indicated by the names. Essentially these are types and names that are missing in the core language as of C++17.   |
 
----
 
-# 2. Installation.
+## 2. Installation & use.
 
 After cloning, checking out or downloading the library:
 
@@ -36,6 +35,13 @@ After cloning, checking out or downloading the library:
    For example, `#include <c/stdio.hpp>` should work.  
    &ldquo;C header wrappers&rdquo; is a project that *cppx-core-language* depends on. You find it as a GIT sub-module in the folder &ldquo;dependencies&rdquo;.
 
+Test with a simple C++ program using the include directive
+
+>     #include <cppx-core-language/all.hpp>
+
+---
+
+The automated tests use Boost Test framework and so running the automated unit tests additionally requires the Boost library.
 
 ----
 #### *Disclaimer*
@@ -48,7 +54,9 @@ Use in student projects is fine.
 
 Further work on this library is expected to be additions. Major changes in file locations or file names, or of C++ identifiers, will probably not happen.
 
+## 3. Tutorial.
 
----
+The code examples in this tutorial are all available via the “examples” top level folder.
+
 
 
