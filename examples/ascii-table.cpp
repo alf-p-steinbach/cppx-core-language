@@ -24,7 +24,7 @@ auto main() -> int
         cout << field << hex_digit( y );
         for( const int x: zero_to( 16 ) ) {
             const char code = 16*y + x;
-            const auto ch = (ascii::is_control_char( code )? ascii::del : code);
+            const auto ch = char( ascii::is_control_char( code )? ascii::del : code );
             cout << field << ch;
         }
         cout << endl;
