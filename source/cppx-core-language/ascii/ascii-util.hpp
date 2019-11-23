@@ -261,6 +261,15 @@ namespace cppx::ascii
     }
 
     template< class Code >
+    inline auto is_noncontrol_char( const Code code )
+        -> bool
+    {
+        static_assert( is_integral_<Code> );
+        // No need to call ::isprint.
+        return ascii::contains( code ) and not is_control_char( code );
+    }
+
+    template< class Code >
     inline auto is_letter( const Code code )
         -> bool
     {
