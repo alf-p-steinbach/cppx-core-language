@@ -4,6 +4,7 @@
 #include <cppx-core-language/tmp/Enable_if_.hpp>                // cppx::Enable_if_
 #include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_integral_
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::Unsigned_
+#include <cppx-core-language/calc/number-type-properties.hpp>   // cppx::(min_, max_)
 
 #include <c/assert.hpp>
 
@@ -54,9 +55,29 @@ namespace cppx{
             -> Integer
         { return static_cast<Integer>( 1 + m_last - m_first ); }
 
-        constexpr auto contains( const Integer x ) const noexcept
+        template< class Value_integer >
+        constexpr auto contains( const Value_integer x ) const noexcept
             -> Truth
-        { return m_first <= x and x <= m_last; }
+        {
+            if constexpr( max_<Value_integer> > max_<Integer> ) {
+                if( x > max_<Integer> ) {
+                    return false;
+                }
+            }
+            if constexpr( min_<Value_integer> < min_<Integer> ) {
+                // Here Value_integer is necessarily a signed type.
+                if constexpr( is_signed_<Integer> ) {
+                    if( x < min_<Integer> ) {
+                        return false;
+                    }
+                } else {
+                    if( x < 0 ) {       // Comparing to Integer(0) could wrap.
+                        return false;
+                    }
+                }
+            }
+            return m_first <= Unsigned( x ) and Unsigned( x ) <= m_last;
+        }
 
         auto begin() const noexcept  -> Iterator     { return Iterator( m_first ); }
         auto end() const noexcept    -> Iterator     { return Iterator( m_last + 1 ); }
@@ -84,8 +105,8 @@ namespace cppx{
         -> Sequence_<Integer>
     { return Sequence_<Integer>( 1, n ); }
 
-    template< class Integer >
-    auto is_in( const Sequence_<Integer>& seq, const Integer v ) noexcept
+    template< class Integer, class Value_integer >
+    inline constexpr auto is_in( const Sequence_<Integer>& seq, const Value_integer v ) noexcept
         -> Truth
     { return seq.contains( v ); }
 

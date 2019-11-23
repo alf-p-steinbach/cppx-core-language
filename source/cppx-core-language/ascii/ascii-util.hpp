@@ -2,7 +2,7 @@
 #include <cppx-core-language/ascii/ascii-character-names.hpp>   // cppx::ascii::/names/
 #include <cppx-core-language/syntax/macro-items_of.hpp>         // CPPX_ITEMS_OF
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_STD
-#include <cppx-core-language/syntax/Sequence_.hpp>              // cppx::Sequence_
+#include <cppx-core-language/syntax/Sequence_.hpp>              // cppx::(Sequence_, zero_to)
 #include <cppx-core-language/system/Byte.hpp>                   // cppx::Byte
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 #include <cppx-core-language/syntax/Span_.hpp>                  // cppx::span_of
@@ -98,42 +98,15 @@ namespace cppx::ascii
     }
 
 
-    //---------------------------------------- ascii::to_wide:
-
-    template< class Char >
-    inline auto to_wide( const basic_string_view<Char>& v )
-        -> wstring
-    {
-        static_assert( is_a_char_type_<Char> );
-        return wstring( v.begin(), v.end() );
-    }
-
-    template< class Char >
-    inline auto to_wide( const C_str_<Char> s )
-        -> wstring
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_wide( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char >
-    inline auto to_wide( const basic_string<Char>& s )
-        -> wstring
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_wide( basic_string_view<Char>( s ) );
-    }
-
-
     //----------------------------------------  Whitespace checking:
 
     // Is independent of locale
-    template< class Char >
-    inline auto is_whitespace( const Char ch )
+    template< class Code >
+    inline auto is_whitespace( const Code code )
         -> Truth
     {
-        static_assert( is_a_char_type_<Char> );
-        return ascii::contains( ch ) and cstdlib::is_byte_space( ch );
+        static_assert( is_integral_<Code> );
+        return ascii::contains( code ) and cstdlib::is_byte_space( code );
     }
 
     template< class Char >
@@ -184,20 +157,20 @@ namespace cppx::ascii
 
     //----------------------------------------  Uppercase/lowercase:
 
-    template< class Char >
-    inline auto is_lowercase( const Char ch )
+    template< class Code >
+    inline auto is_lowercase( const Code code )
         -> Truth
     {
-        static_assert( is_a_char_type_<Char> );
-        return 'a' <= ch and ch <= 'z';
+        static_assert( is_integral_<Code> );
+        return 'a' <= code and code <= 'z';
     }
 
-    template< class Char >
-    inline auto is_uppercase( const Char ch )
+    template< class Code >
+    inline auto is_uppercase( const Code code )
         -> Truth
     {
-        static_assert( is_a_char_type_<Char> );
-        return 'A' <= ch and ch <= 'Z';
+        static_assert( is_integral_<Code> );
+        return 'A' <= code and code <= 'Z';
     }
 
     template< class Char >
@@ -277,20 +250,30 @@ namespace cppx::ascii
 
     //----------------------------------------  Other classification:
 
-    template< class Char >
-    inline auto is_letter( const Char ch )
+    template< class Code >
+    inline auto is_control_char( const Code code )
         -> bool
     {
-        static_assert( is_a_char_type_<Char> );
-        return is_lowercase( ch ) or is_uppercase( ch );
+        static_assert( is_integral_<Code> );
+        static_assert( space == 32 and del == 127 );
+        // No need to call ::iscntrl.
+        return (is_in( zero_to( 32 ), code ) or code == 127);
     }
 
-    template< class Char >
-    inline auto is_digit( const Char ch )
+    template< class Code >
+    inline auto is_letter( const Code code )
         -> bool
     {
-        static_assert( is_a_char_type_<Char> );
-        return '0' <= ch and ch <= '9';
+        static_assert( is_integral_<Code> );
+        return is_lowercase( code ) or is_uppercase( code );
+    }
+
+    template< class Code >
+    inline auto is_digit( const Code code )
+        -> bool
+    {
+        static_assert( is_integral_<Code> );
+        return is_in( Sequence( '0', '9' ), code );
     }
 
     template< class Char >
@@ -299,6 +282,33 @@ namespace cppx::ascii
     {
         static_assert( is_a_char_type_<Char> );
         return is_letter( ch ) or is_digit( ch ) or ch == '_';
+    }
+
+
+    //---------------------------------------- ascii::to_wide:
+
+    template< class Char >
+    inline auto to_wide( const basic_string_view<Char>& v )
+        -> wstring
+    {
+        static_assert( is_a_char_type_<Char> );
+        return wstring( v.begin(), v.end() );
+    }
+
+    template< class Char >
+    inline auto to_wide( const C_str_<Char> s )
+        -> wstring
+    {
+        static_assert( is_a_char_type_<Char> );
+        return to_wide( basic_string_view<Char>( s ) );
+    }
+
+    template< class Char >
+    inline auto to_wide( const basic_string<Char>& s )
+        -> wstring
+    {
+        static_assert( is_a_char_type_<Char> );
+        return to_wide( basic_string_view<Char>( s ) );
     }
 
 
