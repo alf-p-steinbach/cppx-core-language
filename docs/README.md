@@ -176,7 +176,7 @@ auto main()
 {
     $use_std( cout, endl, left, setw );
     $use_cppx( zero_to, hex_digit );
-    $use_cppx_ns( ascii );
+    $alias_cppx_ns( ascii );
     
     const auto field = setw( 4 );
 

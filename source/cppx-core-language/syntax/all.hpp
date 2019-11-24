@@ -2,6 +2,7 @@
 
 #include <cppx-core-language/syntax/basic-string-building.hpp>
 #include <cppx-core-language/syntax/hopefully-or-fail.hpp>
+#include <cppx-core-language/syntax/macro-alias.hpp>
 #include <cppx-core-language/syntax/macro-define_tag.hpp>
 #include <cppx-core-language/syntax/macro-items_of.hpp>
 #include <cppx-core-language/syntax/macro-repeat_times.hpp>
