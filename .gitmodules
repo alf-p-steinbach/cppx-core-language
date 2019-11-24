@@ -1,3 +1,6 @@
 [submodule "dependencies/C-header-wrappers"]
 	path = dependencies/C-header-wrappers
 	url = https://github.com/alf-p-steinbach/C-header-wrappers
+[submodule "dependencies/cppx-testing"]
+	path = dependencies/cppx-testing
+	url = https://github.com/alf-p-steinbach/cppx-testing
