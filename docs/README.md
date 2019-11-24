@@ -199,7 +199,7 @@ auto main()
 }
 ~~~
 
-The brevity, readability and safety has a cost:
+The brevity, readability and safety of this 3ʳᵈ version has a cost:
 
 * One must learn the library&rsquo;s notation.
 
