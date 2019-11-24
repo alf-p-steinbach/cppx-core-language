@@ -59,5 +59,150 @@ Each main area of functionality is a sub-folder in the library.
 
 The code examples in this tutorial are all available via the “examples” top level folder.
 
+### 3.1 An ASCII support example.
 
+All three variants of this section&rsquo;s example produce the following hex-based ASCII code table:
 
+~~~txt
+       0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+
+   0   □   □   □   □   □   □   □   □   □   □   □   □   □   □   □   □
+   1   □   □   □   □   □   □   □   □   □   □   □   □   □   □   □   □
+   2       !   "   #   $   %   &   '   (   )   *   +   ,   -   .   /
+   3   0   1   2   3   4   5   6   7   8   9   :   ;   <   =   >   ?
+   4   @   A   B   C   D   E   F   G   H   I   J   K   L   M   N   O
+   5   P   Q   R   S   T   U   V   W   X   Y   Z   [   \   ]   ^   _
+   6   `   a   b   c   d   e   f   g   h   i   j   k   l   m   n   o
+   7   p   q   r   s   t   u   v   w   x   y   z   {   |   }   ~   □
+~~~
+
+For example, uppercase &ldquo;A&rdquo; is in row 4 column 1, which means that it's represented by ASCII code 41₁₆ = 4×16 + 1 = 65. Non-displayable characters, called *control characters*, are here depicted as small squares &ldquo;□&rdquo;, which is Unicode character U+25A1. It&rsquo;s used because the actual output&rsquo;s ASCII 127, which presents as nice rectangles in the console window, causes some formatting problems in the web browser&rsquo;s presentation of this README file.
+
+First a pure standard C++ variant of the program:
+
+<small>***examples/tutorial/ascii/ascii-table.stdlib.cpp***:</small>
+~~~cpp
+#include <ctype.h>          // ::isprint
+#include <iomanip>          // std::setw
+#include <iostream>
+#include <limits.h>         // CHAR_MIN, UCHAR_MAX    
+
+using Byte = unsigned char;
+
+auto is_noncontrol_ascii( const int code )
+    -> bool
+{ return code >= CHAR_MIN and code <= UCHAR_MAX and ::isprint( Byte( code ) ); }
+
+auto main()
+    -> int
+{
+    using std::cout, std::endl, std::left, std::setw;
+
+    const auto& hex_digits = "0123456789ABCDEF";
+    const auto field = setw( 4 );
+    const auto ascii_del = char( 127 );
+
+    // Column headers.
+    cout << field << "";
+    for( int i = 0; i < 16; ++i ) { cout << field << hex_digits[i]; }
+    cout << endl;
+    cout << endl;               // Spacer line to make the header row stand out as such.
+    
+    // Main table with a row header column to the left.
+    for( int y = 0; y < 8; ++y ) {
+        cout << field << hex_digits[y];
+        for( int x = 0; x < 16; ++x ) {
+            const int code = 16*y + x;
+            const auto ch = char( is_noncontrol_ascii( code )? code: ascii_del );
+            cout << field << ch;
+        }
+        cout << endl;
+    }
+}
+~~~
+
+In this code it's known that `is_noncontrol_ascii` is never called with an out-of-ASCII-range argument. And so, if one discards the source code after writing it and building then the checking in that function is a bit of overkill. However, such a function is *reusable* if it&rsquo;s safe enough, and that&rsquo;s one reason to add the argument checking: put in some effort up front, in order to save work later.
+
+The *cppx-core-language* function `cppx::ascii::is_noncontrol` does such checking and is therefore a drop-in replacement for any such DIY function:
+
+<small>***examples/tutorial/ascii/ascii-table.hybrid.cpp***:</small>
+~~~cpp
+#include <cppx-core-language/ascii/all.hpp>
+#include <iomanip>          // std::setw
+#include <iostream>
+
+auto main()
+    -> int
+{
+    using std::cout, std::endl, std::left, std::setw;
+    using cppx::hex_digit;
+    namespace ascii = cppx::ascii;
+
+    const auto field = setw( 4 );
+    
+    // Column headers.
+    cout << field << "";
+    for( int i = 0; i < 16; ++i ) { cout << field << hex_digit( i ); }
+    cout << endl;
+    cout << endl;               // Spacer line to make the header row stand out as such.
+    
+    // Main table with a row header column to the left.
+    for( int y = 0; y < 8; ++y ) {
+        cout << field << hex_digit( y );
+        for( int x = 0; x < 16; ++x ) {
+            const int code = 16*y + x;
+            const auto ch = char( ascii::is_noncontrol( code )? code: ascii::del );
+            cout << field << ch;
+        }
+        cout << endl;
+    }
+}
+~~~
+
+With use of the *cppx-core-language* library&rsquo;s ASCII support the code is already shorter and more clear.
+
+This program uses just a specific part of the library, namely the ASCII support, so it includes &ldquo;cppx-core-language/ascii/all.hpp&rdquo;. Every folder has an &ldquo;***all.hpp***&rdquo; file that includes all headers in that folder. The top level &ldquo;all.hpp&rdquo; is just a special case, the one that happens to be at the root of the library.
+
+I described the above as hybrid code because apart from the ASCII support it&rsquo;s the same as the pure standard C++ first version. But when one has installed *cppx-core-language* and uses some of it, then it&rsquo;s natural to also use its syntax support, which makes the code more readable, even shorter, and more safe to boot. More safe in that loop variables can then be `const`, which prevents inadvertent modification:
+
+<small>***examples/tutorial/ascii/ascii-table.cpp***:</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iomanip>          // std::setw
+#include <iostream>
+
+auto main()
+    -> int
+{
+    $use_std( cout, endl, left, setw );
+    $use_cppx( zero_to, hex_digit );
+    $use_cppx_ns( ascii );
+    
+    const auto field = setw( 4 );
+
+    // Column headers.
+    cout << field << "";
+    $repeat_times( 16 ) { cout << field << hex_digit( _i ); }
+    cout << endl;
+    cout << endl;               // Spacer line to make the header row stand out as such.
+    
+    // Main table with a row header column to the left.
+    for( const int y: zero_to( 8 ) ) {
+        cout << field << hex_digit( y );
+        for( const int x: zero_to( 16 ) ) {
+            const int code = 16*y + x;
+            const auto ch = char( ascii::is_noncontrol( code )? code: ascii::del );
+            cout << field << ch;
+        }
+        cout << endl;
+    }
+}
+~~~
+
+The brevity, readability and safety has a cost:
+
+* One must learn the library&rsquo;s notation.
+
+Every library effectively defines a notation and language, with action functions as verbs and inspection functions as pronouns, but usually this is limited to the stuff that the library specifically is about and doesn&rsquo;t affect the flow control structures. With *cppx-core-language* one can choose to express flow control structures in ways like above. Since e.g. use of range based `for` loops, especially with the *cppx-core-language*&rsquo;s `zero_to`, is still quite rare, it can be perceived as *foreign* or *alien*. Especially old-timers can perceive it as something not-C++-as-we&rsquo;ve-learned-to-know-it. The feedback I&rsquo;ve had about *cppx* in general is that this is problematic to old-timers, but not to fresh learners.
+
+Anyway, in the above code the `$...` names are simple macros that do what they say they do. The $ naming is formally non-standard, but AFAIK it&rsquo;s accepted by all extant C++ compilers for desktop systems. It&rsquo;s possible to write e.g. `CPPX_USE_STD` instead of `$use_std`, and ditto (systematically) for other such names.

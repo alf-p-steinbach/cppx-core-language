@@ -13,12 +13,11 @@ auto main()
     -> int
 {
     using std::cout, std::endl, std::left, std::setw;
-    constexpr auto& hex_digits = "0123456789abcdef";
-    
+
+    const auto& hex_digits = "0123456789ABCDEF";
     const auto field = setw( 4 );
     const auto ascii_del = char( 127 );
-    cout << left;
-    
+
     // Column headers.
     cout << field << "";
     for( int i = 0; i < 16; ++i ) { cout << field << hex_digits[i]; }

@@ -10,8 +10,7 @@ auto main()
     $use_cppx_ns( ascii );
     
     const auto field = setw( 4 );
-    cout << left;
-    
+
     // Column headers.
     cout << field << "";
     $repeat_times( 16 ) { cout << field << hex_digit( _i ); }

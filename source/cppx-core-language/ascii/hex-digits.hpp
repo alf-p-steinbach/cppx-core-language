@@ -20,4 +20,11 @@ namespace cppx {
         -> char
     { return hex_digits_lowercase[i]; }
 
+    namespace ascii {
+        CPPX_USE_CPPX(
+            hex_digits_per_byte, hex_digits_uppercase, hex_digits_lowercase,
+            hex_digits,
+            hex_digit, lowercase_hex_digit
+            );
+    }  // namespace ascii
 }  // namespace cppx
