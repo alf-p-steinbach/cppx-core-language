@@ -206,3 +206,96 @@ The brevity, readability and safety of this 3ʳᵈ version has a cost:
 Every library effectively defines a notation and language, with action functions as verbs and inspection functions as pronouns, but usually this is limited to the stuff that the library specifically is about and doesn&rsquo;t affect the flow control structures. With *cppx-core-language* one can choose to express flow control structures in ways like above. Since e.g. use of range based `for` loops, especially with the *cppx-core-language*&rsquo;s `zero_to`, is still quite rare, it can be perceived as *foreign* or *alien*. Especially old-timers can perceive it as something not-C++-as-we&rsquo;ve-learned-to-know-it. The feedback I&rsquo;ve had about *cppx* in general is that this is problematic to old-timers, but not to fresh learners.
 
 Anyway, in the above code the `$...` names are simple macros that do what they say they do. The $ naming is formally non-standard, but AFAIK it&rsquo;s accepted by all extant C++ compilers for desktop systems. It&rsquo;s possible to write e.g. `CPPX_USE_STD` instead of `$use_std`, and ditto (systematically) for other such names.
+
+### 3.2 Syntax: a string argument building example.
+
+Both variants of this section&rsquo;s example produce the following output:
+
+~~~txt
+One would expect that 1.23 + 4.56 = 5.79, not 5.790000!
+However, integer arithmetic is exact; 2 + 2 = 4.
+~~~
+
+In this code imagine that `my::display` uses complex means to display the string in a message box pop up, rather than via `cout`. That way it serves a purpose and must be called, rather than just specifying the same action directly at the call site. Pure standard C++ code for this program can then go like this:
+
+<small>***examples/tutorial/syntax/string-argument-formatting.stdlib.cpp***:</small>
+~~~cpp
+#include <iostream>         // std::(cout, endl)
+#include <sstream>          // std::ostringstream
+#include <string>           // std::(to_string, operator ""s)
+#include <string_view>      // std::string_view
+
+namespace my{
+    using std::string_view, std::cout, std::endl;
+
+    void display( const string_view& s )
+    {
+        cout << s << endl;
+    }
+}  // namespace my
+
+auto main()
+    -> int
+{
+    using std::ostringstream, std::to_string;
+
+    const double    a   = 1.23;
+    const double    b   = 4.56;
+    
+    ostringstream stream;
+    stream
+        << "One would expect that " << a << " + " << b << " = " << a + b
+        << ", not " << to_string( a + b ) << "!";
+    my::display( stream.str() );
+    
+    stream = ostringstream();       // Resets the stream object by move assigning.
+    stream << "However, integer arithmetic is exact; 2 + 2 = " << 2 + 2 << ".";
+    my::display( stream.str() );
+}
+~~~
+
+Declaring one `ostringstream` variable for each call argument that needs some formatting, is awkward and verbose. Resetting one such object, as shown above, is just slightly less awkward and verbose. And that&rsquo;s the primary rationale for the *cppx-core-language*&rsquo;s argument string formatting support, *convenience* and *clarity*.
+
+With this support you apply ordinary `<<` output notation to a `string` object, which can be a temporary.
+
+A concise way to get an initial `string` object is to use the `"`&hellip;`"s` notation, which passes the string literal to the standard library&rsquo;s `operator""s`, which produces a `string`:
+
+<small>***examples/tutorial/syntax/string-argument-formatting.cpp***:</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>         // std::(cout, endl)
+#include <string>           // std::(to_string, operator ""s)
+#include <string_view>      // std::string_view
+
+namespace my{
+    $use_std( string_view, cout, endl );
+
+    void display( const string_view& s )
+    {
+        cout << s << endl;
+    }
+}  // namespace my
+
+auto main()
+    -> int
+{
+    using namespace cppx::basic_string_building;
+    $use_std( to_string );
+
+    const double    a   = 1.23;
+    const double    b   = 4.56;
+    
+    my::display( ""s
+        << "One would expect that " << a << " + " << b << " = " << a + b
+        << ", not " << to_string( a + b ) << "!"
+        );
+    my::display( "However, integer arithmetic is exact; 2 + 2 = "s << 2 + 2 << "." );
+}
+~~~
+
+Technical point 1: there is no $-macro for `using namespace`, because one doesn&rsquo;t ordinarily do that for more than a single namespace.
+
+Technical point 2: the `cppx::basic_string_building` namespace supplies not just an `operator<<` overload but also the `std::operator""s`, otherwise one would have had to e.g. `using namespace std::literals;`.
+
+Technical point 3: the formatting support is limited, hence &ldquo;basic&rdquo; in the name. In particular it doesn&rsquo;t support use of `std::endl`, and while use of other manipulators may compile they will not have any effect. However, `std::ostringstream` is used as a general fallback, and so custom formatting is automagically supported.
+
