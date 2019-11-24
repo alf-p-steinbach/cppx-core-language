@@ -24,7 +24,7 @@ Test the installation with a simple C++ program using the include directive
 
 This is a pure header library so you don't need to build or link with anything (other than the program itself).
 
-However, the automated unit tests use Boost Test framework and so running the automated unit tests additionally requires the Boost library.
+However, the automated unit tests use the Boost Test framework and so running the automated unit tests additionally requires the Boost library.
 
 ----
 #### *Disclaimer*
