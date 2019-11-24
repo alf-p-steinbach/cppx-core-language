@@ -7,7 +7,7 @@ using Byte = unsigned char;
 
 auto is_noncontrol_ascii_char( const int code )
     -> bool
-{ return (code >= CHAR_MIN and code <= UCHAR_MAX and ::isprint( Byte( code ) ); }
+{ return (code >= CHAR_MIN and code <= UCHAR_MAX and ::isprint( Byte( code ) ) ); }
 
 auto main()
     -> int
@@ -16,6 +16,8 @@ auto main()
     constexpr auto& hex_digits = "0123456789abcdef";
     
     const auto field = setw( 4 );
+    const auto ascii_del = char( 127 );
+
     cout << left;
     
     // Column headers.
@@ -29,7 +31,7 @@ auto main()
         cout << field << hex_digits[y];
         for( int x = 0; x < 16; ++x ) {
             const int code = 16*y + x;
-            const auto ch = char( is_noncontrol_ascii_char( code )? code: ascii::del );
+            const auto ch = char( is_noncontrol_ascii_char( code )? code: ascii_del );
             cout << field << ch;
         }
         cout << endl;
