@@ -1,4 +1,4 @@
-# The cppx-core-language micro library
+# The *cppx-core-language* micro library
 
 Originally a sub-folder in the *cppx-core* project, the ***cppx-core-language*** header micro-library provides workarounds for various shortcomings of the C++ core language.
 
