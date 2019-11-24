@@ -14,7 +14,7 @@ auto main()
     
     // Column headers.
     cout << field << "";
-    for( const int x: zero_to( 16 ) ) { cout << field << hex_digit( x ); }
+    $repeat_times( 16 ) { cout << field << hex_digit( _i ); }
     cout << endl;
     cout << endl;               // Spacer line to make the header row stand out as such.
     
@@ -23,7 +23,7 @@ auto main()
         cout << field << hex_digit( y );
         for( const int x: zero_to( 16 ) ) {
             const int code = 16*y + x;
-            const auto ch = char( ascii::is_noncontrol_char( code )? code: ascii::del );
+            const auto ch = char( ascii::is_noncontrol( code )? code: ascii::del );
             cout << field << ch;
         }
         cout << endl;

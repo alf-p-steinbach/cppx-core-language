@@ -251,7 +251,7 @@ namespace cppx::ascii
     //----------------------------------------  Other classification:
 
     template< class Code >
-    inline auto is_control_char( const Code code )
+    inline auto is_control( const Code code )
         -> bool
     {
         static_assert( is_integral_<Code> );
@@ -261,12 +261,12 @@ namespace cppx::ascii
     }
 
     template< class Code >
-    inline auto is_noncontrol_char( const Code code )
+    inline auto is_noncontrol( const Code code )
         -> bool
     {
         static_assert( is_integral_<Code> );
         // No need to call ::isprint.
-        return ascii::contains( code ) and not is_control_char( code );
+        return ascii::contains( code ) and not is_control( code );
     }
 
     template< class Code >
