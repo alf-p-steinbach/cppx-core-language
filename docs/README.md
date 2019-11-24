@@ -11,7 +11,7 @@ Even if you don&rsquo;t use it for anything else you may find it useful to use a
 After cloning, checking out or downloading the library:
 
 1. Make the library source code available via C++ include path &ldquo;`cppx-core-language/`&rdquo;.  
-   ***Info***: in Windows I prefer to use junctions in a common include folder. E.g., in that folder I&rsquo;d use the command `mklink /j cppx-core-language c:\somewhere\cppx-core-language\source\cppx-core-language`. With a junction you don't have to configure Windows to developer mode to create it, and you can remove it with an `rd` command, consistent with its use for other things that act like directories. However, in \*nix a symlink would be natural. But just copying the source folder is also fine.  
+   ***Info***: in Windows I prefer to use junctions in a common include folder. E.g., in that folder I&rsquo;d use the command `mklink /j cppx-core-language c:\somewhere\cppx-core-language\source\cppx-core-language`. With a junction you don't have to configure Windows to developer mode to create it, and you can remove it with an `rd` command, consistent with that command&rsquo;s use for other things that act like directories. However, in \*nix a symlink would be natural. But just copying the source folder is also fine.  
    ***Test***: for example, `#include <cppx-core-language/all.hpp>` should now work in C++ source code.
 
 2. Ditto, make the &ldquo;C header wrappers&rdquo; source code available via C++ include path &ldquo;`c/`&rdquo;.  
