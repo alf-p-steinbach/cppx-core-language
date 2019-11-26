@@ -6,9 +6,10 @@ For example, the all-directions implicit conversions for the built-in `bool` typ
 
 Even if you don&rsquo;t use it for anything else you may find it useful to use a `vector<Truth>` instead of `vector<bool>`, because with the `vector<Truth>` you can have a reference or pointer to an item.
 
-The notion of &ldquo;core language&rdquo; is a bit fuzzy. Here it includes the types offered by the core language, namely booleans, numbers and strings. The core language already provides partial support for ASCII via character escapes such as `\a`, and *cppx-core-language* extends this to more of the common ASCII functionality.
+The notion of &ldquo;core language&rdquo; is a bit fuzzy, but here it includes the types offered by the core language, namely booleans, numbers and strings. The core language already provides partial support for ASCII via character escapes such as `\a`, and *cppx-core-language* extends this to more of the common ASCII functionality. The most used ASCII control characters are named, e.g. `\a` (C/C++ &ldquo;alert&rdquo;) is `cppx::ascii::bell`, reflecting the original &ldquo;BEL&rdquo;.
 
-I also regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages. *cppx-core-language* provides a simple notation for assembling strings from parts, e.g. for arguments in function calls. A number of other utility functions, much like the string operations in other modern languages, are also provided.
+I also regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
+*cppx-core-language* provides a simple notation for assembling strings from parts, e.g. `foo(` `"The` `answer` `is` `"s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
 
 ## 1. Installation & use.
 
@@ -18,7 +19,11 @@ After cloning, checking out or downloading the library:
    ***Info***: in Windows I prefer to use junctions in a common include folder. E.g., in that folder I&rsquo;d use the command `mklink /j cppx-core-language c:\somewhere\cppx-core-language\source\cppx-core-language`. With a junction you don't have to configure Windows to developer mode to create it, and you can remove it with an `rd` command, consistent with that command&rsquo;s use for other things that act like directories. However, in \*nix a symlink would be natural. But just copying the source folder is also fine.  
    ***Test***: for example, `#include <cppx-core-language/all.hpp>` should now work in C++ source code.
 
-2. Ditto, make the &ldquo;C header wrappers&rdquo; source code available via C++ include path &ldquo;`c/`&rdquo;.  
+2. Make the &ldquo;Meta macro&rdquo; source code available via C++ include path &ldquo;`cppx-core-language-meta-macro/`&rdquo;.  
+   ***Info***: &ldquo;Meta macro&rdquo; a.k.a. *cppx-core-language-meta-macro* is a project that *cppx-core-language* depends on. You find it as a GIT sub-module in the folder &ldquo;dependencies&rdquo;.  
+   ***Test***: For example, `#include <cppx-core-language-meta-macro/all.hpp>` should work.  
+
+3. Make the &ldquo;C header wrappers&rdquo; source code available via C++ include path &ldquo;`c/`&rdquo;.  
    ***Info***: &ldquo;C header wrappers&rdquo; is a project that *cppx-core-language* depends on. You find it as a GIT sub-module in the folder &ldquo;dependencies&rdquo;.  
    ***Test***: For example, `#include <c/stdio.hpp>` should work.  
 
