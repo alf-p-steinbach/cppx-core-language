@@ -4,3 +4,6 @@
 [submodule "dependencies/cppx-testing"]
 	path = dependencies/cppx-testing
 	url = https://github.com/alf-p-steinbach/cppx-testing
+[submodule "dependencies/cppx-core-language-meta-macro"]
+	path = dependencies/cppx-core-language-meta-macro
+	url = https://github.com/alf-p-steinbach/cppx-core-language-meta-macro
