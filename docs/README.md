@@ -9,7 +9,7 @@ Even if you don&rsquo;t use it for anything else you may find it useful to use a
 The notion of &ldquo;core language&rdquo; is a bit fuzzy, but here it includes the types offered by the core language, namely booleans, numbers and strings. The core language already provides partial support for ASCII via character escapes such as `\a`, and Core Language Extensions extends this to more of the common ASCII functionality. The most used ASCII control characters are named, e.g. `\a` (C/C++ &ldquo;alert&rdquo;) is `cppx::ascii::bell`, reflecting the original &ldquo;BEL&rdquo;.
 
 I also regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
-Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo(` `"The` `answer` `is` `"s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
+Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo(` `"The answer is "s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
 
 ## 1. Installation & use.
 
