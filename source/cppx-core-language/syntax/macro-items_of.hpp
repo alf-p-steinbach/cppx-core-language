@@ -3,7 +3,7 @@
 /// \brief `$items_of` eases use of standard library functions, e.g.
 /// `sort( $items_of( numbers ) )`.
 
-#include <cppx-core-language/meta-macro/lvalue_ref_to.hpp>  // cppx::lvalue_ref_to
+#include <cppx-core-language-meta-macro/lvalue_ref_to.hpp>  // cppx::lvalue_ref_to
 
 #include <iterator>         // std::(begin, end)
 

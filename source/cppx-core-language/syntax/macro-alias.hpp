@@ -8,7 +8,7 @@
 /// `$alias_cppx_namespaces` and
 /// `$alias_std_namespaces`.
 
-#include <cppx-core-language/meta-macro/macro-apply_with_fixed_arg.hpp>
+#include <cppx-core-language-meta-macro/macro-apply_with_fixed_arg.hpp>
 
 #ifndef CPPX_NO_DOLLARS_PLEASE
 #   // Use nested namespace names.

@@ -5,7 +5,7 @@
 /// `$use_cppx` and
 /// `$use_std`.
 
-#include <cppx-core-language/meta-macro/macro-apply_with_fixed_arg.hpp>
+#include <cppx-core-language-meta-macro/macro-apply_with_fixed_arg.hpp>
 
 #ifndef CPPX_NO_DOLLARS_PLEASE
 #   // Use items from namespaces.
