@@ -6,6 +6,10 @@ For example, the all-directions implicit conversions for the built-in `bool` typ
 
 Even if you don&rsquo;t use it for anything else you may find it useful to use a `vector<Truth>` instead of `vector<bool>`, because with the `vector<Truth>` you can have a reference or pointer to an item.
 
+The notion of &ldquo;core language&rdquo; is a bit fuzzy. Here it includes the types offered by the core language, namely booleans, numbers and strings. The core language already provides partial support for ASCII via character escapes such as `\a`, and *cppx-core-language* extends this to more of the common ASCII functionality.
+
+I also regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages. *cppx-core-language* provides a simple notation for assembling strings from parts, e.g. for arguments in function calls. A number of other utility functions, much like the string operations in other modern languages, are also provided.
+
 ## 1. Installation & use.
 
 After cloning, checking out or downloading the library:
