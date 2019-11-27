@@ -67,7 +67,7 @@ Each main area of functionality is a sub-folder in the library.
 
 The code examples in this tutorial are all available via the “examples” top level folder.
 
-### 3.1 Syntax: a string argument building example.
+### 3.1. Syntax: a string argument building example.
 
 Both variants of this section&rsquo;s example produce the following output:
 
@@ -157,7 +157,7 @@ Here the `cppx::basic_string_building` namespace supplies not just an `operator<
 
 The formatting support is quite limited, hence &ldquo;basic&rdquo; in the name. In particular it doesn&rsquo;t support use of `std::endl`, and while use of other manipulators may compile they will not have any effect. However, `std::ostringstream` is used as a general fallback, and so custom formatting is automagically supported.
 
-## 3.2 Syntax: `$use_std`.
+### 3.2. Syntax: `$use_std`.
 
 The last program’s `using`-declaration
 
