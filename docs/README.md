@@ -65,9 +65,61 @@ Each main area of functionality is a sub-folder in the library.
 
 ## 3. Tutorial.
 
-The code examples in this tutorial are all available via the “examples” top level folder.
+The code examples in this tutorial are all available in the “examples” top level folder.
 
-### 3.1. Syntax: a string argument building example.
+### 3.1. The syntax support.
+
+Some of the syntax support is in the form of functions, and some of it is in the form of macros. An example function is `zero_to(n)`, which produces an efficiently iterable `Sequence` suitable for a range-based `for` loop, and the macros include `$repeat_times`, which expresses a simple counting loop, and `$use_std`, which takes an arbitrary number of arguments where e.g. `$use_std(cout, endl, setw)` expands to `using std::cout, std::endl, std::setw`.
+
+As those examples show the syntax support is about
+
+* reducing verbosity,
+* reducing complexity, and
+* increasing readability.
+
+For example, simple counting loops are very common, and a counting loop
+
+>     for( int i = 0, n = expression; i < n; ++i ) {
+>         cout << "iteration " << i + 1 << " of " << n << endl;
+>     }
+
+… can be expressed as
+
+>     $repeat_times( expression ) {
+>         cout << "iteration " << _i + 1 << " of " << _n << endl;
+>     }
+
+… where `_i` and `_n` are `const` within the loop body.
+
+Advantages wrt. verbosity, complexity and readability:
+
+* it’s shorter code,
+* the number of variables the code must handle and update correctly is reduced from 2 to 0, and now the code can’t inadvertently change a variable, and
+* it’s English rather than a jumble of operators.
+
+However, the syntax support is ***not*** about replacing perfectly good C++ constructs with e.g. favorite Pascal keywords, just for readability, or that sort of thing.
+
+For example, C++ has an idiomatic construct `for(;;)` for expressing an infinite loop. It’s a bit cryptic to a beginner so readability could be improved by a macro, but against that: by adding a layer of indirection complexity would be increased instead of reduced, and verbosity would be increased or at least not much reduced. So there’s no `$loop` macro, or the sort.
+
+Costs:
+
+* A reader — especially an old-timer — unfamiliar with `$repeat_times` may balk at the code, perceiving it as foreign or alien, not the C++ that we learned that C++ is, etc. etc.
+* As far as I know all extant desktop system C++ compilers support &ldquo;$&rdquo; in names, but reportedly at least one compiler for an embedded device does not.
+* For macros that take an arbitrary number of arguments, such as `$use_std`, misspelling a name in the argument list may cause the compiler to emit a *diagnostics avalanche* (just as with template errors) where it delves into many levels of nested macro calls.
+
+To address the not perfect portability of “$” one can write `CPPX_REPEAT_TIMES` instead of `$repeat_times`, and ditto for other macros, and define **`CPPX_NO_DOLLARS_PLEASE`** to avoid even an attempted definition of `$repeat_times`. Or, easier, just don't use the library with the embedded device compiler that balks at “$”. One way is to not use that compiler.
+
+With the costs summarized like above they may seem excessive, but in practice, for my own hobby programming I&rsquo;ve found the actual costs to be roughly zero.
+
+The syntax support presented here has been honed down from a much larger set I devised. I’ve only kept the stuff that I’m actually using, or strongly related to that. In my experience over the years I’ve experimented with this, in the end it makes for less work and more pleasant coding.
+
+#### 3.1.1 Syntax support for loops: `Sequence`, `zero_to`, `$repeat_times`.
+
+
+
+asdasd
+
+----
 
 Both variants of this section&rsquo;s example produce the following output:
 
@@ -207,13 +259,9 @@ auto main()
 }
 ~~~
 
-Costs:
+xxx
 
-* A reader — especially an old-timer — unfamiliar with `$use_std` may balk at the code, perceiving it as foreign or alien, not the C++ that we learned that C++ is, etc. etc.
-* As far as I know all extant desktop system C++ compilers support &ldquo;$&rdquo; in names, but reportedly at least one compiler for an embedded device does not.
-* Misspelling a name in the import list may cause the compiler to emit a *diagnostics avalanche* where it delves into many levels of nested macro calls.
 
-To address the second point, not perfect portability, one can write `CPPX_USE_STD` instead of `$use_std`, and define **`CPPX_NO_DOLLARS_PLEASE`** to avoid even an attempted definition of `$use_std`. Or, easier, just don't use the library with that compiler. One way is to not use that compiler.
 
 The third point, diagnostics avalanche, is also a problem with template code. Every practicing C++ programmer is familiar with diagnostics avalanches! And it’s partly due to C++ language deficiencies (in this case, no macro apply operation) that cause high level concepts to be implemented in terms of limited operations that are all the compiler knows, and partly due to a common C++ tooling deficiency, namely no smart diagnostics presentation.
 
