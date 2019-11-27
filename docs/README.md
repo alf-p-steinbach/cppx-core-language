@@ -2,13 +2,13 @@
 
 Originally a sub-folder in the *cppx-core* project, the Core Language Extensions  is a pure header micro-library that provides workarounds for various shortcomings of the C++ core language. This functionality is mundane and simple support for practical programming. There's no shiny flashy impressive stuff.
 
-For example, the all-directions implicit conversions for the built-in `bool` type sometimes cause problems with overload resolution. One infamous case is that of iostreams output of a function pointer resulting in the text “1”, via an unexpected conversion to `bool`. Core Language Extensions offers the alternative `cppx::Truth`, which converts implicitly only to and from `bool`, as a drop-in replacement.
+As an example core language shortcoming, iostreams output of a function pointer typically results in the text “1”, via an unexpected conversion to `bool`. The all-directions implicit conversions for the built-in `bool` type generally cause such unexpected and undesired overload resolutions. Core Language Extensions offers the alternative `Truth`, which converts implicitly only to and from `bool`, as a drop-in replacement for the too-eagerly converting `bool`.
 
 Even if you don&rsquo;t use it for anything else you may find it useful to use a `vector<Truth>` instead of `vector<bool>`, because with the `vector<Truth>` you can have a reference or pointer to an item.
 
-The notion of &ldquo;core language&rdquo; is a bit fuzzy, but here it includes the types offered by the core language, namely booleans, numbers and strings. The core language already provides partial support for ASCII via character escapes such as `\a`, and Core Language Extensions extends this to more of the common ASCII functionality. The most used ASCII control characters are named, e.g. `\a` (C/C++ &ldquo;alert&rdquo;) is `cppx::ascii::bell`, reflecting the original &ldquo;BEL&rdquo;.
+ In passing, everything is provided in the `cppx` namespace so it’s really `cppx::Truth`, but for readability I’ll refer to these names unqualified.
 
-I also regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
+I regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
 Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo(` `"The answer is "s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
 
 ## 1. Installation & use.
