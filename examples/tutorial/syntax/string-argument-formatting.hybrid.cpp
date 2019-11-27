@@ -1,10 +1,10 @@
-#include <cppx-core-language/all.hpp>
+#include <cppx-core-language/syntax/basic-string-building.hpp>
 #include <iostream>         // std::(cout, endl)
 #include <string>           // std::to_string
 #include <string_view>      // std::string_view
 
 namespace my{
-    $use_std( string_view, cout, endl );
+    using std::string_view, std::cout, std::endl;
 
     void display( const string_view& s )
     {
@@ -16,7 +16,7 @@ auto main()
     -> int
 {
     using namespace cppx::basic_string_building;
-    $use_std( to_string );
+    using std::to_string;
 
     const double    a   = 1.23;
     const double    b   = 4.56;
