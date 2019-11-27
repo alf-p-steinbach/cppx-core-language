@@ -210,9 +210,12 @@ auto main()
 Costs:
 
 * A reader — especially an old-timer — unfamiliar with `$use_std` may balk at the code, perceiving it as foreign or alien, not the C++ that we learned that C++ is, etc. etc.
+* As far as I know all extant desktop system C++ compilers support &ldquo;$&rdquo; in names, but reportedly at least one compiler for an embedded device does not.
 * Misspelling a name in the import list may cause the compiler to emit a *diagnostics avalanche* where it delves into many levels of nested macro calls.
 
-The last point is also a problem with use of general function and class templates. Every practicing C++ programmer is familiar with diagnostics avalanches! And it’s partly due to C++ language deficiencies (in this case, no macro apply operation) that cause high level concepts to be implemented in terms of limited operations that are all the compiler knows, and partly due to a common C++ tooling deficiency, namely no smart diagnostics presentation.
+To address the second point, not perfect portability, one can write `CPPX_USE_STD` instead of `$use_std`, and define **`CPPX_NO_DOLLARS_PLEASE`** to avoid even an attempted definition of `$use_std`. Or, easier, just don't use the library with that compiler. One way is to not use that compiler.
+
+The third point, diagnostics avalanche, is also a problem with template code. Every practicing C++ programmer is familiar with diagnostics avalanches! And it’s partly due to C++ language deficiencies (in this case, no macro apply operation) that cause high level concepts to be implemented in terms of limited operations that are all the compiler knows, and partly due to a common C++ tooling deficiency, namely no smart diagnostics presentation.
 
 I find that in my personal programming the costs are near to non-existent so that `$use_std` is well worth it.
 
