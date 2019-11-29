@@ -21,8 +21,7 @@
 #include <c/stddef.hpp>     // size_t
 #include <array>            // std::array
 
-namespace cppx
-{
+namespace cppx::type_builders {
     using std::array;
 
     //----------------------------------------------- Specialized basic builders:
@@ -109,13 +108,6 @@ namespace cppx
     /// \make_name_ref{cppx,Raw_array_of_} and
     /// \make_name_ref{cppx,Array_of_}.
 
-    namespace type_builders
-    {
-        CPPX_USE_CPPX(
-            Type_, P_, R_, Raw_array_, Raw_array_of_, Array_of_
-            );
-    }  // inline namespace type_builders
-
     /// Self-descriptive but more wordy `Ptr_` and `Ref_` aliases for
     /// `P_` and `R_`.
     namespace ptr_and_ref
@@ -123,4 +115,9 @@ namespace cppx
         template< class T > using Ptr_ = P_<T>;
         template< class T > using Ref_ = R_<T>;
     }   // namespace ptr_and_ref
+}  // namespace cppx::type_builders
+
+namespace cppx
+{
+    using namespace type_builders;
 }  // namespace cppx
