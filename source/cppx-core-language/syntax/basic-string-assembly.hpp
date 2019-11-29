@@ -72,7 +72,7 @@ namespace cppx::basic_string_assembly
 
 namespace cppx
 {
-        // Intentionally not exposing `basic_string_building::string_from` here.
+    // Intentionally not exposing `basic_string_building::string_from` here.
     // It might interfere with other `string_from` functions.
     using namespace std::string_literals;       // E.g. ""s
     using basic_string_assembly::operator<<;
