@@ -7,7 +7,8 @@
 
 namespace cppx {
 
-    constexpr int hex_digits_per_byte = div_up( bits_per_byte, 4 );
+    constexpr int hex_digits_per_byte   = div_up( bits_per_byte, 4 );
+    constexpr int hex_base              = 1 << 4;
 
     constexpr auto&     hex_digits_uppercase    = "0123456789ABCDEF";
     constexpr auto&     hex_digits_lowercase    = "0123456789abcdef";
