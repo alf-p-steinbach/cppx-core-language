@@ -1,15 +1,14 @@
 # Core Language Extensions
 
-Originally a sub-folder in the *cppx-core* project, the Core Language Extensions  is a pure header micro-library that provides workarounds for various shortcomings of the C++ core language. This functionality is mundane and simple support for practical programming. There's no shiny flashy impressive stuff.
+Originally a sub-folder in the *cppx-core* project, the Core Language Extensions  is a pure header micro-library that provides workarounds for various shortcomings of the C++ core language and standard library features directly supporting the core language, as of C++17.
 
-As an example core language shortcoming, iostreams output of a function pointer typically results in the text “1”, via an unexpected conversion to `bool`. The all-directions implicit conversions for the built-in `bool` type generally cause such unexpected and undesired overload resolutions. Core Language Extensions offers the alternative `Truth`, which converts implicitly only to and from `bool`, as a drop-in replacement for the too-eagerly converting `bool`.
+As a simple example of a core language shortcoming that’s not addressed in C++20, the all-directions implicit conversions for the built-in `bool` type generally cause unexpected and undesired overload resolutions. For example, iostreams output of a function pointer typically results in the text “1”, via an unexpected conversion to `bool`. Core Language Extensions offers the alternative boolean type `Truth`, which converts implicitly only to and from `bool`.
+
+`Truth` is a drop-in replacement for the too-eagerly converting `bool`.
 
 Even if you don&rsquo;t use it for anything else you may find it useful to use a `vector<Truth>` instead of `vector<bool>`, because with the `vector<Truth>` you can have a reference or pointer to an item.
 
  In passing, everything is provided in the `cppx` namespace so it’s really `cppx::Truth`, but for readability I’ll refer to these names unqualified.
-
-I regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
-Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo(` `"The answer is "s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
 
 ## 1. Installation & use.
 
@@ -67,6 +66,12 @@ Each main area of functionality is a sub-folder in the library.
 
 The code examples in this tutorial are all available in the “examples” top level folder.
 
+But first: a high level context.
+
+xxx
+
+
+
 ### 3.1. The syntax support.
 
 Some of the syntax support is in the form of functions, and some of it is in the form of macros. An example function is `zero_to(n)`, which produces an efficiently iterable `Sequence` suitable for a range-based `for` loop, and the macros include `$repeat_times`, which expresses a simple counting loop, and `$use_std`, which takes an arbitrary number of arguments where e.g. `$use_std(cout, endl, setw)` expands to `using std::cout, std::endl, std::setw`.
@@ -97,7 +102,7 @@ Advantages wrt. verbosity, complexity and readability:
 * the number of variables the code must handle and update correctly is reduced from 2 to 0, and now the code can’t inadvertently change a variable, and
 * it’s English rather than a jumble of operators.
 
-However, the syntax support is ***not*** about replacing perfectly good C++ constructs with e.g. favorite Pascal keywords, just for readability, or that sort of thing.
+However, the syntax support is ***not*** about replacing perfectly good C++ constructs with e.g. favorite Ada keywords, just for readability, or that sort of thing.
 
 For example, C++ has an idiomatic construct `for(;;)` for expressing an infinite loop. It’s a bit cryptic to a beginner so readability could be improved by a macro, but against that: by adding a layer of indirection complexity would be increased instead of reduced, and verbosity would be increased or at least not much reduced. So there’s no `$loop` macro, or the sort.
 
@@ -421,3 +426,10 @@ Every library effectively defines a notation and language, with action functions
 
 Anyway, in the above code the `$...` names are simple macros that do what they say they do. The $ naming is formally non-standard, but AFAIK it&rsquo;s accepted by all extant C++ compilers for desktop systems. It&rsquo;s possible to write e.g. `CPPX_USE_STD` instead of `$use_std`, and ditto (systematically) for other such names.
 
+
+
+
+----
+
+I regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
+Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo(` `"The answer is "s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.

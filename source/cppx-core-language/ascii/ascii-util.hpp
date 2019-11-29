@@ -10,11 +10,10 @@
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::(Unsigned_)
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
 
-#include <c/string.hpp>         // strlen
+#include <c/assert.hpp>         // assert
 #include <c/ctype.hpp>          // isspace
-#include <string>               // std::(string, wstring)
-#include <string_view>          // std::string_view
 #include <functional>           // std::invoke
+#include <string_view>          // std::string_view
 
 namespace cppx::cstdlib
 {
@@ -50,52 +49,14 @@ namespace cppx::cstdlib
 
 namespace cppx::ascii
 {
-    CPPX_USE_STD(
-        basic_string, basic_string_view, invoke, string, string_view, wstring, wstring_view
-        );
+    CPPX_USE_STD( invoke, string_view );
 
     //---------------------------------------- Is-ASCII checking:
 
     template< class Code >
     inline auto contains( const Code v )
         -> Truth
-    { return (Unsigned_<Code>( v ) <= ascii::max_value); }
-
-    template< class It >
-    inline auto contains_all_of( const It start, const It beyond )
-        -> Truth
-    {
-        for( const auto code: span_of( start, beyond ) ) {
-            if( not contains( code ) ) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    template< class Char >
-    inline auto contains_all_of( const basic_string_view<Char>& sv )
-        -> Truth
-    {
-        static_assert( is_a_char_type_<Char> );
-        return contains_all_of( CPPX_ITEMS_OF( sv ) );
-    }
-
-    template< class Char >
-    inline auto contains_all_of( const C_str_<Char> s )
-        -> Truth
-    {
-        static_assert( is_a_char_type_<Char> );
-        return contains_all_of( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char>
-    inline auto contains_all_of( const basic_string<Char>& s )
-        -> Truth
-    {
-        static_assert( is_a_char_type_<Char> );
-        return contains_all_of( basic_string_view<Char>( s ) );
-    }
+    { return (Unsigned_<Code>( v ) <= unsigned( ascii::max_value )); }
 
 
     //----------------------------------------  Whitespace checking:
@@ -109,50 +70,29 @@ namespace cppx::ascii
         return ascii::contains( code ) and cstdlib::is_byte_space( code );
     }
 
-    template< class Char >
-    inline auto is_all_whitespace( const basic_string_view<Char>& sv )
-        -> Truth
-    {
-        static_assert( is_a_char_type_<Char> );
-        for( const Char ch: sv ) {
-            if( not is_whitespace( ch ) ) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    template< class Char >
-    inline auto is_all_whitespace( const basic_string<Char>& s )
-        -> Truth
-    {
-        static_assert( is_a_char_type_<Char> );
-        return is_all_whitespace( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char >
-    inline auto is_all_whitespace( const C_str_<Char> s )
-        -> Truth
-    {
-        static_assert( is_a_char_type_<Char> );
-        return is_all_whitespace( basic_string_view<Char>( s ) );
-    }
-
     inline auto whitespace_characters()
-        -> const string&
+        -> string_view
     {
-        static const string the_chars = invoke([]() -> string
+        struct Wrapped
         {
-            string result;
-            for( const int code: Sequence( 0, ascii::max_value ) ) {
-                if( is_whitespace( char( code ) ) ) {
-                    result += char( code );
-                }
-            }
-            return result;
-        } );
+            char    m_s[32];
+            int     m_n;
 
-        return the_chars;
+            Wrapped():
+                m_n( 0 )
+            {
+                for( const int code: Sequence( 0, ascii::max_value ) ) {
+                    if( is_whitespace( code ) ) {
+                        m_s[m_n++] = char( code );
+                        assert( m_n < int( sizeof( m_s ) ) );
+                    }
+                }
+                m_s[m_n] = '\0';
+            }
+        };
+
+        static const Wrapped the_chars;
+        return string_view( the_chars.m_s, the_chars.m_n );
     }
 
     //----------------------------------------  Uppercase/lowercase:
@@ -187,64 +127,6 @@ namespace cppx::ascii
     {
         static_assert( is_a_char_type_<Char> );
         return (is_lowercase( ch )? Char( ch - 'a' + 'A' ) : ch);
-    }
-
-    template< class Char >
-    inline auto to_lowercase( const basic_string_view<Char>& v )
-        -> basic_string<Char>
-    {
-        static_assert( is_a_char_type_<Char> );
-        basic_string<Char> result;
-        result.reserve( v.size() );
-        for( const Char ch : v ) {
-            result += to_lowercase( ch );
-        }
-        return result;
-    }
-
-    template< class Char >
-    inline auto to_uppercase( const basic_string_view<Char>& v )
-        -> basic_string<Char>
-    {
-        static_assert( is_a_char_type_<Char> );
-        basic_string<Char> result;
-        result.reserve( v.size() );
-        for( const Char ch : v ) {
-            result += to_uppercase( ch );
-        }
-        return result;
-    }
-
-    template< class Char >
-    inline auto to_lowercase( const C_str_<Char> s )
-        -> basic_string<Char>
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_lowercase( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char >
-    inline auto to_uppercase( const C_str_<Char> s )
-        -> basic_string<Char>
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_uppercase( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char >
-    inline auto to_lowercase( const basic_string<Char>& s )
-        -> basic_string<Char>
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_lowercase( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char >
-    inline auto to_uppercase( const basic_string<Char>& s )
-        -> basic_string<Char>
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_uppercase( basic_string_view<Char>( s ) );
     }
 
 
@@ -286,55 +168,11 @@ namespace cppx::ascii
     }
 
     template< class Char >
-    inline auto is_general_identifier_character( const Char ch )
+    inline auto is_identifier_character( const Char ch )
         -> bool
     {
         static_assert( is_a_char_type_<Char> );
         return is_letter( ch ) or is_digit( ch ) or ch == '_';
     }
-
-
-    //---------------------------------------- ascii::to_wide:
-
-    template< class Char >
-    inline auto to_wide( const basic_string_view<Char>& v )
-        -> wstring
-    {
-        static_assert( is_a_char_type_<Char> );
-        return wstring( v.begin(), v.end() );
-    }
-
-    template< class Char >
-    inline auto to_wide( const C_str_<Char> s )
-        -> wstring
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_wide( basic_string_view<Char>( s ) );
-    }
-
-    template< class Char >
-    inline auto to_wide( const basic_string<Char>& s )
-        -> wstring
-    {
-        static_assert( is_a_char_type_<Char> );
-        return to_wide( basic_string_view<Char>( s ) );
-    }
-
-
-    //----------------------------------------  Misc:
-
-    inline auto quoted( const string_view& sv )
-        -> string
-    {
-        string s;
-        s = "\"";
-        s += sv;
-        s += "\"";
-        return s;
-    }
-
-    inline auto quoted( const char ch )
-        -> string
-    { return quoted( string_view( &ch, 1 ) ); }
 
 }  // namespace cppx::ascii

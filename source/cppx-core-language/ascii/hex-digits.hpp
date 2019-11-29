@@ -10,6 +10,7 @@ namespace cppx {
 
     constexpr auto&     hex_digits_uppercase    = "0123456789ABCDEF";
     constexpr auto&     hex_digits_lowercase    = "0123456789abcdef";
+
     constexpr auto&     hex_digits = hex_digits_uppercase;
 
     inline auto hex_digit( const int i )
