@@ -11,7 +11,7 @@ namespace cppx
 {
     CPPX_USE_STD( ostringstream, string, string_view );
 
-    namespace basic_string_building
+    namespace basic_string_assembly
     {
         using namespace std::string_literals;       // E.g. ""s
 
@@ -71,11 +71,11 @@ namespace cppx
             -> string&&
         { return move( operator<<( s, value ) ); }
 
-    }  // namespace basic_string_building
+    }  // namespace basic_string_assembly
 
     // Intentionally not exposing `basic_string_building::string_from` here.
     // It might interfere with other `string_from` functions.
     using namespace std::string_literals;       // E.g. ""s
-    using basic_string_building::operator<<;
+    using basic_string_assembly::operator<<;
 
 }  // namespace cppx
