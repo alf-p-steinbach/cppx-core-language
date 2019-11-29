@@ -4,3 +4,4 @@
 #include <cppx-core-language/ascii/ascii-character-util.hpp>
 #include <cppx-core-language/ascii/ascii-strings-util.hpp>
 #include <cppx-core-language/ascii/hex-digits.hpp>
+#include <cppx-core-language/ascii/to-hex-in-buffer.hpp>
