@@ -5,49 +5,50 @@
 #include <string>           // std::string
 #include <string_view>      // std::string_view
 
-namespace cppx {
+namespace cppx::basic_string_builders {
     CPPX_USE_STD( string, string_view );
 
-    inline namespace basic_string_builders {
+    inline auto spaces( const int n )
+        -> string
+    { return (n <= 0? "" : string( n, ' ')); }
 
-        inline auto spaces( const int n )
-            -> string
-        { return (n <= 0? "" : string( n, ' ')); }
+    inline auto repeated_times( const int n, const string_view& s )
+        -> string
+    {
+        if( n <= 0 ) { return ""; }
 
-        inline auto repeated_times( const int n, const string_view& s )
-            -> string
+        string result;
+        result.reserve( n*s.length() );
+        for( int i = 1; i <= n; ++i )
         {
-            if( n <= 0 ) { return ""; }
-
-            string result;
-            result.reserve( n*s.length() );
-            for( int i = 1; i <= n; ++i )
-            {
-                result += s;
-            }
-            return result;
+            result += s;
         }
+        return result;
+    }
 
-        inline auto operator*( const int n, const string_view& s )
-            -> string
-        { return repeated_times( n, s ); }
+    inline auto operator*( const int n, const string_view& s )
+        -> string
+    { return repeated_times( n, s ); }
 
-        template< class Iterator >      // TODO: Enable_if_
-        inline auto joined(
-            const Span_<Iterator>       range,
-            const string_view&          separator = " "
-            ) -> string
+    template< class Iterator >      // TODO: Enable_if_
+    inline auto joined(
+        const Span_<Iterator>       range,
+        const string_view&          separator = " "
+        ) -> string
+    {
+        if( is_empty( range ) ) { return ""; }
+
+        string result = range.front();
+        for( const auto& item : all_but_first_of( range ) )
         {
-            if( is_empty( range ) ) { return ""; }
-
-            string result = range.front();
-            for( const auto& item : all_but_first_of( range ) )
-            {
-                result += separator;
-                result += item;
-            }
-            return result;
+            result += separator;
+            result += item;
         }
+        return result;
+    }
 
-    }  // namespace basic_string_builders
+}  // namespace cppx::basic_string_builders
+
+namespace cppx{
+    using namespace basic_string_builders;
 }  // namespace cppx
