@@ -7,7 +7,7 @@
 #include <cppx-core-language/syntax/Span_.hpp>              // cppx::span_of
 #include <cppx-core-language/syntax/type-builders.hpp>      // cppx::Type_
 
-namespace cppx {
+namespace cppx::hex_stuff {
     using Bufferptr_byte_to_hex     = C_buffer_param_<char, hex_digits_per_byte>;
 
     inline auto byte_to_hex_in(
@@ -39,4 +39,8 @@ namespace cppx {
         }
         return p - buffer;
     }
+}  // namespace cppx::hex_stuff
+
+namespace cppx {
+    using namespace hex_stuff;
 }  // namespace cppx

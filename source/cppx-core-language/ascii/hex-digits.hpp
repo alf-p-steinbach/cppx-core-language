@@ -5,7 +5,7 @@
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::div_up
 #include <cppx-core-language/system-dependent/Byte.hpp>     // cppx::bits_per_byte
 
-namespace cppx {
+namespace cppx::hex_stuff {
 
     constexpr int hex_digits_per_byte   = div_up( bits_per_byte, 4 );
     constexpr int hex_base              = 1 << 4;
@@ -38,12 +38,8 @@ namespace cppx {
         -> bool
     { return number_from_hex_digit( ch ) != -1; }
 
-    namespace ascii {
-        CPPX_USE_CPPX(
-            hex_digits_per_byte,
-            hex_digits_uppercase, hex_digits_lowercase, hex_digits,
-            hex_digit, lowercase_hex_digit,
-            number_from_hex_digit, is_hex_digit
-            );
-    }  // namespace ascii
+}  // namespace cppx::hex_stuff
+
+namespace cppx {
+    using namespace hex_stuff;
 }  // namespace cppx
