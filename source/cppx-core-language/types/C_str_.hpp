@@ -26,7 +26,7 @@
 ///
 /// ... which supports compile time construction of a `string_view`, if desired.
 
-namespace cppx
+namespace cppx::c_level_stuff
 {
     template< class Char >
     using C_str_            = const Char*;
@@ -40,4 +40,8 @@ namespace cppx
     using Mutable_c_str         = Mutable_c_str_<char>;     // Effectively `char*`.
     using Mutable_wide_c_str    = Mutable_c_str_<wchar_t>;  // Effectively `wchar_t*`.
 
-} // namespace cppx
+} // namespace cppx::::c_level_stuff
+
+namespace cppx {
+    using namespace c_level_stuff;
+}  // namespace cppx

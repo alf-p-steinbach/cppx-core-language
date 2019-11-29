@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <cppx-core-language/system/Byte.hpp>
-#include <cppx-core-language/system/Endian.hpp>
-#include <cppx-core-language/system/size-types.hpp>
+#include <cppx-core-language/system-dependent/Byte.hpp>
+#include <cppx-core-language/system-dependent/Endian.hpp>
+#include <cppx-core-language/system-dependent/size-types.hpp>
 
 namespace cppx{
     /// \brief Provides

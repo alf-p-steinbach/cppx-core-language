@@ -3,7 +3,7 @@
 #include <cppx-core-language/syntax/macro-items_of.hpp>         // CPPX_ITEMS_OF
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_STD
 #include <cppx-core-language/syntax/Sequence_.hpp>              // cppx::(Sequence_, zero_to)
-#include <cppx-core-language/system/Byte.hpp>                   // cppx::Byte
+#include <cppx-core-language/system-dependent/Byte.hpp>         // cppx::Byte
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 #include <cppx-core-language/syntax/Span_.hpp>                  // cppx::span_of
 #include <cppx-core-language/tmp/type-traits.hpp>               // cppx::(is_integral_, is_a_char_type_)

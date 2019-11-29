@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <cppx-core-language/syntax/Sequence_.hpp>      // cppx::zero_to
-#include <cppx-core-language/system/size-types.hpp>     // cppx::Index
+#include <cppx-core-language/syntax/Sequence_.hpp>                  // cppx::zero_to
+#include <cppx-core-language/system-dependent/size-types.hpp>       // cppx::Index
 
 #ifndef CPPX_NO_DOLLARS_PLEASE
 #   define $repeat_times    CPPX_REPEAT_TIMES   ///< \dollarname{repeat_times}
