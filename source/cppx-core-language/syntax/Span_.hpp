@@ -10,7 +10,7 @@
 
 #include <iterator>     // std::(begin, end)
 
-namespace cppx
+namespace cppx::spans
 {
     CPPX_USE_STD( begin, end );
 
@@ -67,4 +67,9 @@ namespace cppx
         -> Size
     { return span.beyond() - span.first(); }
 
+}  // namespace cppx::spans
+
+namespace cppx {
+    using namespace spans;
 }  // namespace cppx
+
