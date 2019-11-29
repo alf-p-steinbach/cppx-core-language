@@ -1,6 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <cppx-core-language/ascii/hex-digits.hpp>          // cppx::(hex_digits*, hex_base)
+#include <cppx-core-language/text/hex-digits.hpp>           // cppx::(hex_digits*, hex_base)
 #include <cppx-core-language/types/C_buffer_param_.hpp>     // cppx::C_buffer_param_
 #include <cppx-core-language/syntax/macro-items_of.hpp>     // CPPX_ITEMS_OF
 #include <cppx-core-language/syntax/macro-repeat_times.hpp> // CPPX_REPEAT_TIMES

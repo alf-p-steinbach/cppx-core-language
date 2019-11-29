@@ -51,11 +51,11 @@ Each main area of functionality is a sub-folder in the library.
 
 |Folder:     | Is about:  |
 |------------|------------|
-|[ascii](../source/ascii)    | ASCII text handling support, such as names of control characters (plus the name `bad_char` defined as `DEL`), ASCII range checking, widening, uppercasing and lowercasing, and whitespace checking and other classification functions. The C standard library defines some of this but in a form that&rsquo;s difficult to use correctly. For example, the Core Language Extensions library's single code overload of `ascii::is_whitespace` (1) checks whether the code is in the ASCII range, and if so (2) casts it to unsigned `Byte` before passing it to the C library&rsquo;s `isspace`, because that function has UB for negative values other than `EOF`, and (3) casts the result from `int` to `bool`.
 |[bit‑level](../source/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)). |
 |[calc](../source/calc)        | Calculations. Here is a header `<cppx-core-language/calc/stdlib-headers.hpp>` that includes all the relevant standard library calculation stuff, here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest absolute value of `T`.
 |[syntax](../source/syntax)        | Mostly about *reduction of verbosity* for safe or best-practice constructs. For example, the `zero_to` function produces a `Sequence` which supports loops such as `for(const int i: zero_to(n))`, where there is no chance of inadvertent modification of the loop variable. With a reasonably good compiler it&rsquo;s as efficient as an ordinary counting loop &mdash; just less verbose and more safe. Some other syntax support is in the form of macros. E.g. `$use_std(A, B, C);` brings in the specified items from the standard library as if by `using std::A, std::B, std::C;`.  Perhaps of most practical utility to a new library user, here is `<<`-like support for assembling strings from parts. E.g. calls like `fail("Unable to open door "s << n)`. |
 |[system](../source/system)      | System-dependent stuff. The type `Byte` + support; the enumeration `Endian` (more precisely it&rsquo;s a `struct` with an inner `enum`)  ; and the signed types `Size` and `Index` plus the corresponding `Unsigned_size` and `Unsigned_index`. These four are all the same size as `size_t`.
+|[text](../source/text)    | Mainly ASCII text handling support, such as names of control characters (plus the name `bad_char` defined as `DEL`), ASCII range checking, widening, uppercasing and lowercasing, and whitespace checking and other classification functions. The C standard library defines some of this but in a form that&rsquo;s difficult to use correctly. For example, the Core Language Extensions library's single code overload of `ascii::is_whitespace` (1) checks whether the code is in the ASCII range, and if so (2) casts it to unsigned `Byte` before passing it to the C library&rsquo;s `isspace`, because that function has UB for negative values other than `EOF`, and (3) casts the result from `int` to `bool`.
 |[tmp](../source/tmp)         | Template meta-programming support, or just, support for defining templates. A number of type traits such as `is_integral_`, type modifiers such as `Unref_` and `Unsigned_`, and the class templates `Enable_if_`, `Type_choice_` and `Type_carrier_`. The two first templates are simple wrappers around `std::enable_if_t` and `std::conditional_t`, mostly for readability. |
 |[type‑checking](../source/type%2Dchecking) | `downcasted_to` guarantees a downcast as opposed to a sideways cast, using a safe `dynamic_cast`; `is_of_derived_class` checks whether a pure downcast is possible; and `array_size_of` and `length_of_literal` do compile time size checking.  |
 |[types](../source/types)        | The `Truth` type is a boolean that doesn't implicitly convert to or from anything other than `bool`; the `Int_` template alias lets you specify an integral type via its bit width; `C_str` and family are type names for simple `char` pointers, indicating use for C strings; and `No_copy` and `No_copy_or_move` can be used as base classes with the properties indicated by the names. Essentially these are types and names that are missing in the core language as of C++17.   |
@@ -299,7 +299,7 @@ For example, uppercase &ldquo;A&rdquo; is in row 4 column 1, which means that it
 
 First a pure standard C++ variant of the program:
 
-<small>***examples/tutorial/ascii/ascii-table.stdlib.cpp***:</small>
+<small>***examples/tutorial/text/ascii-table.stdlib.cpp***:</small>
 ~~~cpp
 #include <ctype.h>          // ::isprint
 #include <iomanip>          // std::setw
@@ -344,9 +344,9 @@ In this code it's known that `is_noncontrol_ascii` is never called with an out-o
 
 The Core Language Extensions function `cppx::ascii::is_noncontrol` does such checking and is therefore a drop-in replacement for any such DIY function:
 
-<small>***examples/tutorial/ascii/ascii-table.hybrid.cpp***:</small>
+<small>***examples/tutorial/text/ascii-table.hybrid.cpp***:</small>
 ~~~cpp
-#include <cppx-core-language/ascii/all.hpp>
+#include <cppx-core-language/text/all.hpp>
 #include <iomanip>          // std::setw
 #include <iostream>
 
@@ -380,11 +380,11 @@ auto main()
 
 With use of the Core Language Extensions library&rsquo;s ASCII support the code is already shorter and more clear.
 
-This program uses just a specific part of the library, namely the ASCII support, so it includes &ldquo;cppx-core-language/ascii/all.hpp&rdquo;. Every folder has an &ldquo;***all.hpp***&rdquo; file that includes all headers in that folder. The top level &ldquo;all.hpp&rdquo; is just a special case, the one that happens to be at the root of the library.
+This program uses just a specific part of the library, namely the ASCII support, so it includes &ldquo;cppx-core-language/text/all.hpp&rdquo;. Every folder has an &ldquo;***all.hpp***&rdquo; file that includes all headers in that folder. The top level &ldquo;all.hpp&rdquo; is just a special case, the one that happens to be at the root of the library.
 
 I described the above as hybrid code because apart from the ASCII support it&rsquo;s the same as the pure standard C++ first version. But when one has installed Core Language Extensions and uses some of it, then it&rsquo;s natural to also use its syntax support, which makes the code more readable, even shorter, and more safe to boot. More safe in that loop variables can then be `const`, which prevents inadvertent modification:
 
-<small>***examples/tutorial/ascii/ascii-table.cpp***:</small>
+<small>***examples/tutorial/text/ascii-table.cpp***:</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <iomanip>          // std::setw

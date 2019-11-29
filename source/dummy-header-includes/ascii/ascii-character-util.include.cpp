@@ -1,2 +1,2 @@
-#include <cppx-core-language/ascii/ascii-character-util.hpp>
+#include <cppx-core-language/text/ascii-character-util.hpp>
 namespace{ int satisfy_linker; }

@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <cppx-core-language/ascii/ascii-character-util.hpp>    // cppx::ascii::*
+#include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
 
 #include <c/string.hpp>         // strlen

@@ -1,2 +1,2 @@
-#include <cppx-core-language/ascii/hex-digits.hpp>
+#include <cppx-core-language/text/hex-digits.hpp>
 namespace{ int satisfy_linker; }
