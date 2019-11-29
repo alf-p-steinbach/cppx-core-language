@@ -6,7 +6,6 @@
 #include <cppx-core-language/system-dependent/Byte.hpp>     // cppx::bits_per_byte
 
 namespace cppx::hex_stuff {
-
     constexpr int hex_digits_per_byte   = div_up( bits_per_byte, 4 );
     constexpr int hex_base              = 1 << 4;
 
@@ -37,7 +36,6 @@ namespace cppx::hex_stuff {
     inline auto is_hex_digit( const char ch )
         -> bool
     { return number_from_hex_digit( ch ) != -1; }
-
 }  // namespace cppx::hex_stuff
 
 namespace cppx {
