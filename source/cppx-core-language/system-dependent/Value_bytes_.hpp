@@ -13,8 +13,12 @@
 namespace cppx {
     CPPX_USE_STD( is_trivially_copyable_v, min, reverse );
 
-    // Provides a big endian sequence of bytes of a specified simple value.
-    template< int capacity >
+    // Provides a sequence of bytes of a specified simple value.
+    template<
+        int             capacity,
+        Endian::Enum    desired_endianess = Endian::big,    // Good default for e.g. hex
+        class = Enable_if_<not system::is_mixed_endian>
+        >
     class Value_bytes_
     {
         Byte    m_buffer[capacity];
@@ -51,7 +55,7 @@ namespace cppx {
             static_assert( sizeof( value ) <= capacity );
             static_assert( not system::is_mixed_endian );
             memcpy( &m_buffer[0], &value, m_buffer_size );
-            if( system::is_little_endian ) {
+            if constexpr( Endian::native != desired_endianess ) {
                 reverse( m_buffer, m_buffer + m_buffer_size );
             }
         }

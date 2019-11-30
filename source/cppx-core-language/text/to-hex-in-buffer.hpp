@@ -8,10 +8,10 @@
 #include <cppx-core-language/syntax/type-builders.hpp>      // cppx::Type_
 
 namespace cppx::hex_stuff {
-    using Bufferptr_byte_to_hex     = C_buffer_param_<char, hex_digits_per_byte>;
+    using Bufferptr_for_byte_to_hex     = C_buffer_param_<char, hex_digits_per_byte>;
 
     inline auto byte_to_hex_in(
-        const Bufferptr_byte_to_hex     buffer,
+        const Bufferptr_for_byte_to_hex     buffer,
         const Byte                      value,
         const Type_<const char*>        hex_digits  = hex_digits_uppercase
         ) -> Size
@@ -26,7 +26,7 @@ namespace cppx::hex_stuff {
     }
 
     inline auto byte_span_to_hex_in(
-        const Bufferptr_byte_to_hex     buffer,
+        const Bufferptr_for_byte_to_hex     buffer,
         const Type_<const Byte*>        p_first,
         const Type_<const Byte*>        p_beyond,
         const Type_<const char*>        hex_digits  = hex_digits_uppercase
@@ -34,8 +34,8 @@ namespace cppx::hex_stuff {
     {
         char* p = buffer.ptr();
         for( const Byte value: span_of( p_first, p_beyond ) ) {
-            byte_to_hex_in( Bufferptr_byte_to_hex( p ), value, hex_digits );
-            p += Bufferptr_byte_to_hex::size_for_1();
+            byte_to_hex_in( Bufferptr_for_byte_to_hex( p ), value, hex_digits );
+            p += Bufferptr_for_byte_to_hex::size_for_1();
         }
         return p - buffer;
     }
