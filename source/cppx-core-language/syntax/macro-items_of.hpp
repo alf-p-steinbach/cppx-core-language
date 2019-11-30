@@ -21,4 +21,9 @@
 /// Don't call this macro with an lvalue expression that has side effects.
 
 #define CPPX_ITEMS_OF( c ) \
-    std::begin( cppx::lvalue_ref_to( c ) ), std::end( c )
+    std::begin( cppx::lvalue_ref_to( c ) ), \
+    std::end( c )
+
+#define CPPX_REVERSE_ITEMS_OF( c ) \
+    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
+    std::make_reverse_iterator( std::begin( c ) )
