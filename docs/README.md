@@ -66,20 +66,13 @@ Each main area of functionality is a sub-folder in the library.
 
 The code examples in this tutorial are all available in the “examples” top level folder.
 
-But first: a high level context.
-
-xxx
-
-
 
 ### 3.1. The syntax support.
 
-Some of the syntax support is in the form of functions, and some of it is in the form of macros. An example function is `zero_to(n)`, which produces an efficiently iterable `Sequence` suitable for a range-based `for` loop, and the macros include `$repeat_times`, which expresses a simple counting loop, and `$use_std`, where e.g. the call `$use_std(cout, endl, setw);` expands to `using std::cout; using std::endl; using std::setw;`.
-
-As those examples show the syntax support is about
+The syntax support is about
 
 * reducing verbosity,
-* reducing complexity, and
+* reducing complexity (generally by imposing constraints), and
 * increasing readability.
 
 For example, simple counting loops are very common, and a counting loop
@@ -102,13 +95,22 @@ Advantages wrt. verbosity, complexity and readability:
 * the number of variables the code must handle and update correctly is reduced from 2 to 0, and now the code can’t inadvertently change a variable, and
 * it’s English rather than a jumble of operators.
 
+As the above shows some of the syntax support is in the form of macros (here `$repeat_times`). Macros are for the cases where systematic text generation is necessary, and/or where the best alternative would be too complex, ugly or verbose. In some cases, and this is one, it’s up to the library user to choose whether to use a macro such as `$repeat_times` or instead a function such as `one_through`, which produces an efficiently iterable `Sequence`:
+
+>     const int n = expression;
+>     for( const int count: one_through( n ) ) {
+>         cout << "iteration " << count << " of " << n << endl;
+>     }
+
+Avoiding a macro generally increases verbosity and reduces constraints. As an example of what reduced constraints is about, why that’s undesirable, the `goto` statement is very unconstrained compared to structured control statements such as `while` and `for`. And just as use of unconstrained `goto` can encourage bugs to enter, so use of unconstrained non-macro alternatives can encourage bugs to enter.
+
 However, the syntax support is ***not*** about replacing perfectly good C++ constructs with e.g. favorite Ada keywords, just for readability, or that sort of thing.
 
 For example, C++ has an idiomatic construct `for(;;)` for expressing an infinite loop. It’s a bit cryptic to a beginner so readability could be improved by a macro, but against that: by adding a layer of indirection complexity would be increased instead of reduced, and verbosity would be increased or at least not much reduced. So there’s no `$loop` macro, or the sort.
 
 Costs:
 
-* A reader — especially an old-timer — unfamiliar with `$repeat_times` may balk at the code, perceiving it as foreign or alien, not the C++ that we learned that C++ is, etc. etc.
+* A reader — especially an old-timer — unfamiliar with `$repeat_times` may balk at the code, perceiving it as foreign or alien, not the C++ that we learned, etc. etc.
 * As far as I know all extant desktop system C++ compilers support &ldquo;$&rdquo; in names, but reportedly at least one compiler for an embedded device does not.
 * For macros that take an arbitrary number of arguments, such as `$use_std`, misspelling a name in the argument list may cause the compiler to emit a *diagnostics avalanche* (just as with template errors) where it delves into many levels of nested macro calls.
 
