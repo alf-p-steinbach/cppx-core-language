@@ -1,6 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/syntax/Sequence_.hpp>              // cppx::Sequence_
-#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::P_
+#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::Type_
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_...
 #include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
 #include <cppx-core-language/tmp/Type_carrier_.hpp>             // cppx::Type_carrier_
@@ -24,16 +24,16 @@ namespace cppx
         -> string;
 
 #ifdef __GNUC__
-    inline auto type_name_from_info( const type_info& info )
+    inline auto type_name_from( const type_info& info )
         -> string
     {
         struct Malloced_string
         {
-            P_<const char> p_chars;
-            ~Malloced_string() { free( const_cast<P_<char>>( p_chars ) ); }
+            Type_<const char*> p_chars;
+            ~Malloced_string() { free( const_cast<Type_<char*>>( p_chars ) ); }
         };
 
-        const P_<const char> mangled_name = info.name();
+        const Type_<const char*> mangled_name = info.name();
         int status = 0;
         const Malloced_string demangled = { ::abi::__cxa_demangle(
             info.name(),
@@ -67,6 +67,7 @@ namespace cppx
         string part;
         bool is_in_name = false;
 
+        // Assemble the parts except ditch MSVC's "struct", "class" and "enum" keywords.
         for( char ch: elaborated ) {
             if( impl::is_identifier_character( ch ) ) {
                 is_in_name = true;
