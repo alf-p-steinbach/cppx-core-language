@@ -74,7 +74,7 @@ xxx
 
 ### 3.1. The syntax support.
 
-Some of the syntax support is in the form of functions, and some of it is in the form of macros. An example function is `zero_to(n)`, which produces an efficiently iterable `Sequence` suitable for a range-based `for` loop, and the macros include `$repeat_times`, which expresses a simple counting loop, and `$use_std`, which takes an arbitrary number of arguments where e.g. `$use_std(cout, endl, setw)` expands to `using std::cout, std::endl, std::setw`.
+Some of the syntax support is in the form of functions, and some of it is in the form of macros. An example function is `zero_to(n)`, which produces an efficiently iterable `Sequence` suitable for a range-based `for` loop, and the macros include `$repeat_times`, which expresses a simple counting loop, and `$use_std`, where e.g. the call `$use_std(cout, endl, setw);` expands to `using std::cout; using std::endl; using std::setw;`.
 
 As those examples show the syntax support is about
 
