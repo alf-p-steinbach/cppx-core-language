@@ -61,4 +61,18 @@ namespace cppx {
         }
     };
 
+    template< class Value >
+    auto inline native_endian_bytes_of( const Value v )
+        -> Value_bytes_<sizeof( Value ), Endian::native>
+    { return Value_bytes_<sizeof( Value ), Endian::native>( v ); }
+
+    template< class Value >
+    auto inline little_endian_bytes_of( const Value v )
+        -> Value_bytes_<sizeof( Value ), Endian::little>
+    { return Value_bytes_<sizeof( Value ), Endian::little>( v ); }
+
+    template< class Value >
+    auto inline big_endian_bytes_of( const Value v )
+        -> Value_bytes_<sizeof( Value )>
+    { return Value_bytes_<sizeof( Value )>( v ); }
 }  // namespace cppx
