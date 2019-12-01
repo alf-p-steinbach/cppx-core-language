@@ -66,6 +66,25 @@ Each main area of functionality is a sub-folder in the library.
 
 The code examples in this tutorial are all available in the “examples” top level folder.
 
+Most of the examples use the Core Language Extensions syntax support. In particular, where the examples use things from the C++ standard library the examples bring in the unqualified names via a macro **`$use_std`**, like this:
+
+>     $use_std( cout, endl, setw );
+
+That expands to the corresponding C++11 single-item `using`-declarations
+
+>     using std::cout;  using std::endl;  using std::setw;
+
+Unqualified names from the Core Language Extension library and other `cppx` namespace libraries are correspondingly brought in via macro invocations like
+
+>     $use_cppx( zero_to, hex_digit );
+
+… which expands to
+
+>     using cppx::zero_to;  using cppx::hex_digit;
+
+I use the macros and other syntax support like the `zero_to` function because it yields shorter, simpler and more readable-as-English code. However, some people reportedly feel uncomfortable writing, or even just reading, C++ code with `$`-macro invocations. If that applies to you then just replace all instances of `$use_std` with `CPPX_USE_STD`, and all instances of `$use_cppx` with `CPPX_USE_CPPX`, and correspondingly for other macros.
+
+xxx
 
 ### 3.1. The syntax support.
 
