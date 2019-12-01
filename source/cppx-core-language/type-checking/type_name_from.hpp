@@ -30,7 +30,7 @@ namespace cppx
         struct Malloced_string
         {
             Type_<const char*> p_chars;
-            ~Malloced_string() { free( const_cast<Type_<char*>>( p_chars ) ); }
+            ~Malloced_string() { free( const_cast<char*>( p_chars ) ); }
         };
 
         const Type_<const char*> mangled_name = info.name();
