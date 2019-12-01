@@ -23,7 +23,7 @@ After cloning, checking out or downloading the library:
    ***Test***: For example, `#include` `<cppx-core-language-meta-macro/all.hpp>` should work.  
 
 3. Make the library source code available via C++ include path &ldquo;`cppx-core-language/`&rdquo;.  
-   ***Info***: Same as earlier, but now it’s this library so it’s not a GIT sub-module.  
+   ***Info***: Now it’s this library so it’s not a GIT sub-module.  
    ***Test***: for example, `#include` `<cppx-core-language/all.hpp>` should work.
 
 Test the installation with a simple C++ program using the include directive
