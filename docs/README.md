@@ -61,12 +61,11 @@ Each main area of functionality is a sub-folder in the library.
 |[types](../source/types)        | The `Truth` type is a boolean that doesn't implicitly convert to or from anything other than `bool`; the `Int_` template alias lets you specify an integral type via its bit width; `C_str` and family are type names for simple `char` pointers, indicating use for C strings; and `No_copy` and `No_copy_or_move` can be used as base classes with the properties indicated by the names. Except for `C_str` these are types and names, or features, that are missing in the core language as of C++17. Additionally here is an internally used class template `C_buffer_param_` which associates a pointer-to-first-item-in-array with a minimum size of the array.   |
 
 
-
 ## 3. Tutorial.
 
 The code examples in this tutorial are all available in the “examples” top level folder.
 
-Most of the examples use the Core Language Extensions syntax support. In particular, where the examples use things from the C++ standard library the examples bring in the unqualified names via a macro **`$use_std`**, like this:
+Most of the examples use the Core Language Extensions syntax support. In particular, where the examples use things from the C++ standard library the unqualified names are brought in via a macro **`$use_std`**, like this:
 
 >     $use_std( cout, endl, setw );
 
@@ -74,7 +73,7 @@ That expands to the corresponding C++11 single-item `using`-declarations
 
 >     using std::cout;  using std::endl;  using std::setw;
 
-Unqualified names from the Core Language Extension library and other `cppx` namespace libraries are correspondingly brought in via macro invocations like
+Unqualified names from the Core Language Extension library and other `cppx` namespace libraries are likewise brought in via macro invocations like
 
 >     $use_cppx( zero_to, hex_digit );
 
@@ -82,11 +81,17 @@ Unqualified names from the Core Language Extension library and other `cppx` name
 
 >     using cppx::zero_to;  using cppx::hex_digit;
 
-I use the macros and other syntax support like the `zero_to` function because it yields shorter, simpler and more readable-as-English code. However, some people reportedly feel uncomfortable writing, or even just reading, C++ code with `$`-macro invocations. If that applies to you then just replace all instances of `$use_std` with `CPPX_USE_STD`, and all instances of `$use_cppx` with `CPPX_USE_CPPX`, and correspondingly for other macros.
+The examples use the macros and other syntax support like the `zero_to` function because it yields shorter, simpler and more readable-as-English code. However, some people reportedly feel uncomfortable reading (not to mention writing!) C++ code with `$`-macro invocations. If that applies to you then just replace all instances of `$use_std` with `CPPX_USE_STD`, and all instances of `$use_cppx` with `CPPX_USE_CPPX`, and correspondingly for other macros.
+
+### 3.1. The bit-level stuff.
+
+Folder: **bit-level**.
+
+
 
 xxx
 
-### 3.1. The syntax support.
+# x. The syntax support.
 
 The syntax support is about
 
