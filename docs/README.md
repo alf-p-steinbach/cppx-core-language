@@ -65,9 +65,11 @@ Each main area of functionality is a sub-folder in the library.
 
 The code examples in this tutorial are all available in the “examples” top level folder.
 
+---
+
 Most of the examples use the Core Language Extensions syntax support. In particular, where the examples use things from the C++ standard library the unqualified names are brought in via a macro **`$use_std`**, like this:
 
->     $use_std( cout, endl, setw );
+    $use_std( cout, endl, setw );
 
 That expands to the corresponding C++11 single-item `using`-declarations
 
@@ -75,13 +77,23 @@ That expands to the corresponding C++11 single-item `using`-declarations
 
 Unqualified names from the Core Language Extension library and other `cppx` namespace libraries are likewise brought in via macro invocations like
 
->     $use_cppx( zero_to, hex_digit );
+    $use_cppx( zero_to, hex_digit );
 
 … which expands to
 
 >     using cppx::zero_to;  using cppx::hex_digit;
 
-The examples use the macros and other syntax support like the `zero_to` function because it yields shorter, simpler and more readable-as-English code. However, some people reportedly feel uncomfortable reading (not to mention writing!) C++ code with `$`-macro invocations. If that applies to you then just replace all instances of `$use_std` with `CPPX_USE_STD`, and all instances of `$use_cppx` with `CPPX_USE_CPPX`, and correspondingly for other macros.
+The examples use the macros and other syntax support like the `zero_to` function because that yields shorter, simpler and more readable-as-English code. However, some people reportedly feel uncomfortable reading (not to mention writing!) C++ code with `$`-macro invocations. If that applies to you then just replace all instances of `$use_std` with `CPPX_USE_STD`, and all instances of `$use_cppx` with `CPPX_USE_CPPX`, and correspondingly for other macros.
+
+---
+
+In practical use of the library one will just include ***the top level “all”  header***,
+
+    #include <cppx-core-language/all.hpp>
+
+However, the examples instead include the most specific headers possible, in order to show where in the library things are located.
+
+Just keep in mind that all the multiple includes can be reduced to the above single line.
 
 ### 3.1. The bit-level stuff.
 

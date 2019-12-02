@@ -1,7 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 /// \file
 /// \brief
-/// \make_name_ref{cppx,bits_per_} and
+/// \make_name_ref{cppx,bits_per_},
+/// \make_name_ref{cppx,value_bits_per_} and
 /// \make_name_ref{cppx,magnitude_bits_per_}.
 
 #include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_CPPX
@@ -26,9 +27,11 @@ namespace cppx
     constexpr int magnitude_bits_per_   = numeric_limits<Type>::digits;
 
     /// \brief The number of bits that determine the value, i.e. the number of value
-    /// representation bits.
+    /// representation bits. Formally, for types larger than `char` this the number
+    /// of value representation bits can be less than the number of bits per value.
+    /// I.e. formally there can be padding bits even in a basic value.
     ///
-    /// On 2019 computers this is generally just `bits_per_<Type>`.
+    /// However, on 2019 computers this is generally just `bits_per_<Type>`.
     ///
     template< class Type >
     constexpr int value_bits_per_       = magnitude_bits_per_<Type> + (Type(-1) < 0);

@@ -26,6 +26,9 @@ namespace cppx
         }
 
         operator string() const { return value(); }
+
+        // Mainly for using the `type_name_of_` template variable as a pseudo function.
+        auto operator() () const -> string { return value(); }
     };
 
     template< class Type >
