@@ -75,7 +75,7 @@ That expands to the corresponding C++11 single-item `using`-declarations
 
 >     using std::cout;  using std::endl;  using std::setw;
 
-Unqualified names from the Core Language Extension library and other `cppx` namespace libraries are likewise brought in via macro invocations like
+Unqualified names from the Core Language Extensions library and other `cppx` namespace libraries are likewise brought in via macro invocations like
 
     $use_cppx( zero_to, hex_digit );
 
