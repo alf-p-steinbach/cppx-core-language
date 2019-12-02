@@ -93,7 +93,7 @@ In practical use of the library one will just include ***the top level “all”
 
 And this is also how each example is presented.
 
-However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.specific-headers.cpp” that instead uses the most specific headers. These includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
+However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.specific-headers.cpp” that instead uses the most specific headers. For your information these includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
 
 ### 3.1. The bit-level stuff.
 
