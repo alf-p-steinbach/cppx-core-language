@@ -11,28 +11,28 @@ namespace cppx
 {
     CPPX_USE_STD( forward, string );
 
-    // An `operator<<` for stream output is defined by <cppx-core/io/type_name_of_.output.hpp>.
-    template< class Type >
-    struct Type_name_of_
-    {
-        auto value() const
-            -> string
+    namespace impl {
+        template< class Type >
+        struct Type_name_of_
         {
-            // Wrapping the type keeps any top level CV-qualification in the result.
-            const string raw = type_name_from( typeid( Type_carrier_<Type> ) );
-            const int i_first = 1 + raw.find_first_of( '<' );
-            const int i_beyond = raw.find_last_of( '>' );
-            return raw.substr( i_first, i_beyond - i_first );
-        }
+            auto value() const
+                -> string
+            {
+                // Wrapping the type keeps any top level CV-qualification in the result.
+                const string raw = type_name_from( typeid( Type_carrier_<Type> ) );
+                const int i_first = 1 + raw.find_first_of( '<' );
+                const int i_beyond = raw.find_last_of( '>' );
+                return raw.substr( i_first, i_beyond - i_first );
+            }
 
-        operator string() const { return value(); }
-
-        // Mainly for using the `type_name_of_` template variable as a pseudo function.
-        auto operator() () const -> string { return value(); }
-    };
+            operator string() const { return value(); }
+        };
+    }  // namespace impl
 
     template< class Type >
-    constexpr auto type_name_of_ = Type_name_of_<Type>();
+    inline auto type_name_of_()
+        -> string
+    { return impl::Type_name_of_<Type>::value(); }
 
     template< class Type >
     inline auto type_name_of( Type&& expr )
