@@ -98,7 +98,7 @@ However, it’s possible to use much more specific, less inclusive headers, and 
 
 ### 3.1. The bit-level stuff.
 
-Folder: “**bit-level**”.
+Folder: “**[bit‑level](../source/bit%2Dlevel)**”.
 
 ---
 
@@ -319,7 +319,7 @@ Specific headers:
 
 ### 3.2. The calculation stuff.
 
-Folder: “**calc**”. Exporting namespace: `calc`.
+Folder: “**[calc](../source/calc)**”. Exporting namespace: `calc`.
 
 The ***exporting namespace*** has `using` declarations of all the calculation stuff, so that you can obtain unqualified versions of these names simply by
 
@@ -327,7 +327,7 @@ The ***exporting namespace*** has `using` declarations of all the calculation st
 using namespace cppx::calc;
 ~~~
 
-Which doesn’t drag in other names from `cppx`.
+This doesn’t drag in other names from `cppx`.
 
 The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::intpow;`, or `$use_cppx( intpow );`, for individual names.
 
