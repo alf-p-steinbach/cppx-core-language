@@ -371,7 +371,7 @@ Result with 64-bit MinGW g++ in Windows 10:
 
 The last result is an approximation of Euler’s number *e* ≈ 2.718281828…, and thereby provides a simple check that the power is computed correctly.
 
-Such checking is needed because the whole point of an integral power function is efficiency, compared to the more general C `pow` function, and so the calculation is non-trivial, not just a simple loop. It wouldn't do to use time O( *n* ) for exponent *n*! `intpow` uses divide-and-conquer to evaluate an integral power of floating point base, *x*<sup>*n*</sup>, in just O( log₂|*n*| ) steps.
+Such checking is needed because the whole point of an integral power function is efficiency, compared to the more general C `pow` function, and so the calculation is non-trivial, not just a simple loop doing *n* multiplications. It wouldn't do to use time O( *n* ) for exponent *n*! `intpow` uses divide-and-conquer to evaluate an integral power of floating point base, *x*<sup>*n*</sup>, in just O( log₂|*n*| ) steps.
 
 Negative exponent is supported.
 
