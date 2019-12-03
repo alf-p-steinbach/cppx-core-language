@@ -271,7 +271,7 @@ auto main()
     using U = uint8_t;
     const int n_bits = bits_per_<U>;
     const int max_bit_pos = n_bits - 1;
-    using Bits = std::bitset<n_bits>;
+    using Bits = bitset<n_bits>;
 
     display_row( "Value:", "Bits:", "MSB pos:", "Sum of bits:" );
     cout << endl;
@@ -311,7 +311,7 @@ Result with 64-bit MinGW g++ in Windows 10:
              170        10101010               7               4
 ~~~
 
-asd
+In passing, `Sequence` is a further example of Core Language Extensions syntax support, namely for the range based `for`. The aforementioned `zero_to(n)` function simply produces a `Sequence(0,` `n-1)`. There is also `one_through`.
 
 
 
