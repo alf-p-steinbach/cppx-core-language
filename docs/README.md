@@ -125,12 +125,6 @@ auto main()
 }
 ~~~
 
-Instead of “all.hpp” you can include this specific header:
-
-~~~cpp
-#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
-~~~
-
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt
@@ -141,6 +135,13 @@ bits, and of those again 31 bits encode the magnitude.
 ~~~
 
 Without the Core Language Extensions library you could do this using `std::numeric_limits` and perhaps the `CHAR_BIT` constant from C.
+
+Specific header:
+
+~~~cpp
+#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+~~~
+
 
 ---
 
