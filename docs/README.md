@@ -139,7 +139,7 @@ With this compiler an `int` is 32 bits. 32 of those are value representation
 bits, and of those again 31 bits encode the magnitude.
 ~~~
 
-Without the Core Language Extensions library you could do this using `std::numeric_limits` and perhaps the `CHAR_BIT` constant from C. It can be worth trying that in order to see if the library really saves work or provides more readable and clear client code. I think it does, but then, it’s not that often that one needs bit width information.
+Without the Core Language Extensions library you could do this using `std::numeric_limits` and perhaps the `CHAR_BIT` constant from C.
 
 ---
 
@@ -223,7 +223,7 @@ Data addresses in this process are 64-bit.
   unsigned long long                  64                  64                  64
 ~~~
 
-The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro. It can be worth trying that in order to see if the library really saves work or provides more readable and clear client code.
+The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro, and gives the ability to obtain readable names of types. That ability is based on `typeid(T).name()`, just with added demangling applied for the g++ compiler and with removal of `struct`, `class` and `enum` keywords for Visual C++ and other compilers.
 
 ---
 
