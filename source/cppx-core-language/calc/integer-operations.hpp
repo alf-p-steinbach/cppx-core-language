@@ -22,12 +22,12 @@
 namespace cppx
 {
     template< class Int >
-    inline auto is_even( const Int x )
+    constexpr inline auto is_even( const Int x )
         -> Truth
     { return x % 2 == 0; }
 
     template< class Int >
-    inline auto is_odd( const Int x )
+    constexpr inline auto is_odd( const Int x )
         -> Truth
     { return x % 2 == 1; }
 
@@ -47,22 +47,22 @@ namespace cppx
         return (q >= 0 and a % b != 0? q + 1 : q);
     }
 
-    inline auto intmod( const int a, const int b ) noexcept
+    constexpr inline auto intmod( const int a, const int b ) noexcept
         -> int
     { return a - b*div_down( a, b ); }
 
     template< class Int = int >
-    inline auto intsquare( const Int x )
+    constexpr inline auto intsquare( const Int x )
         -> Int
     { return x*x; }
 
     template< class Int = int >
-    inline auto intcube( const Int x )
+    constexpr inline auto intcube( const Int x )
         -> Int
     { return x*x*x; }
 
     template< class... Ints >
-    inline auto intmin( const Ints... args )
+    constexpr inline auto intmin( const Ints... args )
         -> std::common_type_t<Ints...>
     { 
         static_assert( (... and std::is_integral_v<Ints> ) );
@@ -70,7 +70,7 @@ namespace cppx
     }
 
     template< class... Ints >
-    inline auto intmax( const Ints... args )
+    constexpr inline auto intmax( const Ints... args )
         -> std::common_type_t<Ints...>
     { 
         static_assert( (... and std::is_integral_v<Ints> ) );

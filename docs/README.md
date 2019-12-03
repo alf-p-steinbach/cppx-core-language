@@ -95,6 +95,7 @@ And this is also how each example is presented.
 
 However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.using-specific-headers.cpp” that instead uses the most specific headers. For your information these includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
 
+
 ### 3.1. The bit-level stuff.
 
 Folder: “**bit-level**”.
@@ -313,6 +314,24 @@ Result with 64-bit MinGW g++ in Windows 10:
 
 In passing, `Sequence` is a further example of Core Language Extensions syntax support, namely for the range based `for`. The aforementioned `zero_to(n)` function simply produces a `Sequence(0,` `n-1)`. There is also `one_through`.
 
+
+### 3.2. The calculation stuff.
+
+Folder: “**calc**”. Exporting namespace: `calc`.
+
+The ***exporting namespace*** has `using` declarations of all the calculation stuff, so that you can obtain unqualified versions of these names simply by
+
+~~~cppx
+using namespace cppx::calc;
+~~~
+
+Which doesn’t drag in other names from `cppx`.
+
+The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using` `cppx::intpow;`, or `$use_cppx(` `intpow` `);`, for individual names.
+
+---
+
+The “*floating-point-operations.hpp*” header provides 
 
 
 xxx

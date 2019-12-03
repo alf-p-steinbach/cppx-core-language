@@ -13,7 +13,7 @@ namespace cppx
     /// @cond DOXY_SHOW_IMPL_DETAILS
     namespace impl
     {
-        inline auto intpow( const double base, const int exponent )
+        constexpr inline auto intpow( const double base, const int exponent )
             -> double
         {
             double result = 1;
@@ -39,7 +39,7 @@ namespace cppx
     ///
     /// Essentially this is Horner's rule adapted to calculating a power, so that the
     /// number of floating point multiplications is at worst O(log2(n)).
-    inline auto intpow( const double base, const int exponent )
+    constexpr inline auto intpow( const double base, const int exponent )
         -> double
     {
         return (0?0
@@ -50,12 +50,12 @@ namespace cppx
     }
 
     /// \brief The square (second power) of the argument.
-    inline auto squared( const double x )
+    constexpr inline auto squared( const double x )
         -> double
     { return x*x; }
 
     /// \brief The cube (third power) of the argument.
-    inline auto cubed( const double x )
+    constexpr inline auto cubed( const double x )
         -> double
     { return x*x*x; }
 
