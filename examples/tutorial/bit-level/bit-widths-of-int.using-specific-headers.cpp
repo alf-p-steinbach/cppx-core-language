@@ -1,7 +1,8 @@
 ﻿#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
 #include <c/stdio.hpp>
 
-auto main() -> int
+auto main()
+    -> int
 {
     const auto& s =
         "Data addresses in this process are %d-bit.\n"
