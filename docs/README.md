@@ -199,14 +199,6 @@ auto main()
 }
 ~~~
 
-Instead of “all.hpp” you can include these specific headers:
-
-~~~cpp
-#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
-#include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
-#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
-~~~
-
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt
@@ -225,6 +217,14 @@ Data addresses in this process are 64-bit.
 ~~~
 
 The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro, and gives the ability to obtain readable names of types. That ability is based on `typeid(T).name()`, just with added demangling applied for the g++ compiler and with removal of `struct`, `class` and `enum` keywords for Visual C++ and other compilers.
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+#include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
+#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
+~~~
 
 ---
 
@@ -286,16 +286,6 @@ auto main()
 }
 ~~~
 
-Instead of “all.hpp” you can include these specific headers:
-
-~~~cpp
-#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_even
-#include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
-#include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::intlog2
-#include <cppx-core-language/bit-level/sum_of_bits.hpp>     // cppx::sum_of_bits
-#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::Sequence
-~~~
-
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt
@@ -313,6 +303,17 @@ Result with 64-bit MinGW g++ in Windows 10:
 ~~~
 
 In passing, `Sequence` is a further example of Core Language Extensions syntax support, namely for the range based `for`. The aforementioned `zero_to(n)` function simply produces a `Sequence(0, n-1)`. There is also `one_through`.
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_even
+#include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
+#include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::intlog2
+#include <cppx-core-language/bit-level/sum_of_bits.hpp>     // cppx::sum_of_bits
+#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::Sequence
+~~~
+
 
 
 ### 3.2. The calculation stuff.
@@ -359,13 +360,6 @@ auto main()
 }
 ~~~
 
-Instead of “all.hpp” you can include this specific header:
-
-~~~cpp
-// cppx::(intpow, squared, cubed)
-#include <cppx-core-language/calc/floating-point-operations.hpp>
-~~~
-
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt
@@ -378,8 +372,14 @@ The last result is an approximation of Euler’s number *e* ≈ 2.718281828…, 
 
 Such checking is needed because the whole point of an integral power function is efficiency, compared to the more general C `pow` function, and so the calculation is non-trivial, not just a simple loop. It wouldn't do to use time O( *n* ) for exponent *n*! `intpow` uses divide-and-conquer to evaluate an integral power of floating point base, *x*<sup>*n*</sup>, in just O( log₂|*n*| ) steps.
 
+Negative exponent is supported.
 
- Negative exponent is supported.
+Specific header:
+
+~~~cpp
+// cppx::(intpow, squared, cubed)
+#include <cppx-core-language/calc/floating-point-operations.hpp>
+~~~
 
 
 
