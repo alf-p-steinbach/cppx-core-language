@@ -37,7 +37,7 @@ namespace cppx
     constexpr int value_bits_per_       = magnitude_bits_per_<Type> + (Type(-1) < 0);
 
     struct Bitness{ enum Enum {
-        _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
+        _8 = 8, _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
         }; };
     static_assert(
         Bitness::system == 16 or

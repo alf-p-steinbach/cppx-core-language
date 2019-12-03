@@ -93,7 +93,7 @@ In practical use of the library one will just include ***the top level “all”
 
 And this is also how each example is presented.
 
-However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.specific-headers.cpp” that instead uses the most specific headers. For your information these includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
+However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.using-specific-headers.cpp” that instead uses the most specific headers. For your information these includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
 
 ### 3.1. The bit-level stuff.
 
@@ -138,16 +138,89 @@ With this compiler an `int` is 32 bits. 32 of those are value representation
 bits, and of those again 31 bits encode the magnitude.
 ~~~
 
+---
+
 The `Bitness::Enum` enumeration type, defined as
 
 >     struct Bitness{ enum Enum {
->         _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
+>         _8 = 8, _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
 >         }; };
 
 … is intended as a formal parameter type where you want the argument value constrained to one in this list.
 
----
+For example as in the `display_info_for_` function template below:
 
+<small>*tutorial/bit-level/table-of-bit-widths.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>
+#include <iomanip>
+$use_std( cout, endl, setw );
+
+template< class... Args >
+void display_row( const Args&... args )
+{
+    ((cout << setw( 20 ) << args), ...) << endl;
+}
+
+template< class Type >
+void display_info_for_type_()
+{
+    using namespace cppx;
+    display_row(
+        type_name_of_<Type>(),
+        bits_per_<Type>,
+        value_bits_per_<Type>,
+        magnitude_bits_per_<Type>
+        );
+}
+
+template< cppx::Bitness::Enum... n_bits >
+void display_info_for_()
+{
+    $use_cppx( Int_, Unsigned_int_ );
+    display_row( "Type:", "Bits per value:", "Value repr. bits:", "Magnitude bits:" );
+    cout << endl;
+    (display_info_for_type_< Int_<n_bits> >(), ...);
+    (display_info_for_type_< Unsigned_int_<n_bits> >(), ...);
+}
+
+auto main()
+    -> int
+{
+    $use_cppx( Bitness );
+    cout << "Data addresses in this process are " << Bitness::system << "-bit." << endl;
+    cout << endl;
+    display_info_for_<Bitness::_8, Bitness::_16, Bitness::_32, Bitness::_64>();
+}
+~~~
+
+Instead of “all.hpp” you can include these specific headers:
+
+~~~cpp
+#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+#include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
+#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+Data addresses in this process are 64-bit.
+
+               Type:     Bits per value:   Value repr. bits:     Magnitude bits:
+
+         signed char                   8                   8                   7
+               short                  16                  16                  15
+                 int                  32                  32                  31
+           long long                  64                  64                  63
+       unsigned char                   8                   8                   8
+      unsigned short                  16                  16                  16
+        unsigned int                  32                  32                  32
+  unsigned long long                  64                  64                  64
+~~~
+
+---
 
 xxx
 

@@ -1,4 +1,7 @@
-﻿#include <cppx-core-language/all.hpp>
+﻿#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+#include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
+#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
+
 #include <iostream>
 #include <iomanip>
 $use_std( cout, endl, setw );
