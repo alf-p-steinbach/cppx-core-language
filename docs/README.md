@@ -97,8 +97,56 @@ However, it’s possible to use much more specific, less inclusive headers, and 
 
 ### 3.1. The bit-level stuff.
 
-Folder: **bit-level**.
+Folder: “**bit-level**”.
 
+---
+
+The “*bits_per_.hpp*” header provides convenient notation for the bit widths of fundamental types, as `int` values:
+
+<small>*tutorial/bit-level/bit-widths-of-int.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+
+auto main() -> int
+{
+    static const auto& s =
+        "Data addresses in this process are %d-bit.\n"
+        "\n"
+        "With this compiler an `int` is %d bits. %d of those are value representation\n"
+        "bits, and of those again %d bits encode the magnitude.\n";
+
+    using namespace cppx;
+    printf( s,
+        Bitness::system, bits_per_<int>, value_bits_per_<int>, magnitude_bits_per_<int>
+        );
+}
+~~~
+
+Instead of “all.hpp” you can include this specific header:
+
+~~~cpp
+#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+Data addresses in this process are 64-bit.
+
+With this compiler an `int` is 32 bits. 32 of those are value representation
+bits, and of those again 31 bits encode the magnitude.
+~~~
+
+The `Bitness::Enum` enumeration type, defined as
+
+>     struct Bitness{ enum Enum {
+>         _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
+>         }; };
+
+… is intended as a formal parameter type where you want the argument value constrained to one in this list.
+
+---
 
 
 xxx
