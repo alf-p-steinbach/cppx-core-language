@@ -227,6 +227,32 @@ The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go fro
 
 ---
 
+The “*intlog2.hpp*” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
+
+The “*sum_of_bits.hpp*” header provides the `sum_of_bits` function, implemented in terms of `std::bitset` as simply
+
+~~~cpp
+    /// The number of 1-bits in an unsigned value.
+    template< class Unsigned >
+    inline auto sum_of_bits( const Unsigned x ) noexcept
+        -> int
+    {
+        static_assert( is_unsigned_<Unsigned> );
+        return bitset< bits_per_<Unsigned> >( x ).count();
+    }
+~~~
+
+There is also an overload for a `std::bitset` as argument.
+
+This is generally known as a “**pop count**”, short for “population count”, which presumably refers to the bits as representing a set. With the g++ compiler the function can possibly be optimized in terms of the intrinsic `__builtin_popcount` and family, and with the Visual C++ compiler it can possibly be optimized in terms of the intrinsic `__popcnt` and family. The header provides a rough outline of these optimizations as dead code in a preprocessor `#if 0` conditional, but I haven’t measured, and chances are that `std::bitset::count` is expressed via an intrinsic anyway.
+
+Example:
+
+
+
+
+
+
 xxx
 
 # x. The syntax support.

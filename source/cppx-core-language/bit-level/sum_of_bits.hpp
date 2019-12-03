@@ -3,15 +3,14 @@
 /// \brief \make_name_ref{cppx,sum_of_bits}, the number of 1-bits in a `std::bitset` or
 /// unsigned value.
 
-#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_CPPX
+#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_CPPX, CPPX_USE_STD
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
+#include <cppx-core-language/tmp/type-traits.hpp>           // cppx::is_unsigned_
 
 #include <bitset>           // std::bitset
-#include <type_traits>      // std::is_unsigned_v
 
-namespace cppx
-{
-    using std::bitset;
+namespace cppx{
+    CPPX_USE_STD( bitset );
 
     /// \brief The number of 1-bits in a `std::bitset`.
     template< int n >
@@ -24,9 +23,14 @@ namespace cppx
     inline auto sum_of_bits( const Unsigned x ) noexcept
         -> int
     {
-        static_assert( std::is_unsigned_v<Unsigned> );
-        return bitset<bits_per_<Unsigned>>( x ).count();
+        static_assert( is_unsigned_<Unsigned> );
+        return bitset< bits_per_<Unsigned> >( x ).count();
     }
+
+    namespace bitlevel
+    {
+        CPPX_USE_CPPX( sum_of_bits );
+    }  // namespace bitlevel
 
 #if 0  // Possible optimizations, probably not needed
 #if defined( _MSC_VER )
@@ -79,8 +83,4 @@ namespace cppx
 #endif
 #endif // 0
 
-    namespace bitlevel
-    {
-        CPPX_USE_CPPX( sum_of_bits );
-    }  // namespace bitlevel
 }  // namespace cppx
