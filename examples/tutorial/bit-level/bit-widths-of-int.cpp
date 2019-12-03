@@ -3,7 +3,7 @@
 
 auto main() -> int
 {
-    static const auto& s =
+    const auto& s =
         "Data addresses in this process are %d-bit.\n"
         "\n"
         "With this compiler an `int` is %d bits. %d of those are value representation\n"
