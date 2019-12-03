@@ -18,14 +18,11 @@ namespace cppx
         {
             double result = 1;
             double weight = base;
-            for( int n = exponent; n != 0; weight *= weight )
-            {
+            for( int n = exponent; n != 0; weight *= weight ) {
                 if( is_odd( n ) ) {
                     result *= weight;
-                    --n;
-                } else {
-                    n /= 2;
                 }
+                n /= 2;
             }
             return result;
         }

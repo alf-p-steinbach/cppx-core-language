@@ -331,7 +331,11 @@ The names are however originally defined directly in the `cppx` namespace, so yo
 
 ---
 
-The “*floating-point-operations.hpp*” header provides 
+The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow`, `squared` and `cubed`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but then, it’s nice to have the ability.
+
+
+For run time evaluation the `intpow` function uses divide-and-conquer to evaluate an integral power of floating point base, *x*<sup>*n*</sup>, in O(log₂(|*n*|)) steps. Negative exponent is supported.
+
 
 
 xxx
