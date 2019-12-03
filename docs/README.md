@@ -16,15 +16,15 @@ After cloning, checking out or downloading the library:
 
 1. Make the C Header Wrappers source code available via C++ include path &ldquo;`c/`&rdquo;.  
    ***Info***: C header Wrappers is a project that Core Language Extensions depends on. You find it as a GIT sub-module in the folder &ldquo;dependencies&rdquo;. In Windows I prefer to make library headers available by using junctions in a common include folder. For example, in that folder I&rsquo;d use the command `mklink /j c c:\somewhere\c-header-wrappers\source\c`. Just copying the source is also fine.  
-   ***Test***: For example, `#include` `<c/math.hpp>` should now work in C++ source code.  
+   ***Test***: For example, `#include <c/math.hpp>` should now work in C++ source code.  
 
 2. Make the Meta Macro source code available via C++ include path &ldquo;`cppx-core-language-meta-macro/`&rdquo;.  
    ***Info***: Meta Macro is a project that Core Language Extensions depends on. You find it as a GIT sub-module in the folder &ldquo;dependencies&rdquo;.  
-   ***Test***: For example, `#include` `<cppx-core-language-meta-macro/all.hpp>` should work.  
+   ***Test***: For example, `#include <cppx-core-language-meta-macro/all.hpp>` should work.  
 
 3. Make the library source code available via C++ include path &ldquo;`cppx-core-language/`&rdquo;.  
    ***Info***: Now it’s this library so it’s not a GIT sub-module.  
-   ***Test***: for example, `#include` `<cppx-core-language/all.hpp>` should work.
+   ***Test***: for example, `#include <cppx-core-language/all.hpp>` should work.
 
 Test the installation with a simple C++ program using the include directive
 
@@ -312,7 +312,7 @@ Result with 64-bit MinGW g++ in Windows 10:
              170        10101010               7               4
 ~~~
 
-In passing, `Sequence` is a further example of Core Language Extensions syntax support, namely for the range based `for`. The aforementioned `zero_to(n)` function simply produces a `Sequence(0,` `n-1)`. There is also `one_through`.
+In passing, `Sequence` is a further example of Core Language Extensions syntax support, namely for the range based `for`. The aforementioned `zero_to(n)` function simply produces a `Sequence(0, n-1)`. There is also `one_through`.
 
 
 ### 3.2. The calculation stuff.
@@ -327,7 +327,7 @@ using namespace cppx::calc;
 
 Which doesn’t drag in other names from `cppx`.
 
-The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using` `cppx::intpow;`, or `$use_cppx( intpow );`, for individual names.
+The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::intpow;`, or `$use_cppx( intpow );`, for individual names.
 
 ---
 
@@ -752,4 +752,4 @@ Anyway, in the above code the `$...` names are simple macros that do what they s
 ----
 
 I regard `std::string` as effectively part of the C++ core language, because it plays the same rôle as the core language string types do in other programming languages, and because it’s critical for both throwing and handling exceptions. Mostly for use in exception throwing, but also generally for function arguments, 
-Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo(` `"The answer is "s` `<<` `6*7` `<<` `"."` `)`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
+Core Language Extensions provides a simple notation for assembling strings from parts, e.g. `foo( "The answer is "s << 6*7 << "." )`. For exception throwing there is support for automatically including the throw point source location, and for exception handling there is support for inspecting and retrieving the messages of standard nested exceptions.
