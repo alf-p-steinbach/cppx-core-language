@@ -327,7 +327,7 @@ using namespace cppx::calc;
 
 Which doesn’t drag in other names from `cppx`.
 
-The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using` `cppx::intpow;`, or `$use_cppx(` `intpow` `);`, for individual names.
+The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using` `cppx::intpow;`, or `$use_cppx( intpow );`, for individual names.
 
 ---
 
