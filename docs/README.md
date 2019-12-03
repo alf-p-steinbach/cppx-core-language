@@ -249,7 +249,7 @@ This is generally known as a “**pop count**”, short for “population count�
 
 Example:
 
-<small>*tutorial/bit-level/pop-counts.cpp.cpp*</small>
+<small>*tutorial/bit-level/pop-counts.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <c/stdint.hpp>         // uint8_t
@@ -333,8 +333,53 @@ The names are however originally defined directly in the `cppx` namespace, so yo
 
 The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow`, `squared` and `cubed`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but then, it’s nice to have the ability.
 
+<small>*tutorial/bit-level/floating-point-constexpr.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>     // std::(cout, endl, fixed)
+#include <iomanip>      // std::setprecision
+$use_std( cout, endl, fixed, setprecision );
 
-For run time evaluation the `intpow` function uses divide-and-conquer to evaluate an integral power of floating point base, *x*<sup>*n*</sup>, in O(log₂(|*n*|)) steps. Negative exponent is supported.
+auto main()
+    -> int
+{
+    $use_cppx( intpow, squared, cubed );
+    constexpr int n = 10'000;
+    constexpr double base = 1 + 1.0/n;
+    cout << fixed << setprecision( 16 );
+
+    constexpr double x2 = squared( base );
+    cout << base << " ^ 2 ~= " << x2 << "." << endl;
+
+    constexpr double x3 = cubed( base );
+    cout << base << " ^ 3 ~= " << x3 << "." << endl;
+
+    constexpr double xn = intpow( base, n );
+    cout << base << " ^ " << n << " ~= " << xn << "." << endl;
+}
+~~~
+
+Instead of “all.hpp” you can include this specific header:
+
+~~~cpp
+// cppx::(intpow, squared, cubed)
+#include <cppx-core-language/calc/floating-point-operations.hpp>
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+1.0001000000000000 ^ 2 ~= 1.0002000099999999.
+1.0001000000000000 ^ 3 ~= 1.0003000300009999.
+1.0001000000000000 ^ 10000 ~= 2.7181459268243562.
+~~~
+
+The last result is an approximation of Euler’s number *e* ≈ 2.718281828…, and thereby provides a simple check that the power is computed correctly.
+
+Such checking is needed because the whole point of an integral power function is efficiency, compared to the more general C `pow` function, and so the calculation is non-trivial, not just a simple loop. It wouldn't do to use time O( *n* ) for exponent *n*! `intpow` uses divide-and-conquer to evaluate an integral power of floating point base, *x*<sup>*n*</sup>, in just O( log₂|*n*| ) steps.
+
+
+ Negative exponent is supported.
 
 
 
