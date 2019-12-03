@@ -333,7 +333,7 @@ The names are however originally defined directly in the `cppx` namespace, so yo
 
 ---
 
-The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but then, it’s nice to have the ability.
+The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
 <small>*tutorial/bit-level/floating-point-constexpr.cpp*</small>
 ~~~cpp
