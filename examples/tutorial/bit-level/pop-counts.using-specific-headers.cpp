@@ -24,7 +24,7 @@ auto main()
     using U = uint8_t;
     const int n_bits = bits_per_<U>;
     const int max_bit_pos = n_bits - 1;
-    using Bits = std::bitset<n_bits>;
+    using Bits = bitset<n_bits>;
 
     display_row( "Value:", "Bits:", "MSB pos:", "Sum of bits:" );
     cout << endl;
