@@ -324,9 +324,9 @@ Specific headers:
 
 ### 3.2. The calculation stuff.
 
-Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. Exporting namespace: `calc`.
+Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. Exporting namespaces: `calc` and `m`.
 
-The ***exporting namespace*** has `using` declarations of all the calculation stuff, so that you can obtain unqualified versions of these names simply by
+An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
 
 ~~~cppx
 using namespace cppx::calc;
@@ -334,7 +334,9 @@ using namespace cppx::calc;
 
 This doesn’t drag in other names from `cppx`.
 
-The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::intpow;`, or `$use_cppx( intpow );`, for individual names.
+`calc` is used as a general exporting namespace, but in order to minimize the risk of name collisions after C++20, the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence, you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
+
+The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::pi;`, or `$use_cppx( pi );`, for individual names.
 
 
 #### 3.2.1. Header “*floating-point-operations.hpp*”.

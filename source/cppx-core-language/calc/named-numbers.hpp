@@ -95,12 +95,12 @@ namespace cppx
     /// \make_name_ref{cppx,nan_} and \make_name_ref{cppx,nan},
     /// \make_name_ref{cppx,has_infinity_} and \make_name_ref{cppx,has_infinity}, and
     /// \make_name_ref{cppx,infinity_} and \make_name_ref{cppx,infinity}.
-    namespace calc
+    namespace m
     {
         CPPX_USE_CPPX(
             e, log2e, log10e, ln2, ln10, pi, inv_sqrt_pi, sqrt2, inv_sqrt2,
             has_nan_, has_nan, nan_, nan, has_infinity_, has_infinity, infinity_, infinity
             );
-    }  // namespace calc
+    }  // namespace m
 
 }  // namespace cppx
