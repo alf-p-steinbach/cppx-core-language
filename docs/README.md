@@ -500,6 +500,52 @@ Specific headers:
 #include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::zero_to
 ~~~
 
+---
+
+Throughout C++98 and C++03 the `%` remainder operator had partially implementation defined behavior, because the rounding behavior of integer `/` was unspecified. Integer `/` could round down towards negative infinity, or in towards zero. With C++11 `/` and `%` were finally completely specified, with `/` rounding in towards zero:
+
+*C++11 §5.6/4:*
+> **”** For integral operands the `/` operator yields the algebraic quotient with any fractional part discarded; if the quotient `a/b` is representable in the type of the result, `(a/b)*b + a%b` is equal to `a`.
+
+This matches how humans and most (possibly all) computers do integer division, but it complicates the programming.
+
+Consider, if one taxi can take 3 passengers, how many taxies are needed for a group of 10 people? Integer division `10/3` yields 3, which leaves one person stranded… The C++ expression `(10 + (3 - 1))/3` works for positive numbers, and is not uncommon. In Python, where integer division rounds down towards negative infinity, one can write `-(10//-3)`. However, neither expression is intuitive and clear at a glance. So, this is `div_up`:
+
+<small>*tutorial/calc/div-up-and-down.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+
+auto main()
+    -> int
+{
+    $use_cppx( div_up, div_down );
+
+    const int   n_per_taxi      = 3;
+    const int   n_persons       = 10;
+    const int   n_choco_bars    = 27;
+    
+    const auto& txinfo = "With %d persons and max %d per taxi, %d taxis are needed.\n";
+    printf( txinfo, n_persons, n_per_taxi, div_up( n_persons, n_per_taxi ) );
+    
+    const auto& cbinfo = "With %d chocolate bars and %d persons, each gets %d bars.\n";
+    printf( cbinfo, n_choco_bars, n_persons, div_down( n_choco_bars, n_persons ) );
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+With 10 persons and max 3 per taxi, 4 taxis are needed.
+With 27 chocolate bars and 10 persons, each gets 2 bars.
+~~~
+
+Specific header:
+
+~~~cpp
+#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::(div_up, div_down)
+~~~
+
 asdasd
 
 
