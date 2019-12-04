@@ -392,7 +392,7 @@ Specific header:
 
 #### 3.2.2. Header “*general-operations.hpp*”.
 
-The `squared` and `cubed` function templates already discussed in the previous section.
+The “*general-operations.hpp*” header provides the `squared` and `cubed` function templates already discussed in the previous section.
 
 
 #### 3.2.3. Header “*integer-operations.hpp*”.
@@ -606,6 +606,66 @@ Specific header:
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::(div_down, mod)
 ~~~
+
+
+#### 3.2.4. Header “*named-numbers.hpp*”.
+
+The “*named-numbers.hpp*” header provides the `double` constants `e`, `log2e`, `log10e`, `ln2`, `ln10`, `pi`, `inv_sqrt_pi`, `sqrt2` and `inv_sqrt2`; the `Truth` constants `has_nan`_, `has_nan`, `has_infinity_` and `has_infinity`; and the  `constexpr` functions `nan_`, `nan`, `infinity_` and `infinity`.
+
+The names that end with underscore are templates. The set of double constants are defined in terms of [the Posix standard’s `M_PI` etc.](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/math.h.html), if available, and otherwise simple literals, copied from a `<math.h>` header, are used. The `nan` and `infinity` functions are simple wrappers around the corresponding `std::numeric_limits` functions.
+
+C++20’s [new header `<numbers>`](https://en.cppreference.com/w/cpp/header/numbers) will define all of the `double` constants, plus a few more esoteric ones.
+
+<small>*tutorial/calc/named-numbers.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>     // std::(cout, endl)
+#include <iomanip>      // std::setw
+$use_std( cout, endl, setw, left, right, fixed, setprecision );
+$use_cppx( Type_ );
+
+void display( const double number, const Type_<const char*> name )
+{
+    cout << left << setw( 12 ) << name << " = " << right << setw( 15 ) << number << endl;
+}
+
+#define DISPLAY( name ) display( cppx::name, #name );
+
+auto main()
+    -> int
+{
+    cout << fixed << setprecision( 10 );
+    $apply( DISPLAY, e, log2e, log10e, ln2, ln10, pi, inv_sqrt_pi, sqrt2, inv_sqrt2 );
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+e            =    2.7182818285
+log2e        =    1.4426950409
+log10e       =    0.4342944819
+ln2          =    0.6931471806
+ln10         =    2.3025850930
+pi           =    3.1415926536
+inv_sqrt_pi  =    0.5641895835
+sqrt2        =    1.4142135624
+inv_sqrt2    =    0.7071067812
+~~~
+
+Here the `$apply` macro is from the Meta Macro library, but that library is included wholesale by the Core Language Extensions “all” header. `$apply` invokes the specified macro, here `DISPLAY`, once with each of the following arguments as argument. The `Type_` template alias is a nice way to support prefix `const`, as far as I know originally proposed by Johannes “litb” Schaub.
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/named-numbers.hpp>        // cppx::calc::*
+#include <cppx-core-language/syntax/type-builders.hpp>      // cppx::Type_
+#include <cppx-core-language-meta-macro/macro-apply.hpp>    // $apply    
+~~~
+
+
+#### 3.x. Header “**”.
+
 
 ---
 
