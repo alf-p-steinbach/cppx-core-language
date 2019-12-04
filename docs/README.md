@@ -334,7 +334,7 @@ using namespace cppx::calc;
 
 This doesn’t drag in other names from `cppx`.
 
-`calc` is used as a general exporting namespace, but in order to minimize the risk of name collisions after C++20, the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence, you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
+`calc` is used as a general exporting namespace for headers in the “calc” folder, but in order to minimize the risk of name collisions after C++20, the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence, you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
 
 The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::pi;`, or `$use_cppx( pi );`, for individual names.
 
@@ -656,6 +656,8 @@ inv_sqrt2    =    0.7071067812
 ~~~
 
 Here the `$apply` macro is from the Meta Macro library, but that library is included wholesale by the Core Language Extensions “all” header. `$apply` invokes the specified macro, here `DISPLAY`, once with each of the following arguments as argument. The `Type_` template alias is a nice way to support prefix `const`, as far as I know originally proposed by Johannes “litb” Schaub.
+
+Not exemplified by the code above: the names are available via the exporting namespace `m`, e.g. `using namespace cppx::m;` brings in all these names unqualified.
 
 Specific headers:
 
