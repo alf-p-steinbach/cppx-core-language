@@ -540,11 +540,65 @@ With 10 persons and max 3 per taxi, 4 taxis are needed.
 With 27 chocolate bars and 10 persons, each gets 2 bars.
 ~~~
 
+In terms of the mathematical floor and ceiling functions, `div_up` is ⌈*a*/*b*⌉ and `div_down` is ⌊*a*/*b*⌋.
+
 Specific header:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::(div_up, div_down)
 ~~~
+
+---
+
+The `intmod` function is defined in terms of `div_down`,
+
+~~~cpp
+    constexpr inline auto intmod( const int a, const int b ) noexcept
+        -> int
+    { return a - b*div_down( a, b ); }
+~~~
+
+… which makes it more like mathematics than the built in `%`. That means that what you generally need to consider in order to use the result in code, the *behavior*, the rules, the system, is simpler. However, when you look at particular numbers they can instead seem more arbitrary than with the core language’s `%`:
+
+<small>*tutorial/calc/remainders.cpp*</small>
+~~~cpp
+#include <cppx-core-language/calc/all.hpp>
+#include <c/stdio.hpp>
+
+auto main()
+    -> int
+{
+    $use_cppx( div_down, intmod );
+
+    for( const int a: {13, -13} ) {
+        for( const int b: {5, -5} ) {
+            const auto& s =
+                "%3d / %3d = %3d,  %% = %3d; %10c div_down(%3d, %3d) = %3d,  intmod = %3d\n";
+            printf( s,
+                a, b, a/b, a%b,
+                ' ',
+                a, b, div_down( a, b ), intmod( a, b )
+                );
+        }
+    }
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+ 13 /   5 =   2,  % =   3;            div_down( 13,   5) =   2,  intmod =   3
+ 13 /  -5 =  -2,  % =   3;            div_down( 13,  -5) =  -3,  intmod =  -2
+-13 /   5 =  -2,  % =  -3;            div_down(-13,   5) =  -3,  intmod =   2
+-13 /  -5 =   2,  % =  -3;            div_down(-13,  -5) =   2,  intmod =  -3
+~~~
+
+Specific header:
+
+~~~cpp
+#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::(div_down, intmod)
+~~~
+
 
 asdasd
 
