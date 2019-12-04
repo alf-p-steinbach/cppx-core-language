@@ -1,4 +1,4 @@
-// Display the positions of the odd numbers in Pascal's triangle.
+﻿// Display the positions of the odd numbers in Pascal's triangle.
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
 #include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::(Sequence, zero_to)
 #include <c/stdio.hpp>  // printf
@@ -24,7 +24,7 @@ auto main()
             swap( next_row, row );
         }
 
-        // Display the odd number positions.
+        // Display the odd numbers’ positions.
         printf( "%*c", n - y, ' ' );
         for( const int x: row ) {
             printf( " %c", is_odd( x )? 'o' : ' ' );

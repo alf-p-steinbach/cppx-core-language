@@ -419,7 +419,7 @@ auto main()
             swap( next_row, row );
         }
 
-        // Display the odd number positions.
+        // Display the odd numbers’ positions.
         printf( "%*c", n - y, ' ' );
         for( const int x: row ) {
             printf( " %c", is_odd( x )? 'o' : ' ' );
