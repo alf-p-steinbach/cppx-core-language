@@ -98,7 +98,17 @@ However, it’s possible to use much more specific, less inclusive headers, and 
 
 ### 3.1. The bit-level stuff.
 
-Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”.
+Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. Exporting namespace: `bitlevel`.
+
+An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
+
+~~~cppx
+using namespace cppx::bitlevel;
+~~~
+
+This doesn’t drag in other names from `cppx`.
+
+The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::bits_per_;`, or `$use_cppx( bits_per_ );`, for individual names.
 
 
 #### 3.1.1. Header “*bits_per_.hpp*”.
