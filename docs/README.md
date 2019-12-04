@@ -339,7 +339,9 @@ The names are however originally defined directly in the `cppx` namespace, so yo
 
 #### 3.2.1. Header “*floating-point-operations.hpp*”.
 
-The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
+The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. The `squared` and `cubed` functions are function demplates defined in the “*general-operations.hpp*” header, which is included here for convenience.
+
+ I can’t think of any situtation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
 <small>*tutorial/calc/floating-point-constexpr.cpp*</small>
 ~~~cpp
@@ -388,12 +390,16 @@ Specific header:
 #include <cppx-core-language/calc/floating-point-operations.hpp>
 ~~~
 
+#### 3.2.2. Header “*general-operations.hpp*”.
 
-#### 3.2.2. Header “*integer-operations.hpp*”.
+The `squared` and `cubed` function templates already discussed in the previous section.
 
-The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`.
 
-All these functions are templated on the integer type.
+#### 3.2.3. Header “*integer-operations.hpp*”.
+
+The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`. In addition the “*general-operations.hpp*” header is included for convenience. It defines the functions `squared` and `cubed`.
+
+All these functions are templated on the integer (or general number) type.
 
 `is_even` and `is_odd` do what their names say. Typically they’re used for checking the value of the least significant bit in an integer. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
 
