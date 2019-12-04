@@ -3,12 +3,10 @@
 /// \brief Common integer operations:
 /// \make_name_ref{cppx,is_even},
 /// \make_name_ref{cppx,is_odd},
-/// \make_name_ref{cppx,intdiv},
-/// \make_name_ref{cppx,intmod},
-/// \make_name_ref{cppx,intsquare},
-/// \make_name_ref{cppx,intcube},
-/// \make_name_ref{cppx,intmin} and
-/// \make_name_ref{cppx,intmax}.
+/// \make_name_ref{cppx,is_zero},
+/// \make_name_ref{cppx,div_down},
+/// \make_name_ref{cppx,div_up} and
+/// \make_name_ref{cppx,mod}.
 
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_CPPX
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
@@ -52,41 +50,41 @@ namespace cppx
         return (q >= 0 and a % b != 0? q + 1 : q);
     }
 
-    constexpr inline auto intmod( const int a, const int b ) noexcept
+    constexpr inline auto mod( const int a, const int b ) noexcept
         -> int
     { return a - b*div_down( a, b ); }
 
-    template< class Int = int >
-    constexpr inline auto intsquare( const Int x )
-        -> Int
-    { return x*x; }
+    //template< class Int = int >
+    //constexpr inline auto intsquare( const Int x )
+    //    -> Int
+    //{ return x*x; }
 
-    template< class Int = int >
-    constexpr inline auto intcube( const Int x )
-        -> Int
-    { return x*x*x; }
+    //template< class Int = int >
+    //constexpr inline auto intcube( const Int x )
+    //    -> Int
+    //{ return x*x*x; }
 
-    template< class... Ints >
-    constexpr inline auto intmin( const Ints... args )
-        -> std::common_type_t<Ints...>
-    { 
-        static_assert( (... and std::is_integral_v<Ints> ) );
-        return std::min( {std::common_type_t<Ints...>( args )...} );
-    }
+    //template< class... Ints >
+    //constexpr inline auto intmin( const Ints... args )
+    //    -> std::common_type_t<Ints...>
+    //{ 
+    //    static_assert( (... and std::is_integral_v<Ints> ) );
+    //    return std::min( {std::common_type_t<Ints...>( args )...} );
+    //}
 
-    template< class... Ints >
-    constexpr inline auto intmax( const Ints... args )
-        -> std::common_type_t<Ints...>
-    { 
-        static_assert( (... and std::is_integral_v<Ints> ) );
-        return std::max( {std::common_type_t<Ints...>( args )...} );
-    }
+    //template< class... Ints >
+    //constexpr inline auto intmax( const Ints... args )
+    //    -> std::common_type_t<Ints...>
+    //{ 
+    //    static_assert( (... and std::is_integral_v<Ints> ) );
+    //    return std::max( {std::common_type_t<Ints...>( args )...} );
+    //}
 
     // Is documented in the `all.hpp` header.
     namespace calc
     {
         CPPX_USE_CPPX(
-            is_even, is_odd, div_down, div_up, intmod, intsquare, intcube, intmin, intmax
+            is_even, is_odd, is_zero, div_down, div_up, mod
         );
     }  // namespace calc
 }  // namespace cppx

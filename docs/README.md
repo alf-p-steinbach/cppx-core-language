@@ -391,7 +391,7 @@ Specific header:
 
 #### 3.2.2. Header “*integer-operations.hpp*”.
 
-The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)`, `intmod(a,b)`, `intsquare(x)`, `intcube(x)`, `intmin(a,b,c...)` and `intmax(a,b,c...)`.
+The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`.
 
 All these functions are templated on the integer type.
 
@@ -550,17 +550,17 @@ Specific header:
 
 ---
 
-The `intmod` function is defined in terms of `div_down`,
+The `mod` function is defined in terms of `div_down`,
 
 ~~~cpp
-    constexpr inline auto intmod( const int a, const int b ) noexcept
+    constexpr inline auto mod( const int a, const int b ) noexcept
         -> int
     { return a - b*div_down( a, b ); }
 ~~~
 
 … which makes it more like mathematics than the built in `%`.
 
-I’ve provided `intmod` for *completeness*, that there ought to be this operation complementing `div_down` just as in the core language there is `%` complementing integer `/`, and just as in the standard library there is `fmod` complementing floating point `/`. However, I’m at a loss coming up with a practical example where `intmod` would be clearly useful. The following example just illustrates the signs and magnitudes that one can expect:
+I’ve provided `mod` for *completeness*, that there ought to be this operation complementing `div_down` just as in the core language there is `%` complementing integer `/`, and just as in the standard library there is `fmod` complementing floating point `/`. However, I’m at a loss coming up with a practical example where `mod` would be clearly useful. The following example just illustrates the signs and magnitudes that one can expect:
 
 <small>*tutorial/calc/remainders.cpp*</small>
 ~~~cpp
@@ -570,16 +570,16 @@ I’ve provided `intmod` for *completeness*, that there ought to be this operati
 auto main()
     -> int
 {
-    $use_cppx( div_down, intmod );
+    $use_cppx( div_down, mod );
 
     for( const int a: {13, -13} ) {
         for( const int b: {5, -5} ) {
             const auto& s =
-                "%3d / %3d = %3d,  %% = %3d; %10c div_down(%3d, %3d) = %3d,  intmod = %3d\n";
+                "%3d / %3d = %3d,  %% = %3d; %10c div_down(%3d, %3d) = %3d,  mod = %3d\n";
             printf( s,
                 a, b, a/b, a%b,
                 ' ',
-                a, b, div_down( a, b ), intmod( a, b )
+                a, b, div_down( a, b ), mod( a, b )
                 );
         }
     }
@@ -589,17 +589,21 @@ auto main()
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt
- 13 /   5 =   2,  % =   3;            div_down( 13,   5) =   2,  intmod =   3
- 13 /  -5 =  -2,  % =   3;            div_down( 13,  -5) =  -3,  intmod =  -2
--13 /   5 =  -2,  % =  -3;            div_down(-13,   5) =  -3,  intmod =   2
--13 /  -5 =   2,  % =  -3;            div_down(-13,  -5) =   2,  intmod =  -3
+ 13 /   5 =   2,  % =   3;            div_down( 13,   5) =   2,  mod =   3
+ 13 /  -5 =  -2,  % =   3;            div_down( 13,  -5) =  -3,  mod =  -2
+-13 /   5 =  -2,  % =  -3;            div_down(-13,   5) =  -3,  mod =   2
+-13 /  -5 =   2,  % =  -3;            div_down(-13,  -5) =   2,  mod =  -3
 ~~~
 
 Specific header:
 
 ~~~cpp
-#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::(div_down, intmod)
+#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::(div_down, mod)
 ~~~
+
+---
+
+`intsquare` and `intcube` have `int`…-prefix to avoid situations where the effect of a call `square(x)` (say) would depend on which headers were included. For example, with the hypothetical function name `square`, the expression `square(5)/10` would yield exactly 2 with the integer overloads present, and `2.5` when only the floating point overloads were present. An alternative to a name prefix could be to place all overloads in the same header.
 
 
 asdasd
