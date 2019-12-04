@@ -32,6 +32,11 @@ namespace cppx
     { return x % 2 == 1; }
 
     template< class Int >
+    constexpr inline auto is_zero( const Int x )
+        -> Truth
+    { return x == 0; }
+
+    template< class Int >
     constexpr inline auto div_down( const Int a, const Int b ) noexcept
         -> Int
     {

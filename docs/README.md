@@ -335,7 +335,7 @@ The names are however originally defined directly in the `cppx` namespace, so yo
 
 The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
-<small>*tutorial/bit-level/floating-point-constexpr.cpp*</small>
+<small>*tutorial/calc/floating-point-constexpr.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <iostream>     // std::(cout, endl, fixed)
@@ -384,13 +384,13 @@ Specific header:
 
 ---
 
-The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `div_down(a,b)`, `div_up(a,b)`, `intmod(a,b)`, `intsquare(x)`, `intcube(x)`, `intmin(a,b,c...)` and `intmax(a,b,c...)`.
+The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)`, `intmod(a,b)`, `intsquare(x)`, `intcube(x)`, `intmin(a,b,c...)` and `intmax(a,b,c...)`.
 
 All these functions are templated on the integer type.
 
-`is_even` and `is_odd` do what their names say. After naming these operations I found that they pop up surprisingly often, just not very visible as such when they’re expressed in operator notation. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
+`is_even` and `is_odd` do what their names say. Typically they’re used for checking the value of the last significant bit in an integer. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
 
-Example:
+A somewhat construed example:
 
 
 
