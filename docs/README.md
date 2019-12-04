@@ -388,11 +388,110 @@ The “*integer-operations.hpp*” header provides a suite of `constexpr` intege
 
 All these functions are templated on the integer type.
 
-`is_even` and `is_odd` do what their names say. Typically they’re used for checking the value of the last significant bit in an integer. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
+`is_even` and `is_odd` do what their names say. Typically they’re used for checking the value of the least significant bit in an integer. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
 
 A somewhat construed example:
 
+<small>*tutorial/calc/pascal-as-sierpinsky.cpp*</small>
+~~~cpp
+// Display the positions of the odd numbers in Pascal's triangle.
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>  // printf
+#include <vector>       // std::vector
 
+auto main()
+    -> int
+{
+    $use_std( vector );
+    $use_cppx( is_odd, Sequence, zero_to );
+
+    const int n = 1 << 4;
+    vector<int> row = {1};
+
+    for( const int y: zero_to( n ) ) {
+        if( y > 0 ) {
+            // Compute the next row.
+            vector<int> next_row = {1};
+            for( const int i: Sequence( 1, row.size() - 1 ) ) {
+                next_row.push_back( row[i] + row[i - 1] );
+            }
+            next_row.push_back( 1 );
+            swap( next_row, row );
+        }
+
+        // Display the odd number positions.
+        printf( "%*c", n - y, ' ' );
+        for( const int x: row ) {
+            printf( " %c", is_odd( x )? 'o' : ' ' );
+        }
+        printf( "\n" );
+    }
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+                 o
+                o o
+               o   o
+              o o o o
+             o       o
+            o o     o o
+           o   o   o   o
+          o o o o o o o o
+         o               o
+        o o             o o
+       o   o           o   o
+      o o o o         o o o o
+     o       o       o       o
+    o o     o o     o o     o o
+   o   o   o   o   o   o   o   o
+  o o o o o o o o o o o o o o o o
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
+#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::(Sequence, zero_to)
+~~~
+
+The Pascal’s triangle example above is “somewhat construed” because all that matters for the oddness or not of a number in Pascal’s triangle, is the oddness of the numbers above. So the above needlessly computes numbers that for a larger triangle (think about a high resolution graphics presentation) can easily exceed the range of `int`. All that needs to be stored each place in a row, is a `Truth` value representing the oddness.
+
+A bit of analysis can reduce that further down to an apparently very simple program, showing how the `is_zero` function can be of practical use. For, the expression `x & ~y == 0` means something very different from the intended `(x & ~y) == 0`. Using `is_zero` and writing it as `is_zero(x & ~y)` the operator precedence problem just doesn't pop up:
+
+<small>*tutorial/calc/sierpinsky.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+
+auto main()
+    -> int
+{
+    $use_cppx( zero_to, is_zero );
+
+    const int n = 1 << 4;
+    for( const int y: zero_to( n ) ) {
+        printf( "%*c", n - y, ' ' );
+        for( const int x: zero_to( n ) ) {
+            printf( " %c", is_zero( x & ~y )? 'o' : ' ' );
+        }
+        printf( "\n" );
+    }
+}
+~~~
+
+Same result as before.
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_zero
+#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::zero_to
+~~~
+
+asdasd
 
 
 
