@@ -665,7 +665,7 @@ sqrt2        =    1.4142135624
 inv_sqrt2    =    0.7071067812
 ~~~
 
-Here the `$apply` macro is from the Meta Macro library, but that library is included wholesale by the Core Language Extensions “all” header. `$apply` invokes the specified macro, here `DISPLAY`, once with each of the following arguments as argument. The `Type_` template alias is a nice way to support prefix `const`, as far as I know originally proposed by Johannes “litb” Schaub.
+Here the `$apply` macro is from the Meta Macro library, but that library is included wholesale by the Core Language Extensions “all” header. For each of the following arguments `$apply` invokes the specified macro, here `DISPLAY`, with that argument. The `Type_` template alias is a nice way to support prefix `const`, as far as I know originally proposed by Johannes “litb” Schaub.
 
 Not exemplified by the code above: the names are available via the exporting namespace `m`, e.g. `using namespace cppx::m;` brings in all these names unqualified.
 
