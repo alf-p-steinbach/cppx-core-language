@@ -50,6 +50,6 @@ namespace cppx
     // Is documented in the `all.hpp` header.
     namespace calc
     {
-        CPPX_USE_CPPX( intpow, squared, cubed );
+        CPPX_USE_CPPX( intpow );
     }  // namespace math
 }  // namespace cppx
