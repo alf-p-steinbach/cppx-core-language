@@ -558,7 +558,9 @@ The `intmod` function is defined in terms of `div_down`,
     { return a - b*div_down( a, b ); }
 ~~~
 
-… which makes it more like mathematics than the built in `%`. That means that what you generally need to consider in order to use the result in code, the *behavior*, the rules, the system, is simpler. However, when you look at particular numbers they can instead seem more arbitrary than with the core language’s `%`:
+… which makes it more like mathematics than the built in `%`.
+
+I’ve provided `intmod` for *completeness*, that there ought to be this operation complementing `div_down` just as in the core language there is `%` complementing integer `/`, and just as in the standard library there is `fmod` complementing floating point `/`. However, I’m at a loss coming up with a practical example where `intmod` would be clearly useful. The following example just illustrates the signs and magnitudes that one can expect:
 
 <small>*tutorial/calc/remainders.cpp*</small>
 ~~~cpp
