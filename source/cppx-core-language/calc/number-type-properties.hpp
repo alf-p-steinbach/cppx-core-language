@@ -167,12 +167,12 @@ namespace cppx
     /// \make_name_ref{cppx,n_digits_},
     /// \make_name_ref{cppx,radix_} and
     /// \make_name_ref{cppx,epsilon_}.
-    namespace number_properties
+    namespace calc
     {
         CPPX_USE_CPPX(
             is_ieee_754_, largest_, smallest_, max_, min_, max_e_, min_e_, n_digits_,
             radix_, epsilon_
             );
-    }  // namespace number_properties
+    }  // namespace calc
 
 }  // namespace cppx
