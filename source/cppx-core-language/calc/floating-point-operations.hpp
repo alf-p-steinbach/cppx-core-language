@@ -5,8 +5,9 @@
 /// \make_name_ref{cppx,squared} and
 /// \make_name_ref{cppx,cubed}.
 
+#include <cppx-core-language/calc/general-operations.hpp>       // cppx::(squared, cubed)
 #include <cppx-core-language/calc/integer-operations.hpp>       // cppx::is_odd
-#include <cppx-core-language/syntax/macro-use.hpp>
+#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_CPPX
 
 namespace cppx
 {
@@ -45,16 +46,6 @@ namespace cppx
             :                       impl::intpow( base, exponent )
             );
     }
-
-    /// \brief The square (second power) of the argument.
-    constexpr inline auto squared( const double x )
-        -> double
-    { return x*x; }
-
-    /// \brief The cube (third power) of the argument.
-    constexpr inline auto cubed( const double x )
-        -> double
-    { return x*x*x; }
 
     // Is documented in the `all.hpp` header.
     namespace calc

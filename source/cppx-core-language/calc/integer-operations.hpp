@@ -8,9 +8,9 @@
 /// \make_name_ref{cppx,div_up} and
 /// \make_name_ref{cppx,mod}.
 
+#include <cppx-core-language/calc/general-operations.hpp>       // cppx::(squared, cubed)
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_CPPX
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
-//#include <cppx-core-language/tmp/basic-type-traits.hpp>         // cppx::is_unsigned_
 
 #include <c/limits.hpp>     // INT_MAX
 #include <c/stdint.hpp>     // ::(uintXX_t)
@@ -53,16 +53,6 @@ namespace cppx
     constexpr inline auto mod( const int a, const int b ) noexcept
         -> int
     { return a - b*div_down( a, b ); }
-
-    //template< class Int = int >
-    //constexpr inline auto intsquare( const Int x )
-    //    -> Int
-    //{ return x*x; }
-
-    //template< class Int = int >
-    //constexpr inline auto intcube( const Int x )
-    //    -> Int
-    //{ return x*x*x; }
 
     //template< class... Ints >
     //constexpr inline auto intmin( const Ints... args )

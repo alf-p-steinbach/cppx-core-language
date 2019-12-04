@@ -603,7 +603,6 @@ Specific header:
 
 ---
 
-`intsquare` and `intcube` have `int`…-prefix to avoid situations where the effect of a call `square(x)` (say) would depend on which headers were included. For example, with the hypothetical function name `square`, the expression `square(5)/10` would yield exactly 2 with the integer overloads present, and `2.5` when only the floating point overloads were present. An alternative to a name prefix could be to place all overloads in the same header.
 
 
 asdasd
