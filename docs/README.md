@@ -100,7 +100,8 @@ However, it’s possible to use much more specific, less inclusive headers, and 
 
 Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”.
 
----
+
+#### 3.1.1. Header “*bits_per_.hpp*”.
 
 The “*bits_per_.hpp*” header provides convenient notation for the bit widths of fundamental types, as `int` values:
 
@@ -227,9 +228,13 @@ Specific headers:
 #include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
 ~~~
 
----
+
+#### 3.1.2. Header “*intlog2.hpp*”.
 
 The “*intlog2.hpp*” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
+
+
+#### 3.1.3. Header “*sum_of_bits.hpp*”.
 
 The “*sum_of_bits.hpp*” header provides the `sum_of_bits` function, implemented in terms of `std::bitset` as simply
 
@@ -331,7 +336,8 @@ This doesn’t drag in other names from `cppx`.
 
 The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::intpow;`, or `$use_cppx( intpow );`, for individual names.
 
----
+
+#### 3.2.1. Header “*floating-point-operations.hpp*”.
 
 The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. I can’t think of any situtation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
@@ -382,7 +388,8 @@ Specific header:
 #include <cppx-core-language/calc/floating-point-operations.hpp>
 ~~~
 
----
+
+#### 3.2.2. Header “*integer-operations.hpp*”.
 
 The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)`, `intmod(a,b)`, `intsquare(x)`, `intcube(x)`, `intmin(a,b,c...)` and `intmax(a,b,c...)`.
 
@@ -456,6 +463,8 @@ Specific headers:
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
 #include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::(Sequence, zero_to)
 ~~~
+
+---
 
 The Pascal’s triangle example above is “somewhat construed” because all that matters for the oddness or not of a number in Pascal’s triangle, is the oddness of the numbers above. So the above needlessly computes numbers that for a larger triangle (think about a high resolution graphics presentation) can easily exceed the range of `int`. All that needs to be stored each place in a row, is a `Truth` value representing the oddness.
 
