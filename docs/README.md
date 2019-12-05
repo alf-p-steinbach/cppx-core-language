@@ -684,7 +684,7 @@ Specific headers:
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt
-  Name          Smallest           Largest               Min               Max  Dig   IEEE?   Min E   Max E    R           Epsilon
+ Name:         Smallest:          Largest:              Min:              Max: Dig:   IEEE?  Min E:  Max E:   R:          Epsilon:
 
   bool              true              true             false              true    0
    int                 1        2147483647       -2147483648        2147483647    9

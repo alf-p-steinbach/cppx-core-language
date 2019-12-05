@@ -51,9 +51,9 @@ void display_column_headers()
 {
     const int* widths = field_widths;
     display_fields( widths,
-        "Name",
-        "Smallest", "Largest", "Min", "Max", "Dig",
-        "IEEE?", "Min E", "Max E", "R", "Epsilon"
+        "Name:",
+        "Smallest:", "Largest:", "Min:", "Max:", "Dig:",
+        "IEEE?", "Min E:", "Max E:", "R:", "Epsilon:"
         );
     cout << endl;
 }
