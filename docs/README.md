@@ -8,15 +8,15 @@
   - [2. Overview.](#2-overview)
   - [3. Tutorial.](#3-tutorial)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
-      - [3.1.1. Examples for “*bits_per_.hpp*”.](#311-header-bits_per_hpp)
-      - [3.1.2. Examples for “*intlog2.hpp*”.](#312-header-intlog2hpp)
-      - [3.1.3. Examples for “*sum_of_bits.hpp*”.](#313-header-sum_of_bitshpp)
+      - [3.1.1. Examples for “*bits_per_.hpp*”.](#311-examples-for-bits_per_hpp)
+      - [3.1.2. Examples for “*intlog2.hpp*”.](#312-examples-for-intlog2hpp)
+      - [3.1.3. Examples for “*sum_of_bits.hpp*”.](#313-examples-for-sum_of_bitshpp)
     - [3.2. The calculation stuff.](#32-the-calculation-stuff)
-      - [3.2.1. Examples for “*floating-point-operations.hpp*”.](#321-header-floating-point-operationshpp)
-      - [3.2.2. Examples for “*general-operations.hpp*”.](#322-header-general-operationshpp)
-      - [3.2.3. Examples for “*integer-operations.hpp*”.](#323-header-integer-operationshpp)
-      - [3.2.4. Examples for “*named-numbers.hpp*”.](#324-header-named-numbershpp)
-      - [3.2.5. Examples for “*number-type-properties.hpp*”.](#325-header-number-type-propertieshpp)
+      - [3.2.1. Examples for “*floating-point-operations.hpp*”.](#321-examples-for-floating-point-operationshpp)
+      - [3.2.2. Examples for “*general-operations.hpp*”.](#322-examples-for-general-operationshpp)
+      - [3.2.3. Examples for “*integer-operations.hpp*”.](#323-examples-for-integer-operationshpp)
+      - [3.2.4. Examples for “*named-numbers.hpp*”.](#324-examples-for-named-numbershpp)
+      - [3.2.5. Examples for “*number-type-properties.hpp*”.](#325-examples-for-number-type-propertieshpp)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
