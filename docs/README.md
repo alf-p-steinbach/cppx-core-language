@@ -1,3 +1,25 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Core Language Extensions](#core-language-extensions)
+  - [1. Installation & use.](#1-installation--use)
+      - [*Disclaimer*](#disclaimer)
+  - [2. Overview.](#2-overview)
+  - [3. Tutorial.](#3-tutorial)
+    - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
+      - [3.1.1. Examples for “*bits_per_.hpp*”.](#311-header-bits_per_hpp)
+      - [3.1.2. Examples for “*intlog2.hpp*”.](#312-header-intlog2hpp)
+      - [3.1.3. Examples for “*sum_of_bits.hpp*”.](#313-header-sum_of_bitshpp)
+    - [3.2. The calculation stuff.](#32-the-calculation-stuff)
+      - [3.2.1. Examples for “*floating-point-operations.hpp*”.](#321-header-floating-point-operationshpp)
+      - [3.2.2. Examples for “*general-operations.hpp*”.](#322-header-general-operationshpp)
+      - [3.2.3. Examples for “*integer-operations.hpp*”.](#323-header-integer-operationshpp)
+      - [3.2.4. Examples for “*named-numbers.hpp*”.](#324-header-named-numbershpp)
+      - [3.2.5. Examples for “*number-type-properties.hpp*”.](#325-header-number-type-propertieshpp)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Core Language Extensions
 
 Originally a sub-folder in the *cppx-core* project, the Core Language Extensions  is a pure header micro-library that provides workarounds for various shortcomings of the C++ core language and standard library features directly supporting the core language, as of C++17.
@@ -111,7 +133,7 @@ This doesn’t drag in other names from `cppx`.
 The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::bits_per_;`, or `$use_cppx( bits_per_ );`, for individual names.
 
 
-#### 3.1.1. Header “*bits_per_.hpp*”.
+#### 3.1.1. Examples for “*bits_per_.hpp*”.
 
 The “*bits_per_.hpp*” header provides convenient notation for the bit widths of fundamental types, as `int` values:
 
@@ -239,12 +261,12 @@ Specific headers:
 ~~~
 
 
-#### 3.1.2. Header “*intlog2.hpp*”.
+#### 3.1.2. Examples for “*intlog2.hpp*”.
 
 The “*intlog2.hpp*” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
 
 
-#### 3.1.3. Header “*sum_of_bits.hpp*”.
+#### 3.1.3. Examples for “*sum_of_bits.hpp*”.
 
 The “*sum_of_bits.hpp*” header provides the `sum_of_bits` function, implemented in terms of `std::bitset` as simply
 
@@ -349,7 +371,7 @@ This doesn’t drag in other names from `cppx`.
 The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::pi;`, or `$use_cppx( pi );`, for individual names.
 
 
-#### 3.2.1. Header “*floating-point-operations.hpp*”.
+#### 3.2.1. Examples for “*floating-point-operations.hpp*”.
 
 The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. The `squared` and `cubed` functions are function demplates defined in the “*general-operations.hpp*” header, which is included here for convenience.
 
@@ -402,12 +424,12 @@ Specific header:
 #include <cppx-core-language/calc/floating-point-operations.hpp>
 ~~~
 
-#### 3.2.2. Header “*general-operations.hpp*”.
+#### 3.2.2. Examples for “*general-operations.hpp*”.
 
 The “*general-operations.hpp*” header provides the `squared` and `cubed` function templates already discussed in the previous section.
 
 
-#### 3.2.3. Header “*integer-operations.hpp*”.
+#### 3.2.3. Examples for “*integer-operations.hpp*”.
 
 The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`. In addition the “*general-operations.hpp*” header is included for convenience. It defines the functions `squared` and `cubed`.
 
@@ -620,7 +642,7 @@ Specific header:
 ~~~
 
 
-#### 3.2.4. Header “*named-numbers.hpp*”.
+#### 3.2.4. Examples for “*named-numbers.hpp*”.
 
 The “*named-numbers.hpp*” header provides the `double` constants `e`, `log2e`, `log10e`, `ln2`, `ln10`, `pi`, `inv_sqrt_pi`, `sqrt2` and `inv_sqrt2`; the `Truth` constants `has_nan`_, `has_nan`, `has_infinity_` and `has_infinity`; and the  `constexpr` functions `nan_`, `nan`, `infinity_` and `infinity`.
 
@@ -678,7 +700,7 @@ Specific headers:
 ~~~
 
 
-#### 3.2.5. Header “*number-type-properties.hpp*”.
+#### 3.2.5. Examples for “*number-type-properties.hpp*”.
 
 The “*named-numbers.hpp*” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
 
