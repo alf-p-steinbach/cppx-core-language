@@ -678,7 +678,18 @@ Specific headers:
 ~~~
 
 
-#### 3.x. Header “**”.
+#### 3.2.5. Header “*number-type-properties.hpp*”.
+
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+  Name          Smallest           Largest               Min               Max  Dig   IEEE?   Min E   Max E    R           Epsilon
+
+  bool              true              true             false              true    0
+   int                 1        2147483647       -2147483648        2147483647    9
+double    2.2250739e-308    1.7976931e+308   -1.7976931e+308    1.7976931e+308   15    true    -307     308    2      2.220446e-16
+~~~
 
 
 ---

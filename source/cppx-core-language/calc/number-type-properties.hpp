@@ -6,8 +6,8 @@
 /// \make_name_ref{cppx,smallest_},
 /// \make_name_ref{cppx,max_},
 /// \make_name_ref{cppx,min_},
-/// \make_name_ref{cppx,max_e_},
-/// \make_name_ref{cppx,min_e_},
+/// \make_name_ref{cppx,max_exp_},
+/// \make_name_ref{cppx,min_exp_},
 /// \make_name_ref{cppx,n_digits_},
 /// \make_name_ref{cppx,radix_} and
 /// \make_name_ref{cppx,epsilon_}.
@@ -41,10 +41,10 @@ namespace cppx
         {
             static_assert( std::is_integral_v<T> );
 
-            static constexpr T      largest         = Nl_<T>::max();
             static constexpr T      smallest        = 1;                // Smallest non-zero.
-            static constexpr T      max             = largest;
+            static constexpr T      largest         = Nl_<T>::max();
             static constexpr T      min             = Nl_<T>::min();    // Usually `-largest_ - 1`.
+            static constexpr T      max             = largest;
             static constexpr int    n_digits        = Nl_<T>::digits10;
         };
 
@@ -58,8 +58,8 @@ namespace cppx
             static constexpr T      smallest        = Nl_<T>::min();    // Smallest non-zero.
             static constexpr T      max             = largest;
             static constexpr T      min             = -largest;         // Largest negative.
-            static constexpr int    max_e           = Nl_<T>::max_exponent10;
-            static constexpr int    min_e           = Nl_<T>::min_exponent10;
+            static constexpr int    max_exp         = Nl_<T>::max_exponent10;
+            static constexpr int    min_exp         = Nl_<T>::min_exponent10;
             static constexpr int    n_digits        = Nl_<T>::digits10;
             static constexpr int    radix           = Nl_<T>::radix;
             static constexpr T      epsilon         = Nl_<T>::epsilon();
@@ -121,16 +121,16 @@ namespace cppx
     /// \hideinitializer
     /// \brief FP only. E-notation maximum (largest positive) exponent value.
     ///
-    /// The expression `max_e_<T>` is an alias for
+    /// The expression `max_exp_<T>` is an alias for
     /// `std::numeric_limits<T>::max_exponent10`.
-    template< class T > constexpr int   max_e_          = Number_properties_<T>::max_e;
+    template< class T > constexpr int   max_exp_        = Number_properties_<T>::max_exp;
 
     /// \hideinitializer
     /// \brief FP only. E-notation minimum (largest negative) exponent value.
     ///
-    /// The expression `min_e_<T>` is an alias for
+    /// The expression `min_exp_<T>` is an alias for
     /// `std::numeric_limits<T>::min_exponent10`.
-    template< class T > constexpr int   min_e_          = Number_properties_<T>::min_e;
+    template< class T > constexpr int   min_exp_        = Number_properties_<T>::min_exp;
 
     /// \hideinitializer
     /// \brief Number of decimal digits that guaranteed can be represented.
@@ -170,7 +170,7 @@ namespace cppx
     namespace calc
     {
         CPPX_USE_CPPX(
-            is_ieee_754_, largest_, smallest_, max_, min_, max_e_, min_e_, n_digits_,
+            is_ieee_754_, largest_, smallest_, max_, min_, max_exp_, min_exp_, n_digits_,
             radix_, epsilon_
             );
     }  // namespace calc
