@@ -6,14 +6,14 @@
   - [1. Installation & use.](#1-installation--use)
       - [*Disclaimer*](#disclaimer)
   - [2. Overview.](#2-overview)
-  - [3. Tutorial.](#3-tutorial)
+  - [3. Examples.](#3-examples)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
       - [3.1.1. Examples for “*bits_per_.hpp*”.](#311-examples-for-bits_per_hpp)
-      - [3.1.2. Examples for “*intlog2.hpp*”.](#312-examples-for-intlog2hpp)
+      - [3.1.2. Header “*intlog2.hpp*”.](#312-header-intlog2hpp)
       - [3.1.3. Examples for “*sum_of_bits.hpp*”.](#313-examples-for-sum_of_bitshpp)
     - [3.2. The calculation stuff.](#32-the-calculation-stuff)
       - [3.2.1. Examples for “*floating-point-operations.hpp*”.](#321-examples-for-floating-point-operationshpp)
-      - [3.2.2. Examples for “*general-operations.hpp*”.](#322-examples-for-general-operationshpp)
+      - [3.2.2. Header “*general-operations.hpp*”.](#322-header-general-operationshpp)
       - [3.2.3. Examples for “*integer-operations.hpp*”.](#323-examples-for-integer-operationshpp)
       - [3.2.4. Examples for “*named-numbers.hpp*”.](#324-examples-for-named-numbershpp)
       - [3.2.5. Examples for “*number-type-properties.hpp*”.](#325-examples-for-number-type-propertieshpp)
@@ -89,9 +89,9 @@ Each main area of functionality is a sub-folder in the library.
 |[types](../source/cppx%2Dcore%2Dlanguage/types)        | The `Truth` type is a boolean that doesn't implicitly convert to or from anything other than `bool`; the `Int_` template alias lets you specify an integral type via its bit width; `C_str` and family are type names for simple `char` pointers, indicating use for C strings; and `No_copy` and `No_copy_or_move` can be used as base classes with the properties indicated by the names. Except for `C_str` these are types and names, or features, that are missing in the core language as of C++17. Additionally here is an internally used class template `C_buffer_param_` which associates a pointer-to-first-item-in-array with a minimum size of the array.   |
 
 
-## 3. Tutorial.
+## 3. Examples.
 
-The code examples in this tutorial are all available in the “examples” top level folder.
+These code examples are all available in the “examples” top level folder.
 
 ---
 
@@ -143,7 +143,7 @@ The names are however originally defined directly in the `cppx` namespace, so yo
 
 The “*bits_per_.hpp*” header provides convenient notation for the bit widths of fundamental types, as `int` values:
 
-<small>*tutorial/bit-level/bit-widths-of-int.cpp*</small>
+<small>*examples/bit-level/bit-widths-of-int.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <c/stdio.hpp>
@@ -194,7 +194,7 @@ The `Bitness::Enum` enumeration type, defined as
 
 For example as in the `display_info_for_` function template below:
 
-<small>*tutorial/bit-level/table-of-bit-widths.cpp*</small>
+<small>*examples/bit-level/table-of-bit-widths.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <iostream>
@@ -267,7 +267,7 @@ Specific headers:
 ~~~
 
 
-#### 3.1.2. Examples for “*intlog2.hpp*”.
+#### 3.1.2. Header “*intlog2.hpp*”.
 
 The “*intlog2.hpp*” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
 
@@ -293,7 +293,7 @@ This is generally known as a “**pop count**”, short for “population count�
 
 Example:
 
-<small>*tutorial/bit-level/pop-counts.cpp*</small>
+<small>*examples/bit-level/pop-counts.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <c/stdint.hpp>         // uint8_t
@@ -383,7 +383,7 @@ The “*floating-point-operations.hpp*” header provides three `double` functio
 
  I can’t think of any situtation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
-<small>*tutorial/calc/floating-point-constexpr.cpp*</small>
+<small>*examples/calc/floating-point-constexpr.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <iostream>     // std::(cout, endl, fixed)
@@ -430,7 +430,7 @@ Specific header:
 #include <cppx-core-language/calc/floating-point-operations.hpp>
 ~~~
 
-#### 3.2.2. Examples for “*general-operations.hpp*”.
+#### 3.2.2. Header “*general-operations.hpp*”.
 
 The “*general-operations.hpp*” header provides the `squared` and `cubed` function templates already discussed in the previous section.
 
@@ -445,7 +445,7 @@ All these functions are templated on the integer (or general number) type.
 
 A somewhat construed example:
 
-<small>*tutorial/calc/pascal-as-sierpinsky.cpp*</small>
+<small>*examples/calc/pascal-as-sierpinsky.cpp*</small>
 ~~~cpp
 // Display the positions of the odd numbers in Pascal's triangle.
 #include <cppx-core-language/all.hpp>
@@ -516,7 +516,7 @@ The Pascal’s triangle example above is “somewhat construed” because all th
 
 A bit of analysis can reduce that further down to an apparently very simple program, showing how the `is_zero` function can be of practical use. For, the expression `x & ~y == 0` means something very different from the intended `(x & ~y) == 0`. Using `is_zero` and writing it as `is_zero(x & ~y)` the operator precedence problem just doesn't pop up:
 
-<small>*tutorial/calc/sierpinsky.cpp*</small>
+<small>*examples/calc/sierpinsky.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <c/stdio.hpp>
@@ -557,7 +557,7 @@ This matches how humans and most (possibly all) computers do integer division, b
 
 Consider, if one taxi can take 3 passengers, how many taxies are needed for a group of 10 people? Integer division `10/3` yields 3, which leaves one person stranded… The C++ expression `(10 + (3 - 1))/3` works for positive numbers, and is not uncommon. In Python, where integer division rounds down towards negative infinity, one can write `-(10//-3)`. However, neither expression is intuitive and clear at a glance. So, this is `div_up`:
 
-<small>*tutorial/calc/div-up-and-down.cpp*</small>
+<small>*examples/calc/div-up-and-down.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <c/stdio.hpp>
@@ -608,7 +608,7 @@ The `mod` function is defined in terms of `div_down`,
 
 I’ve provided `mod` for *completeness*, that there ought to be this operation complementing `div_down` just as in the core language there is `%` complementing integer `/`, and just as in the standard library there is `fmod` complementing floating point `/`. However, I’m at a loss coming up with a practical example where `mod` would be clearly useful. The following example just illustrates the signs and magnitudes that one can expect:
 
-<small>*tutorial/calc/remainders.cpp*</small>
+<small>*examples/calc/remainders.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/calc/all.hpp>
 #include <c/stdio.hpp>
@@ -656,7 +656,7 @@ The names that end with underscore are templates. The set of double constants ar
 
 C++20’s [new header `<numbers>`](https://en.cppreference.com/w/cpp/header/numbers) will define all of the `double` constants, plus a few more esoteric ones.
 
-<small>*tutorial/calc/named-numbers.cpp*</small>
+<small>*examples/calc/named-numbers.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <iostream>     // std::(cout, endl)
@@ -742,7 +742,7 @@ Not to mention that `min_<double>` is very much shorter and readable than (!) `-
 
 A program that diplays these properties for types `bool`, `int` and `double`:
 
-<small>*tutorial/calc/number-type-properties.cpp*</small>
+<small>*examples/calc/number-type-properties.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <iostream>     // std::(cout, endl)
