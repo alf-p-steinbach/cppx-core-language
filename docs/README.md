@@ -680,6 +680,105 @@ Specific headers:
 
 #### 3.2.5. Header “*number-type-properties.hpp*”.
 
+The “*named-numbers.hpp*” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
+
+For an integral type `T` the set is
+
+~~~cpp
+constexpr T     smallest_       = 1;                            // Smallest non-zero.
+constexpr T     largest_        = numeric_limits<T>::max();
+constexpr T     min_            = numeric_limits<T>::min();     // Usually `-largest_ - 1`.
+constexpr T     max_            = largest;
+constexpr int   n_digits_       = numeric_limits<T>::digits10;
+~~~
+
+… and for a floating point type `T` the set has some additional properties:
+
+~~~cpp
+constexpr T     smallest_       = numeric_limits<T>::min();     // Smallest non-zero.
+constexpr T     largest_        = numeric_limits<T>::max();
+constexpr T     min_            = -largest;                     // Largest negative.
+constexpr T     max_            = largest;
+constexpr int   n_digits_       = numeric_limits<T>::digits10;
+            
+constexpr Truth is_ieee_754_    = numeric_limits<T>::is_iec559;
+constexpr int   min_exp_        = numeric_limits<T>::min_exponent10;
+constexpr int   max_exp_        = numeric_limits<T>::max_exponent10;
+constexpr int   radix_          = numeric_limits<T>::radix;
+constexpr T     epsilon_        = numeric_limits<T>::epsilon();
+~~~
+
+Use of floating point-specific property for an integral type, would most likely be an error. Therefore, unlike `std::numeric_limits` the floating point-specific properties *do not exist* for integral types. So, this set is more consistent wrt. form (value or function), more consistent wrt. meaning, and more safe, than `std::numeric_limits`.
+
+A program that diplays these properties for types `bool`, `int` and `double`:
+
+<small>*tutorial/calc/number-type-properties.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>     // std::(cout, endl)
+#include <iomanip>      // std::setw
+$use_std( cout, endl, setw, setprecision, boolalpha );
+
+constexpr int field_widths[] =
+{
+    6,
+    18, 18, 18, 18, 5,
+    8, 8, 8, 5, 18
+};
+
+template< class... Args >
+void display_fields( const int*& p_width, const Args&... args )
+{
+    ((cout << setw( *p_width++ ) << args), ...);
+}
+
+template< class Type >
+void display_properties_of_type_()
+{
+    const int* widths = field_widths;
+
+    $use_cppx( is_floating_point_, type_name_of_ );
+    using namespace cppx::calc;
+    display_fields( widths,
+        type_name_of_<Type>(),
+        smallest_<Type>, largest_<Type>, min_<Type>, max_<Type>, n_digits_<Type>
+        );
+    if constexpr( is_floating_point_<Type> ) {
+        display_fields( widths,
+            is_ieee_754_<Type>,
+            min_exp_<Type>, max_exp_<Type>, radix_<Type>, epsilon_<Type>
+            );
+    }
+    cout << endl;
+}
+
+template< class... Type >
+void display_properties_of_()
+{
+    (display_properties_of_type_<Type>(),...);
+}
+
+void display_column_headers()
+{
+    const int* widths = field_widths;
+    display_fields( widths,
+        "Name:",
+        "Smallest:", "Largest:", "Min:", "Max:", "Dig:",
+        "IEEE?", "Min E:", "Max E:", "R:", "Epsilon:"
+        );
+    cout << endl;
+}
+
+auto main()
+    -> int
+{
+    display_column_headers();
+    cout << endl;
+    cout << setprecision( 8 ) << boolalpha;
+    display_properties_of_<bool, int, double>();
+}
+~~~
+
 
 Result with 64-bit MinGW g++ in Windows 10:
 
@@ -689,6 +788,26 @@ Result with 64-bit MinGW g++ in Windows 10:
   bool              true              true             false              true    0
    int                 1        2147483647       -2147483648        2147483647    9
 double    2.2250739e-308    1.7976931e+308   -1.7976931e+308    1.7976931e+308   15    true    -307     308    2      2.220446e-16
+~~~
+
+How come `true` is the “smallest” value of type `bool`?
+
+The “Smallest:” column shows the *smallest strictly positive* value. The value 0 could in some sense be regarded as smallest, but as the value of `smallest_<T>` it would have no practical value. One could then, better, just write `0` instead.
+
+How come that the minimum value of the exponent is reported as `-307`, when the very first `double` value in the table has exponent `-308`?
+
+`min_exp_` is effectively an alias for `std::numeric_limits::min_exponent10`, which in C++17 is defined as
+
+> **”** Minimum negative integer such that 10 raised to that power is in the range of normalized floating-point numbers.
+
+Even without considering normalization and denormal numbers, since 10⁻³⁰⁸ < 2.23⋅10⁻³⁰⁸ the former is not “in the range” of the type. But 10⁻³⁰⁷ is. A practical view is that the range 10⁻³⁰⁷ … 10⁺³⁰⁸ is a subset of the range of the type, and that the powers of 10 immediately outside that sub-range are outside the range of the type.
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/number-type-properties.hpp>   // cppx::calc::*
+#include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_floating_point_
+#include <cppx-core-language/type-checking/type_name_of_.hpp>   // cppx::type_name_of_
 ~~~
 
 

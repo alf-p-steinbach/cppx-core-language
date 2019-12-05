@@ -1,7 +1,4 @@
-#include <cppx-core-language/calc/number-type-properties.hpp>   // cppx::calc::*
-#include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_floating_point_
-#include <cppx-core-language/type-checking/type_name_of_.hpp>   // cppx::type_name_of_
-
+#include <cppx-core-language/all.hpp>
 #include <iostream>     // std::(cout, endl)
 #include <iomanip>      // std::setw
 $use_std( cout, endl, setw, setprecision, boolalpha );
