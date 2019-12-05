@@ -708,7 +708,7 @@ constexpr int   radix_          = numeric_limits<T>::radix;
 constexpr T     epsilon_        = numeric_limits<T>::epsilon();
 ~~~
 
-Use of floating point-specific property for an integral type, would most likely be an error. Therefore, unlike `std::numeric_limits` the floating point-specific properties *do not exist* for integral types. So, this set is more consistent wrt. form (value or function), more consistent wrt. meaning, and more safe, than `std::numeric_limits`.
+Use of a floating point-specific property for an integral type, would most likely be an error. Therefore, unlike `std::numeric_limits` the floating point-specific properties *do not exist* for integral types. So, this set is more consistent wrt. form (value or function), more consistent wrt. meaning, and more safe, than `std::numeric_limits`.
 
 A program that diplays these properties for types `bool`, `int` and `double`:
 
