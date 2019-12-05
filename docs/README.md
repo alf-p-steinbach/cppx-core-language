@@ -17,6 +17,12 @@
       - [3.2.3. Examples for “*integer-operations.hpp*”.](#323-examples-for-integer-operationshpp)
       - [3.2.4. Examples for “*named-numbers.hpp*”.](#324-examples-for-named-numbershpp)
       - [3.2.5. Examples for “*number-type-properties.hpp*”.](#325-examples-for-number-type-propertieshpp)
+    - [3.3. The syntax support.](#33-the-syntax-support)
+    - [3.4. The system dependent stuff.](#34-the-system-dependent-stuff)
+    - [3.5. The text handling.](#35-the-text-handling)
+    - [3.6. The template meta programming support.](#36-the-template-meta-programming-support)
+    - [3.7. The type checking support.](#37-the-type-checking-support)
+    - [3.8. Supporting types.](#38-supporting-types)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -841,3 +847,14 @@ Specific headers:
 
 asdasd
 
+### 3.3. The syntax support.
+
+### 3.4. The system dependent stuff.
+
+### 3.5. The text handling.
+
+### 3.6. The template meta programming support.
+
+### 3.7. The type checking support.
+
+### 3.8. Supporting types.
