@@ -376,7 +376,7 @@ This doesn’t drag in other names from `cppx`.
 
 The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::pi;`, or `$use_cppx( pi );`, for individual names.
 
-**Tip**: The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.
+**Tip**: *The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.*
 
 
 #### 3.2.1. Examples for “*floating-point-operations.hpp*”.
