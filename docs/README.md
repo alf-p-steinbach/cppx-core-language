@@ -426,6 +426,8 @@ Such checking is needed because the whole point of an integral power function is
 
 Negative exponent is supported.
 
+Note: the standard library’s [`ldexp` function](https://en.cppreference.com/w/cpp/numeric/math/ldexp) could in principle be used to create integral powers of 2 efficiently, because on extant C++ implementations as of 2019, with binary floating point representation, it could just specify the power internally in the floating point representation. However, its page on cppreference.com notes that “On many implementations, `std::ldexp` is less efficient than multiplication or division by a power of two using arithmetic operators.”. I don’t know why.
+
 Specific header:
 
 ~~~cpp
