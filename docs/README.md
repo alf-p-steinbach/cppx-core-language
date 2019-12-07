@@ -762,29 +762,29 @@ The “*named-numbers.hpp*” header provides much of the same information as `s
 
 For an integral type `T` the set is
 
-~~~cpp
-constexpr T     smallest_       = 1;                            // Smallest non-zero.
-constexpr T     largest_        = numeric_limits<T>::max();
-constexpr T     min_            = numeric_limits<T>::min();     // Usually `-largest_ - 1`.
-constexpr T     max_            = largest;
-constexpr int   n_digits_       = numeric_limits<T>::digits10;
-~~~
+> ~~~cpp
+> constexpr T     smallest_       = 1;                            // Smallest non-zero.
+> constexpr T     largest_        = numeric_limits<T>::max();
+> constexpr T     min_            = numeric_limits<T>::min();     // Usually `-largest_ - 1`.
+> constexpr T     max_            = largest;
+> constexpr int   n_digits_       = numeric_limits<T>::digits10;
+> ~~~
 
 … and for a floating point type `T` the set has some additional properties:
 
-~~~cpp
-constexpr T     smallest_       = numeric_limits<T>::min();     // Smallest non-zero.
-constexpr T     largest_        = numeric_limits<T>::max();
-constexpr T     min_            = -largest;                     // Largest negative.
-constexpr T     max_            = largest;
-constexpr int   n_digits_       = numeric_limits<T>::digits10;
-            
-constexpr Truth is_ieee_754_    = numeric_limits<T>::is_iec559;
-constexpr int   min_exp_        = numeric_limits<T>::min_exponent10;
-constexpr int   max_exp_        = numeric_limits<T>::max_exponent10;
-constexpr int   radix_          = numeric_limits<T>::radix;
-constexpr T     epsilon_        = numeric_limits<T>::epsilon();
-~~~
+> ~~~cpp
+> constexpr T     smallest_       = numeric_limits<T>::min();     // Smallest non-zero.
+> constexpr T     largest_        = numeric_limits<T>::max();
+> constexpr T     min_            = -largest;                     // Largest negative.
+> constexpr T     max_            = largest;
+> constexpr int   n_digits_       = numeric_limits<T>::digits10;
+> 
+> constexpr Truth is_ieee_754_    = numeric_limits<T>::is_iec559;
+> constexpr int   min_exp_        = numeric_limits<T>::min_exponent10;
+>constexpr int   max_exp_        = numeric_limits<T>::max_exponent10;
+> constexpr int   radix_          = numeric_limits<T>::radix;
+> constexpr T     epsilon_        = numeric_limits<T>::epsilon();
+> ~~~
 
 Use of a floating point-specific property for an integral type, would most likely be an error. Therefore, unlike `std::numeric_limits` the floating point-specific properties *do not exist* for integral types. So, this set is more consistent wrt. form (value or function), more consistent wrt. meaning, and more safe, than `std::numeric_limits`.
 
