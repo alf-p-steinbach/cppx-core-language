@@ -727,13 +727,14 @@ auto main() -> int
 {
     $use_std( cout, endl, fixed, setprecision );
     $use_cppx( squared );
-    
-    using namespace cppx::m;    // pi
+    using namespace cppx::m;    // pi, etc.
     
     cout << "60 degrees ~= " << 60*(pi/180) << " radians." << endl;
 
     cout << fixed << setprecision( 20 );
+    const double atp = 2*atan2( 1, 0 );     // Pi computed using arc tan of 90 degrees.
     cout << "Error when using '3.14'  : " << 4*squared( sin( 3.14/3 ) ) - 3 << "." << endl;
+    cout << "Error when using arctan  : " << 4*squared( sin( atp/3 ) ) - 3 << "." << endl;
     cout << "Error when using cppx:pi : " << 4*squared( sin( pi/3 ) ) - 3 << "." << endl;
 }
 ~~~
@@ -743,6 +744,7 @@ Result with 64-bit MinGW g++ in Windows 10:
 ~~~txt
 60 degrees ~= 1.0472 radians.
 Error when using '3.14'  : -0.00183960128876048401.
+Error when using arctan  : -0.00000000000000044409.
 Error when using cppx:pi : -0.00000000000000044409.
 ~~~
 
