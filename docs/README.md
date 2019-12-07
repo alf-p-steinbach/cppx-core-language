@@ -840,6 +840,28 @@ Specific headers:
 #include <cppx-core-language/type-checking/type_name_of_.hpp>   // cppx::type_name_of_
 ~~~
 
+#### 3.2.6. Examples for “*stdlib-headers.hpp*”.
+
+The “*stdlib-headers.hpp*” header includes all the **calculator-like stuff** from the standard library, and adds nothing (except that the Posix number names `M_PI` etc. are made available courtesy of the C Header Wrappers library).
+
+~~~cpp
+#include <c/math.hpp>       // <math.h>, <cmath>, <c/stdlib.hpp>
+#include <complex>          // std::complex
+#include <numeric>          // std::accumulate etc.
+// Intentionally not including <valarray> because it doesn't follow std library conventions.
+~~~
+
+Correctness: ensures that both the integral and the floating point overloads of `abs` are present (the integral overloads are provided by `<cstdlib>` and the floating point overloads by `<cmath>`, and both are included), and ensures that `div` is present.
+
+Portability:  ensures that all needed headers are included by your source code, so that that source code also will work with other standard library implementations.
+
+Convenience: a single header, hey.
+
+The `std::valarray` class is not included, because, first, it’s a high level library thing, not calculator-like, not core functionality; secondly it’s a weird pre-standard non-collection-oriented design that just wasn’t ditched or sufficiently adapted in the first standardization in 1998; and third, it would possibly be a heavy dependency.
+
+
+
+
 
 ---
 
