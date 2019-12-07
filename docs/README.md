@@ -710,6 +710,49 @@ Specific headers:
 #include <cppx-core-language-meta-macro/macro-apply.hpp>    // $apply    
 ~~~
 
+---
+
+The most common use of the named numbers is probably using `pi` in conversions between degrees and radians.
+
+One way to judge the accuracy of that is to compute the sine or cosine of an angle with well-known simple sine or cosine. For example, which you can figure out from considering an equilateral triangle and applying Pythagora’s law, sin(60°) = sin(π/3) = ½√3. So, four times the square of that should ideally be exactly 3, and we do get pretty close:
+
+<small>*examples/calc/trig.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/math.hpp>       // sin
+#include <iostream>         // std::(cout, endl, fixed)
+#include <iomanip>          // std::setprecision
+
+auto main() -> int
+{
+    $use_std( cout, endl, fixed, setprecision );
+    $use_cppx( squared );
+    
+    using namespace cppx::m;    // pi
+    
+    cout << "60 degrees ~= " << 60*(pi/180) << " radians." << endl;
+
+    cout << fixed << setprecision( 20 );
+    cout << "Error when using '3.14'  : " << 4*squared( sin( 3.14/3 ) ) - 3 << "." << endl;
+    cout << "Error when using cppx:pi : " << 4*squared( sin( pi/3 ) ) - 3 << "." << endl;
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+60 degrees ~= 1.0472 radians.
+Error when using '3.14'  : -0.00183960128876048401.
+Error when using cppx:pi : -0.00000000000000044409.
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/named-numbers.hpp>        // cppx::m::*
+#include <cppx-core-language/calc/general-operations.hpp>   // cppx::squared    
+#include <cppx-core-language/syntax/macro-use.hpp>          // $use_std
+~~~
 
 #### 3.2.5. Examples for “*number-type-properties.hpp*”.
 
