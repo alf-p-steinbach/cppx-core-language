@@ -915,7 +915,7 @@ Specific headers:
 
 Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting namespace: `syntax`.*
 
-Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::general_string_builders`. These per-header namespaces provides more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
+Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::general_string_builders`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
 
 #### 3.3.1. Examples for “*basic-string-assembly.hpp*”.
 
