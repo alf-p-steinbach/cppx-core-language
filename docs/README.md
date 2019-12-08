@@ -140,27 +140,19 @@ Generally (but there are exceptions to all rules),
 
 * a header may have its own exporting namespace, e.g. `cppx::basic_string_assembly`,
 * a folder has an exporting namespace, e.g. `cppx::syntax`, that exports everything exported by the headers in that folder, and
-* the `cppx` namespace serves as a top-level catch-all exporting namespace.
+* the `cppx` namespace serves as a top-level catch-all exporting namespace so that you can use the `$use_cppx` macro to bring in unqualified individual names.
 
 Mostly things are *defined* in a special namespace `cppx::_`. A lot of names from the standard library are brought into this namespace to support the implementation code, and you may not necessarily want those standard library names colliding with something in your code. So, use the exporting namespaces, and not `_`.
 
 
 ### 3.1. The bit-level stuff.
 
-Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. Exporting namespace: `bitlevel`.
-
-An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
-
-~~~cppx
-using namespace cppx::bitlevel;
-~~~
-
-This doesn’t drag in other names from `cppx`.
-
-The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::bits_per_;`, or `$use_cppx( bits_per_ );`, for individual names.
+Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *Exporting namespace: `cppx::bitlevel`.*
 
 
 #### 3.1.1. Examples for “*bits_per_.hpp*”.
+
+*Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
 The “*bits_per_.hpp*” header provides convenient notation for the bit widths of fundamental types, as `int` values:
 
@@ -290,10 +282,14 @@ Specific headers:
 
 #### 3.1.2. Header “*intlog2.hpp*”.
 
+*Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
+
 The “*intlog2.hpp*” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
 
 
 #### 3.1.3. Examples for “*sum_of_bits.hpp*”.
+
+*Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
 The “*sum_of_bits.hpp*” header provides the `sum_of_bits` function, implemented in terms of `std::bitset` as simply
 
@@ -380,28 +376,19 @@ Specific headers:
 ~~~
 
 
-
 ### 3.2. The calculation stuff.
 
-Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. Exporting namespaces: `calc` and `m`.
-
-An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
-
-~~~cppx
-using namespace cppx::calc;
-~~~
-
-This doesn’t drag in other names from `cppx`.
+Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting namespaces: `calc` and `m`.*
 
 `calc` is used as a general exporting namespace for headers in the “calc” folder, but in order to minimize the risk of name collisions after C++20, the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence, you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
 
-The names are however originally defined directly in the `cppx` namespace, so you can also use e.g. just `using cppx::pi;`, or `$use_cppx( pi );`, for individual names.
-
 **Tip**:  
-*The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.*
+The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.
 
 
 #### 3.2.1. Examples for “*floating-point-operations.hpp*”.
+
+*Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
 The “*floating-point-operations.hpp*” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. The `squared` and `cubed` functions are function templates defined in the “*general-operations.hpp*” header, which is included here for convenience.
 
@@ -458,10 +445,14 @@ Specific header:
 
 #### 3.2.2. Header “*general-operations.hpp*”.
 
+*Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
+
 The “*general-operations.hpp*” header provides the `squared` and `cubed` function templates already discussed in the previous section.
 
 
 #### 3.2.3. Examples for “*integer-operations.hpp*”.
+
+*Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
 The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`. In addition the “*general-operations.hpp*” header is included for convenience. It defines the functions `squared` and `cubed`.
 
@@ -676,7 +667,15 @@ Specific header:
 
 #### 3.2.4. Examples for “*named-numbers.hpp*”.
 
-The “*named-numbers.hpp*” header provides the `double` constants `e`, `log2e`, `log10e`, `ln2`, `ln10`, `pi`, `inv_sqrt_pi`, `sqrt2` and `inv_sqrt2`; the `Truth` constants `has_nan`_, `has_nan`, `has_infinity_` and `has_infinity`; and the  `constexpr` functions `nan_`, `nan`, `infinity_` and `infinity`.
+*Exporting namespace: `cppx::m`.*
+
+In order to avoid potential name collisions after C++20, the names provided by this header, like `pi`, are not made available in the folder’s namespace `calc` or in the common `cppx` namespace. But you can still use the `$use_cppx` macro to easily bring in individual unqualified names. For example, `$use_cppx( m::pi );` (think Posix `M_PI`).
+
+The “*named-numbers.hpp*” header provides
+
+* the `double` constants `e`, `log2e`, `log10e`, `ln2`, `ln10`, `pi`, `inv_sqrt_pi`, `sqrt2` and `inv_sqrt2`;
+* the `Truth` constants `has_nan`_, `has_nan`, `has_infinity_` and `has_infinity`; and
+* the  `constexpr` functions `nan_`, `nan`, `infinity_` and `infinity`.
 
 The names that end with underscore are templates. The set of double constants are defined in terms of [the Posix standard’s `M_PI` etc.](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/math.h.html), if available, and otherwise simple literals, copied from a `<math.h>` header, are used. The `nan` and `infinity` functions are simple wrappers around the corresponding `std::numeric_limits` functions.
 
@@ -720,8 +719,6 @@ inv_sqrt2    =    0.7071067812
 ~~~
 
 Here the `$apply` macro is from the Meta Macro library, but that library is included wholesale by the Core Language Extensions “all” header. For each of the following arguments `$apply` invokes the specified macro, here `DISPLAY`, with that argument. The `Type_` template alias is a nice way to support prefix `const`, as far as I know originally proposed by Johannes “litb” Schaub.
-
-Not exemplified by the code above: the names are available via the exporting namespace `m`, e.g. `using namespace cppx::m;` brings in all these names unqualified.
 
 Specific headers:
 
@@ -779,7 +776,9 @@ Specific headers:
 
 #### 3.2.5. Examples for “*number-type-properties.hpp*”.
 
-The “*named-numbers.hpp*” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
+*Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
+
+The “*number-type-properties.hpp*” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
 
 For an integral type `T` the set is
 
@@ -914,17 +913,9 @@ Specific headers:
 
 ### 3.3. The syntax support.
 
-Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/calc)**”. Exporting namespace: `syntax`.
+Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting namespace: `syntax`.*
 
-An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
-
-~~~cppx
-using namespace cppx::syntax;
-~~~
-
-This doesn’t drag in other names from `cppx`.
-
-Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::general_string_builders`. These per-header namespaces provides more fine grained control over which identifiers you bring in unqualified. And in the other direction, just `using namespace cppx;` brings in everything, plus plus.
+Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::general_string_builders`. These per-header namespaces provides more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
 
 #### 3.3.1. Examples for “*basic-string-assembly.hpp*”.
 
