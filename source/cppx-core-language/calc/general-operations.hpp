@@ -2,8 +2,7 @@
 
 #include <cppx-core-language/syntax/macro-use.hpp>      // CPPX_USE_CPPX
 
-namespace cppx {
-
+namespace cppx::definitions {
     /// \brief The square (second power) of the argument.
     template< class Number >
     constexpr inline auto squared( const Number x )
@@ -15,9 +14,13 @@ namespace cppx {
     constexpr inline auto cubed( const Number x )
         -> Number
     { return x*x*x; }
+}  // namespace cppx::definions
 
-    // Exporting namespace.
+// Exporting namespaces.
+namespace cppx{
     namespace calc {
-        CPPX_USE_CPPX( squared, cubed );
+        CPPX_USE_CPPX( definitions::squared, definitions::cubed );
     }  // namespace calc
+
+    using namespace calc;
 }  // namespace cppx

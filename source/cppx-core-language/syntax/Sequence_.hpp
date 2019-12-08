@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a firstcase Greek "pi").
-#include <cppx-core/iterators/Forward_iterator_impl_.hpp>       // cppx::Forward_iterator_impl_
+#include <cppx-core-language/types/Forward_iterator_impl_.hpp>  // cppx::Forward_iterator_impl_
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 #include <cppx-core-language/tmp/Enable_if_.hpp>                // cppx::Enable_if_
 #include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_integral_

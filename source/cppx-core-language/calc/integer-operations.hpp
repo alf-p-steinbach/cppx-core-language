@@ -17,8 +17,7 @@
 #include <algorithm>        // std::max
 #include <type_traits>      // std::(common_type_t, is_integral_v, is_unsigned_v)
 
-namespace cppx
-{
+namespace cppx::definitions {
     template< class Int >
     constexpr inline auto is_even( const Int x )
         -> Truth
@@ -69,12 +68,21 @@ namespace cppx
     //    static_assert( (... and std::is_integral_v<Ints> ) );
     //    return std::max( {std::common_type_t<Ints...>( args )...} );
     //}
+}  // namespace cppx::definitions
 
-    // Exporting namespace.
+// Exporting namespaces.
+namespace cppx{
     namespace calc
     {
         CPPX_USE_CPPX(
-            is_even, is_odd, is_zero, div_down, div_up, mod
+            definitions::is_even,
+            definitions::is_odd,
+            definitions::is_zero,
+            definitions::div_down,
+            definitions::div_up,
+            definitions::mod
         );
     }  // namespace calc
+
+    using namespace calc;
 }  // namespace cppx

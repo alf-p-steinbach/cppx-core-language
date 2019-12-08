@@ -9,7 +9,7 @@
 
 #include <bitset>           // std::bitset
 
-namespace cppx{
+namespace cppx::definitions{
     CPPX_USE_STD( bitset );
 
     /// \brief The number of 1-bits in a `std::bitset`.
@@ -26,12 +26,6 @@ namespace cppx{
         static_assert( is_unsigned_<Unsigned> );
         return bitset< bits_per_<Unsigned> >( x ).count();
     }
-
-    // Exporting namespace.
-    namespace bitlevel
-    {
-        CPPX_USE_CPPX( sum_of_bits );
-    }  // namespace bitlevel
 
 #if 0  // Possible optimizations, probably not needed
 #if defined( _MSC_VER )
@@ -84,4 +78,14 @@ namespace cppx{
 #endif
 #endif // 0
 
+}  // namespace cppx::definitions
+
+// Exporting namespaces.
+namespace cppx{
+    namespace bitlevel
+    {
+        CPPX_USE_CPPX( definitions::sum_of_bits );
+    }  // namespace bitlevel
+
+    using namespace bitlevel;
 }  // namespace cppx

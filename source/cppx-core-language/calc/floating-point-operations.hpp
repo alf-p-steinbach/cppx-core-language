@@ -9,8 +9,7 @@
 #include <cppx-core-language/calc/integer-operations.hpp>       // cppx::is_odd
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_CPPX
 
-namespace cppx
-{
+namespace cppx::definitions {
     /// @cond DOXY_SHOW_IMPL_DETAILS
     namespace impl
     {
@@ -46,10 +45,13 @@ namespace cppx
             :                       impl::intpow( base, exponent )
             );
     }
+}  // namespace cppx::definitions
 
-    // Exporting namespace.
-    namespace calc
-    {
-        CPPX_USE_CPPX( intpow );
+// Exporting namespaces.
+namespace cppx {
+    namespace calc {
+        CPPX_USE_CPPX( definitions::intpow );
     }  // namespace math
+
+    using namespace calc;
 }  // namespace cppx

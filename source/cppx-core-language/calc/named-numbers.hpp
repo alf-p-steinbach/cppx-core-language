@@ -20,8 +20,7 @@
 #include <c/math.hpp>
 #include <limits>           // std::numeric_limits
 
-namespace cppx
-{
+namespace cppx::definitions {
     CPPX_USE_STD( numeric_limits );
 
 #ifdef M_PI
@@ -81,13 +80,32 @@ namespace cppx
         -> double
     { return infinity_<double>(); }
 
-    // Exporting namespace.
-    namespace m
-    {
+}  // namespace cppx::definitions
+
+// Exporting namespaces.
+namespace cppx {
+    namespace m {
         CPPX_USE_CPPX(
-            e, log2e, log10e, ln2, ln10, pi, inv_sqrt_pi, sqrt2, inv_sqrt2,
-            has_nan_, has_nan, nan_, nan, has_infinity_, has_infinity, infinity_, infinity
-            );
+            definitions::e,
+            definitions::log2e,
+            definitions::log10e,
+            definitions::ln2,
+            definitions::ln10,
+            definitions::pi,
+            definitions::inv_sqrt_pi,
+            definitions::sqrt2,
+            definitions::inv_sqrt2,
+
+            definitions::has_nan_,
+            definitions::has_nan,
+            definitions::nan_,
+            definitions::nan,
+            definitions::has_infinity_,
+            definitions::has_infinity,
+            definitions::infinity_,
+            definitions::infinity
+        );
     }  // namespace m
+    // Intentionally not placed in namespace `calc` or directly in `cppx`, avoid collisions.
 
 }  // namespace cppx

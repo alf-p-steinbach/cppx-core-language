@@ -9,7 +9,7 @@
 #include <string_view>      // std::string_view
 #include <sstream>          // std::ostringstream
 
-namespace cppx::basic_string_assembly
+namespace cppx::definitions
 {
     CPPX_USE_STD(
         ostream, ostringstream, string, string_view
@@ -78,14 +78,18 @@ namespace cppx::basic_string_assembly
         -> string&&
     { return move( operator<<( s, value ) ); }
 
-}  // namespace cppx::basic_string_assembly
+}  // namespace cppx::definitions
 
+// Exporting namespaces.
 namespace cppx
 {
-    // Exporting namespace.
-    namespace syntax {
+    namespace basic_string_assembly {
         using namespace std::string_literals;       // E.g. ""s
-        using basic_string_assembly::operator<<;
+        using definitions::operator<<;
+    }  // basic_string_assembly
+
+    namespace syntax {
+        using namespace basic_string_assembly;
     }  // namespace syntax
 
     using namespace syntax;
