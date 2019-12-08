@@ -5,7 +5,7 @@
 #include <string>           // std::string
 #include <string_view>      // std::string_view
 
-namespace cppx::general_string_builders {
+namespace cppx::definitions {
     CPPX_USE_STD( string, string_view );
 
     inline auto spaces( const int n )
@@ -47,11 +47,20 @@ namespace cppx::general_string_builders {
         return result;
     }
 
-}  // namespace cppx::general_string_builders
+}  // namespace cppx::definitions
 
+// Exporting namespaces.
 namespace cppx{
 
-    // Exporting namespace.
+    namespace general_string_builders {
+        CPPX_USE_CPPX(
+            definitions::spaces,
+            definitions::repeated_times,
+            definitions::operator*,
+            definitions::joined
+            );
+    }  // namespace general_string_builders
+
     namespace syntax{
         using namespace general_string_builders;
     }  // namespace syntax

@@ -95,6 +95,7 @@ These code examples are all available in the “examples” top level folder.
 
 ---
 
+**Notation**  
 Most of the examples use the Core Language Extensions syntax support. In particular, where the examples use things from the C++ standard library the unqualified names are brought in via a macro **`$use_std`**, like this:
 
     $use_std( cout, endl, setw );
@@ -115,6 +116,7 @@ The examples use the macros and other syntax support like the `zero_to` function
 
 ---
 
+**Headers**  
 In practical use of the library one will just include ***the top level “all”  header***,
 
     #include <cppx-core-language/all.hpp>
@@ -122,6 +124,26 @@ In practical use of the library one will just include ***the top level “all”
 And this is also how each example is presented.
 
 However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.using-specific-headers.cpp” that instead uses the most specific headers. For your information these includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
+
+---
+
+**Namespaces**  
+
+An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
+
+~~~cppx
+using namespace cppx::bitlevel;
+~~~
+
+This doesn’t drag in other names from `cppx`.
+
+Generally (but there are exceptions to all rules),
+
+* a header may have its own exporting namespace, e.g. `cppx::basic_string_assembly`,
+* a folder has an exporting namespace, e.g. `cppx::syntax`, that exports everything exported by the headers in that folder, and
+* the `cppx` namespace serves as a top-level catch-all exporting namespace.
+
+Mostly things are *defined* in a special namespace `cppx::definitions`, which client code should not use. One reason for not using, is that a lot of names from the standard library are brought into this namespace. You may not necessarily want those standard library names colliding with something in your code.
 
 
 ### 3.1. The bit-level stuff.
