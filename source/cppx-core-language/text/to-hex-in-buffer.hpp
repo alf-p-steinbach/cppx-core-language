@@ -12,8 +12,8 @@ namespace cppx::hex_stuff {
 
     inline auto byte_to_hex_in(
         const Bufferptr_for_byte_to_hex     buffer,
-        const Byte                      value,
-        const Type_<const char*>        hex_digits  = hex_digits_uppercase
+        const Byte                          value,
+        const Type_<const char*>            hex_digits  = hex_digits_uppercase
         ) -> Size
     {
         char* p_end = buffer.ptr() + hex_digits_per_byte;
@@ -27,9 +27,9 @@ namespace cppx::hex_stuff {
 
     inline auto byte_span_to_hex_in(
         const Bufferptr_for_byte_to_hex     buffer,
-        const Type_<const Byte*>        p_first,
-        const Type_<const Byte*>        p_beyond,
-        const Type_<const char*>        hex_digits  = hex_digits_uppercase
+        const Type_<const Byte*>            p_first,
+        const Type_<const Byte*>            p_beyond,
+        const Type_<const char*>            hex_digits  = hex_digits_uppercase
         ) -> Size
     {
         char* p = buffer.ptr();

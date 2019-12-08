@@ -47,7 +47,7 @@ namespace cppx
             );
     }
 
-    // Is documented in the `all.hpp` header.
+    // Exporting namespace.
     namespace calc
     {
         CPPX_USE_CPPX( intpow );

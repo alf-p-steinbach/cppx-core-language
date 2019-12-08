@@ -56,6 +56,7 @@ namespace cppx
         return impl::log2( x );
     }
 
+    // Exporting namespace.
     namespace bitlevel
     {
         CPPX_USE_CPPX( intlog2 );

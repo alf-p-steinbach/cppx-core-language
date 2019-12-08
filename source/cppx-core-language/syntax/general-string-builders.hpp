@@ -50,5 +50,11 @@ namespace cppx::general_string_builders {
 }  // namespace cppx::general_string_builders
 
 namespace cppx{
-    using namespace general_string_builders;
+
+    // Exporting namespace.
+    namespace syntax{
+        using namespace general_string_builders;
+    }  // namespace syntax
+
+    using namespace syntax;
 }  // namespace cppx

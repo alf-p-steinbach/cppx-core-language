@@ -81,20 +81,7 @@ namespace cppx
         -> double
     { return infinity_<double>(); }
 
-    /// \brief Provides
-    /// \make_name_ref{cppx,e},
-    /// \make_name_ref{cppx,log2e},
-    /// \make_name_ref{cppx,log10e},
-    /// \make_name_ref{cppx,ln2},
-    /// \make_name_ref{cppx,ln10},
-    /// \make_name_ref{cppx,pi},
-    /// \make_name_ref{cppx,inv_sqrt_pi},
-    /// \make_name_ref{cppx,sqrt2},
-    /// \make_name_ref{cppx,inv_sqrt2},
-    /// \make_name_ref{cppx,has_nan_} and \make_name_ref{cppx,has_nan},
-    /// \make_name_ref{cppx,nan_} and \make_name_ref{cppx,nan},
-    /// \make_name_ref{cppx,has_infinity_} and \make_name_ref{cppx,has_infinity}, and
-    /// \make_name_ref{cppx,infinity_} and \make_name_ref{cppx,infinity}.
+    // Exporting namespace.
     namespace m
     {
         CPPX_USE_CPPX(

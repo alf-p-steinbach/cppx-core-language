@@ -46,6 +46,7 @@ namespace cppx
         Bitness::system == 128
         );
 
+    // Exporting namespace.
     namespace bitlevel
     {
         CPPX_USE_CPPX( bits_per_, magnitude_bits_per_, Bitness );

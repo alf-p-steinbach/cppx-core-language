@@ -891,16 +891,24 @@ Specific headers:
 ~~~
 
 
-
-
-
----
-
-
-
-asdasd
-
 ### 3.3. The syntax support.
+
+Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/calc)**”. Exporting namespace: `syntax`.
+
+An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
+
+~~~cppx
+using namespace cppx::syntax;
+~~~
+
+This doesn’t drag in other names from `cppx`.
+
+Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::general_string_builders`. These per-header namespaces provides more fine grained control over which identifiers you bring in unqualified. And in the other direction, just `using namespace cppx;` brings in everything, plus plus.
+
+#### 3.3.1. Examples for “*basic-string-assembly.hpp*”.
+
+
+
 
 ### 3.4. The system dependent stuff.
 

@@ -27,6 +27,7 @@ namespace cppx{
         return bitset< bits_per_<Unsigned> >( x ).count();
     }
 
+    // Exporting namespace.
     namespace bitlevel
     {
         CPPX_USE_CPPX( sum_of_bits );

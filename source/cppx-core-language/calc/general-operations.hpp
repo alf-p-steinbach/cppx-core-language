@@ -16,6 +16,7 @@ namespace cppx {
         -> Number
     { return x*x*x; }
 
+    // Exporting namespace.
     namespace calc {
         CPPX_USE_CPPX( squared, cubed );
     }  // namespace calc
