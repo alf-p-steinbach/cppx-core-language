@@ -9,7 +9,7 @@ void display( const double number, const Type_<const char*> name )
     cout << left << setw( 12 ) << name << " = " << right << setw( 15 ) << number << endl;
 }
 
-#define DISPLAY( name ) display( cppx::name, #name );
+#define DISPLAY( name ) display( cppx::m::name, #name );
 
 auto main()
     -> int
