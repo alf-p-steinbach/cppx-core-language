@@ -10,7 +10,7 @@
 
 #include <limits>           // std::numeric_limits 
 
-namespace cppx::definitions {
+namespace cppx::_ {
     CPPX_USE_STD( numeric_limits );
 
     /// \brief The number of bits per object/value of the specified type.
@@ -45,16 +45,16 @@ namespace cppx::definitions {
         Bitness::system == 128
         );
 
-}  // namespace cppx::definitions
+}  // namespace cppx::_
 
 // Exporting namespaces.
 namespace cppx {
     namespace bitlevel
     {
         CPPX_USE_CPPX(
-            definitions::bits_per_,
-            definitions::magnitude_bits_per_,
-            definitions::Bitness
+            _::bits_per_,
+            _::magnitude_bits_per_,
+            _::Bitness
             );
     }  // namespace bitlevel
 

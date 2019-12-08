@@ -143,7 +143,7 @@ Generally (but there are exceptions to all rules),
 * a folder has an exporting namespace, e.g. `cppx::syntax`, that exports everything exported by the headers in that folder, and
 * the `cppx` namespace serves as a top-level catch-all exporting namespace.
 
-Mostly things are *defined* in a special namespace `cppx::definitions`, which client code should not use. One reason for not using, is that a lot of names from the standard library are brought into this namespace. You may not necessarily want those standard library names colliding with something in your code.
+Mostly things are *defined* in a special namespace `cppx::_`, which client code should not use. One reason for not using, is that a lot of names from the standard library are brought into this namespace. You may not necessarily want those standard library names colliding with something in your code.
 
 
 ### 3.1. The bit-level stuff.

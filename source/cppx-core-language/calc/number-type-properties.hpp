@@ -24,7 +24,7 @@
 #include <limits>       // std::numeric_limits
 #include <type_traits>  // std::is_integral_v
 
-namespace cppx::definitions {
+namespace cppx::_ {
     /// @cond DOXY_SHOW_IMPL_DETAILS
     CPPX_USE_STD( conditional_t );
 
@@ -156,22 +156,22 @@ namespace cppx::definitions {
     /// The expression `epsilon_<T>` is an alias for `std::numeric_limits<T>::epsilon()`.
     template< class T > constexpr T     epsilon_        = Number_properties_<T>::epsilon;
 
-}  // namespace cppx::definitions
+}  // namespace cppx::_
 
 // Exporting namespaces.
 namespace cppx {
     namespace calc {
         CPPX_USE_CPPX(
-            definitions::smallest_,
-            definitions::largest_,
-            definitions::min_,
-            definitions::max_,
-            definitions::n_digits_,
-            definitions::is_ieee_754_,
-            definitions::min_exp_,
-            definitions::max_exp_,
-            definitions::radix_,
-            definitions::epsilon_
+            _::smallest_,
+            _::largest_,
+            _::min_,
+            _::max_,
+            _::n_digits_,
+            _::is_ieee_754_,
+            _::min_exp_,
+            _::max_exp_,
+            _::radix_,
+            _::epsilon_
         );
     }  // namespace calc
 

@@ -9,7 +9,7 @@
 
 #include <bitset>           // std::bitset
 
-namespace cppx::definitions{
+namespace cppx::_{
     CPPX_USE_STD( bitset );
 
     /// \brief The number of 1-bits in a `std::bitset`.
@@ -78,13 +78,13 @@ namespace cppx::definitions{
 #endif
 #endif // 0
 
-}  // namespace cppx::definitions
+}  // namespace cppx::_
 
 // Exporting namespaces.
 namespace cppx{
     namespace bitlevel
     {
-        CPPX_USE_CPPX( definitions::sum_of_bits );
+        CPPX_USE_CPPX( _::sum_of_bits );
     }  // namespace bitlevel
 
     using namespace bitlevel;

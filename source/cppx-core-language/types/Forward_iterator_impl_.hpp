@@ -1,7 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_STD
-#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::P_
-#include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::(Size)
+#include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::Size
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
 #include <c/stddef.hpp>                             // ptrdiff_t
@@ -45,7 +44,7 @@ namespace cppx
         // `std::iterator_traits` types:
         using difference_type       = Size;
         using value_type            = Value_type_param;  // decltype( *declval<Derived>() );
-        using pointer               = P_<value_type>;
+        using pointer               = value_type*;
         using reference             = const value_type&;
         using iterator_category     = forward_iterator_tag;
 

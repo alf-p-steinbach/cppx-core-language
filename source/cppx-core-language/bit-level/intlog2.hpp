@@ -10,7 +10,7 @@
 
 #include <type_traits>      // std::is_unsigned_v
 
-namespace cppx::definitions {
+namespace cppx::_ {
     /// @cond DOXY_SHOW_IMPL_DETAILS
     namespace impl
     {
@@ -54,13 +54,13 @@ namespace cppx::definitions {
         static_assert( std::is_unsigned_v<Unsigned> );
         return impl::log2( x );
     }
-}  // namespace cppx::definitions
+}  // namespace cppx::_
 
 // Exporting namespaces.
 namespace cppx {
     namespace bitlevel
     {
-        CPPX_USE_CPPX( definitions::intlog2 );
+        CPPX_USE_CPPX( _::intlog2 );
     }  // namespace bitlevel
 
     using namespace bitlevel;
