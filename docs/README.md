@@ -14,9 +14,9 @@
     - [3.2. The calculation stuff.](#32-the-calculation-stuff)
       - [3.2.1. Examples for “floating-point-operations.hpp”.](#321-examples-for-floating-point-operationshpp)
       - [3.2.2. Header “general-operations.hpp”.](#322-header-general-operationshpp)
-      - [3.2.3. Examples for “*integer-operations.hpp*”.](#323-examples-for-integer-operationshpp)
+      - [3.2.3. Examples for “integer-operations.hpp”.](#323-examples-for-integer-operationshpp)
       - [3.2.4. Examples for “named-numbers.hpp”.](#324-examples-for-named-numbershpp)
-      - [3.2.5. Examples for “*number-type-properties.hpp*”.](#325-examples-for-number-type-propertieshpp)
+      - [3.2.5. Examples for “number-type-properties.hpp”.](#325-examples-for-number-type-propertieshpp)
     - [3.3. The syntax support.](#33-the-syntax-support)
       - [3.3.1. Examples for “basic-string-assembly.hpp”.](#331-examples-for-basic-string-assemblyhpp)
     - [3.4. The system dependent stuff.](#34-the-system-dependent-stuff)
@@ -459,11 +459,11 @@ Specific header:
 The “general-operations.hpp” header provides the `squared` and `cubed` function templates already discussed in the previous section.
 
 
-#### 3.2.3. Examples for “*integer-operations.hpp*”.
+#### 3.2.3. Examples for “integer-operations.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
-The “*integer-operations.hpp*” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`. In addition the “*general-operations.hpp*” header is included for convenience. It defines the functions `squared` and `cubed`.
+The “integer-operations.hpp” header provides a suite of `constexpr` integer functions: `is_even(x)`, `is_odd(x)`, `is_zero(x)`, `div_down(a,b)`, `div_up(a,b)` and `mod(a,b)`. In addition the “*general-operations.hpp*” header is included for convenience. It defines the functions `squared` and `cubed`.
 
 All these functions are templated on the integer (or general number) type.
 
