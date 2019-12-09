@@ -74,35 +74,39 @@ namespace cppx
     template< class Truth_class >
     const Truth_class Truth_values_<Truth_class>::no    = false;
     
-    constexpr auto is_true( const Truth value )
+    constexpr inline auto is_true( const Truth value )
         -> Truth
     { return value; }
 
-    constexpr auto is_false( const Truth value )
+    constexpr inline auto is_false( const Truth value )
         -> Truth
     { return not value; }
 
-    constexpr auto operator!=( const Truth lhs, const Truth rhs )
+    constexpr inline auto operator+( const Truth value )
+        -> int
+    { return 0 + !!value; }
+
+    constexpr inline auto operator!=( const Truth lhs, const Truth rhs )
         -> bool
     { return !!lhs != !!rhs; }
 
-    constexpr auto operator<=( const Truth lhs, const Truth rhs )
+    constexpr inline auto operator<=( const Truth lhs, const Truth rhs )
         -> bool
     { return !!lhs <= !!rhs; }
 
-    constexpr auto operator<( const Truth lhs, const Truth rhs )
+    constexpr inline auto operator<( const Truth lhs, const Truth rhs )
         -> bool
     { return !!lhs < !!rhs; }
 
-    constexpr auto operator==( const Truth lhs, const Truth rhs )
+    constexpr inline auto operator==( const Truth lhs, const Truth rhs )
         -> bool
     { return !!lhs == !!rhs; }
 
-    constexpr auto operator>=( const Truth lhs, const Truth rhs )
+    constexpr inline auto operator>=( const Truth lhs, const Truth rhs )
         -> bool
     { return !!lhs >= !!rhs; }
 
-    constexpr auto operator>( const Truth lhs, const Truth rhs )
+    constexpr inline auto operator>( const Truth lhs, const Truth rhs )
         -> bool
     { return !!lhs > !!rhs; }
 
