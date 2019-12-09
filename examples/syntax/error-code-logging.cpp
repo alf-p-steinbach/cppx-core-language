@@ -1,5 +1,5 @@
 #include <cppx-core-language/all.hpp>
-#include <stdio.h>          // fprintf, stderr
+#include <c/stdio.hpp>      // fprintf, stderr
 #include <system_error>     // std::(errc, make_error_code)
 
 void log( const std::string& s )

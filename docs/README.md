@@ -934,7 +934,7 @@ As a first example, instead of
 
 >     display( "Welcome, user #" << user_id << "!" );
 
-Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`, and the `user_id`, if it is numeric or other non-string, is converted (as-if) via a `std::ostringstream` with default options.
+Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`, and the `user_id`, if it is numeric or other non-string, is converted (as-if) via a `std::ostringstream` with default options, except that (as-if) `std::boolalpha` is appplied so that boolean values result in text “true” and “false”.
 
 ---
 
@@ -978,7 +978,7 @@ A corresponding program using (also) the C++ Core Extensions library and its str
 <small>*examples/syntax/error-code-logging.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
-#include <stdio.h>          // fprintf, stderr
+#include <c/stdio.hpp>      // fprintf, stderr
 #include <system_error>     // std::(errc, make_error_code)
 
 void log( const std::string& s )
