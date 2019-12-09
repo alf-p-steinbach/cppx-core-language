@@ -934,7 +934,7 @@ As a first example, instead of
 
 >     display( "Welcome, user #"s << user_id << "!" );
 
-Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`, and the `user_id`, if it is numeric or other non-string, is converted (as-if) via a `std::ostringstream` with default options, except that (as-if) `std::boolalpha` is appplied so that boolean values result in text “true” and “false”.
+Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`, and the `user_id`, if it is numeric or other non-string, is converted (as-if) via a `std::ostringstream` with default options, except that (as-if) `std::boolalpha` is applied so that boolean values result in text “true” and “false”.
 
 ---
 
