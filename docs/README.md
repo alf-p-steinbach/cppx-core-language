@@ -924,6 +924,8 @@ Some headers in this folder have their own smaller exporting namespaces in addit
 
 The “basic-string-assembly.hpp” header provides a set of overloads of `operator<<` so that one can assemble a `std::string` from individual number and string pieces, especially for an argument of a function call.
 
+Note: there is no stream object that persists from one `<<` invocation to the next, and therefore manipulators such as `std::setprecision` have no effect. Use of the simplest manipulators such as `endl` and `fixed` is detected and transformed to compilation errors. However, the stateful manipulators such as `std::setprecision` have no identifying features apart from their individual types, so use of such manipulators is not detected and will compile, but with no result effect.
+
 ---
 
 As a first example, instead of
