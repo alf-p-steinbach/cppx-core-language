@@ -96,7 +96,7 @@ These code examples are all available in the “examples” top level folder.
 
 ---
 
-**Notation**  
+***Notation***  
 Most of the examples use the Core Language Extensions syntax support. In particular, where the examples use things from the C++ standard library the unqualified names are brought in via a macro **`$use_std`**, like this:
 
     $use_std( cout, endl, setw );
@@ -117,7 +117,7 @@ The examples use the macros and other syntax support like the `zero_to` function
 
 ---
 
-**Headers**  
+***Headers***  
 In practical use of the library one will just include ***the top level “all”  header***,
 
     #include <cppx-core-language/all.hpp>
@@ -128,7 +128,7 @@ However, it’s possible to use much more specific, less inclusive headers, and 
 
 ---
 
-**Namespaces**  
+***Namespaces***  
 An ***exporting namespace*** has `using` declarations of a bunch of related stuff, so that you can obtain unqualified versions of these names simply by e.g.
 
 ~~~cppx
@@ -159,7 +159,7 @@ The “bits_per_.hpp” header provides convenient notation for the bit widths o
 
 ---
 
-**Bits per int**  
+***Bits per int***  
 <small>*examples/bit-level/bit-widths-of-int.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -201,7 +201,7 @@ Specific header:
 
 ---
 
-**Types from bit widths**  
+***Types from bit widths***  
 The `Bitness::Enum` enumeration type, defined as
 
 >     struct Bitness{ enum Enum {
@@ -315,7 +315,7 @@ This is generally known as a “**pop count**”, short for “population count�
 
 ---
 
-**Sum of bits**  
+***Sum of bits***  
 <small>*examples/bit-level/pop-counts.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -388,7 +388,7 @@ Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting name
 
 `calc` is used as a general exporting namespace for headers in the “calc” folder, but in order to minimize the risk of name collisions after C++20, the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence, you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
 
-**Tip**:  
+***Tip***:  
 The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.
 
 
@@ -400,7 +400,7 @@ The “floating-point-operations.hpp” header provides three `double` functions
 
 ---
 
-**`constexpr` powers**  
+***`constexpr` powers***  
  I can’t think of any situation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
 <small>*examples/calc/floating-point-constexpr.cpp*</small>
@@ -469,7 +469,7 @@ All these functions are templated on the integer (or general number) type.
 
 ---
 
-**Even and odd checking**  
+***Even and odd checking***  
 `is_even` and `is_odd` do what their names say. Typically they’re used for checking the value of the least significant bit in an integer. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
 
 A somewhat construed example:
@@ -541,7 +541,7 @@ Specific headers:
 
 ---
 
-**Zero checking**  
+***Zero checking***  
 The Pascal’s triangle example above is “somewhat construed” because all that matters for the oddness or not of a number in Pascal’s triangle, is the oddness of the numbers above. So the above needlessly computes numbers that for a larger triangle (think about a high resolution graphics presentation) can easily exceed the range of `int`. All that needs to be stored each place in a row, is a `Truth` value representing the oddness.
 
 A bit of analysis can reduce that further down to an apparently very simple program, showing how the `is_zero` function can be of practical use. For, the expression `x & ~y == 0` means something very different from the intended `(x & ~y) == 0`. Using `is_zero` and writing it as `is_zero(x & ~y)` the operator precedence problem just doesn't pop up:
@@ -578,7 +578,7 @@ Specific headers:
 
 ---
 
-**Up and down-rounding integer division**  
+***Up and down-rounding integer division***  
 Throughout C++98 and C++03 the `%` remainder operator had partially implementation defined behavior, because the rounding behavior of integer `/` was unspecified. Integer `/` could round down towards negative infinity, or in towards zero. With C++11 `/` and `%` were finally completely specified, with `/` rounding in towards zero:
 
 *C++11 §5.6/4:*
@@ -627,7 +627,7 @@ Specific header:
 
 ---
 
-**Remainder for down-division**  
+***Remainder for down-division***  
 The `mod` function is defined in terms of `div_down`,
 
 ~~~cpp
@@ -698,7 +698,7 @@ C++20’s [new header `<numbers>`](https://en.cppreference.com/w/cpp/header/numb
 
 ---
 
-**Values of the named constants**  
+***Values of the named constants***  
 <small>*examples/calc/named-numbers.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -748,7 +748,7 @@ Specific headers:
 
 ---
 
-**Degrees-to-radians conversion**  
+***Degrees-to-radians conversion***  
 The most common use of the named numbers is probably using `pi` in conversions between degrees and radians.
 
 One way to judge the accuracy of that is to compute the sine or cosine of an angle with well-known simple sine or cosine. For example, which you can figure out from considering an equilateral triangle and applying Pythagora’s law, sin(60°) = sin(π/3) = ½√3. So, four times the square of that should ideally be exactly 3, and we do get pretty close:
@@ -831,7 +831,7 @@ Not to mention that `min_<double>` is very much shorter and readable than (!) `-
 
 ---
 
-**The properties of `bool`, `int` and `double`**  
+***The properties of `bool`, `int` and `double`***  
 A program that diplays these properties for types `bool`, `int` and `double`:
 
 <small>*examples/calc/number-type-properties.cpp*</small>
@@ -949,7 +949,7 @@ Note: there is no stream object that persists from one `<<` invocation to the ne
 
 ---
 
-**Basic notation**  
+***Basic notation***  
 As a first example, instead of
 
 >     display( "Welcome, user #" + to_string( user_id ) + "!" );
@@ -962,7 +962,7 @@ Here the `s` suffix essentially produces a `std::string` type object, via the st
 
 ---
 
-**Invoking custom `<<` operators**  
+***Invoking custom `<<` operators***  
 Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the Core Language Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
 
 As an example of this, both programs below would ideally produce
@@ -1033,7 +1033,7 @@ Specific headers:
 
 ---
 
-**English and numerical output of booleans**  
+***English and numerical output of booleans***  
 The Core Language Extensions string assembly translates booleans to “false” and “true” by default, because arranging that would be quite inconvenient if it weren’t the default. Getting “0” and “1” instead, where that’s desired for a value, is as easy as writing a **`+`** in front of the value. That's the old *promotion trick*, also useful for e.g. displaying the numerical value of a `char`.
 
 Unfortunately, with the standard library’s iostreams the default is the opposite, so that one has to apply the `std::boolalpha` manipulator to get “false” and “true”.
