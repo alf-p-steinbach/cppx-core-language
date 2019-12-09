@@ -922,9 +922,87 @@ Some headers in this folder have their own smaller exporting namespaces in addit
 
 *Exporting namespaces: `basic_string_assembly`, the folder’s `cppx::syntax`, the library’s `cppx`.*
 
-The “basic-string-assembly.hpp” header provides a set of overloads of `operator<<` so that can assemble a `std::string` from individual pieces, especially for an argument of a function call. For example, `display( "Hello, "s << username >> "!" );`. Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`.
+The “basic-string-assembly.hpp” header provides a set of overloads of `operator<<` so that one can assemble a `std::string` from individual number and string pieces, especially for an argument of a function call.
 
+---
 
+As a first example, instead of
+
+>     display( "Welcome, user #"s + to_string( user_id ) + "!" );
+
+… one writes just
+
+>     display( "Welcome, user #" << user_id << "!" );
+
+Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`, and the `user_id`, if it is numeric or other non-string, is converted (as-if) via a `std::ostringstream` with default options.
+
+---
+
+Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the C++ Core Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
+
+As an example of this, both programs below would ideally produce
+
+~~~txt
+!Oops - error code generic:116 (network down).
+~~~
+
+And they do produce that text with Visual C++ 2019, but with the Nuwen distribution of MinGW g++ 9.2 the text “network down” is replaced with “Unknown error”.
+
+A program using only the C++ standard library:
+
+<small>*examples/syntax/error-code-logging.stdlib.cpp*</small>
+~~~cpp
+#include <stdio.h>          // fprintf, stderr
+#include <sstream>          // std::ostringstream
+#include <system_error>     // std::(errc, make_error_code)
+
+void log( const std::string& s )
+{
+    fprintf( stderr, "!%s\n", s.c_str() );
+}
+
+auto main()
+    -> int
+{
+    using std::errc, std::make_error_code, std::ostringstream;
+    const auto code = make_error_code( errc::network_down );
+    
+    ostringstream stream;
+    stream << "Oops - error code " << code << " (" << code.message() << ").";
+    log( stream.str() );
+}
+~~~
+
+A corresponding program using (also) the C++ Core Extensions library and its string assembly:
+
+<small>*examples/syntax/error-code-logging.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <stdio.h>          // fprintf, stderr
+#include <system_error>     // std::(errc, make_error_code)
+
+void log( const std::string& s )
+{
+    fprintf( stderr, "!%s\n", s.c_str() );
+}
+
+auto main()
+    -> int
+{
+    $use_std( errc, make_error_code );
+    const auto code = make_error_code( errc::network_down );
+
+    using namespace cppx::syntax;
+    log( "Oops - error code " << code << " (" << code.message() << ")." );
+}
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
+#include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
+~~~
 
 
 
