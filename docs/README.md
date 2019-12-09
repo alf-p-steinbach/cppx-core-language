@@ -932,7 +932,7 @@ As a first example, instead of
 
 … one writes just
 
->     display( "Welcome, user #" << user_id << "!" );
+>     display( "Welcome, user #"s << user_id << "!" );
 
 Here the `s` suffix essentially produces a `std::string` type object, via the standard library’s `operator""s`, and the `user_id`, if it is numeric or other non-string, is converted (as-if) via a `std::ostringstream` with default options, except that (as-if) `std::boolalpha` is appplied so that boolean values result in text “true” and “false”.
 
@@ -996,6 +996,8 @@ auto main()
     log( "Oops - error code " << code << " (" << code.message() << ")." );
 }
 ~~~
+
+Subtlety: the `s` suffix or other measure to ensure type `std::string` for the left operand of `<<` is necessary when both operands of `<<` are of primitive type, such as `const char*` and `int` — because one can’t overload operators for exclusively primitive type arguments. However, after the first `<<` the left hand side of the subsequent `<<` invocations is of type `std::string`, so an `s` suffix can only be necessary for the first item. Also, when the right hand side is of class type there is no such problem so then one can do without an `s` suffix, and that’s the situation in the above code.
 
 Specific headers:
 
