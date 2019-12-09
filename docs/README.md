@@ -938,7 +938,7 @@ Here the `s` suffix essentially produces a `std::string` type object, via the st
 
 ---
 
-Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the C++ Core Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
+Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the Core Language Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
 
 As an example of this, both programs below would ideally produce
 
@@ -973,7 +973,7 @@ auto main()
 }
 ~~~
 
-A corresponding program using (also) the C++ Core Extensions library and its string assembly:
+A corresponding program using (also) the Core Language Extensions library and its string assembly:
 
 <small>*examples/syntax/error-code-logging.cpp*</small>
 ~~~cpp
@@ -1008,7 +1008,7 @@ Specific headers:
 
 ---
 
-The C++ Core Extensions string assembly translates booleans to “false” and “true” by default, because arranging that would be quite inconvenient if it weren’t the default. Getting “0” and “1” instead, where that’s desired for a value, is as easy as writing a **`+`** in front of the value. That's the old *promotion trick*, also useful for e.g. displaying the numerical value of a `char`.
+The Core Language Extensions string assembly translates booleans to “false” and “true” by default, because arranging that would be quite inconvenient if it weren’t the default. Getting “0” and “1” instead, where that’s desired for a value, is as easy as writing a **`+`** in front of the value. That's the old *promotion trick*, also useful for e.g. displaying the numerical value of a `char`.
 
 Unfortunately, with the standard library’s iostreams the default is the opposite, so that one has to apply the `std::boolalpha` manipulator to get “false” and “true”.
 
@@ -1045,7 +1045,7 @@ auto main()
 }
 ~~~
 
-Corresponding program using (also) the C++ Core Extensions library and its string assembly support:
+Corresponding program using (also) the Core Language Extensions library and its string assembly support:
 
 <small>*examples/syntax/booleans-as-truth-values.cpp*</small>
 ~~~cpp
