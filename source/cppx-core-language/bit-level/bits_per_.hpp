@@ -54,6 +54,7 @@ namespace cppx {
         CPPX_USE_CPPX(
             _::bits_per_,
             _::magnitude_bits_per_,
+            _::value_bits_per_,
             _::Bitness
             );
     }  // namespace bitlevel
