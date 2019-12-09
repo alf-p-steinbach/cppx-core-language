@@ -997,7 +997,7 @@ auto main()
 }
 ~~~
 
-Subtlety: the `s` suffix or other measure to ensure type `std::string` for the left operand of `<<` is necessary when both operands of `<<` are of primitive type, such as `const char*` and `int` — because one can’t overload operators for exclusively primitive type arguments. However, after the first `<<` the left hand side of the subsequent `<<` invocations is of type `std::string`, so an `s` suffix can only be necessary for the first item. Also, when the right hand side is of class type there is no such problem so then one can do without an `s` suffix, and that’s the situation in the above code.
+Subtlety: the `s` suffix or other measure to ensure type `std::string` for the left operand of `<<` is necessary when both operands of `<<` are otherwise of primitive type, such as `const char*` and `int` — because one can’t overload operators for exclusively primitive type arguments. However, after the first `<<` the left hand side of the subsequent `<<` invocations is of type `std::string`, so an `s` suffix can only be necessary for the first item. Also, when the right hand side is of class type there is no such problem so then one can do without an `s` suffix, and that’s the situation in the above code.
 
 Specific headers:
 
