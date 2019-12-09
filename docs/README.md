@@ -315,7 +315,7 @@ This is generally known as a “**pop count**”, short for “population count�
 
 ---
 
-***Sum of bits***  
+***Sum of bits & integral log₂***  
 <small>*examples/bit-level/pop-counts.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
