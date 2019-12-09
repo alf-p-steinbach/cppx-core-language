@@ -793,11 +793,11 @@ Specific headers:
 #include <cppx-core-language/syntax/macro-use.hpp>          // $use_std
 ~~~
 
-#### 3.2.5. Examples for “*number-type-properties.hpp*”.
+#### 3.2.5. Examples for “number-type-properties.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
-The “*number-type-properties.hpp*” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
+The “number-type-properties.hpp” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
 
 For an integral type `T` the set is
 
