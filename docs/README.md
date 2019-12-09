@@ -930,7 +930,7 @@ Note: there is no stream object that persists from one `<<` invocation to the ne
 
 As a first example, instead of
 
->     display( "Welcome, user #"s + to_string( user_id ) + "!" );
+>     display( "Welcome, user #" + to_string( user_id ) + "!" );
 
 … one writes just
 
