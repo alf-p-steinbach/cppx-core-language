@@ -1006,7 +1006,71 @@ Specific headers:
 #include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
 ~~~
 
+---
 
+The C++ Core Extensions string assembly translates booleans to “false” and “true” by default, because arranging that would be quite inconvenient if it weren’t the default. Getting “0” and “1” instead, where that’s desired for a value, is as easy as writing a **`+`** in front of the value. That's the old *promotion trick*, also useful for e.g. displaying the numerical value of a `char`.
+
+Unfortunately, with the standard library’s iostreams the default is the opposite, so that one has to apply the `std::boolalpha` manipulator to get “false” and “true”.
+
+For example, both programs below produce the following output:
+
+~~~txt
+Most people say that 2 + 2 = 4 is true.
+However, some people maintain that 2 + 2 = 4 is 1...
+~~~
+
+A program using only the standard library:
+
+<small>*examples/syntax/booleans-as-truth-values.stdlib.cpp*</small>
+~~~cpp
+#include <stdlib.h>     // printf
+#include <sstream>      // std::ostringstream
+#include <string>       // std::string
+using std::boolalpha, std::string, std::ostringstream;
+
+void say( const string& s ) { printf( "%s\n", s.c_str() ); }
+
+auto main()
+    -> int
+{
+
+    ostringstream stream;
+ 
+    stream << boolalpha;
+    stream << "Most people say that 2 + 2 = 4 is " << (2 + 2 == 4) << ".";
+    say( stream.str() );
+    
+    stream = ostringstream();   // Reset. Effect as-if with `std::noboolalpha` is default.
+    stream << "However, some people maintain that 2 + 2 = 4 is " << (2 + 2 == 4) << "...";
+    say( stream.str() );
+}
+~~~
+
+Corresponding program using (also) the C++ Core Extensions library and its string assembly support:
+
+<small>*examples/syntax/booleans-as-truth-values.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdlib.hpp>     // printf
+#include <string>           // std::string
+$use_std( string );
+using namespace cppx::syntax;
+
+void say( const string& s ) { printf( "%s\n", s.c_str() ); }
+
+auto main() -> int
+{
+    say( "Most people say that 2 + 2 = 4 is "s << (2 + 2 == 4) << "." );
+    say( "However, some people maintain that 2 + 2 = 4 is "s << +(2 + 2 == 4) << "..." );
+}
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
+#include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
+~~~
 
 
 ### 3.4. The system dependent stuff.
