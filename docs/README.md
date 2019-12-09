@@ -155,8 +155,11 @@ Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
-The “bits_per_.hpp” header provides convenient notation for the bit widths of fundamental types, as `int` values:
+The “bits_per_.hpp” header provides convenient notation for the bit widths of fundamental types, as `int` values.
 
+---
+
+**Bits per int**  
 <small>*examples/bit-level/bit-widths-of-int.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -198,6 +201,7 @@ Specific header:
 
 ---
 
+**Types from bit widths**  
 The `Bitness::Enum` enumeration type, defined as
 
 >     struct Bitness{ enum Enum {
@@ -309,8 +313,9 @@ There is also an overload for a `std::bitset` as argument.
 
 This is generally known as a “**pop count**”, short for “population count”, which presumably refers to the bits as representing a set. With the g++ compiler the function can possibly be optimized in terms of the intrinsic `__builtin_popcount` and family, and with the Visual C++ compiler it can possibly be optimized in terms of the intrinsic `__popcnt` and family. The header provides a rough outline of these optimizations as dead code in a preprocessor `#if 0` conditional, but I haven’t measured, and chances are that `std::bitset::count` is expressed via an intrinsic anyway.
 
-Example:
+---
 
+**Sum of bits**  
 <small>*examples/bit-level/pop-counts.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -393,6 +398,9 @@ The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/
 
 The “floating-point-operations.hpp” header provides three `double` functions: `intpow(x,n)`, `squared(x)` and `cubed(x)`. All are `constexpr`. The `squared` and `cubed` functions are function templates defined in the “*general-operations.hpp*” header, which is included here for convenience.
 
+---
+
+**`constexpr` powers**  
  I can’t think of any situation where one would need compile time evaluation of any of these functions, but it’s nice to have the ability.
 
 <small>*examples/calc/floating-point-constexpr.cpp*</small>
@@ -459,6 +467,9 @@ The “*integer-operations.hpp*” header provides a suite of `constexpr` intege
 
 All these functions are templated on the integer (or general number) type.
 
+---
+
+**Even and odd checking**  
 `is_even` and `is_odd` do what their names say. Typically they’re used for checking the value of the least significant bit in an integer. For example, `is_odd` is used in the integral-power-of-floating-point function `intpow` discussed above.
 
 A somewhat construed example:
@@ -530,6 +541,7 @@ Specific headers:
 
 ---
 
+**Zero checking**  
 The Pascal’s triangle example above is “somewhat construed” because all that matters for the oddness or not of a number in Pascal’s triangle, is the oddness of the numbers above. So the above needlessly computes numbers that for a larger triangle (think about a high resolution graphics presentation) can easily exceed the range of `int`. All that needs to be stored each place in a row, is a `Truth` value representing the oddness.
 
 A bit of analysis can reduce that further down to an apparently very simple program, showing how the `is_zero` function can be of practical use. For, the expression `x & ~y == 0` means something very different from the intended `(x & ~y) == 0`. Using `is_zero` and writing it as `is_zero(x & ~y)` the operator precedence problem just doesn't pop up:
@@ -566,6 +578,7 @@ Specific headers:
 
 ---
 
+**Up and down-rounding integer division**  
 Throughout C++98 and C++03 the `%` remainder operator had partially implementation defined behavior, because the rounding behavior of integer `/` was unspecified. Integer `/` could round down towards negative infinity, or in towards zero. With C++11 `/` and `%` were finally completely specified, with `/` rounding in towards zero:
 
 *C++11 §5.6/4:*
@@ -614,6 +627,7 @@ Specific header:
 
 ---
 
+**Remainder for down-division**  
 The `mod` function is defined in terms of `div_down`,
 
 ~~~cpp
@@ -682,6 +696,9 @@ The names that end with underscore are templates. The set of double constants ar
 
 C++20’s [new header `<numbers>`](https://en.cppreference.com/w/cpp/header/numbers) will define all of the `double` constants, plus a few more esoteric ones.
 
+---
+
+**Values of the named constants**  
 <small>*examples/calc/named-numbers.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -731,6 +748,7 @@ Specific headers:
 
 ---
 
+**Degrees-to-radians conversion**  
 The most common use of the named numbers is probably using `pi` in conversions between degrees and radians.
 
 One way to judge the accuracy of that is to compute the sine or cosine of an angle with well-known simple sine or cosine. For example, which you can figure out from considering an equilateral triangle and applying Pythagora’s law, sin(60°) = sin(π/3) = ½√3. So, four times the square of that should ideally be exactly 3, and we do get pretty close:
@@ -811,6 +829,9 @@ Use of a floating point-specific property for an integral type, would most likel
 
 Not to mention that `min_<double>` is very much shorter and readable than (!) `-std::numeric_limits<double>::max()`.
 
+---
+
+**The properties of `bool`, `int` and `double`**  
 A program that diplays these properties for types `bool`, `int` and `double`:
 
 <small>*examples/calc/number-type-properties.cpp*</small>
@@ -928,6 +949,7 @@ Note: there is no stream object that persists from one `<<` invocation to the ne
 
 ---
 
+**Basic notation**  
 As a first example, instead of
 
 >     display( "Welcome, user #" + to_string( user_id ) + "!" );
@@ -940,6 +962,7 @@ Here the `s` suffix essentially produces a `std::string` type object, via the st
 
 ---
 
+**Invoking custom `<<` operators**  
 Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the Core Language Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
 
 As an example of this, both programs below would ideally produce
@@ -1010,6 +1033,7 @@ Specific headers:
 
 ---
 
+**English and numerical output of booleans**  
 The Core Language Extensions string assembly translates booleans to “false” and “true” by default, because arranging that would be quite inconvenient if it weren’t the default. Getting “0” and “1” instead, where that’s desired for a value, is as easy as writing a **`+`** in front of the value. That's the old *promotion trick*, also useful for e.g. displaying the numerical value of a `char`.
 
 Unfortunately, with the standard library’s iostreams the default is the opposite, so that one has to apply the `std::boolalpha` manipulator to get “false” and “true”.
