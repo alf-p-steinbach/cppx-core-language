@@ -1,9 +1,12 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 #include <cppx-core-language/syntax/macro-use.hpp>  // CPPX_USE_STD
+#include <cppx-core-language/text/format-specs.hpp> // cppx::fp::Formatted
 #include <cppx-core-language/types/C_str_.hpp>      // cppx::C_str
 #include <cppx-core-language/types/Truth.hpp>       // cppx::Truth
 
+#include <ios>              // std::(fixed, scientific, uppercase)
+#include <iomanip>          // std::setprecision
 #include <ostream>          // std::ostream
 #include <string>           // std::string
 #include <string_view>      // std::string_view
@@ -12,7 +15,8 @@
 namespace cppx::_
 {
     CPPX_USE_STD(
-        ostream, ostringstream, string, string_view
+        ostream, ostringstream, string, string_view,
+        fixed, scientific, uppercase, setprecision
         );
     using namespace std::string_literals;       // E.g. ""s
 
@@ -25,6 +29,29 @@ namespace cppx::_
     {
         ostringstream stream;
         stream << value;
+        s += stream.str();
+        return s;
+    }
+
+    // TODO: Replace with more fast-ish floating point output.
+    inline auto operator<<( string& s, const fp::Formatted& fv )
+        -> string&
+    {
+        ostringstream stream;
+        switch( fv.format.scheme ) {
+            case fp::Scheme::fixed:
+                stream << fixed;
+                break;
+            case fp::Scheme::general:
+                break;      // std::defaultfloat
+            case fp::Scheme::scientific:
+                stream << scientific;
+                break;
+            case fp::Scheme::scientific_uc:
+                stream << scientific << uppercase;
+                break;
+        }
+        stream << setprecision( fv.format.precision.n_digits ) << fv.value;
         s += stream.str();
         return s;
     }
