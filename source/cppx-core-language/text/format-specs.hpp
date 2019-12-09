@@ -75,5 +75,10 @@ namespace cppx {
         namespace integral  = cppx::_::integral;
     }  // namespace format_specs
 
+    // Convenience inclusion.
+    namespace syntax {
+        using namespace format_specs;
+    }  // namespace syntax
+
     using namespace format_specs;
 }  // namespace cppx
