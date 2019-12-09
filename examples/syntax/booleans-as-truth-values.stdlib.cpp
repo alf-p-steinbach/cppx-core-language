@@ -8,7 +8,6 @@ void say( const string& s ) { printf( "%s\n", s.c_str() ); }
 auto main()
     -> int
 {
-
     ostringstream stream;
  
     stream << boolalpha;
