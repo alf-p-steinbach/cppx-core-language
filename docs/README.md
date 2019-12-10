@@ -1098,6 +1098,94 @@ Specific headers:
 #include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
 ~~~
 
+---
+
+***Floating point values in string assemblies***
+
+The default iostreams presentation of floating point values, e.g. like `3.14159` with six digits, is sometimes/often insufficient or at least undesired. To address that issue the following functions are provided:
+
+|Function: | *As-if* this effect internally in a string assembly expression evaluation:|
+|---------|------- |
+| `fp::smart`(*v*, *n*) | `s << std::defaultfloat << std::setprecision( n ) << v`
+| `fp::fix`(*v*, *n*)   | `s << std::fixed << std::setprecision( n ) << v`
+| `fp::sci`(*v*, *n*)   | `s << std::scientific << std::setprecision( n ) << v`
+| `fp::sci_uc`(*v*, *n*) | `s << std::scientific << std::uppercase << std::setprecision( n ) << v`
+
+For the `smart` function *n* specifies the total number of digits, while for the other functions it specifies the number of fractional part digits. For all four functions it defaults to 6, because that’s the iostreams default.
+
+Each function produces an instance of `fp::Formatted`, which contains the specified value and information about the desired formatting, which is then used by the string assembly `<<` machinery (and can be used in other ways by other code).
+
+The `fp` namespace with these functions and the `Formatted` class etc. are provided by the  “format.specs.hpp” header in the “text” folder, and that header is included by “basic-string-assembly.hpp”.
+
+Exporting namespaces for the `fp` namespace:
+* the defining header’s own `cppx::format_specs`,
+* the defining header’s folder namespace `cppx::text`,
+* for convenience also the folder namespace `cppx::syntax`, and
+* the general `cppx`.
+
+<small>*examples/syntax/fp-values-in-string-assembly.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+#include <string>
+$use_std( string );
+
+void say( const string& s ) { printf( "%s\n", s.c_str() ); }
+
+auto main()
+    -> int
+{
+    $use_cppx( intpow, m::pi, n_digits_, spaces, Sequence );
+    using namespace cppx::syntax;       // "<<"
+
+    const int max_decimals = n_digits_<double> - 1;
+    say( "Pi is roughly "s << pi << ", or thereabouts." );
+    say( "More precisely it's "s << fp::fix( pi, max_decimals ) << ", and so on." );
+
+    say( "" );
+    for( const int n: Sequence( 0, max_decimals ) ) {
+        const double c = intpow( 10, n );
+        const int n_spaces = 30 - n + (n == 0);
+        say( ""s << fp::fix( pi, n ) << spaces( n_spaces ) << fp::sci( c*pi ) );
+    }
+}
+~~~
+
+The `spaces` function usage here is a kludge to achieve column formatting for a fixed width console window font. The string assembly syntax doesn’t support such formatting in general. The minimal formatting support for floating point values is there for necessity, because it’s generally needed in order to create strings with the desired content.
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+Pi is roughly 3.14159, or thereabouts.
+More precisely it's 3.14159265358979, and so on.
+
+3                               3.141593e+00
+3.1                             3.141593e+01
+3.14                            3.141593e+02
+3.142                           3.141593e+03
+3.1416                          3.141593e+04
+3.14159                         3.141593e+05
+3.141593                        3.141593e+06
+3.1415927                       3.141593e+07
+3.14159265                      3.141593e+08
+3.141592654                     3.141593e+09
+3.1415926536                    3.141593e+10
+3.14159265359                   3.141593e+11
+3.141592653590                  3.141593e+12
+3.1415926535898                 3.141593e+13
+3.14159265358979                3.141593e+14
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/floating-point-operations.hpp>    // cppx::intpow
+#include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
+#include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::n_digits_
+#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
+#include <cppx-core-language/syntax/general-string-builders.hpp>    // cppx::spaces
+#include <cppx-core-language/syntax/Sequence_.hpp>                  // cppx::Sequence
+~~~
 
 ### 3.4. The system dependent stuff.
 

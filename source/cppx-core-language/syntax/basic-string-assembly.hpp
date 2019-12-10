@@ -39,15 +39,15 @@ namespace cppx::_
     {
         ostringstream stream;
         switch( fv.format.scheme ) {
-            case fp::Scheme::fixed:
+        case fp::Scheme::smart:
+            break;      // std::defaultfloat
+        case fp::Scheme::fix:
                 stream << fixed;
                 break;
-            case fp::Scheme::general:
-                break;      // std::defaultfloat
-            case fp::Scheme::scientific:
+            case fp::Scheme::sci:
                 stream << scientific;
                 break;
-            case fp::Scheme::scientific_uc:
+            case fp::Scheme::sci_uc:
                 stream << scientific << uppercase;
                 break;
         }

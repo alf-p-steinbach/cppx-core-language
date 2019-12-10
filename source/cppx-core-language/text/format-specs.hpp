@@ -13,7 +13,7 @@ namespace cppx::_ {
             int     n_digits;
         };
 
-        struct Scheme { enum Enum{ general, fixed, scientific, scientific_uc }; };
+        struct Scheme { enum Enum{ smart, fix, sci, sci_uc }; };
 
         struct Format
         {
@@ -27,30 +27,30 @@ namespace cppx::_ {
             Format          format;
         };
 
-        inline auto general(
+        inline auto smart(
             const double        value,
             int                 n_digits        = 6
             ) -> Formatted
-        { return {value, {Scheme::general, n_digits}}; }
+        { return {value, {Scheme::smart, n_digits}}; }
 
-        inline auto fixed(
+        inline auto fix(
             const double        value,
             int                 n_digits        = 6
             ) -> Formatted
-        { return {value, {Scheme::fixed, n_digits}}; }
+        { return {value, {Scheme::fix, n_digits}}; }
 
-        inline auto scientific(
+        inline auto sci(
             const double        value,
             int                 n_digits        = 6
             ) -> Formatted
-        { return {value, {Scheme::scientific, n_digits}}; }
+        { return {value, {Scheme::sci, n_digits}}; }
 
 
-        inline auto scientific_uc(
+        inline auto sci_uc(
             const double        value,
             int                 n_digits        = 6
             ) -> Formatted
-        { return {value, {Scheme::scientific_uc, n_digits}}; }
+        { return {value, {Scheme::sci_uc, n_digits}}; }
     }  // namespace fp
 
     namespace integral {
@@ -75,6 +75,10 @@ namespace cppx {
         namespace integral  = cppx::_::integral;
     }  // namespace format_specs
 
+    namespace text {
+        using namespace format_specs;
+    }  // namespace text
+       
     // Convenience inclusion.
     namespace syntax {
         using namespace format_specs;
