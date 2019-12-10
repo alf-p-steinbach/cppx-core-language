@@ -1033,7 +1033,7 @@ Specific headers:
 
 ---
 
-***English and numerical output of booleans***  
+***English and numerical specifications of booleans***  
 The Core Language Extensions string assembly translates booleans to “false” and “true” by default, because arranging that would be quite inconvenient if it weren’t the default. Getting “0” and “1” instead, where that’s desired for a value, is as easy as writing a **`+`** in front of the value. That's the old *promotion trick*, also useful for e.g. displaying the numerical value of a `char`.
 
 Unfortunately, with the standard library’s iostreams the default is the opposite, so that one has to apply the `std::boolalpha` manipulator to get “false” and “true”.
@@ -1106,10 +1106,10 @@ The default iostreams presentation of floating point values, e.g. like `3.14159`
 
 |Function: | *As-if* this effect internally in a string assembly expression evaluation:|
 |---------|------- |
-| `fp::smart`(*v*, *n*) | `s << std::defaultfloat << std::setprecision( n ) << v`
-| `fp::fix`(*v*, *n*)   | `s << std::fixed << std::setprecision( n ) << v`
-| `fp::sci`(*v*, *n*)   | `s << std::scientific << std::setprecision( n ) << v`
-| `fp::sci_uc`(*v*, *n*) | `s << std::scientific << std::uppercase << std::setprecision( n ) << v`
+| `fp::smart`(*v*, *n*) | `stream << std::defaultfloat << std::setprecision( n ) << v`
+| `fp::fix`(*v*, *n*)   | `stream << std::fixed << std::setprecision( n ) << v`
+| `fp::sci`(*v*, *n*)   | `stream << std::scientific << std::setprecision( n ) << v`
+| `fp::sci_uc`(*v*, *n*) | `stream << std::scientific << std::uppercase << std::setprecision( n ) << v`
 
 For the `smart` function *n* specifies the total number of digits, while for the other functions it specifies the number of fractional part digits. For all four functions it defaults to 6, because that’s the iostreams default.
 
