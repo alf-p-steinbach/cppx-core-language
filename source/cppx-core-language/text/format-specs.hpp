@@ -21,7 +21,7 @@ namespace cppx::_ {
             Precision       precision;
         };
 
-        struct Formatted
+        struct Format_spec
         {
             double          value;
             Format          format;
@@ -30,26 +30,26 @@ namespace cppx::_ {
         inline auto smart(
             const double        value,
             int                 n_digits        = 6
-            ) -> Formatted
+            ) -> Format_spec
         { return {value, {Scheme::smart, n_digits}}; }
 
         inline auto fix(
             const double        value,
             int                 n_digits        = 6
-            ) -> Formatted
+            ) -> Format_spec
         { return {value, {Scheme::fix, n_digits}}; }
 
         inline auto sci(
             const double        value,
             int                 n_digits        = 6
-            ) -> Formatted
+            ) -> Format_spec
         { return {value, {Scheme::sci, n_digits}}; }
 
 
         inline auto sci_uc(
             const double        value,
             int                 n_digits        = 6
-            ) -> Formatted
+            ) -> Format_spec
         { return {value, {Scheme::sci_uc, n_digits}}; }
     }  // namespace fp
 

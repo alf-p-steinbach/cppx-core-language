@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 #include <cppx-core-language/syntax/macro-use.hpp>  // CPPX_USE_STD
-#include <cppx-core-language/text/format-specs.hpp> // cppx::fp::Formatted
+#include <cppx-core-language/text/format-specs.hpp> // cppx::fp::Format_spec
 #include <cppx-core-language/types/C_str_.hpp>      // cppx::C_str
 #include <cppx-core-language/types/Truth.hpp>       // cppx::Truth
 
@@ -34,7 +34,7 @@ namespace cppx::_
     }
 
     // TODO: Replace with more fast-ish floating point output.
-    inline auto operator<<( string& s, const fp::Formatted& fv )
+    inline auto operator<<( string& s, const fp::Format_spec& fv )
         -> string&
     {
         ostringstream stream;
