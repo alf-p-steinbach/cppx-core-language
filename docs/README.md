@@ -1100,7 +1100,7 @@ Specific headers:
 
 ---
 
-***Floating point values in string assemblies***
+***Floating point value formatting***
 
 The default iostreams presentation of floating point values, e.g. like `3.14159` with six digits, is sometimes/often insufficient or at least undesired. To address that issue the following functions are provided:
 
