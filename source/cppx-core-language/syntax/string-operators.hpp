@@ -1,7 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <cppx-core-language/syntax/macro-use.hpp>      // CPPX_USE_STD, CPPX_USE_CPPX
-#include <cppx-core-language/syntax/Span_.hpp>          // cppx::Span_
-#include <cppx-core-language/types/C_str_.hpp>          // cppx::C_str
+#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_STD, CPPX_USE_CPPX
+#include <cppx-core-language/syntax/macro-repeat_times.hpp>     // CPPX_REPEAT_TIMES
+#include <cppx-core-language/syntax/Span_.hpp>                  // cppx::Span_
+#include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str
 
 #include <string>           // std::string
 #include <string_view>      // std::string_view
@@ -20,11 +21,11 @@ namespace cppx::_ {
         -> string
     {
         if( n <= 0 ) { return ""; }
+        if( s.length() == 1 ) { return string( n, s[0] ); }
 
         string result;
         result.reserve( n*s.length() );
-        for( int i = 1; i <= n; ++i )
-        {
+        CPPX_REPEAT_TIMES( n ) {
             result += s;
         }
         return result;

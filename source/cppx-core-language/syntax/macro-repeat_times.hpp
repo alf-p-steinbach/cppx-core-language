@@ -7,7 +7,6 @@
 #   define $repeat_times    CPPX_REPEAT_TIMES   ///< \dollarname{repeat_times}
 #endif
 
-
 // Using a range based loop allows the loop index variable to be `const`.
 //
 #define CPPX_REPEAT_TIMES( n ) \
