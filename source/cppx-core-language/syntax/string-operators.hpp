@@ -35,12 +35,12 @@ namespace cppx::_ {
         -> string
     { return repeated_times( n, s ); }
 
-    // Optimization of `repeated_times( n, " " )`.
+    // Optimization & clarity of `repeated_times( n, " " )`.
     inline auto spaces( const int n )
         -> string
     { return (n <= 0? "" : string( n, ' ')); }
 
-    // Optimization of `repeated_times( n, "-" )`.
+    // Optimization & clarity of `repeated_times( n, "-" )`.
     inline auto dashes( const int n )
         -> string
     { return (n <= 0? "" : string( n, '-')); }
