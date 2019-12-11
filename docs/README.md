@@ -1187,6 +1187,46 @@ Specific headers:
 #include <cppx-core-language/syntax/Sequence_.hpp>                  // cppx::Sequence
 ~~~
 
+---
+
+***Generating a C string pointer***
+
+For convenience “basic-string-assembly.hpp” also includes “string-operators.hpp”, also from the syntax folder. It provides in particular the notation *some_std_string* `^sz` for invoking the `.c_str()` member function. Which is practically useful when the left operand is a general `std::string` type expression and not just a variable or literal.
+
+**`^`** has lower precedence than `<<`, so `^sz` can be placed at the end of a basic string assembly expression.
+
+The `std::string` overloads of operators `^` and `*` are in a separate header file that’s just included, so that they can be more easily used with some other string `<<` notation, or without bringing in the `<<` overloads.
+
+<small>*examples/syntax/sz.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+
+auto main()
+    -> int
+{
+    $use_cppx( m::pi );
+    using namespace cppx::syntax;       // s, "<<" and "^".
+
+    printf( "Pi is roughly "s << pi << ", or thereabouts.\n" ^sz );
+}
+~~~
+
+Imagine that instead of `printf` the above uses some library function that takes a C string pointer argument.
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+Pi is roughly 3.14159, or thereabouts.
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
+#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // "<<"
+~~~
+
 ### 3.4. The system dependent stuff.
 
 ### 3.5. The text handling.
