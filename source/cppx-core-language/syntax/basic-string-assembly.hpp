@@ -1,9 +1,10 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <cppx-core-language/syntax/macro-use.hpp>  // CPPX_USE_STD
-#include <cppx-core-language/text/format-specs.hpp> // cppx::fp::Format_spec
-#include <cppx-core-language/types/C_str_.hpp>      // cppx::C_str
-#include <cppx-core-language/types/Truth.hpp>       // cppx::Truth
+#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_STD
+#include <cppx-core-language/syntax/string-operators.hpp>   // ” Convenience. ^ and *.
+#include <cppx-core-language/text/format-specs.hpp>         // cppx::fp::Format_spec
+#include <cppx-core-language/types/C_str_.hpp>              // cppx::C_str
+#include <cppx-core-language/types/Truth.hpp>               // cppx::Truth
 
 #include <ios>              // std::(fixed, scientific, uppercase)
 #include <iomanip>          // std::setprecision
@@ -39,9 +40,9 @@ namespace cppx::_
     {
         ostringstream stream;
         switch( fv.format.scheme ) {
-        case fp::Scheme::smart:
-            break;      // std::defaultfloat
-        case fp::Scheme::fix:
+            case fp::Scheme::smart:
+                break;      // std::defaultfloat
+            case fp::Scheme::fix:
                 stream << fixed;
                 break;
             case fp::Scheme::sci:

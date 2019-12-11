@@ -48,8 +48,7 @@ namespace cppx::_ {
 
 // Exporting namespaces.
 namespace cppx{
-
-    namespace general_string_builders {
+    namespace string_operators {
         CPPX_USE_CPPX(
             _::sz,
             _::operator^,
@@ -58,10 +57,10 @@ namespace cppx{
             _::spaces,
             _::dashes
             );
-    }  // namespace general_string_builders
+    }  // namespace string_operators
 
     namespace syntax{
-        using namespace general_string_builders;
+        using namespace string_operators;
     }  // namespace syntax
 
     using namespace syntax;
