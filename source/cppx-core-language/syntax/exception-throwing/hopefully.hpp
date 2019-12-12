@@ -26,5 +26,9 @@ namespace cppx {
         using _::hopefully;
     }  // namespace x_throwing
 
+    namespace syntax {
+        using namespace x_throwing;
+    }  // namespace syntax
+
     using namespace x_throwing;
 }  // namespace cppx

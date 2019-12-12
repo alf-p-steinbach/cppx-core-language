@@ -66,5 +66,9 @@ namespace cppx {
         using _::fail;
     }  // namespace x_throwing
 
+    namespace syntax {
+        using namespace x_throwing;
+    }  // namespace syntax
+
     using namespace x_throwing;
 }  // namespace cppx

@@ -2,7 +2,7 @@
 
 #include <cppx-core-language/types/Truth.hpp>           // cppx::Truth
 
-namespace cppx::success_checking {
+namespace cppx::_ {
 
     //------------------------------------------ Success, Failure & `>>`
     //
@@ -23,36 +23,39 @@ namespace cppx::success_checking {
     //      auto operator>>( const HRESULT hr, Success )
     //          -> Truth
     //      { return SUCCEEDED( hr ); }
-
-    struct Success{};
-    struct Is_zero{};
-
+    //
     // The intent is that client code provides meanings for `expr >> Success`.
     // Others can be expressed in terms of such client code provided meanings.
 
+    struct Success{};
+    struct Is_zero{};
+    struct Failure{};
+
+    //auto operator>>( const Value& v, Success );     // Must be provided by client code.
+        
     template< class Value >
     auto operator>>( const Value& v, Is_zero )
         -> Truth
     { return v == 0; }
-}  // namespace cppx::success_checking
-
-namespace cppx::failure_checking {
-    using namespace success_checking;
-
-    //--------------------------------------------- Inverted condition:
-    struct Failure{};
 
     template< class Value >
     auto operator>>( const Value& v, Failure )
         -> Truth
     { return not (v >> Success()); }
-}  // namespace cppx::failure_checking
+}  // namespace cppx::_
 
+// Exporting namespaces:
 namespace cppx {
-    using success_checking::Success;
-    using success_checking::Is_zero;
-    using success_checking::operator>>;
+    namespace x_throwing {
+        using _::Success;
+        using _::Is_zero;
+        using _::Failure;
+        using _::operator>>;
+    }  // namespace x_throwing
 
-    using failure_checking::Failure;
-    using failure_checking::operator>>;
+    namespace syntax {
+        using namespace x_throwing;
+    }  // namespace syntax
+
+    using namespace x_throwing;
 }  // namespace cppx
