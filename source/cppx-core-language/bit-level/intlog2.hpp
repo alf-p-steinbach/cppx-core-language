@@ -3,7 +3,7 @@
 /// \brief \make_name_ref{cppx,intlog2}, the position of the most significant bit
 /// in an unsigned value.
 
-#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_CPPX
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_CPPX
 
 #include <c/limits.hpp>     // INT_MAX
 #include <c/stdint.hpp>     // uint8_t

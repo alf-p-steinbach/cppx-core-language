@@ -3,7 +3,7 @@
 /// \brief \make_name_ref{cppx,sum_of_bits}, the number of 1-bits in a `std::bitset` or
 /// unsigned value.
 
-#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_CPPX, CPPX_USE_STD
+#include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_CPPX, CPPX_USE_STD
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
 #include <cppx-core-language/tmp/type-traits.hpp>           // cppx::is_unsigned_
 

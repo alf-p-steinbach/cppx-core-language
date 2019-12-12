@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <cppx-core-language/syntax/type-builders.hpp>
+#include <cppx-core-language/syntax/types/type-builders.hpp>        // cppx::P_
 /// \file
 /// \brief `$define_tag(NAME)` defines `NAME` as a ~unique pointer type in namespace `tag`.
 

@@ -1,6 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <cppx-core-language/syntax/macro-use.hpp>                  // CPPX_USE_STD
+#include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE_STD
 #include <cppx-core-language/system-dependent/Endian.hpp>           // cppx::
 #include <cppx-core-language/system-dependent/Value_bytes_.hpp>     // cppx::(big_endian_bytes_of, Value_bytes_)
 #include <cppx-core-language/text/remove_leading_zeroes_in.hpp>     // cppx::remove_leading_zeroes_in

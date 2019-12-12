@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <cppx-core-language/syntax/Sequence_.hpp>              // cppx::Sequence_
-#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::Type_
-#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_...
+#include <cppx-core-language/syntax/types/Sequence_.hpp>        // cppx::Sequence_
+#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
 #include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
 #include <cppx-core-language/tmp/Type_carrier_.hpp>             // cppx::Type_carrier_
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::Unref_

@@ -7,7 +7,7 @@
 
 #include <cppx-core-language/calc/general-operations.hpp>       // cppx::(squared, cubed)
 #include <cppx-core-language/calc/integer-operations.hpp>       // cppx::is_odd
-#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_CPPX
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_CPPX
 
 namespace cppx::_ {
     /// @cond DOXY_SHOW_IMPL_DETAILS

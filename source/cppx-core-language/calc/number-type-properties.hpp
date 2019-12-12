@@ -18,7 +18,7 @@
 /// values as values but floating point type values as functions that must be invoked.
 /// Hence this more consistent and easy-to-use, but limited, facility.
 
-#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_STD, CPPX_USE_CPPX
+#include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_STD, CPPX_USE_CPPX
 #include <cppx-core-language/types/Truth.hpp>               // cppx::Truth
 
 #include <limits>       // std::numeric_limits

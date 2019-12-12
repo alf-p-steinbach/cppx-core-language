@@ -5,7 +5,7 @@
 /// is a drop-in replacement for `bool` without implicit conversion from/to types other
 /// than `bool`.
 
-#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_STD
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
 #include <cppx-core-language/tmp/Enable_if_.hpp>                // cppx::Enable_if_
 
 #include <type_traits>      // std::is_same_v

@@ -9,7 +9,7 @@
 /// \make_name_ref{cppx,mod}.
 
 #include <cppx-core-language/calc/general-operations.hpp>       // cppx::(squared, cubed)
-#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_CPPX
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_CPPX
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
 #include <c/limits.hpp>     // INT_MAX

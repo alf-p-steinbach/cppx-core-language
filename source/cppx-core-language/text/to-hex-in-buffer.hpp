@@ -1,11 +1,10 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <cppx-core-language/text/hex-digits.hpp>           // cppx::(hex_digits*, hex_base)
-#include <cppx-core-language/types/C_buffer_param_.hpp>     // cppx::C_buffer_param_
-#include <cppx-core-language/syntax/macro-items_of.hpp>     // CPPX_ITEMS_OF
-#include <cppx-core-language/syntax/macro-repeat_times.hpp> // CPPX_REPEAT_TIMES
-#include <cppx-core-language/syntax/Span_.hpp>              // cppx::span_of
-#include <cppx-core-language/syntax/type-builders.hpp>      // cppx::Type_
+#include <cppx-core-language/text/hex-digits.hpp>               // cppx::(hex_digits*, hex_base)
+#include <cppx-core-language/types/C_buffer_param_.hpp>         // cppx::C_buffer_param_
+#include <cppx-core-language/syntax/flow-control.hpp>           // CPPX_ITEMS_OF, CPPX_REPEAT_TIMES
+#include <cppx-core-language/syntax/types/Span_.hpp>            // cppx::span_of
+#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
 
 namespace cppx::hex_stuff {
     using Bufferptr_for_byte_to_hex     = C_buffer_param_<char, hex_digits_per_byte>;

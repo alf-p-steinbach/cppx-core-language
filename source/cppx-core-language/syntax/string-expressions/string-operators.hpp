@@ -1,7 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <cppx-core-language/syntax/macro-use.hpp>              // CPPX_USE_STD, CPPX_USE_CPPX
-#include <cppx-core-language/syntax/macro-repeat_times.hpp>     // CPPX_REPEAT_TIMES
-#include <cppx-core-language/syntax/Span_.hpp>                  // cppx::Span_
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD, CPPX_USE_CPPX
+#include <cppx-core-language/syntax/flow-control.hpp>           // CPPX_REPEAT_TIMES, cppx::Span_
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str
 
 #include <string>           // std::string

@@ -378,7 +378,7 @@ Specific headers:
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::intlog2
 #include <cppx-core-language/bit-level/sum_of_bits.hpp>     // cppx::sum_of_bits
-#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::Sequence
+#include <cppx-core-language/syntax/types/Sequence_.hpp>          // cppx::Sequence
 ~~~
 
 
@@ -536,7 +536,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
-#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::(Sequence, zero_to)
+#include <cppx-core-language/syntax/types/Sequence_.hpp>          // cppx::(Sequence, zero_to)
 ~~~
 
 ---
@@ -573,7 +573,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_zero
-#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::zero_to
+#include <cppx-core-language/syntax/types/Sequence_.hpp>          // cppx::zero_to
 ~~~
 
 ---
@@ -742,7 +742,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/named-numbers.hpp>        // cppx::calc::*
-#include <cppx-core-language/syntax/type-builders.hpp>      // cppx::Type_
+#include <cppx-core-language/syntax/types/type-builders.hpp>      // cppx::Type_
 #include <cppx-core-language-meta-macro/macro-apply.hpp>    // $apply    
 ~~~
 
@@ -791,7 +791,7 @@ Specific headers:
 ~~~cpp
 #include <cppx-core-language/calc/named-numbers.hpp>        // cppx::m::*
 #include <cppx-core-language/calc/general-operations.hpp>   // cppx::squared    
-#include <cppx-core-language/syntax/macro-use.hpp>          // $use_std
+#include <cppx-core-language/syntax/declarations.hpp>          // $use_std
 ~~~
 
 #### 3.2.5. Examples for “number-type-properties.hpp”.
@@ -1028,8 +1028,8 @@ Subtlety: the `s` suffix or other measure to ensure type `std::string` for the l
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
+#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // cppx::syntax::*
+#include <cppx-core-language/syntax/declarations.hpp>                  // $use_std
 ~~~
 
 ---
@@ -1095,8 +1095,8 @@ auto main()
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
+#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // cppx::syntax::*
+#include <cppx-core-language/syntax/declarations.hpp>                  // $use_std
 ~~~
 
 ---
@@ -1183,9 +1183,9 @@ Specific headers:
 #include <cppx-core-language/calc/floating-point-operations.hpp>    // cppx::intpow
 #include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
 #include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::n_digits_
-#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
+#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // cppx::syntax::*
 #include <cppx-core-language/syntax/general-string-builders.hpp>    // cppx::spaces
-#include <cppx-core-language/syntax/Sequence_.hpp>                  // cppx::Sequence
+#include <cppx-core-language/syntax/types/Sequence_.hpp>                  // cppx::Sequence
 ~~~
 
 ---
@@ -1225,7 +1225,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
-#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // "<<"
+#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // "<<"
 ~~~
 
 ### 3.4. The system dependent stuff.

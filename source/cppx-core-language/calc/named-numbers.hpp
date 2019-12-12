@@ -14,7 +14,7 @@
 /// \make_name_ref{cppx,has_infinity_} and \make_name_ref{cppx,has_infinity}, and
 /// \make_name_ref{cppx,infinity_} and \make_name_ref{cppx,infinity}.
 
-#include <cppx-core-language/syntax/macro-use.hpp>
+#include <cppx-core-language/syntax/declarations.hpp>
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
 #include <c/math.hpp>

@@ -6,7 +6,7 @@
 /// \make_name_ref{cppx::system,is_big_endian} and
 /// \make_name_ref{cppx::system,as_mixed_endian}.
 
-#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_STD
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
 
 namespace cppx {
     // Documented in the <all.hpp> header.

@@ -13,9 +13,9 @@
 /// \make_name_ref{cppx,P_} and
 /// \make_name_ref{cppx,R_}, do. Those basic type assemblers are also offered by this
 /// header, via a convenience include of
-/// `<cppx-core-language/syntax/type-builders.hpp> `.
+/// `<cppx-core-language/syntax/types/type-builders.hpp> `.
 
-#include <cppx-core-language/syntax/type-builders.hpp>      // Convenience include.
+#include <cppx-core-language/syntax/types/type-builders.hpp>        // Convenience include.
 
 #include <type_traits>      // std::(add_*, make_*, remove_*)
 

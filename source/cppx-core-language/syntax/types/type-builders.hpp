@@ -16,7 +16,7 @@
 /// but they have advantages such as supporting uniform `const` first notation,
 /// more generally read-left-to-right declarations, and being self-descriptive.
 
-#include <cppx-core-language/syntax/macro-use.hpp>          // CPPX_USE_CPPX
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_CPPX
 
 #include <c/stddef.hpp>     // size_t
 #include <array>            // std::array
