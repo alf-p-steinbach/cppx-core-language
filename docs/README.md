@@ -805,7 +805,7 @@ For an integral type `T` the set is
 > ~~~cpp
 > constexpr T     smallest_       = 1;                            // Smallest non-zero.
 > constexpr T     largest_        = numeric_limits<T>::max();
-> constexpr T     min_            = numeric_limits<T>::min();     // Usually `-largest_ - 1`.
+> constexpr T     min_            = numeric_limits<T>::min();     // 0 or `-largest_ - 1`.
 > constexpr T     max_            = largest;
 > constexpr int   n_digits_       = numeric_limits<T>::digits10;
 > ~~~

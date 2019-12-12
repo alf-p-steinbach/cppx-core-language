@@ -42,7 +42,7 @@ namespace cppx::_ {
 
             static constexpr T      smallest        = 1;                // Smallest non-zero.
             static constexpr T      largest         = Info_<T>::max();
-            static constexpr T      min             = Info_<T>::min();  // Usually `-largest_ - 1`.
+            static constexpr T      min             = Info_<T>::min();  // 0 or `-largest_ - 1`.
             static constexpr T      max             = largest;
             static constexpr int    n_digits        = Info_<T>::digits10;
         };
