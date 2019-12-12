@@ -386,7 +386,7 @@ Specific headers:
 
 Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting namespaces: `calc` and `m`.*
 
-`calc` is used as a general exporting namespace for headers in the “calc” folder, but in order to minimize the risk of name collisions after C++20, the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
+`calc` is used as a general exporting namespace for headers in the “calc” folder, but in order to minimize the risk of name collisions after C++20 the named numbers such as `pi` are exported via `m` instead (mnemonic: `m::pi` is like Posix’ `M_PI`). Hence you can have a convenient `using namespace cppx::calc` also where you have a ditto convenient `using namespace std::numbers`. I hope.
 
 ***Tip***:  
 The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.
