@@ -938,7 +938,7 @@ Specific headers:
 
 Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting namespace: `syntax`.*
 
-The syntax support is mainly about reducing excessive verbosity and “repeat yourself!”-requirements in the core language and its direct library support, for an even more joyful and DRY C++ coding experience. This is organized in 5 areas, each in a sub-folder with a small set of headers. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes everything from that sub-folder, and an exporting namespace `cppx:`*X*.
+The syntax support is mainly about reducing excessive verbosity and “repeat yourself!”-requirements in the core language and its direct library support, for an even more joyful and [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) C++ coding experience. This is organized in 5 areas, each in a sub-folder with a small set of headers. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes everything from that sub-folder, and an exporting namespace `cppx:`*X*.
 
 | Area | *X*.hpp | Functionality |
 |------|---------|---------------|
