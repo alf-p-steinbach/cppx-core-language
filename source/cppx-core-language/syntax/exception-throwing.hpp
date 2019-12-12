@@ -9,7 +9,7 @@
 #include <string>           // std::string
 #include <utility>          // std::forward
 
-namespace cppx::throwing {
+namespace cppx::x_throwing {
     CPPX_USE_STD(
         forward,
         current_exception, runtime_error, string, throw_with_nested 
@@ -22,7 +22,7 @@ namespace cppx::throwing {
     // /can/ just be ignored at the exception handling site.
     //
     // The rationale of the nesting is to not discard useful information even though
-    // it carries some overhead, because throwing should be rare, not the normal case.
+    // it carries some overhead, because x_throwing should be rare, not the normal case.
     //
     // Typical usage patterns:
     //
@@ -36,7 +36,7 @@ namespace cppx::throwing {
     //          or fail( "foo - to_wide_from_utf8 failed" );
     //      wide_s.resize( n_values );
     //
-    // In future `fail` may be extended to support error codes by throwing a
+    // In future `fail` may be extended to support error codes by x_throwing a
     // `std::system_error`, which is derived from `std::runtime_error` and carries an
     // error code.
 
@@ -69,10 +69,10 @@ namespace cppx::throwing {
         -> Truth
     { return fail_<runtime_error>( message ); }
 
-}  // namespace cppx::throwing
+}  // namespace cppx::x_throwing
 
 namespace cppx {
-    using throwing::hopefully;
-    using throwing::fail_;
-    using throwing::fail;
+    using x_throwing::hopefully;
+    using x_throwing::fail_;
+    using x_throwing::fail;
 }  // namespace cppx
