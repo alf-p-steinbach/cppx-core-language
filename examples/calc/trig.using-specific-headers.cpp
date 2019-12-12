@@ -5,7 +5,8 @@
 #include <iostream>         // std::(cout, endl, fixed)
 #include <iomanip>          // std::setprecision
 
-auto main() -> int
+auto main()
+    -> int
 {
     $use_std( cout, endl, fixed, setprecision );
     $use_cppx( squared );

@@ -760,7 +760,8 @@ One way to judge the accuracy of that is to compute the sine or cosine of an ang
 #include <iostream>         // std::(cout, endl, fixed)
 #include <iomanip>          // std::setprecision
 
-auto main() -> int
+auto main()
+    -> int
 {
     $use_std( cout, endl, fixed, setprecision );
     $use_cppx( squared );
