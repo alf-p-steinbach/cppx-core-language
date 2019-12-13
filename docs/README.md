@@ -126,6 +126,14 @@ And this is also how each example is presented.
 
 However, it’s possible to use much more specific, less inclusive headers, and to show that each example “foo.cpp” has a corresponding file “foo.using-specific-headers.cpp” that instead uses the most specific headers. For your information these includes are presented after the “foo.cpp” code. But since the Core Language Extensions is a micro-library client code build time is not significantly reduced by using more specific headers: it’s already a small dependency.
 
+Note: the most specific header that provides the `$use_std` and `$use_cppx` macros,
+
+~~~cpp
+#include <cppx-core-language/syntax/declarations/macro-use_from_namespace.hpp>  // $use_...
+~~~
+
+… is not repeated in the list of most specific headers for each example.
+
 ---
 
 ***Namespaces***  
@@ -378,7 +386,7 @@ Specific headers:
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::intlog2
 #include <cppx-core-language/bit-level/sum_of_bits.hpp>     // cppx::sum_of_bits
-#include <cppx-core-language/syntax/types/Sequence_.hpp>          // cppx::Sequence
+#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::Sequence
 ~~~
 
 
@@ -536,7 +544,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
-#include <cppx-core-language/syntax/types/Sequence_.hpp>          // cppx::(Sequence, zero_to)
+#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::(Sequence, zero_to)
 ~~~
 
 ---
@@ -573,7 +581,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_zero
-#include <cppx-core-language/syntax/types/Sequence_.hpp>          // cppx::zero_to
+#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::zero_to
 ~~~
 
 ---

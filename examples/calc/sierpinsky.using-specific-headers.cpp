@@ -1,5 +1,5 @@
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_zero
-#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::zero_to
+#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::zero_to
 #include <c/stdio.hpp>
 
 auto main()

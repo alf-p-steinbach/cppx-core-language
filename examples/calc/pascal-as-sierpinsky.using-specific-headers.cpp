@@ -1,6 +1,6 @@
 ﻿// Display the positions of the odd numbers in Pascal's triangle.
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
-#include <cppx-core-language/syntax/Sequence_.hpp>          // cppx::(Sequence, zero_to)
+#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::(Sequence, zero_to)
 #include <c/stdio.hpp>  // printf
 #include <vector>       // std::vector
 
