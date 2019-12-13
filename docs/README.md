@@ -791,7 +791,7 @@ Specific headers:
 ~~~cpp
 #include <cppx-core-language/calc/named-numbers.hpp>        // cppx::m::*
 #include <cppx-core-language/calc/general-operations.hpp>   // cppx::squared    
-#include <cppx-core-language/syntax/declarations.hpp>          // $use_std
+#include <cppx-core-language/syntax/declarations.hpp>       // $use_std
 ~~~
 
 #### 3.2.5. Examples for “number-type-properties.hpp”.

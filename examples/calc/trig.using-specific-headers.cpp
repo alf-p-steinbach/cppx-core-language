@@ -1,6 +1,6 @@
 #include <cppx-core-language/calc/named-numbers.hpp>        // cppx::m::*
 #include <cppx-core-language/calc/general-operations.hpp>   // cppx::squared    
-#include <cppx-core-language/syntax/macro-use.hpp>          // $use_std
+#include <cppx-core-language/syntax/declarations.hpp>       // $use_std
 #include <c/math.hpp>       // sin
 #include <iostream>         // std::(cout, endl, fixed)
 #include <iomanip>          // std::setprecision
