@@ -789,9 +789,9 @@ Error when using cppx:pi : -0.00000000000000044409.
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/calc/named-numbers.hpp>        // cppx::m::*
-#include <cppx-core-language/calc/general-operations.hpp>   // cppx::squared    
-#include <cppx-core-language/syntax/declarations.hpp>       // $use_std
+#include <cppx-core-language/calc/named-numbers.hpp>                            // cppx::m::*
+#include <cppx-core-language/calc/general-operations.hpp>                       // cppx::squared
+#include <cppx-core-language/syntax/declarations/macro-use_from_namespace.hpp>  // $use_std
 ~~~
 
 #### 3.2.5. Examples for “number-type-properties.hpp”.
