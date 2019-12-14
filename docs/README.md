@@ -969,7 +969,7 @@ The support is organized in 5 areas, each in a sub-folder with a small set of he
 
 Outside the above categories, in their own headers, the lvalue-restricted macro `$items_of` and sibling `$reverse_items_of` allow you to write things like `std::sort($items_of(v))` instead of `std::sort(begin(v),end(v))`. With C++20 the Ranges sub-library of the standard library will define overloads of `sort` etc. that admit similarly concise & DRY calls. However, that doesn’t help with 3ʳᵈ party libraries that require iterator pairs, while `$items_of` does help in general.
 
-For an rvalue expression one can write `$with(expression){std::sort($items_of(_));}`.
+For an rvalue expression one can write `$with(expression){foobar($items_of(_));}`.
 
 Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::string_operators`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
 
