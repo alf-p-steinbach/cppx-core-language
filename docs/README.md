@@ -989,7 +989,7 @@ Smaller functional area exporting namespaces: `basic_string_assembly` and `strin
 
 Provides a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; a `*`-notation to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`.
 
-The `*` operator just invokes the function `repeated_times`, e.g. `7*"yes"s` invokes `repeated_times(7,"yes"s)`, and for convenience and optimization functions `spaces` and `dashes`, which also just call `repeated_times`, are provided.
+The `*` operator just invokes the function `repeated_times`, e.g. `7*"yes"s` invokes `repeated_times(7,"yes"s)`, and for convenience and optimization functions `spaces` and `dashes`, which also just (as-if) call `repeated_times`, are provided.
 
 These notations play well together, e.g. like
 
