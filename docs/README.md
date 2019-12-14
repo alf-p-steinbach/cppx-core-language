@@ -1117,8 +1117,8 @@ auto main()
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/declarations.hpp>                  // $use_std
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::*
+#include <cppx-core-language/syntax/declarations.hpp>           // $use_std
 ~~~
 
 ---

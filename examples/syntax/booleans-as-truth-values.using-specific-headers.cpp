@@ -1,5 +1,5 @@
-#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/macro-use.hpp>                  // $use_std
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::*
+#include <cppx-core-language/syntax/declarations.hpp>           // $use_std
 #include <c/stdlib.hpp>     // printf
 #include <string>           // std::string
 $use_std( string );
