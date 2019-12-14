@@ -1,9 +1,8 @@
 #include <cppx-core-language/calc/floating-point-operations.hpp>    // cppx::intpow
 #include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
 #include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::n_digits_
-#include <cppx-core-language/syntax/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/general-string-builders.hpp>    // cppx::spaces
-#include <cppx-core-language/syntax/Sequence_.hpp>                  // cppx::Sequence
+#include <cppx-core-language/syntax/types.hpp>                      // cppx::Sequence
+#include <cppx-core-language/syntax/string-expressions.hpp>         // cppx::syntax::*
 
 #include <c/stdio.hpp>
 #include <string>
@@ -15,7 +14,7 @@ auto main()
     -> int
 {
     $use_cppx( intpow, m::pi, n_digits_, spaces, Sequence );
-    using namespace cppx::syntax;       // "<<"
+    using namespace cppx::syntax;       // "<<", spaces
 
     const int max_decimals = n_digits_<double> - 1;
     say( "Pi is roughly "s << pi << ", or thereabouts." );

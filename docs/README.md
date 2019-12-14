@@ -987,7 +987,7 @@ xxx asd
 *Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
 Smaller functional area exporting namespaces: `basic_string_assembly` and `string_operators`.*
 
-Provides a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; a `*`-notation to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`.
+Provides a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; a `*`-notation to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`. The `*` operator just invokes the function `repeated_times`, e.g. `7*"yes"s` invokes `repeated_times(7,"yes"s)`. As optimizations of that function for common single-character string arguments, functions `spaces` and `dashes` are provided.
 
 These notations play well together, e.g. like
 
@@ -1205,9 +1205,8 @@ Specific headers:
 #include <cppx-core-language/calc/floating-point-operations.hpp>    // cppx::intpow
 #include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
 #include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::n_digits_
-#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/general-string-builders.hpp>    // cppx::spaces
-#include <cppx-core-language/syntax/types/Sequence_.hpp>                  // cppx::Sequence
+#include <cppx-core-language/syntax/types.hpp>                      // cppx::Sequence
+#include <cppx-core-language/syntax/string-expressions.hpp>         // cppx::syntax::*
 ~~~
 
 ---
