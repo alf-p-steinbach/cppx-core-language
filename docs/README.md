@@ -21,8 +21,10 @@
       - [3.3.1. Examples for header “syntax/declarations.hpp”.](#331-examples-for-header-syntaxdeclarationshpp)
       - [3.3.2. Examples for header “syntax/exception-throwing.hpp”.](#332-examples-for-header-syntaxexception-throwinghpp)
       - [3.3.3. Examples for header “syntax/flow-control.hpp”.](#333-examples-for-header-syntaxflow-controlhpp)
-      - [3.3.4. Examples for header “syntax/string-expressions.hpp”.](#334-examples-for-header-syntaxstring-expressionshpp)
-      - [3.3.5. Examples for header “syntax/types.hpp”.](#335-examples-for-header-syntaxtypeshpp)
+      - [3.3.4. Examples for header “syntax/macro-items_of.hpp”.](#334-examples-for-header-syntaxmacro-items_ofhpp)
+      - [3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.](#335-examples-for-header-syntaxmacro-reverse_items_ofhpp)
+      - [3.3.6. Examples for header “syntax/string-expressions.hpp”.](#336-examples-for-header-syntaxstring-expressionshpp)
+      - [3.3.7. Examples for header “syntax/types.hpp”.](#337-examples-for-header-syntaxtypeshpp)
       - [x3.3.1. Examples for header “basic-string-assembly.hpp”.](#x331-examples-for-header-basic-string-assemblyhpp)
     - [3.4. The system dependent stuff.](#34-the-system-dependent-stuff)
     - [3.5. The text handling.](#35-the-text-handling)
@@ -961,9 +963,13 @@ The support is organized in 5 areas, each in a sub-folder with a small set of he
 |------|---------|---------------|
 | Declaration statements| “declarations.hpp” | Declaring aliases of nested namespaces without repeating the names; declaring tag types; `using` names from a given namespace unqualified; and `$with` for executing a block with a variable scoped to that block, like the C# and Java auto cleanup constructs. This is all necessarily macro-based. One wishes for ch-ch-ch-changes. |
 | Exception throwing | “exception-throwing.hpp” | Primarily `fail` for writing things like `do_something() or fail("Oops")`. The `hopefully` function to use in conjunction with `fail`, plus the ditto more advanced syntax `>>` *Property*. Both `hopefully` and `>>` rely on short circuit evaluation of `or` to avoid evaluation of the argument(s) to `fail` except when it’s actually called. |
-| Flow control | “flow-control.hpp” | Includes as a convenience the “Sequence_.hpp” and “Span_.hpp” headers from folder “types”, in support of range based `for` loops. However, the types also have other uses and so their definitions reside elsewhere. This folder  defines the macro `$repeat_times` to repeat something *n* times; a corresponding non-macro function `repeat_times` (less convenient but it’s just *not a macro*); and the `[[noreturn]]` function `noreturn` that throws integer `666`, which can help to avoid silly­warnings. |
+| Flow control | “flow-control.hpp” | Class templates `Sequence_` and `Span_`, plus supporting functions such as `zero_to`, let you used safer, shorter and more readable range based `for` loops in a great many cases, with the same efficiency as index based loops. `Sequence_` is for integers and `Span_` is for arrays. However, the types also have other uses and so their definitions reside in the “types” folder. The headers are included here for convenience. This folder itself defines the macro `$repeat_times` to repeat something *n* times; a corresponding non-macro function `repeat_times` (less convenient but it’s just *not a macro*); and the `[[noreturn]]` function `noreturn` that throws integer `666`, which can help to avoid silly­warnings. |
 | Creating or<br> assembling<br> `std::string`s | “string-expressions.hpp” | A `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; operator `*` to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`. |
-| Type machinery | “types.hpp” | Class templates `Sequence_` and `Span_`, plus supporting functions such as `zero_to`, let you used safer, shorter and more readable range based `for` loops in a great many cases, with the same efficiency as index based loops. `Sequence_` is for integers and `Span_` is for arrays. The type builders such as `Type_` let you avoid nasty C type expressions, and let you use prefix `const` consistently.  |
+| Type machinery | “types.hpp” | The type builders such as `Type_` let you avoid nasty C type expressions, and let you use prefix `const` consistently. Class templates `Sequence_` and `Span_` are mainly in support of range based `for` loops. However, a `Sequence_` is nice as a simple set of a contiguous range of values, and a `Span_` is useful as a formal parameter type. |
+
+Outside the above categories, in its own header, the lvalue-restricted macro `$items_of` and sibling `$reverse_items_of` allows you to write things like `std::sort($items_of(v))` instead of `std::sort(begin(v),end(v))`. With C++20 the Ranges sub-library of the standard library will define overloads of `sort` etc. that admit similarly concise & DRY calls. However, that doesn’t help with 3ʳᵈ party libraries that require iterator pairs, while `$items_of` does help in general.
+
+For an rvalue expression one can write `$with(expression){std::sort($items_of(_));}`.
 
 Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::string_operators`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
 
@@ -971,8 +977,10 @@ Some headers in this folder have their own smaller exporting namespaces in addit
 #### 3.3.1. Examples for header “syntax/declarations.hpp”.
 #### 3.3.2. Examples for header “syntax/exception-throwing.hpp”.
 #### 3.3.3. Examples for header “syntax/flow-control.hpp”.
-#### 3.3.4. Examples for header “syntax/string-expressions.hpp”.
-#### 3.3.5. Examples for header “syntax/types.hpp”.
+#### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
+#### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
+#### 3.3.6. Examples for header “syntax/string-expressions.hpp”.
+#### 3.3.7. Examples for header “syntax/types.hpp”.
 
 ---
 
