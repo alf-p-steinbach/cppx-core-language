@@ -987,7 +987,9 @@ xxx asd
 *Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
 Smaller functional area exporting namespaces: `basic_string_assembly` and `string_operators`.*
 
-Provides a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; a `*`-notation to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`. The `*` operator just invokes the function `repeated_times`, e.g. `7*"yes"s` invokes `repeated_times(7,"yes"s)`. As optimizations of that function for common single-character string arguments, functions `spaces` and `dashes` are provided.
+Provides a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; a `*`-notation to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`.
+
+The `*` operator just invokes the function `repeated_times`, e.g. `7*"yes"s` invokes `repeated_times(7,"yes"s)`, and for convenience and optimization functions `spaces` and `dashes`, which also just call `repeated_times`, are provided.
 
 These notations play well together, e.g. like
 
