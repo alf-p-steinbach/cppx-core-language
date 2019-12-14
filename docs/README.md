@@ -985,18 +985,17 @@ xxx asd
 
 #### 3.3.6. Examples for header “syntax/string-expressions.hpp”.
 *Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
-Sub-headers: “basic-string-assembly.hpp” and “string-operators.hpp”.  
-Per sub-header exporting namespaces: `basic_string_assembly` and `string_operators`.*
+Smaller functional area exporting namespaces: `basic_string_assembly` and `string_operators`.*
 
-Provides, via the “basic-string-assembly.hpp” header, a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`.
-
-Also provides, via the “string-operators” header, `*`-notation to specify *n* repeats of a string, and pseudo-operator `^sz` to call `.c_str()`.
+Provides a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; a `*`-notation to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`.
 
 These notations play well together, e.g. like
 
->     infobox( "The answer is "s << 6*7 "." ^sz );
+>     infobox( "The answer is "s << 6*7 << "." ^sz );
 
-Note: there is no stream object that persists from one `<<` invocation to the next, and therefore manipulators such as `std::setprecision` have no effect. Use of the simplest manipulators such as `endl` and `fixed` is detected and transformed to compilation errors. However, the stateful manipulators such as `std::setprecision` have no identifying features apart from their individual types, so use of such manipulators is not detected and will compile, but with no result effect.
+The `<<` notation is available on its own via exporting namespace `basic_string_assembly` and ditto sub-header, and the `*` and `^sz` (pseudo-) operators are available on their own via exporting namespace `string_operators` and ditto sub-header.
+
+There is no stream object that persists from one `<<` invocation to the next, and therefore manipulators such as `std::setprecision` have no effect. Use of the simplest manipulators such as `endl` and `fixed` is detected and transformed to compilation errors. However, the stateful manipulators such as `std::setprecision` have no identifying features apart from their individual types, so use of such manipulators is not detected and will compile, but with no result effect.
 
 ---
 
