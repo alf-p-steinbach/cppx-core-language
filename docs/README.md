@@ -1015,41 +1015,6 @@ Here the `s` suffix essentially produces a `std::string` type object, via the st
 ***Invoking custom `<<` operators***  
 Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the Core Language Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
 
-As an example of this, both programs below would ideally produce
-
-~~~txt
-!Oops - error code generic:116 (network down).
-~~~
-
-And they do produce that text with Visual C++ 2019, but with the Nuwen distribution of MinGW g++ 9.2 the text “network down” is replaced with “Unknown error”.
-
-A program using only the C++ standard library:
-
-<small>*examples/syntax/error-code-logging.stdlib.cpp*</small>
-~~~cpp
-#include <stdio.h>          // fprintf, stderr
-#include <sstream>          // std::ostringstream
-#include <system_error>     // std::(errc, make_error_code)
-
-void log( char const* const s ) { fprintf( stderr, "!%s\n", s ); }
-
-auto main()
-    -> int
-{
-    using std::errc, std::make_error_code, std::ostringstream;
-
-    auto const code = make_error_code( errc::network_down );
-
-    ostringstream stream;
-    stream << "Oops - error code " << code << " (" << code.message() << ").";
-    log( stream.str().c_str() );
-}
-~~~
-
-Notable: awkward east `const`, helper variable `stream`.
-
-A corresponding program using (also) the Core Language Extensions library and its string assembly:
-
 <small>*examples/syntax/error-code-logging.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
@@ -1070,7 +1035,13 @@ auto main()
 }
 ~~~
 
-Notable: natural west `const`, and just an expression.
+Result with Visual C++ 2019 in Windows 10:
+
+~~~txt
+!Oops - error code generic:116 (network down).
+~~~
+
+The text part “generic: 116” is produced by the standard library’s iostream `<<` output support for error codes. That `<<` operator is invoked in the internal implementation of the string assembly notation’s `<<`, where the error code object is output to a `std::ostringstream`. In passing: with MinGW g++ 9.2 the text part “network down” is replaced with “Unknown error”, which is a deficiency of that compiler’s standard library implementation.
 
 Why no `s` suffix?
 
