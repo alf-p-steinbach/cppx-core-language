@@ -6,7 +6,7 @@
   - [1. Installation & use.](#1-installation--use)
       - [*Disclaimer*](#disclaimer)
   - [2. Overview.](#2-overview)
-  - [3. Examples.](#3-examples)
+  - [3. Examples & details.](#3-examples--details)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
       - [3.1.1. Examples for header “bit-level/bits_per_.hpp”.](#311-examples-for-header-bit-levelbits_per_hpp)
       - [3.1.2. Header “bit-level/intlog2.hpp”.](#312-header-bit-levelintlog2hpp)
