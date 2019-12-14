@@ -1138,7 +1138,7 @@ For the `smart` function *n* specifies the total number of digits, while for the
 
 Each function produces an instance of `fp::Format_spec`, which contains the specified value as a `double`, and information about the desired formatting, which is then used by the string assembly `<<` machinery (and can be used in other ways by other code).
 
-The `fp` namespace with these functions and the `Format_spec` class etc. is provided by the  “format-specs.hpp” header in the “text” folder, and that header is included by “basic-string-assembly.hpp”.
+The `fp` namespace with these functions and the `Format_spec` class etc. is provided by the  “format-specs.hpp” header in the “text” folder, and that header is included by “string-expressions.hpp”.
 
 Exporting namespaces for the `fp` namespace:
 * the defining header’s own `cppx::format_specs`,
