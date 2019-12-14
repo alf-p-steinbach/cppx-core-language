@@ -115,8 +115,12 @@ namespace cppx
         using _::operator<<;
     }  // basic_string_assembly
 
-    namespace syntax {
+    namespace string_expressions {
         using namespace basic_string_assembly;
+    }  // namespace syntax
+
+    namespace syntax {
+        using namespace string_expressions;
     }  // namespace syntax
 
     using namespace syntax;

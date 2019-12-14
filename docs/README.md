@@ -973,30 +973,34 @@ For an rvalue expression one can write `$with(expression){foobar($items_of(_));}
 
 Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::string_operators`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
 
+---
+
+xxx asd
 
 #### 3.3.1. Examples for header “syntax/declarations.hpp”.
 #### 3.3.2. Examples for header “syntax/exception-throwing.hpp”.
 #### 3.3.3. Examples for header “syntax/flow-control.hpp”.
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
 #### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
+
 #### 3.3.6. Examples for header “syntax/string-expressions.hpp”.
-#### 3.3.7. Examples for header “syntax/types.hpp”.
+*Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
+Sub-headers: “basic-string-assembly.hpp” and “string-operators.hpp”.  
+Per sub-header exporting namespaces: `basic_string_assembly` and `string_operators`.*
 
----
+Provides, via the “basic-string-assembly.hpp” header, a `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`.
 
-xxx asd
+Also provides, via the “string-operators” header, `*`-notation to specify *n* repeats of a string, and pseudo-operator `^sz` to call `.c_str()`.
 
-#### x3.3.1. Examples for header “basic-string-assembly.hpp”.
+These notations play well together, e.g. like
 
-*Exporting namespaces: `basic_string_assembly`, the folder’s `cppx::syntax`, the library’s `cppx`.*
-
-The “basic-string-assembly.hpp” header provides a set of overloads of `operator<<` so that one can assemble a `std::string` from individual number and string pieces, especially for an argument of a function call.
+>     infobox( "The answer is "s << 6*7 "." ^sz );
 
 Note: there is no stream object that persists from one `<<` invocation to the next, and therefore manipulators such as `std::setprecision` have no effect. Use of the simplest manipulators such as `endl` and `fixed` is detected and transformed to compilation errors. However, the stateful manipulators such as `std::setprecision` have no identifying features apart from their individual types, so use of such manipulators is not detected and will compile, but with no result effect.
 
 ---
 
-***Basic notation***  
+***Basic string assembly notation***  
 As a first example, instead of
 
 >     display( "Welcome, user #" + to_string( user_id ) + "!" );
@@ -1274,9 +1278,13 @@ Specific headers:
 #include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // "<<"
 ~~~
 
+#### 3.3.7. Examples for header “syntax/types.hpp”.
+
+
 ### 3.4. The system dependent stuff.
 
 ### 3.5. The text handling.
+
 
 ### 3.6. The template meta programming support.
 
