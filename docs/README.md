@@ -1031,22 +1031,22 @@ A program using only the C++ standard library:
 #include <sstream>          // std::ostringstream
 #include <system_error>     // std::(errc, make_error_code)
 
-void log( const std::string& s )
-{
-    fprintf( stderr, "!%s\n", s.c_str() );
-}
+void log( char const* const s ) { fprintf( stderr, "!%s\n", s ); }
 
 auto main()
     -> int
 {
     using std::errc, std::make_error_code, std::ostringstream;
-    const auto code = make_error_code( errc::network_down );
-    
+
+    auto const code = make_error_code( errc::network_down );
+
     ostringstream stream;
     stream << "Oops - error code " << code << " (" << code.message() << ").";
-    log( stream.str() );
+    log( stream.str().c_str() );
 }
 ~~~
+
+Notable: awkward east `const`, helper variable `stream`.
 
 A corresponding program using (also) the Core Language Extensions library and its string assembly:
 
@@ -1055,30 +1055,32 @@ A corresponding program using (also) the Core Language Extensions library and it
 #include <cppx-core-language/all.hpp>
 #include <c/stdio.hpp>      // fprintf, stderr
 #include <system_error>     // std::(errc, make_error_code)
+$use_cppx( Type_ );
 
-void log( const std::string& s )
-{
-    fprintf( stderr, "!%s\n", s.c_str() );
-}
+void log( const Type_<const char*> s ) { fprintf( stderr, "!%s\n", s ); }
 
 auto main()
     -> int
 {
     $use_std( errc, make_error_code );
-    const auto code = make_error_code( errc::network_down );
-
     using namespace cppx::syntax;
-    log( "Oops - error code " << code << " (" << code.message() << ")." );
+
+    const auto code = make_error_code( errc::network_down );
+    log( "Oops - error code " << code << " (" << code.message() << ")." ^sz );
 }
 ~~~
 
-Subtlety: the `s` suffix or other measure to ensure type `std::string` for the left operand of `<<` is necessary when both operands of `<<` are otherwise of primitive type, such as `const char*` and `int` — because one can’t overload operators for just primitive type arguments. However, after the first `<<` the left hand side of the subsequent `<<` invocations is of type `std::string`, so an `s` suffix can only be necessary for the first item. Also, when the right hand side is of class type there is no such problem so then one can do without an `s` suffix, and that’s the situation in the above code.
+Notable: natural west `const`, and just an expression.
+
+Why no `s` suffix?
+
+The `s` suffix or other measure to ensure type `std::string` for the left operand of `<<` is necessary when both operands of `<<` are otherwise of primitive type, such as `const char*` and `int` — because one can’t overload operators for just primitive type arguments. However, after the first `<<` the left hand side of the subsequent `<<` invocations is of type `std::string`, so an `s` suffix can only be necessary for the first item. Also, when the right hand side is of class type there is no such problem so then one can do without an `s` suffix, and that’s the situation in the above code.
 
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // cppx::syntax::*
-#include <cppx-core-language/syntax/declarations.hpp>                  // $use_std
+#include <cppx-core-language/syntax/declarations.hpp>           // $use_std
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::*
 ~~~
 
 ---
