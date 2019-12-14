@@ -8,17 +8,22 @@
   - [2. Overview.](#2-overview)
   - [3. Examples.](#3-examples)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
-      - [3.1.1. Examples for “bits_per_.hpp”.](#311-examples-for-bits_per_hpp)
-      - [3.1.2. Header “intlog2.hpp”.](#312-header-intlog2hpp)
-      - [3.1.3. Examples for “sum_of_bits.hpp”.](#313-examples-for-sum_of_bitshpp)
+      - [3.1.1. Examples for “bit-level/bits_per_.hpp”.](#311-examples-for-bit-levelbits_per_hpp)
+      - [3.1.2. Header “bit-level/intlog2.hpp”.](#312-header-bit-levelintlog2hpp)
+      - [3.1.3. Examples for “bit-level/sum_of_bits.hpp”.](#313-examples-for-bit-levelsum_of_bitshpp)
     - [3.2. The calculation stuff.](#32-the-calculation-stuff)
-      - [3.2.1. Examples for “floating-point-operations.hpp”.](#321-examples-for-floating-point-operationshpp)
-      - [3.2.2. Header “general-operations.hpp”.](#322-header-general-operationshpp)
-      - [3.2.3. Examples for “integer-operations.hpp”.](#323-examples-for-integer-operationshpp)
-      - [3.2.4. Examples for “named-numbers.hpp”.](#324-examples-for-named-numbershpp)
-      - [3.2.5. Examples for “number-type-properties.hpp”.](#325-examples-for-number-type-propertieshpp)
+      - [3.2.1. Examples for “calc/floating-point-operations.hpp”.](#321-examples-for-calcfloating-point-operationshpp)
+      - [3.2.2. Header “calc/general-operations.hpp”.](#322-header-calcgeneral-operationshpp)
+      - [3.2.3. Examples for “calc/integer-operations.hpp”.](#323-examples-for-calcinteger-operationshpp)
+      - [3.2.4. Examples for “calc/named-numbers.hpp”.](#324-examples-for-calcnamed-numbershpp)
+      - [3.2.5. Examples for “calc/number-type-properties.hpp”.](#325-examples-for-calcnumber-type-propertieshpp)
     - [3.3. The syntax support.](#33-the-syntax-support)
-      - [3.3.1. Examples for “basic-string-assembly.hpp”.](#331-examples-for-basic-string-assemblyhpp)
+      - [3.3.1. Examples for “syntax/declarations.hpp”.](#331-examples-for-syntaxdeclarationshpp)
+      - [3.3.2. Examples for “syntax/exception-throwing.hpp”.](#332-examples-for-syntaxexception-throwinghpp)
+      - [3.3.3. Examples for “syntax/flow-control.hpp”.](#333-examples-for-syntaxflow-controlhpp)
+      - [3.3.4. Examples for “syntax/string-expressions.hpp”.](#334-examples-for-syntaxstring-expressionshpp)
+      - [3.3.5. Examples for “syntax/types.hpp”.](#335-examples-for-syntaxtypeshpp)
+      - [x3.3.1. Examples for “basic-string-assembly.hpp”.](#x331-examples-for-basic-string-assemblyhpp)
     - [3.4. The system dependent stuff.](#34-the-system-dependent-stuff)
     - [3.5. The text handling.](#35-the-text-handling)
     - [3.6. The template meta programming support.](#36-the-template-meta-programming-support)
@@ -159,7 +164,7 @@ Mostly things are *defined* in a special namespace `cppx::_`. A lot of names fro
 Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *Exporting namespace: `cppx::bitlevel`.*
 
 
-#### 3.1.1. Examples for “bits_per_.hpp”.
+#### 3.1.1. Examples for “bit-level/bits_per_.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
@@ -293,14 +298,14 @@ Specific headers:
 ~~~
 
 
-#### 3.1.2. Header “intlog2.hpp”.
+#### 3.1.2. Header “bit-level/intlog2.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
 The “intlog2.hpp” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
 
 
-#### 3.1.3. Examples for “sum_of_bits.hpp”.
+#### 3.1.3. Examples for “bit-level/sum_of_bits.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
@@ -400,7 +405,7 @@ Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting name
 The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.
 
 
-#### 3.2.1. Examples for “floating-point-operations.hpp”.
+#### 3.2.1. Examples for “calc/floating-point-operations.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
@@ -460,14 +465,14 @@ Specific header:
 #include <cppx-core-language/calc/floating-point-operations.hpp>
 ~~~
 
-#### 3.2.2. Header “general-operations.hpp”.
+#### 3.2.2. Header “calc/general-operations.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
 The “general-operations.hpp” header provides the `squared` and `cubed` function templates already discussed in the previous section.
 
 
-#### 3.2.3. Examples for “integer-operations.hpp”.
+#### 3.2.3. Examples for “calc/integer-operations.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
@@ -688,7 +693,7 @@ Specific header:
 ~~~
 
 
-#### 3.2.4. Examples for “named-numbers.hpp”.
+#### 3.2.4. Examples for “calc/named-numbers.hpp”.
 
 *Exporting namespace: `cppx::m`.*
 
@@ -802,7 +807,7 @@ Specific headers:
 #include <cppx-core-language/syntax/declarations/macro-use_from_namespace.hpp>  // $use_std
 ~~~
 
-#### 3.2.5. Examples for “number-type-properties.hpp”.
+#### 3.2.5. Examples for “calc/number-type-properties.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::calc`, the library’s `cppx`.*
 
@@ -960,13 +965,20 @@ The support is organized in 5 areas, each in a sub-folder with a small set of he
 | Creating or<br> assembling<br> `std::string`s | “string-expressions.hpp” | A `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; operator `*` to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`. |
 | Type machinery | “types.hpp” | Class templates `Sequence_` and `Span_`, plus supporting functions such as `zero_to`, let you used safer, shorter and more readable range based `for` loops in a great many cases, with the same efficiency as index based loops. `Sequence_` is for integers and `Span_` is for arrays. The type builders such as `Type_` let you avoid nasty C type expressions, and let you use prefix `const` consistently.  |
 
-Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::general_string_builders`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
+Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::string_operators`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
+
+
+#### 3.3.1. Examples for “syntax/declarations.hpp”.
+#### 3.3.2. Examples for “syntax/exception-throwing.hpp”.
+#### 3.3.3. Examples for “syntax/flow-control.hpp”.
+#### 3.3.4. Examples for “syntax/string-expressions.hpp”.
+#### 3.3.5. Examples for “syntax/types.hpp”.
 
 ---
 
 xxx asd
 
-#### 3.3.1. Examples for “basic-string-assembly.hpp”.
+#### x3.3.1. Examples for “basic-string-assembly.hpp”.
 
 *Exporting namespaces: `basic_string_assembly`, the folder’s `cppx::syntax`, the library’s `cppx`.*
 
