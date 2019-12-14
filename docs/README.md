@@ -97,7 +97,7 @@ Each main area of functionality is a sub-folder in the library.
 |[types](../source/cppx%2Dcore%2Dlanguage/types)        | The `Truth` type is a boolean that doesn't implicitly convert to or from anything other than `bool`; the `Int_` template alias lets you specify an integral type via its bit width; `C_str` and family are type names for simple `char` pointers, indicating use for C strings; and `No_copy` and `No_copy_or_move` can be used as base classes with the properties indicated by the names. Except for `C_str` these are types and names, or features, that are missing in the core language as of C++17. Additionally here is an internally used class template `C_buffer_param_` which associates a pointer-to-first-item-in-array with a minimum size of the array.   |
 
 
-## 3. Examples.
+## 3. Examples & details.
 
 These code examples are all available in the “examples” top level folder.
 
