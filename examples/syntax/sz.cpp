@@ -5,7 +5,7 @@ auto main()
     -> int
 {
     $use_cppx( m::pi );
-    using namespace cppx::syntax;       // s, "<<" and "^".
+    using namespace cppx::syntax;       // s, "<<", "^" and sz.
 
     printf( "Pi is roughly "s << pi << ", or thereabouts.\n" ^sz );
 }

@@ -1014,6 +1014,44 @@ Here the `s` suffix essentially produces a `std::string` type object, via the st
 
 ---
 
+***Generating a C string pointer***
+
+The pseudo-operator notation *some_std_string* `^sz` for invoking the `.c_str()` member function can be practically useful when the left operand is a general `std::string` type expression and not just a variable or literal.
+
+**`^`** has lower precedence than `<<`, so `^sz` can be placed at the end of a basic string assembly expression.
+
+<small>*examples/syntax/sz.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+
+auto main()
+    -> int
+{
+    $use_cppx( m::pi );
+    using namespace cppx::syntax;       // s, "<<", "^" and sz.
+
+    printf( "Pi is roughly "s << pi << ", or thereabouts.\n" ^sz );
+}
+~~~
+
+Imagine that instead of `printf` the above uses some library function that takes a C string pointer argument.
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+Pi is roughly 3.14159, or thereabouts.
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/calc/named-numbers.hpp>            // cppx::m::pi
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::*
+~~~
+
+---
+
 ***Invoking custom `<<` operators***  
 Some of the standard library’s conversion-to-text functionality is expressed as `operator<<` overloads for iostreams output, and that means that the Core Language Extensions string assembly sometimes is not just more efficient and concise than `+` concatenation, but also saves you from declaring helper variables and/or support functions.
 
@@ -1209,46 +1247,6 @@ Specific headers:
 #include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::n_digits_
 #include <cppx-core-language/syntax/types.hpp>                      // cppx::Sequence
 #include <cppx-core-language/syntax/string-expressions.hpp>         // cppx::syntax::*
-~~~
-
----
-
-***Generating a C string pointer***
-
-For convenience “basic-string-assembly.hpp” also includes “string-operators.hpp”, also from the syntax folder. It provides in particular the notation *some_std_string* `^sz` for invoking the `.c_str()` member function. Which is practically useful when the left operand is a general `std::string` type expression and not just a variable or literal.
-
-**`^`** has lower precedence than `<<`, so `^sz` can be placed at the end of a basic string assembly expression.
-
-The `std::string` overloads of operators `^` and `*` are in a separate header file that’s just included, so that they can be more easily used with some other string `<<` notation, or without bringing in the `<<` overloads.
-
-<small>*examples/syntax/sz.cpp*</small>
-~~~cpp
-#include <cppx-core-language/all.hpp>
-#include <c/stdio.hpp>
-
-auto main()
-    -> int
-{
-    $use_cppx( m::pi );
-    using namespace cppx::syntax;       // s, "<<" and "^".
-
-    printf( "Pi is roughly "s << pi << ", or thereabouts.\n" ^sz );
-}
-~~~
-
-Imagine that instead of `printf` the above uses some library function that takes a C string pointer argument.
-
-Result with 64-bit MinGW g++ in Windows 10:
-
-~~~txt
-Pi is roughly 3.14159, or thereabouts.
-~~~
-
-Specific headers:
-
-~~~cpp
-#include <cppx-core-language/calc/named-numbers.hpp>                // cppx::m::pi
-#include <cppx-core-language/syntax/string-expressions/basic-string-assembly.hpp>      // "<<"
 ~~~
 
 #### 3.3.7. Examples for header “syntax/types.hpp”.
