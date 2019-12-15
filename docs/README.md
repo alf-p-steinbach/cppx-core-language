@@ -891,10 +891,7 @@ void display_properties_of_type_()
 }
 
 template< class... Type >
-void display_properties_of_()
-{
-    (display_properties_of_type_<Type>(),...);
-}
+void display_properties_of_() { (display_properties_of_type_<Type>(),...); }
 
 void display_column_headers()
 {
