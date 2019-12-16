@@ -9,7 +9,6 @@
 
 #ifndef CPPX_NO_DOLLARS_PLEASE
 #   define  $items_of           CPPX_ITEMS_OF           ///< \dollarname{items_of}
-#   define  $reverse_items_of   CPPX_REVERSE_ITEMS_OF   ///< \dollarname{reverse_items_of}
 #endif
 
 /// \brief `$items_of(c)` effectively expands to `std::begin(c), std::end(c)`.
@@ -24,7 +23,3 @@
 #define CPPX_ITEMS_OF( c ) \
     std::begin( cppx::lvalue_ref_to( c ) ), \
     std::end( c )
-
-#define CPPX_REVERSE_ITEMS_OF( c ) \
-    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
-    std::make_reverse_iterator( std::begin( c ) )
