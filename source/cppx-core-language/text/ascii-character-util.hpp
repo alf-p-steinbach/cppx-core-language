@@ -11,8 +11,10 @@
 
 #include <c/assert.hpp>         // assert
 #include <c/ctype.hpp>          // isspace
+#include <bitset>               // std::bitset
 #include <functional>           // std::invoke
 #include <string_view>          // std::string_view
+#include <utility>              // std::invoke
 
 namespace cppx::cstdlib
 {
@@ -44,18 +46,25 @@ namespace cppx::cstdlib
         return !!::iswspace( wchar_t( ch ) );
     }
 
+    // TODO: is_punctuation
+
 }  // namespace cppx::cstdlib
 
-namespace cppx::ascii
+namespace cppx::_::ascii_impl
 {
-    CPPX_USE_STD( invoke, string_view );
+    CPPX_USE_STD( bitset, invoke, string_view );
 
     //---------------------------------------- Is-ASCII checking:
 
     template< class Code >
+    inline auto is_ascii( const Code v )
+        -> Truth
+    { return (Unsigned_<Code>( v ) < unsigned( ascii::n_values )); }
+
+    template< class Code >
     inline auto contains( const Code v )
         -> Truth
-    { return (Unsigned_<Code>( v ) <= unsigned( ascii::max_value )); }
+    { return is_ascii( v ); }
 
 
     //----------------------------------------  Whitespace checking:
@@ -66,7 +75,7 @@ namespace cppx::ascii
         -> Truth
     {
         static_assert( is_integral_<Code> );
-        return ascii::contains( code ) and cstdlib::is_byte_space( code );
+        return is_ascii( code ) and cstdlib::is_byte_space( code );
     }
 
     inline auto whitespace_characters()
@@ -136,7 +145,7 @@ namespace cppx::ascii
         -> bool
     {
         static_assert( is_integral_<Code> );
-        static_assert( space == 32 and del == 127 );
+        static_assert( ascii::space == 32 and ascii::del == 127 );
         // No need to call ::iscntrl.
         return (is_in( zero_to( 32 ), code ) or code == 127);
     }
@@ -147,7 +156,7 @@ namespace cppx::ascii
     {
         static_assert( is_integral_<Code> );
         // No need to call ::isprint.
-        return ascii::contains( code ) and not is_control( code );
+        return is_ascii( code ) and not is_control( code );
     }
 
     template< class Code >
@@ -174,4 +183,52 @@ namespace cppx::ascii
         return is_letter( ch ) or is_digit( ch ) or ch == '_';
     }
 
-}  // namespace cppx::ascii
+    constexpr inline auto punctuation_characters()
+        -> string_view
+    { return R"_(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)_"; }
+
+    template< class Char >
+    inline auto is_punctuation( const Char ch )
+        -> bool
+    {
+        using Bits = bitset<ascii::n_values>;
+        static const Bits chars = invoke( [&]() -> Bits
+        {
+            Bits result;
+            for( const char ch: punctuation_characters() ) {
+                if( ch != 0 ) { result.set( ch ); }
+            }
+            return result;
+        } );
+
+        return ascii_contains( ch ) and chars[Byte( ch )];
+    }
+}  // namespace cppx::_::ascii_impl
+
+// Exporting namespaces
+namespace cppx {
+    namespace ascii {
+        CPPX_USE_FROM_NAMESPACE( _::ascii_impl,
+            contains,
+            is_control,
+            is_digit,
+            is_identifier_character,
+            is_letter,
+            is_lowercase,
+            is_noncontrol,
+            is_punctuation,
+            is_uppercase,
+            is_whitespace,
+            punctuation_characters,
+            to_lowercase,
+            to_uppercase,
+            whitespace_characters
+            );
+    }  // namespace ascii
+
+    namespace text {
+        namespace ascii = cppx::ascii;
+    };
+
+    using namespace text;
+}  // namespace cppx
