@@ -10,45 +10,9 @@
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
 
 #include <c/assert.hpp>         // assert
-#include <c/ctype.hpp>          // isspace
 #include <bitset>               // std::bitset
 #include <functional>           // std::invoke
 #include <string_view>          // std::string_view
-#include <utility>              // std::invoke
-
-namespace cppx::cstdlib
-{
-    // Depends on the C level locale via the `setlocale` function.
-
-    template< class Code >
-    inline auto is_byte_space( const Code ch )
-        -> Truth
-    {
-        static_assert( is_integral_<Code> );
-        if constexpr( sizeof( Code ) > 1 ) {
-            if( Unsigned_<Code>( ch ) > max_byte ) {
-                return false;
-            }
-        }
-        return !!::isspace( Byte( ch ) );
-    }
-
-    template< class Code >
-    inline auto is_wide_space( const Code ch )
-        -> Truth
-    {
-        static_assert( is_integral_<Code> );
-        if constexpr( sizeof( Code ) > sizeof( wchar_t ) ) {
-            if( Unsigned_<Code>( ch ) > wchar_t( -1 ) ) {
-                return false;
-            }
-        }
-        return !!::iswspace( wchar_t( ch ) );
-    }
-
-    // TODO: is_punctuation
-
-}  // namespace cppx::cstdlib
 
 namespace cppx::_::ascii_impl
 {
