@@ -980,6 +980,8 @@ xxx asd
 
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
 
+The `$reverse_items_of` macro is mainly for completeness, as a complement of `$items_of`.
+
 Definition:
 
 ~~~cpp
@@ -1002,7 +1004,7 @@ The following example first shows direct use of `$reverse_items_of` with a stand
 #include <iostream>
 #include <iterator>             // std::ostream_iterator
 #include <string>               // std::string
-#include <string_view>          // std::string
+#include <string_view>          // std::string_view
 #include <vector>               // std::vector
 $use_std( string, string_view, vector );
 $alias_cppx_namespaces( ascii );

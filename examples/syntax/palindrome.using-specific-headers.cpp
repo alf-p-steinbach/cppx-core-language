@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iterator>             // std::ostream_iterator
 #include <string>               // std::string
-#include <string_view>          // std::string
+#include <string_view>          // std::string_view
 #include <vector>               // std::vector
 $use_std( string, string_view, vector );
 $alias_cppx_namespaces( ascii );
