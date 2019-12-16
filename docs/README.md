@@ -1032,7 +1032,7 @@ auto main()
 }
 ~~~
 
-Imagine that instead of `printf` the above uses some library function that takes a C string pointer argument.
+Imagine that instead of `printf` the above uses some 3ʳᵈ party library function that takes a C string pointer argument.
 
 Result with 64-bit MinGW g++ in Windows 10:
 
