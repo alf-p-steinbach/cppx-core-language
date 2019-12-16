@@ -1211,7 +1211,7 @@ auto main()
 }
 ~~~
 
-The `spaces` function usage here is a kludge to achieve column formatting for a fixed width console window font. The string assembly syntax doesn’t support such formatting in general. The minimal formatting support for floating point values is there for necessity, because it’s generally needed in order to create strings with the desired content.
+The `spaces` function usage here is a kludge to achieve column formatting for a fixed width console window font. The string assembly syntax doesn’t support such formatting in general. The minimal formatting support for floating point values is there out of necessity, because it’s generally needed in order to create strings with the desired content.
 
 Result with 64-bit MinGW g++ in Windows 10:
 
