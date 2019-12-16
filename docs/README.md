@@ -992,12 +992,12 @@ Definition:
 
 ~~~cpp
 #ifndef CPPX_NO_DOLLARS_PLEASE
-#   define  $reverse_items_of CPPX_REVERSE_ITEMS_OF
+#   define  $items_of CPPX_ITEMS_OF
 #endif
 
-#define CPPX_REVERSE_ITEMS_OF( c ) \
-    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
-    std::make_reverse_iterator( std::begin( c ) )
+#define CPPX_ITEMS_OF( c ) \
+    std::begin( cppx::lvalue_ref_to( c ) ), \
+    std::end( c )
 ~~~
 
 … where `lvalue_ref_to` implements the restriction.
