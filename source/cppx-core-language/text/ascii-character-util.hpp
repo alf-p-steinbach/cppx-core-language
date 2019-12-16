@@ -196,7 +196,7 @@ namespace cppx {
 
     namespace text {
         namespace ascii = cppx::ascii;
-    };
+    }
 
     using namespace text;
 }  // namespace cppx

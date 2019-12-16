@@ -1,4 +1,8 @@
-#include <cppx-core-language/all.hpp>
+#include <cppx-core-language/syntax/declarations.hpp>               // $alias.., $use_...
+#include <cppx-core-language/syntax/macro-reverse_items_of.hpp>     // $reverse_items_of
+#include <cppx-core-language/syntax/types.hpp>                      // cppx::span_of
+#include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii
+
 #include <algorithm>            // std::copy
 #include <iostream>
 #include <iterator>             // std::ostream_iterator

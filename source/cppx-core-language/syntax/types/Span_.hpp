@@ -3,10 +3,9 @@
 // Mainly for use with range based `for` loops.
 
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::P_
+#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
 #include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::Size
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
-
 
 #include <iterator>     // std::(begin, end)
 
@@ -60,7 +59,7 @@ namespace cppx::spans
     { return Span_<Iterator>( first, beyond ); }
 
     template< class Item >
-    using Array_span_ = Span_<P_<Item>>;
+    using Array_span_ = Span_<Type_<Item>*>;
 
     template< class Item >
     inline auto n_items_of( const Array_span_<Item>& span )
@@ -72,4 +71,3 @@ namespace cppx::spans
 namespace cppx {
     using namespace spans;
 }  // namespace cppx
-

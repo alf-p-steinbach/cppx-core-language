@@ -977,7 +977,102 @@ xxx asd
 #### 3.3.1. Examples for header “syntax/declarations.hpp”.
 #### 3.3.2. Examples for header “syntax/exception-throwing.hpp”.
 #### 3.3.3. Examples for header “syntax/flow-control.hpp”.
+
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
+
+Definition:
+
+~~~cpp
+#ifndef CPPX_NO_DOLLARS_PLEASE
+#   define  $reverse_items_of CPPX_REVERSE_ITEMS_OF
+#endif
+
+#define CPPX_REVERSE_ITEMS_OF( c ) \
+    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
+    std::make_reverse_iterator( std::begin( c ) )
+~~~
+
+… where `lvalue_ref_to` causes a compilation error for rvalue arguments, because one usually doesn’t want duplication of an expression with side-effects.
+
+The following example first shows direct use of `$reverse_items_of` with a standard library function, namely `std::copy`, and then shows it used in combination with the Core Language Extensions library’s `span_of`:
+
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <algorithm>            // std::copy
+#include <iostream>
+#include <iterator>             // std::ostream_iterator
+#include <string>               // std::string
+#include <string_view>          // std::string
+#include <vector>               // std::vector
+$use_std( string, string_view, vector );
+$alias_cppx_namespaces( ascii );
+
+struct Classified
+{
+    string          letters;
+    vector<string>  non_letters;
+
+    Classified( const string_view& s ) {
+        for( const char ch: s ) {
+            if( ascii::is_letter( ch ) ) {
+                letters += ch;
+            }
+        }
+
+        non_letters.resize( letters.size() + 1 );
+        int i = 0;
+        for( const char ch: s ) {
+            if( ascii::is_letter( ch ) ) {
+                ++i;
+            } else {
+                non_letters[i] += ch;
+            }
+        }
+    }
+};
+
+auto main()
+    -> int
+{
+    $use_std( ostream_iterator, cout, endl );
+    $use_cppx( span_of );
+    
+    const auto s = string_view( "$$$ A man, a plan, a canal: panama!" );
+
+    copy( $reverse_items_of( s ), ostream_iterator<char>( cout ) );
+    cout << "  (reversed)" << endl;
+    
+    const auto the = Classified( s );
+    int i = 0;
+    cout << the.non_letters[0];
+    for( const char ch: span_of( $reverse_items_of( the.letters ) ) ) {
+        cout << ch;
+        ++i;
+        cout << the.non_letters[i];
+    }
+    cout << "  (smart-reversed)" << endl;
+    
+    cout << s << "  (original)" << endl;
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+!amanap :lanac a ,nalp a ,nam A $$$  (reversed)
+$$$ a man, a plan, a canal: panamA!  (smart-reversed)
+$$$ A man, a plan, a canal: panama!  (original)
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/syntax/declarations.hpp>               // $alias.., $use_...
+#include <cppx-core-language/syntax/macro-reverse_items_of.hpp>     // $reverse_items_of
+#include <cppx-core-language/syntax/types.hpp>                      // cppx::span_of
+#include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii
+~~~
+
 #### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
 
 #### 3.3.6. Examples for header “syntax/string-expressions.hpp”.
