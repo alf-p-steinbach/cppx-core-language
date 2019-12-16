@@ -52,14 +52,19 @@ namespace cppx::cstdlib
 
 namespace cppx::_::ascii_impl
 {
-    CPPX_USE_STD( bitset, invoke, string_view );
+    CPPX_USE_STD( invoke, string_view );
+    using Bitset = std::bitset<ascii::n_values>;
+
 
     //---------------------------------------- Is-ASCII checking:
 
     template< class Code >
     inline auto is_ascii( const Code v )
         -> Truth
-    { return (Unsigned_<Code>( v ) < unsigned( ascii::n_values )); }
+    {
+        static_assert( is_integral_<Code> );
+        return (Unsigned_<Code>( v ) < unsigned( ascii::n_values ));
+    }
 
     template< class Code >
     inline auto contains( const Code v )
@@ -69,39 +74,32 @@ namespace cppx::_::ascii_impl
 
     //----------------------------------------  Whitespace checking:
 
+    constexpr inline auto whitespace_characters()
+        -> string_view
+    { return " \f\n\r\t\v"; }
+
+    constexpr inline auto constexpr_whitespace_character_bits()
+        -> Bitset
+    {
+        Bitset result;
+        for( const char ch: whitespace_characters() ) {
+            if( ch != 0 ) { result.set( ch ); }
+        }
+        return result;
+    }
+
+    inline auto whitespace_character_bits()
+        -> const Bitset&
+    {
+        static const Bitset the_bits = constexpr_whitespace_character_bits();
+        return the_bits;
+    }
+
     // Is independent of locale
     template< class Code >
     inline auto is_whitespace( const Code code )
         -> Truth
-    {
-        static_assert( is_integral_<Code> );
-        return is_ascii( code ) and cstdlib::is_byte_space( code );
-    }
-
-    inline auto whitespace_characters()
-        -> string_view
-    {
-        struct Wrapped
-        {
-            char    m_s[32];
-            int     m_n;
-
-            Wrapped():
-                m_n( 0 )
-            {
-                for( const int code: Sequence( 0, ascii::max_value ) ) {
-                    if( is_whitespace( code ) ) {
-                        m_s[m_n++] = char( code );
-                        assert( m_n < int( sizeof( m_s ) ) );
-                    }
-                }
-                m_s[m_n] = '\0';
-            }
-        };
-
-        static const Wrapped the_chars;
-        return string_view( the_chars.m_s, the_chars.m_n );
-    }
+    { return is_ascii( code ) and whitespace_character_bits()[code]; }
 
     //----------------------------------------  Uppercase/lowercase:
 
@@ -187,28 +185,34 @@ namespace cppx::_::ascii_impl
         -> string_view
     { return R"_(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)_"; }
 
-    template< class Char >
-    inline auto is_punctuation( const Char ch )
-        -> bool
+    constexpr inline auto constexpr_punctuation_character_bits()
+        -> const Bitset
     {
-        using Bits = bitset<ascii::n_values>;
-        static const Bits chars = invoke( [&]() -> Bits
-        {
-            Bits result;
+            Bitset result;
             for( const char ch: punctuation_characters() ) {
                 if( ch != 0 ) { result.set( ch ); }
             }
             return result;
-        } );
-
-        return ascii_contains( ch ) and chars[Byte( ch )];
     }
+
+    inline auto punctuation_character_bits()
+        -> const Bitset&
+    {
+        static const auto the_bits = constexpr_punctuation_character_bits();
+        return the_bits;
+    }
+
+    template< class Char >
+    inline auto is_punctuation( const Char ch )
+        -> bool
+    { return ascii_contains( ch ) and punctuation_character_bits()[Byte( ch )]; }
 }  // namespace cppx::_::ascii_impl
 
 // Exporting namespaces
 namespace cppx {
     namespace ascii {
         CPPX_USE_FROM_NAMESPACE( _::ascii_impl,
+            Bitset,
             contains,
             is_control,
             is_digit,
