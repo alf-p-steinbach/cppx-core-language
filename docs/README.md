@@ -980,6 +980,8 @@ xxx asd
 
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
 
+#### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
+
 The `$reverse_items_of` macro is mainly for completeness, as a complement of `$items_of`.
 
 Definition:
@@ -1074,8 +1076,6 @@ Specific headers:
 #include <cppx-core-language/syntax/types.hpp>                      // cppx::span_of
 #include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii
 ~~~
-
-#### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
 
 #### 3.3.6. Examples for header “syntax/string-expressions.hpp”.
 *Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
