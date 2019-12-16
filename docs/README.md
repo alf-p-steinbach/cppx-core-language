@@ -980,6 +980,87 @@ xxx asd
 
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
 
+`$items_of(c)` produces the iterator pair text “`std::begin(c), std::end(c)`”, except that `c` must be an lvalue expression such as the name of a variable: if `c` instead is an rvalue expression then you get a compilation error.
+
+The lvalue restriction removes almost all cases where an argument expression could have its side effect or resource usage duplicated.
+
+As mentioned in the outer section introduction, for an rvalue expression one can write
+
+>     $with( expression ) { foobar( $items_of( _ ) ); }
+
+Definition:
+
+~~~cpp
+#ifndef CPPX_NO_DOLLARS_PLEASE
+#   define  $reverse_items_of CPPX_REVERSE_ITEMS_OF
+#endif
+
+#define CPPX_REVERSE_ITEMS_OF( c ) \
+    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
+    std::make_reverse_iterator( std::begin( c ) )
+~~~
+
+… where `lvalue_ref_to` implements the restriction.
+
+---
+
+***`$items_of` applied to lvalue***  
+In C++17 and earlier standard library algorithms that operate on sequences, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence.
+
+<small>*examples/syntax/sort-and-search.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>         // std::(cout, endl)
+#include <algorithm>        // std::(copy, sort, equal_range)
+#include <string_view>      // std::string_view
+
+auto main()
+    -> int
+{
+    $use_std( copy, cout, endl, equal_range, sort, string_view );
+
+    constexpr string_view   pi_digits   = "3141592653589793238462643383279";      // 30 decimals.
+    constexpr int           n_digits    = pi_digits.length();
+    
+    char sorted_digits[n_digits];
+    copy( $items_of( pi_digits ), &sorted_digits[0] );
+    sort( $items_of( sorted_digits ) );
+
+    cout << pi_digits << endl;
+    cout << string_view( sorted_digits, n_digits ) << endl;
+    
+    const auto range_pair = equal_range( $items_of( sorted_digits ), '6' );
+    const int n = range_pair.second - range_pair.first;
+    if( n == 0 ) {
+        cout << "... No 6-digits, weird." << endl;
+    } else {
+        using namespace cppx::syntax;
+        cout << spaces( range_pair.first - &sorted_digits[0] ) << n*"^"s << endl;
+        cout << "The digit 6 occurs " << n << " times." << endl;
+    }
+}
+~~~
+
+The output via a `string_view` could alternatively have been accomplished e.g. via `std::copy` and an output stream iterator, which is a more general approach:
+
+>     copy( $items_of( sorted_digits ), ostream_iterator<char>( cout ) );  cout << endl;
+
+Anyway, result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+3141592653589793238462643383279
+1122223333333444555666778889999
+                   ^^^
+The digit 6 occurs 3 times.
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/syntax/macro-items_of.hpp>         // $items_of
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::(spaces, n*s)
+~~~
+
 #### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
 
 The `$reverse_items_of` macro is mainly for completeness, as a complement of `$items_of`.
@@ -1003,6 +1084,7 @@ Definition:
 ***Direct `$reverse_items_of`, and combined with `span_of`***  
 The following example first shows direct use of `$reverse_items_of` with a standard library function, namely `std::copy`, and then shows it used in combination with the Core Language Extensions library’s `span_of`:
 
+<small>*examples/syntax/palindrome.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
 #include <algorithm>            // std::copy
