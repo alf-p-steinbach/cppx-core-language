@@ -998,6 +998,9 @@ Definition:
 
 … where `lvalue_ref_to` causes a compilation error for rvalue arguments, because one usually doesn’t want duplication of an expression with side-effects.
 
+---
+
+***Direct `$reverse_items_of`, and combined with `span_of`***  
 The following example first shows direct use of `$reverse_items_of` with a standard library function, namely `std::copy`, and then shows it used in combination with the Core Language Extensions library’s `span_of`:
 
 ~~~cpp
