@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 /// \file
 /// \brief Concise, clear & consistent notation for number type properties:
-/// \make_name_ref{cppx,is_ieee_754_},
+/// \make_name_ref{cppx,is_ieee754_format_},
 /// \make_name_ref{cppx,largest_},
 /// \make_name_ref{cppx,smallest_},
 /// \make_name_ref{cppx,max_},
@@ -40,11 +40,11 @@ namespace cppx::_ {
         {
             static_assert( std::is_integral_v<T> );
 
-            static constexpr T      smallest        = 1;                // Smallest non-zero.
-            static constexpr T      largest         = Info_<T>::max();
-            static constexpr T      min             = Info_<T>::min();  // 0 or `-largest_ - 1`.
-            static constexpr T      max             = largest;
-            static constexpr int    n_digits        = Info_<T>::digits10;
+            static constexpr T      smallest            = 1;                // Smallest non-zero.
+            static constexpr T      largest             = Info_<T>::max();
+            static constexpr T      min                 = Info_<T>::min();  // 0 or `-largest_ - 1`.
+            static constexpr T      max                 = largest;
+            static constexpr int    n_digits            = Info_<T>::digits10;
         };
 
         template< class T >
@@ -52,17 +52,17 @@ namespace cppx::_ {
         {
             static_assert( not std::is_integral_v<T> );
 
-            static constexpr T      smallest        = Info_<T>::min();  // Smallest non-zero.
-            static constexpr T      largest         = Info_<T>::max();
-            static constexpr T      min             = -largest;         // Largest negative.
-            static constexpr T      max             = largest;
-            static constexpr int    n_digits        = Info_<T>::digits10;
+            static constexpr T      smallest            = Info_<T>::min();  // Smallest non-zero.
+            static constexpr T      largest             = Info_<T>::max();
+            static constexpr T      min                 = -largest;         // Largest negative.
+            static constexpr T      max                 = largest;
+            static constexpr int    n_digits            = Info_<T>::digits10;
 
-            static constexpr Truth  is_ieee_754     = Info_<T>::is_iec559;
-            static constexpr int    min_exp         = Info_<T>::min_exponent10;
-            static constexpr int    max_exp         = Info_<T>::max_exponent10;
-            static constexpr int    radix           = Info_<T>::radix;
-            static constexpr T      epsilon         = Info_<T>::epsilon();
+            static constexpr Truth  is_ieee754_format   = Info_<T>::is_iec559;
+            static constexpr int    min_exp             = Info_<T>::min_exponent10;
+            static constexpr int    max_exp             = Info_<T>::max_exponent10;
+            static constexpr int    radix               = Info_<T>::radix;
+            static constexpr T      epsilon             = Info_<T>::epsilon();
         };
 
         //TODO: good isnan()
@@ -83,7 +83,7 @@ namespace cppx::_ {
     ///
     /// For integer `T` this is just 1, and for floating point `T` the expression
     /// `smallest_<T>` is an alias for `std::numeric_limits<T>::min()`.
-        template< class T > constexpr T     smallest_       = Number_properties_<T>::smallest;
+        template< class T > constexpr T smallest_       = Number_properties_<T>::smallest;
 
     /// \hideinitializer
     /// \brief The largest representable-as-positive absolute value of the type.
@@ -122,7 +122,8 @@ namespace cppx::_ {
     /// Note that (at the writing of this documentation) both the Visual C++ and g++
     /// compilers report IEEE 754 conformance when their fast-math options are used, which
     /// in particular causes incorrect NaN-checking, i.e. non-conformance.
-    template< class T > constexpr Truth is_ieee_754_    = Number_properties_<T>::is_ieee_754;
+    template< class T > constexpr Truth is_ieee754_format_  =
+        Number_properties_<T>::is_iee754_format;
 
     /// \hideinitializer
     /// \brief FP only. E-notation minimum (largest negative) exponent value.
@@ -167,7 +168,7 @@ namespace cppx {
             _::min_,
             _::max_,
             _::n_digits_,
-            _::is_ieee_754_,
+            _::is_ieee754_format_,
             _::min_exp_,
             _::max_exp_,
             _::radix_,

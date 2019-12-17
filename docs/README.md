@@ -815,7 +815,17 @@ Specific headers:
 
 The “number-type-properties.hpp” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
 
-For an integral type `T` the set is
+For an integral type `T` the set is defined by
+
+| Expression | Yields |
+|------------|--------|
+| `smallest_<T>` | The smallest positive non-zero `T` value. |
+| `largest_<T>` | The largest positive `T` value. |
+| `min_<T>` | The `T` value farthest in the direction of negative infinity. |
+| `max_<T>` | The `T` value farthest in the direction of positive infinity, = `largest_<T>`. |
+| `n_digits_<T>` | The number of decimal digits that can survive a round-trip to and back from `T` value. |
+
+A possible implementation:
 
 > ~~~cpp
 > constexpr T     smallest_       = 1;                            // Smallest non-zero.
@@ -825,23 +835,27 @@ For an integral type `T` the set is
 > constexpr int   n_digits_       = numeric_limits<T>::digits10;
 > ~~~
 
-… and for a floating point type `T` the set has some additional properties:
+For a floating point type `T` the set has some additional properties, for which the possible implementation in terms of `numeric_limits` serves best as description:
 
 > ~~~cpp
-> constexpr T     smallest_       = numeric_limits<T>::min();     // Smallest non-zero.
-> constexpr T     largest_        = numeric_limits<T>::max();
-> constexpr T     min_            = -largest;                     // Largest negative.
-> constexpr T     max_            = largest;
-> constexpr int   n_digits_       = numeric_limits<T>::digits10;
+> constexpr T     smallest_           = numeric_limits<T>::min();     // Smallest non-zero.
+> constexpr T     largest_            = numeric_limits<T>::max();
+> constexpr T     min_                = -largest;                     // Largest negative.
+> constexpr T     max_                = largest;
+> constexpr int   n_digits_           = numeric_limits<T>::digits10;
 > 
-> constexpr Truth is_ieee_754_    = numeric_limits<T>::is_iec559;
-> constexpr int   min_exp_        = numeric_limits<T>::min_exponent10;
->constexpr int   max_exp_        = numeric_limits<T>::max_exponent10;
-> constexpr int   radix_          = numeric_limits<T>::radix;
-> constexpr T     epsilon_        = numeric_limits<T>::epsilon();
+> constexpr Truth is_ieee754_format_  = numeric_limits<T>::is_iec559;
+> constexpr int   min_exp_            = numeric_limits<T>::min_exponent10;
+> constexpr int   max_exp_            = numeric_limits<T>::max_exponent10;
+> constexpr int   radix_              = numeric_limits<T>::radix;
+> constexpr T     epsilon_            = numeric_limits<T>::epsilon();
 > ~~~
 
-Use of a floating point-specific property for an integral type, would most likely be an error. Therefore, unlike `std::numeric_limits` the floating point-specific properties *do not exist* for integral types. So, this set is more consistent wrt. form (value or function), more consistent wrt. meaning, and more safe, than `std::numeric_limits`.
+Note that the floating point implementation of the common 5 properties differs from the integral type implementation: with direct use of `numeric_limits` different code would be needed to express the same notions.
+
+Also note that since `is_ieee754_format_` is defined in terms of `numeric_limits::is_iec559`, it's subject to the same compiler idiosyncracies as the latter. In particular, as of late 2019, with “fast” floating point arithmetic option selected both the g++ and Visual C++ compilers report IEEE 754 / IEC 559 conformance via `is_iec559`, while e.g. comparison of NaN values is then non-conforming. And so for the in-practice these properties are about *the binary memory representation* only, and I try to make that more clear via the name `is_ieee754_format_`.
+
+Use of a floating point-specific property for an integral type, would most likely be an error. Therefore, unlike `std::numeric_limits` the floating point-specific properties *do not exist* for integral types. So, this set is more consistent wrt. form (value or function), more consistent wrt. meaning, more truthful, and more safe, than `std::numeric_limits`.
 
 Not to mention that `min_<double>` is very much shorter and readable than (!) `-std::numeric_limits<double>::max()`.
 
