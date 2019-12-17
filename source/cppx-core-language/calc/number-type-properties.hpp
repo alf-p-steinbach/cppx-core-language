@@ -123,7 +123,7 @@ namespace cppx::_ {
     /// compilers report IEEE 754 conformance when their fast-math options are used, which
     /// in particular causes incorrect NaN-checking, i.e. non-conformance.
     template< class T > constexpr Truth is_ieee754_format_  =
-        Number_properties_<T>::is_iee754_format;
+        Number_properties_<T>::is_ieee754_format;
 
     /// \hideinitializer
     /// \brief FP only. E-notation minimum (largest negative) exponent value.

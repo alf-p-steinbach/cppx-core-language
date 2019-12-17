@@ -32,7 +32,7 @@ void display_properties_of_type_()
         );
     if constexpr( is_floating_point_<Type> ) {
         display_fields( widths,
-            is_ieee_754_<Type>,
+            is_ieee754_format_<Type>,
             min_exp_<Type>, max_exp_<Type>, radix_<Type>, epsilon_<Type>
             );
     }
