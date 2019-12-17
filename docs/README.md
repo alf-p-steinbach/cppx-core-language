@@ -99,8 +99,6 @@ Each main area of functionality is a sub-folder in the library.
 
 ## 3. Examples & details.
 
----
-
 ***Availability***  
 These code examples are all available in the “examples” top level folder.
 
