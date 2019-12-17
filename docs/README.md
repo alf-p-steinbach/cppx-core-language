@@ -815,7 +815,7 @@ Specific headers:
 
 The “number-type-properties.hpp” header provides much of the same information as `std::numeric_limits`, but more consistently as `constexpr` values instead of a mix of values and functions, and more consistently with a single meaning of e.g. `min`, instead of a type-dependent meaning.
 
-For an integral type `T` the set is defined by
+The common set of properties for any numerical type `T` is defined by
 
 | Expression | Yields |
 |------------|--------|
@@ -825,7 +825,7 @@ For an integral type `T` the set is defined by
 | `max_<T>` | The `T` value farthest in the direction of positive infinity, = `largest_<T>`. |
 | `n_digits_<T>` | The number of decimal digits that can survive a round-trip to and back from `T` value. |
 
-A possible implementation:
+A possible implementation for integral types:
 
 > ~~~cpp
 > constexpr T     smallest_       = 1;                            // Smallest non-zero.
