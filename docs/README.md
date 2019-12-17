@@ -99,7 +99,19 @@ Each main area of functionality is a sub-folder in the library.
 
 ## 3. Examples & details.
 
+---
+
+***Availability***  
 These code examples are all available in the “examples” top level folder.
+
+---
+
+***Order of the examples***  
+The examples and discussions are given here in alphabetical order of folders and headers.
+
+All examples draw on the relevant parts of the library. With alphabetical ordering of discussion that means that many things are necessarily used in examples before these things are (more fully) explained. An alternative could have been to only use the library for each feature to be exemplified, but that would have given unnatural and verbose code.
+
+I’ve tried to explain enough about each example to leave no “mystery”.
 
 ---
 
