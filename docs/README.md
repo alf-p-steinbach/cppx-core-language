@@ -756,9 +756,9 @@ Here the `$apply` macro is from the Meta Macro library, but that library is incl
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/calc/named-numbers.hpp>        // cppx::calc::*
-#include <cppx-core-language/syntax/types/type-builders.hpp>      // cppx::Type_
-#include <cppx-core-language-meta-macro/macro-apply.hpp>    // $apply    
+#include <cppx-core-language/calc/named-numbers.hpp>            // cppx::calc::*
+#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
+#include <cppx-core-language-meta-macro/macro-apply.hpp>        // $apply    
 ~~~
 
 ---
