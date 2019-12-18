@@ -33,10 +33,17 @@ namespace cppx {
     inline void remove_leading_zeroes_in( string& s )
     {
         const Size new_length = remove_leading_zeroes_in(
-            s.data(),
-            s.data() + s.size()
+            s.data(), s.data() + s.size()
         );
         s.resize( new_length );
+        s.shrink_to_fit();
     }
 
+    inline auto sans_leading_zeroes( const string& s )
+        -> string
+    {
+        string result = s;
+        remove_leading_zeroes_in( result );
+        return result;
+    }
 }  // namespace cppx
