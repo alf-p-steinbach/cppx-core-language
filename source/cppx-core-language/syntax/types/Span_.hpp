@@ -2,10 +2,11 @@
 //
 // Mainly for use with range based `for` loops.
 
-#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
-#include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::Size
-#include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
+#include <cppx-core-language/mix-in/Adapt_as_iterable_collection_.hpp>  // cppx::mix_in::*
+#include <cppx-core-language/syntax/declarations.hpp>                   // CPPX_USE_...
+#include <cppx-core-language/syntax/types/type-builders.hpp>            // cppx::Type_
+#include <cppx-core-language/system-dependent/size-types.hpp>           // cppx::Size
+#include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 
 #include <iterator>     // std::(begin, end, distance)
 
@@ -25,6 +26,7 @@ namespace cppx::_
 
     template< class Iterator >
     class Span_
+        : public mix_in::Adapt_as_iterable_collection_<Span_<Iterator>>
     {
         Iterator    m_first;
         Iterator    m_beyond;
@@ -32,15 +34,10 @@ namespace cppx::_
     public:
         auto first() const      -> Iterator { return m_first; }
         auto beyond() const     -> Iterator { return m_beyond; }
-        auto n_items() const    -> Size     { distance( m_first, m_beyond ); }
+        auto n_items() const    -> Size     { return distance( m_first, m_beyond ); }
 
         auto front() const      -> auto&    { return *m_first; }
         auto is_empty() const   -> Truth    { return (m_first == m_beyond); }
-
-        // Standard library & core language naming convention adapters.
-        auto begin() const      -> Iterator { return m_first; }
-        auto end() const        -> Iterator { return m_beyond; }
-        auto empty() const      -> Truth    { return (m_first == m_beyond); }
 
         Span_( const Iterator first, const Iterator beyond ):
             m_first( first ),
