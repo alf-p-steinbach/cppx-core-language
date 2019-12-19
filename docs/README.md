@@ -1004,11 +1004,11 @@ xxx asd
 
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
 
-`$items_of(c)` produces the iterator pair text “`std::begin(c), std::end(c)`”, except that `c` must be an lvalue expression such as the name of a variable: if `c` instead is an rvalue expression then you get a compilation error.
+In C++17 and earlier standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
 
-The lvalue restriction removes almost all cases where an argument expression could have its side effect or resource usage duplicated.
+`$items_of(c)`, where `c` must be an lvalue expression, produces the iterator pair text “`std::begin(c),std::end(c)`”. For example, you can write just `std::sort($items_of(the_numbers))`. The name of a variable is an lvalue expression.
 
-As mentioned in the outer section introduction, for an rvalue expression one can write
+If `c` is an rvalue expression (a temporary) such as a value result of a function call, then by design you get a compilation error. This *lvalue restriction* removes almost all cases where an argument expression could have its side effect or resource usage duplicated. However, for an rvalue expression `c` one can write the non-expression statement
 
 >     $with( expression ) { foobar( $items_of( _ ) ); }
 
@@ -1028,8 +1028,9 @@ Definition:
 
 ---
 
-***`$items_of` applied to lvalue***  
-In C++17 and earlier standard library algorithms that operate on sequences, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence.
+***Sorting and searching of a raw array***  
+
+In the following example I use a raw array for `sorted_digits`, which complicates things a little, in order to show how `$items_of` also works nicely with a raw array:
 
 <small>*examples/syntax/sort-and-search.cpp*</small>
 ~~~cpp
