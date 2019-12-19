@@ -1006,13 +1006,7 @@ xxx asd
 
 In C++17 and earlier C++ standards the standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
 
-`$items_of(c)`, where `c` must be an lvalue expression, produces the iterator pair text “`std::begin(c),std::end(c)`”. For example, you can write just `std::sort($items_of(the_numbers))`. The name of a variable is an lvalue expression.
-
-If `c` is an rvalue expression (a temporary) such as a value result of a function call, then by design you get a compilation error. This *lvalue restriction* removes almost all cases where an argument expression could have its side effect or resource usage duplicated. However, for an rvalue expression `c` one can write the non-expression statement
-
->     $with( expression ) { foobar( $items_of( _ ) ); }
-
-Definition:
+To help with that “syntax/macro-items_of.hpp” includes the standard library’s `<iterator>` header and defines the `$item_of` macro as
 
 ~~~cpp
 #ifndef CPPX_NO_DOLLARS_PLEASE
@@ -1024,7 +1018,14 @@ Definition:
     std::end( c )
 ~~~
 
-… where `lvalue_ref_to` implements the restriction.
+… where `lvalue_ref_to` implements a restriction to lvalue.
+
+`$items_of(c)`, where `c` must be an lvalue expression, produces (as-if) the iterator pair text “`std::begin(c),std::end(c)`”. For example, you can write just `std::sort($items_of(the_numbers))`. The name of a variable is an lvalue expression.
+
+If `c` is an rvalue expression, e.g. a temporary such as a value result of a function call, then by design you get a compilation error. This *lvalue restriction* removes almost all cases where an argument expression could have its side effect or resource usage duplicated. However, for an rvalue expression `c` one can write the non-expression statement
+
+>     $with( expression ) { foobar( $items_of( _ ) ); }
+
 
 ---
 
