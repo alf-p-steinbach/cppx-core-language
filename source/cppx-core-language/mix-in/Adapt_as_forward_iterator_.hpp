@@ -36,7 +36,7 @@ namespace cppx::_
     template< class Derived, class Value_type_param >
     class Adapt_as_forward_iterator_
     {
-        auto derived_self()
+        auto self()
             -> Derived&
         { return static_cast<Derived&>( *this ); }
 
@@ -53,15 +53,15 @@ namespace cppx::_
         auto operator++()
             -> const Derived&
         {
-            derived_self().advance();
-            return derived_self();
+            self().advance();
+            return self();
         }
         
         auto operator++( int )
             -> Derived
         {
-            Derived original = derived_self();
-            derived_self().advance();
+            Derived original = self();
+            self().advance();
             return original;
         }
 
