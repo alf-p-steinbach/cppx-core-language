@@ -17,20 +17,20 @@
       - [3.2.3. Examples for header “calc/integer-operations.hpp”.](#323-examples-for-header-calcinteger-operationshpp)
       - [3.2.4. Examples for header “calc/named-numbers.hpp”.](#324-examples-for-header-calcnamed-numbershpp)
       - [3.2.5. Examples for header “calc/number-type-properties.hpp”.](#325-examples-for-header-calcnumber-type-propertieshpp)
-    - [3.3. The syntax support.](#33-the-syntax-support)
-      - [3.3.1. Examples for header “syntax/declarations.hpp”.](#331-examples-for-header-syntaxdeclarationshpp)
-      - [3.3.2. Examples for header “syntax/exception-throwing.hpp”.](#332-examples-for-header-syntaxexception-throwinghpp)
-      - [3.3.3. Examples for header “syntax/flow-control.hpp”.](#333-examples-for-header-syntaxflow-controlhpp)
-      - [3.3.4. Examples for header “syntax/macro-items_of.hpp”.](#334-examples-for-header-syntaxmacro-items_ofhpp)
-      - [3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.](#335-examples-for-header-syntaxmacro-reverse_items_ofhpp)
-      - [3.3.6. Examples for header “syntax/string-expressions.hpp”.](#336-examples-for-header-syntaxstring-expressionshpp)
-      - [3.3.7. Examples for header “syntax/types.hpp”.](#337-examples-for-header-syntaxtypeshpp)
-      - [x3.3.1. Examples for header “basic-string-assembly.hpp”.](#x331-examples-for-header-basic-string-assemblyhpp)
-    - [3.4. The system dependent stuff.](#34-the-system-dependent-stuff)
-    - [3.5. The text handling.](#35-the-text-handling)
-    - [3.6. The template meta programming support.](#36-the-template-meta-programming-support)
-    - [3.7. The type checking support.](#37-the-type-checking-support)
-    - [3.8. Supporting types.](#38-supporting-types)
+    - [3.3. Mix-in classes.](#33-mix-in-classes)
+    - [3.4. The syntax support.](#34-the-syntax-support)
+      - [3.4.1. Examples for header “syntax/declarations.hpp”.](#341-examples-for-header-syntaxdeclarationshpp)
+      - [3.4.2. Examples for header “syntax/exception-throwing.hpp”.](#342-examples-for-header-syntaxexception-throwinghpp)
+      - [3.4.3. Examples for header “syntax/flow-control.hpp”.](#343-examples-for-header-syntaxflow-controlhpp)
+      - [3.4.4. Examples for header “syntax/macro-items_of.hpp”.](#344-examples-for-header-syntaxmacro-items_ofhpp)
+      - [3.4.5. Examples for header “syntax/macro-reverse_items_of.hpp”.](#345-examples-for-header-syntaxmacro-reverse_items_ofhpp)
+      - [3.4.6. Examples for header “syntax/string-expressions.hpp”.](#346-examples-for-header-syntaxstring-expressionshpp)
+      - [3.4.7. Examples for header “syntax/types.hpp”.](#347-examples-for-header-syntaxtypeshpp)
+    - [3.5. The system dependent stuff.](#35-the-system-dependent-stuff)
+    - [3.6. The text handling.](#36-the-text-handling)
+    - [3.7. The template meta programming support.](#37-the-template-meta-programming-support)
+    - [3.8. The type checking support.](#38-the-type-checking-support)
+    - [3.9. Supporting types.](#39-supporting-types)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -89,6 +89,7 @@ Each main area of functionality is a sub-folder in the library.
 |------------|------------|
 |[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)). |
 |[calc](../source/cppx%2Dcore%2Dlanguage/calc)        | Calculations. Here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest strictly positive value of `T`.
+|[mix-in](../source/cppx%2Dcore%2Dlanguage/mix%2Din)        | Mix-in classes such as `mix_in::Forward_iterator_stuff_`.
 |[syntax](../source/cppx%2Dcore%2Dlanguage/syntax)        | Mostly about *reduction of verbosity* for safe or best-practice constructs. For example, the `zero_to` function produces a `Sequence` which supports loops such as `for(const int i: zero_to(n))`, where there is no chance of inadvertent modification of the loop variable. With a reasonably good compiler it&rsquo;s as efficient as an ordinary counting loop &mdash; just less verbose and more safe. Some other syntax support is in the form of macros. E.g. `$use_std(A, B, C);` brings in the specified items from the standard library as if by `using std::A, std::B, std::C;`.  Perhaps of most practical utility to a new library user, here is `<<`-like support for assembling strings from parts. E.g. calls like `fail("Unable to open door "s << n)`. |
 |[system-dependent](../source/cppx%2Dcore%2Dlanguage/system%2Ddependent)      | System-dependent stuff. The type `Byte` + support; the enumeration `Endian` (more precisely it&rsquo;s a `struct` with an inner `enum`)  ; and the signed types `Size` and `Index` plus the corresponding `Unsigned_size` and `Unsigned_index`. These four are all the same size as `size_t`.
 |[text](../source/cppx%2Dcore%2Dlanguage/text)    | Mainly ASCII text handling support, such as names of control characters (plus the name `bad_char` defined as `DEL`), ASCII range checking, widening, uppercasing and lowercasing, and whitespace checking and other classification functions. The C standard library defines some of this but in a form that&rsquo;s difficult to use correctly. Also, the `to_hex` function lives here.
@@ -969,8 +970,11 @@ Specific headers:
 #include <cppx-core-language/type-checking/type_name_of_.hpp>   // cppx::type_name_of_
 ~~~
 
+### 3.3. Mix-in classes.
 
-### 3.3. The syntax support.
+asdlkj
+
+### 3.4. The syntax support.
 
 Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/syntax)**”. *Exporting namespace: `syntax`.*
 
@@ -998,11 +1002,11 @@ Some headers in this folder have their own smaller exporting namespaces in addit
 
 xxx asd
 
-#### 3.3.1. Examples for header “syntax/declarations.hpp”.
-#### 3.3.2. Examples for header “syntax/exception-throwing.hpp”.
-#### 3.3.3. Examples for header “syntax/flow-control.hpp”.
+#### 3.4.1. Examples for header “syntax/declarations.hpp”.
+#### 3.4.2. Examples for header “syntax/exception-throwing.hpp”.
+#### 3.4.3. Examples for header “syntax/flow-control.hpp”.
 
-#### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
+#### 3.4.4. Examples for header “syntax/macro-items_of.hpp”.
 
 In C++17 and earlier C++ standards the standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
 
@@ -1089,7 +1093,7 @@ Specific headers:
 #include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::(spaces, n*s)
 ~~~
 
-#### 3.3.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
+#### 3.4.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
 
 The `$reverse_items_of` macro is mainly for completeness, as a complement of `$items_of`.
 
@@ -1192,7 +1196,7 @@ Specific headers:
 #include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii
 ~~~
 
-#### 3.3.6. Examples for header “syntax/string-expressions.hpp”.
+#### 3.4.6. Examples for header “syntax/string-expressions.hpp”.
 *Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
 Smaller functional area exporting namespaces: `basic_string_assembly` and `string_operators`.*
 
@@ -1458,16 +1462,16 @@ Specific headers:
 #include <cppx-core-language/syntax/string-expressions.hpp>         // cppx::syntax::*
 ~~~
 
-#### 3.3.7. Examples for header “syntax/types.hpp”.
+#### 3.4.7. Examples for header “syntax/types.hpp”.
 
 
-### 3.4. The system dependent stuff.
+### 3.5. The system dependent stuff.
 
-### 3.5. The text handling.
+### 3.6. The text handling.
 
 
-### 3.6. The template meta programming support.
+### 3.7. The template meta programming support.
 
-### 3.7. The type checking support.
+### 3.8. The type checking support.
 
-### 3.8. Supporting types.
+### 3.9. Supporting types.
