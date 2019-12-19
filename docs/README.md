@@ -1004,7 +1004,7 @@ xxx asd
 
 #### 3.3.4. Examples for header “syntax/macro-items_of.hpp”.
 
-In C++17 and earlier standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
+In C++17 and earlier C++ standards the standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
 
 `$items_of(c)`, where `c` must be an lvalue expression, produces the iterator pair text “`std::begin(c),std::end(c)`”. For example, you can write just `std::sort($items_of(the_numbers))`. The name of a variable is an lvalue expression.
 
