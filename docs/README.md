@@ -1067,6 +1067,8 @@ auto main()
 }
 ~~~
 
+C++11’s `string_view` is one of the rare cases (for the standard library) where a span is not specified via a pair of iterators. It could have followed the precedent of the `std::vector` constructor design, but it didn’t. And so `$items_of` could not be used in the construction of the `string_view` in the output of `sorted_digits`.
+
 The output via a `string_view` could alternatively have been accomplished e.g. via `std::copy` and an output stream iterator, which is a more general approach:
 
 >     copy( $items_of( sorted_digits ), ostream_iterator<char>( cout ) );  cout << endl;
