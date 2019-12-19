@@ -1173,6 +1173,8 @@ auto main()
 }
 ~~~
 
+Here the `span_of` function creates a little object holding the two iterators and providing them via `.begin()` and `.end()` member functions to the C++ range based `for`, i.e., it’s just shallow (but important) syntactical glue.
+
 Result with 64-bit MinGW g++ in Windows 10:
 
 ~~~txt

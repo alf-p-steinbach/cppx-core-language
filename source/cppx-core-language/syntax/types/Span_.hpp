@@ -2,16 +2,16 @@
 //
 // Mainly for use with range based `for` loops.
 
-#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
 #include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
 #include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::Size
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
-#include <iterator>     // std::(begin, end)
+#include <iterator>     // std::(begin, end, distance)
 
-namespace cppx::spans
+namespace cppx::_
 {
-    CPPX_USE_STD( begin, end );
+    CPPX_USE_STD( begin, end, distance );
 
     template< class Collection >
     inline auto first_iterator_of( Collection& c )
@@ -53,21 +53,31 @@ namespace cppx::spans
         {}
     };
 
+    template< class Item >
+    using Array_span_ = Span_<Type_<Item>*>;
+
     template< class Iterator >
     inline auto span_of( const Iterator first, const Iterator beyond )
         -> Span_<Iterator>
     { return Span_<Iterator>( first, beyond ); }
 
-    template< class Item >
-    using Array_span_ = Span_<Type_<Item>*>;
-
-    template< class Item >
-    inline auto n_items_of( const Array_span_<Item>& span )
+    template< class Iterator >
+    inline auto n_items_of( const Span_<Iterator>& range )
         -> Size
-    { return span.beyond() - span.first(); }
+    { return distance( range.begin(), range.end() ); }
+}  // namespace cppx::_
 
-}  // namespace cppx::spans
-
+// Exporting namespaces:
 namespace cppx {
+    namespace spans {
+        CPPX_USE_FROM_NAMESPACE( _,
+            first_iterator_of,
+            beyond_iterator_of,
+            Span_,
+            Array_span_,
+            span_of,
+            n_items_of
+        );
+    }
     using namespace spans;
 }  // namespace cppx
