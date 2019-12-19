@@ -978,7 +978,7 @@ The syntax support is intended to give you an even more joyful and [DRY](https:/
 
 It does that by reducing excessive verbosity in the core language and its direct library support; by automating required repetitions of information; and by providing far more easy ways to express constraints such as `const` for a loop control.
 
-The support is organized in 5 main areas, each in a sub-folder with a small set of headers. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes everything from that sub-folder, and it has an exporting namespace `cppx::`*X*.
+There are 5 main areas, each in a sub-folder with a small set of headers. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes everything from that sub-folder, and it has an exporting namespace `cppx::`*X*.
 
 | Area | *X*.hpp | Functionality |
 |------|---------|---------------|
