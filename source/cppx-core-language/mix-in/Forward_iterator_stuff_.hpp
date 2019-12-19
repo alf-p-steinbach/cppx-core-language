@@ -9,7 +9,7 @@
 // Example usage:
 //
 //      class Iterator:
-//          public Forward_iterator_impl_<Iterator, Integer>
+//          public mix_in::Forward_iterator_stuff_<Iterator, Integer>
 //      {
 //          Integer     m_current;
 //      
@@ -29,12 +29,12 @@
 //          {}
 //      };
 
-namespace cppx
+namespace cppx::_
 {
     CPPX_USE_STD( forward_iterator_tag );
     
     template< class Derived, class Value_type_param >
-    class Forward_iterator_impl_
+    class Forward_iterator_stuff_
     {
         auto derived_self()
             -> Derived&
@@ -70,4 +70,15 @@ namespace cppx
         { return not(a == b); }
     };
 
+}  // namespace cppx::_
+
+// Exporting namespaces
+namespace cppx {
+    namespace mix_in {
+        CPPX_USE_FROM_NAMESPACE( _,
+            Forward_iterator_stuff_
+        );
+    }  // namespace with
+
+    using namespace mix_in;
 }  // namespace cppx

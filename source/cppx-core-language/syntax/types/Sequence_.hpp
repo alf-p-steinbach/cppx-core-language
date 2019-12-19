@@ -1,10 +1,10 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a firstcase Greek "pi").
-#include <cppx-core-language/types/Forward_iterator_impl_.hpp>  // cppx::Forward_iterator_impl_
-#include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
-#include <cppx-core-language/tmp/Enable_if_.hpp>                // cppx::Enable_if_
-#include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_integral_
-#include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::Unsigned_
-#include <cppx-core-language/calc/number-type-properties.hpp>   // cppx::(min_, max_)
+#include <cppx-core-language/mix-in/Forward_iterator_stuff_.hpp>    // cppx::mix_in::Forward_iterator_stuff_
+#include <cppx-core-language/types/Truth.hpp>                       // cppx::Truth
+#include <cppx-core-language/tmp/Enable_if_.hpp>                    // cppx::Enable_if_
+#include <cppx-core-language/tmp/type-traits.hpp>                   // cppx::is_integral_
+#include <cppx-core-language/tmp/type-modifiers.hpp>                // cppx::Unsigned_
+#include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::(min_, max_)
 
 #include <c/assert.hpp>
 
@@ -22,7 +22,7 @@ namespace cppx::sequences{
         Unsigned    m_last;
 
         class Iterator:
-            public Forward_iterator_impl_<Iterator, Integer>
+            public mix_in::Forward_iterator_stuff_<Iterator, Integer>
         {
             Unsigned    m_current;
 

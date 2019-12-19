@@ -1,9 +1,9 @@
-#include <cppx-core-language/types/Forward_iterator_impl_.hpp>
+#include <cppx-core-language/mix-in/Forward_iterator_stuff_.hpp>
 
 using cppx::Truth;
 namespace
 {
-    struct S: cppx::Forward_iterator_impl_<S, int>
+    struct S: cppx::mix_in::Forward_iterator_stuff_<S, int>
     {
         void advance() {}
         friend auto operator==( S const&, S const& ) -> Truth { return true; }

@@ -32,6 +32,7 @@ namespace cppx::_
     public:
         auto first() const      -> Iterator { return m_first; }
         auto beyond() const     -> Iterator { return m_beyond; }
+        auto n_items() const    -> Size     { distance( m_first, m_beyond ); }
 
         auto front() const      -> auto&    { return *m_first; }
         auto is_empty() const   -> Truth    { return (m_first == m_beyond); }
@@ -62,9 +63,9 @@ namespace cppx::_
     { return Span_<Iterator>( first, beyond ); }
 
     template< class Iterator >
-    inline auto n_items_of( const Span_<Iterator>& range )
+    inline auto n_items_of( const Span_<Iterator>& span )
         -> Size
-    { return distance( range.begin(), range.end() ); }
+    { return distance( span.begin(), span.end() ); }
 }  // namespace cppx::_
 
 // Exporting namespaces:
