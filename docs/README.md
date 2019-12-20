@@ -87,7 +87,7 @@ Each main area of functionality is a sub-folder in the library.
 
 |Folder:     | Is about:  |
 |------------|------------|
-|[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)). |
+|[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)).<br>[*Discussion and code examples.*](#31-the-bit-level-stuff) |
 |[calc](../source/cppx%2Dcore%2Dlanguage/calc)        | Calculations. Here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest strictly positive value of `T`.
 |[mix-in](../source/cppx%2Dcore%2Dlanguage/mix%2Din)        | Mix-in classes such as `mix_in::Adapt_as_forward_iterator_`.
 |[syntax](../source/cppx%2Dcore%2Dlanguage/syntax)        | Mostly about *reduction of verbosity* for safe or best-practice constructs. For example, the `zero_to` function produces a `Sequence` which supports loops such as `for(const int i: zero_to(n))`, where there is no chance of inadvertent modification of the loop variable. With a reasonably good compiler it&rsquo;s as efficient as an ordinary counting loop &mdash; just less verbose and more safe. Some other syntax support is in the form of macros. E.g. `$use_std(A, B, C);` brings in the specified items from the standard library as if by `using std::A, std::B, std::C;`.  Perhaps of most practical utility to a new library user, here is `<<`-like support for assembling strings from parts. E.g. calls like `fail("Unable to open door "s << n)`. |
@@ -176,6 +176,10 @@ Mostly things are *defined* in a special namespace `cppx::_`. A lot of names fro
 
 Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *Exporting namespace: `cppx::bitlevel`.*
 
+Headers:
+- [3.1.1. “bit-level/bits_per_.hpp”](#311-examples-for-header-bit-levelbits_per_hpp)
+- [3.1.2. “bit-level/intlog2.hpp”](#312-header-bit-levelintlog2hpp)
+- [3.1.3. “bit-level/sum_of_bits.hpp”](#313-examples-for-header-bit-levelsum_of_bitshpp)
 
 #### 3.1.1. Examples for header “bit-level/bits_per_.hpp”.
 
