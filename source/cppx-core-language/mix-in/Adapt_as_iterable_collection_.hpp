@@ -7,7 +7,7 @@
 #include <iterator>
 
 namespace cppx::_ {
-    CPPX_USE_STD( make_reverse_iterator );
+    CPPX_USE_STD( begin, end, make_reverse_iterator );
 
     template< class Derived >
     class Adapt_as_iterable_collection_
@@ -43,13 +43,28 @@ namespace cppx::_ {
         auto empty() const      -> Truth    { return const_self().is_empty(); }
         auto size() const       -> Size     { return const_self().n_items(); }
     };
+
+    // Alternatives to avoid ambiguity when using `begin` and `end` in derived class:
+
+    template< class Collection >
+    inline auto first_iterator_of( Collection& c )
+        -> auto
+    { return begin( c ); }
+
+    template< class Collection >
+    inline auto beyond_iterator_of( Collection& c )
+        -> auto
+    { return end( c ); }
+
 }  // namespace cppx::_
 
 // Exporting namespaces
 namespace cppx {
     namespace mix_in {
         CPPX_USE_FROM_NAMESPACE( _,
-            Adapt_as_iterable_collection_
+            Adapt_as_iterable_collection_,
+            first_iterator_of,
+            beyond_iterator_of
         );
     }  // namespace with
 

@@ -8,22 +8,8 @@
 #include <cppx-core-language/system-dependent/size-types.hpp>           // cppx::Size
 #include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 
-#include <iterator>     // std::(begin, end, distance)
-
 namespace cppx::_
 {
-    CPPX_USE_STD( begin, end, distance );
-
-    template< class Collection >
-    inline auto first_iterator_of( Collection& c )
-        -> auto
-    { return begin( c ); }
-
-    template< class Collection >
-    inline auto beyond_iterator_of( Collection& c )
-        -> auto
-    { return end( c ); }
-
     template< class Iterator >
     class Span_
         : public mix_in::Adapt_as_iterable_collection_<Span_<Iterator>>
@@ -69,8 +55,6 @@ namespace cppx::_
 namespace cppx {
     namespace spans {
         CPPX_USE_FROM_NAMESPACE( _,
-            first_iterator_of,
-            beyond_iterator_of,
             Span_,
             Array_span_,
             span_of,
