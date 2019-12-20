@@ -8,8 +8,7 @@
 #include <cppx-core-language/system-dependent/size-types.hpp>           // cppx::Size
 #include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 
-namespace cppx::_
-{
+namespace cppx::_ {
     template< class Iterator >
     class Span_
         : public mix_in::Adapt_as_iterable_collection_<Span_<Iterator>>
