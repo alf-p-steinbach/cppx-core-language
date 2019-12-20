@@ -88,7 +88,7 @@ Each main area of functionality is a sub-folder in the library.
 |Folder:     | Is about:  |
 |------------|------------|
 |[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)).<br>[*Discussion and code examples.*](#31-the-bit-level-stuff) |
-|[calc](../source/cppx%2Dcore%2Dlanguage/calc)        | Calculations. Here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest strictly positive value of `T`.
+|[calc](../source/cppx%2Dcore%2Dlanguage/calc)        | Calculations. Here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest strictly positive value of `T`.<br>[*Discussion and code examples.*](#32-the-calculation-stuff)
 |[mix-in](../source/cppx%2Dcore%2Dlanguage/mix%2Din)        | Mix-in classes such as `mix_in::Adapt_as_forward_iterator_`.
 |[syntax](../source/cppx%2Dcore%2Dlanguage/syntax)        | Mostly about *reduction of verbosity* for safe or best-practice constructs. For example, the `zero_to` function produces a `Sequence` which supports loops such as `for(const int i: zero_to(n))`, where there is no chance of inadvertent modification of the loop variable. With a reasonably good compiler it&rsquo;s as efficient as an ordinary counting loop &mdash; just less verbose and more safe. Some other syntax support is in the form of macros. E.g. `$use_std(A, B, C);` brings in the specified items from the standard library as if by `using std::A, std::B, std::C;`.  Perhaps of most practical utility to a new library user, here is `<<`-like support for assembling strings from parts. E.g. calls like `fail("Unable to open door "s << n)`. |
 |[system-dependent](../source/cppx%2Dcore%2Dlanguage/system%2Ddependent)      | System-dependent stuff. The type `Byte` + support; the enumeration `Endian` (more precisely it&rsquo;s a `struct` with an inner `enum`)  ; and the signed types `Size` and `Index` plus the corresponding `Unsigned_size` and `Unsigned_index`. These four are all the same size as `size_t`.
@@ -421,6 +421,13 @@ Folder: “**[calc](../source/cppx%2Dcore%2Dlanguage/calc)**”. *Exporting name
 ***Tip***:  
 The “C++ Headers Collection” micro-library provides [a wrapper header `<cpp/calc.hpp>`](https://github.com/alf-p-steinbach/Cpp-Header-Collections/blob/master/source/cpp/calc.hpp) that includes all the calculation stuff from the standard library, including various overloads of `abs` and `div` from different standard library headers, and including both `::` and `std` namespace variants. Well, it includes “all” except the very rarely used `valarray`. Handy.
 
+Headers:
+
+- 3.2.1. “calc/[floating-point-operations.hpp](#321-examples-for-header-calcfloating-point-operationshpp)”
+- 3.2.2. “calc/[general-operations.hpp](#322-header-calcgeneral-operationshpp)”
+- 3.2.3. “calc/[integer-operations.hpp](#323-examples-for-header-calcinteger-operationshpp)”
+- 3.2.4. “calc/[named-numbers.hpp](#324-examples-for-header-calcnamed-numbershpp)”
+- 3.2.5. “calc/[number-type-properties.hpp](#325-examples-for-header-calcnumber-type-propertieshpp)”
 
 #### 3.2.1. Examples for header “calc/floating-point-operations.hpp”.
 
