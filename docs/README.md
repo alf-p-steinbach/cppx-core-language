@@ -86,6 +86,8 @@ Further work on this library is expected to be additions. Major changes in file 
 
 Each main area of functionality is a sub-folder in the library.
 
+To benefit the most from the examples and discussion you may read the [information about the examples’ availability, order, notation, headers and namespaces](#30-about-the-examples--availability-order-notation-headers-namespaces).
+
 |Folder:     | Is about:  |
 |------------|------------|
 |[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)   | Examples: `bits_per_`*`<T>`* gives the number of bits of a *`T`*-value, `intlog2` reports the position of the most significant 1-bit in an integer, and `sum_of_bits` reports the sum of the bits in an integer (note: in some contexts `sum_of_bits` is known as [&ldquo;pop-count&rdquo;](https://en.wikipedia.org/wiki/Hamming_weight)).<br>[*Discussion and code examples.*](#31-the-bit-level-stuff) |
