@@ -39,7 +39,7 @@
 
 Originally a sub-folder in the *cppx-core* project, the Core Language Extensions  is a pure header micro-library that provides workarounds for various shortcomings of the C++ core language and standard library features directly supporting the core language, as of C++17.
 
-As a simple example of a core language shortcoming that’s not addressed in C++20, the all-directions implicit conversions for the built-in `bool` type generally cause unexpected and undesired overload resolutions. For example, iostreams output of a function pointer typically results in the text “1”, via an unexpected conversion of pointer to `bool`. The Core Language Extensions’ `to_hex` function can help with this specific case, and to help you avoid the general overload resolution problem Core Language Extensions offers the alternative boolean type `Truth`, which converts implicitly only to and from `bool`.
+As a simple example of a core language shortcoming that’s not addressed in C++20, the all-directions implicit conversions for the built-in `bool` type generally cause unexpected and undesired overload resolutions. For example, iostreams output of a function pointer typically results in the text “1”, via an unexpected conversion of pointer to `bool`. The Core Language Extensions’ `to_hex` function can help with this specific case, and to help you avoid the general overload resolution problem the library offers the alternative boolean type `Truth`, which converts implicitly only to and from `bool`.
 
 `Truth` is a drop-in replacement for the too-eagerly converting `bool`.
 
