@@ -7,6 +7,7 @@
       - [*Disclaimer*](#disclaimer)
   - [2. Overview.](#2-overview)
   - [3. Examples & details.](#3-examples--details)
+    - [3.0. About the examples — availability, order, notation, headers, namespaces.](#30-about-the-examples--availability-order-notation-headers-namespaces)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
       - [3.1.1. Examples for header “bit-level/bits_per_.hpp”.](#311-examples-for-header-bit-levelbits_per_hpp)
       - [3.1.2. Header “bit-level/intlog2.hpp”.](#312-header-bit-levelintlog2hpp)
@@ -100,15 +101,17 @@ Each main area of functionality is a sub-folder in the library.
 
 ## 3. Examples & details.
 
+### 3.0. About the examples — availability, order, notation, headers, namespaces.
+
 ***Availability***  
 These code examples are all available in the “examples” top level folder.
 
 ---
 
-***Order of the examples***  
+***Order***  
 The examples and discussions are given here in alphabetical order of folders and headers.
 
-All examples draw on the relevant parts of the library. With alphabetical ordering of discussion that means that many things are necessarily used in examples before these things are (more fully) explained. An alternative could have been to only use the library for each feature to be exemplified, but that would have given unnatural and verbose code.
+All examples draw on the relevant parts of the full library. With alphabetical ordering of discussion that means that many things are necessarily used in examples before these things are (more fully) explained. An alternative could have been to only use the library for each feature to be exemplified, but that would have given unnatural and verbose code.
 
 I’ve tried to explain enough about each example to leave no “mystery”.
 
