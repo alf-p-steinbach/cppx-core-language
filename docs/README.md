@@ -106,7 +106,7 @@ To benefit the most from the examples and discussion you may read the [informati
 ### 3.0. About the examples — availability, order, notation, headers, namespaces.
 
 ***Availability***  
-These code examples are all available in [the “examples” top level folder](../source).
+These code examples are all available in [the “examples” top level folder](../examples).
 
 ---
 
