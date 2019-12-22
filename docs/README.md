@@ -334,6 +334,7 @@ C++20 will provide a number of bit level functions via [header `<bit>`](https://
 
 | *C++20 function* | *Rough `intlog2` equivalence* |
 |----------------|------------------|
+| `std::countl_zero` | `countl_zero(x)` = `(x==0? value_bits_per_<decltype(x)> : intlog2(x)` |
 | `std::log2pl` | `log2pl(x)` = `intlog2(x) + 1` |
 | `std::countr_zero` | `countr_zero(x)` = `(x==0? value_bits_per_<decltype(x)> : intlog2r(x))` |
 
