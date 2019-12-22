@@ -342,7 +342,6 @@ Since the functions are not completely identical there may be uses for both sets
 ---
 
 ***Positions of most and least significant `1` in bit pattern***  
-
 <small>*examples/bit-level/positions-of-msb-and-lsb.cpp*</small>
 ~~~cpp
 #include <cppx-core-language/all.hpp>
