@@ -3,8 +3,7 @@
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
 #include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::(Index, Size)
 
-namespace cppx
-{
+namespace cppx::_ {
     CPPX_USE_STD( forward );
 
     template< class Func, class... Args >
@@ -14,4 +13,13 @@ namespace cppx
             f( forward<Args>( args )... );
         }
     }
-}
+}  // namespace cppx::_
+
+// Exporting namespaces:
+namespace cppx {
+    namespace syntax {
+        CPPX_USE_FROM_NAMESPACE( _, repeat_times );
+    }  // namespace syntax
+
+    using namespace syntax;
+}  // namespace cppx

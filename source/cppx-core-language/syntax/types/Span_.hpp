@@ -52,13 +52,14 @@ namespace cppx::_ {
 
 // Exporting namespaces:
 namespace cppx {
-    namespace spans {
+    namespace syntax {
         CPPX_USE_FROM_NAMESPACE( _,
             Span_,
             Array_span_,
             span_of,
             n_items_of
         );
-    }
-    using namespace spans;
+    }  // namespace syntax
+
+    using namespace syntax;
 }  // namespace cppx

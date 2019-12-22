@@ -8,7 +8,7 @@
 
 #include <c/assert.hpp>
 
-namespace cppx::sequences{
+namespace cppx::_{
     
     template<
         class Integer,
@@ -110,8 +110,19 @@ namespace cppx::sequences{
         -> Truth
     { return seq.contains( v ); }
 
-}  // namespace cppx::sequences
+}  // namespace cppx::_
 
+// Exporting namespaces:
 namespace cppx {
-    using namespace cppx::sequences;
+    namespace syntax {
+        CPPX_USE_FROM_NAMESPACE( _,
+            Sequence_,
+            Sequence,
+            zero_to,
+            one_through,
+            is_in
+            );
+    }  // namespace syntax
+
+    using namespace cppx::syntax;
 }  // namespace cppx
