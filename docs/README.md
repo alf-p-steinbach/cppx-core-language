@@ -10,7 +10,7 @@
     - [3.0. About the examples — availability, order, notation, headers, namespaces.](#30-about-the-examples--availability-order-notation-headers-namespaces)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
       - [3.1.1. Examples for header “bit-level/bits_per_.hpp”.](#311-examples-for-header-bit-levelbits_per_hpp)
-      - [3.1.2. Header “bit-level/intlog2.hpp”.](#312-header-bit-levelintlog2hpp)
+      - [3.1.2. Examples for header “bit-level/intlog2.hpp”.](#312-examples-for-header-bit-levelintlog2hpp)
       - [3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.](#313-examples-for-header-bit-levelsum_of_bitshpp)
     - [3.2. The calculation stuff.](#32-the-calculation-stuff)
       - [3.2.1. Examples for header “calc/floating-point-operations.hpp”.](#321-examples-for-header-calcfloating-point-operationshpp)
@@ -183,7 +183,7 @@ Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *
 
 Headers:
 - 3.1.1. “bit-level/[bits_per_.hpp](#311-examples-for-header-bit-levelbits_per_hpp)”
-- 3.1.2. “bit-level/[intlog2.hpp](#312-header-bit-levelintlog2hpp)”
+- 3.1.2. “bit-level/[intlog2.hpp](#312-examples-for-header-bit-levelintlog2hpp)”
 - 3.1.3. “bit-level/[sum_of_bits.hpp](#313-examples-for-header-bit-levelsum_of_bitshpp)”
 
 #### 3.1.1. Examples for header “bit-level/bits_per_.hpp”.
@@ -320,13 +320,13 @@ Specific headers:
 ~~~
 
 
-#### 3.1.2. Header “bit-level/intlog2.hpp”.
+#### 3.1.2. Examples for header “bit-level/intlog2.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
 The “intlog2.hpp” header provides the `constexpr` function `intlog2`, which, using a number of steps logarithmic in the bit width, returns the zero based bit position of the most signficant `1` in the binary representation of the unsigned argument. I.e., it returns the integer part of the two’s logarithm.
 
-The corresponding convenience function `intlog2r` (“r” for “reverse”) returns the bit position of the least significant `1`. For the general non-zero `x` case `intlog2r(x)` can be expressed as just `intlog2(x^(x-1))`. But to many code readers the name `intlog2r` is probably considerably less cryptic, and it can provide tooltip documentation in an editor.
+The corresponding convenience function `intlog2r` (“r” for “reverse”) returns the bit position of the least significant `1`. The general case of `intlog2r(x)` for non-zero `x` of type `unsigned int` or wider, can be expressed as just `intlog2(x^(x-1))`. But to many code readers the name `intlog2r` is probably considerably less cryptic, it can provide tooltip documentation in an editor, and it’s more robust for use with narrow types.
 
 Both functions return -1 when the argument is zero.
 
@@ -337,6 +337,80 @@ C++20 will provide a number of bit level functions via [header `<bit>`](https://
 | `std::log2pl` | `log2pl(x)` = `intlog2(x) + 1` |
 | `std::countr_zero` | `countr_zero(x)` = `(x==0? value_bits_per_<decltype(x)> : intlog2r(x))` |
 
+Since the functions are not completely identical there may be uses for both sets.
+
+---
+
+***Positions of most and least significant `1` in bit pattern***  
+
+<small>*examples/bit-level/positions-of-msb-and-lsb.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdint.hpp>     // uint32_t
+#include <bitset>           // std::bitset
+#include <iomanip>          // std::setw
+#include <iostream>         // std::(cout, endl)
+
+const int n_bits = 16;
+
+template< class... Args >
+void display_row( const Args&... args )
+{
+    static const int widths[] = {n_bits, 10, 10};
+    const int* pw = widths;
+    $use_std( cout, endl, setw );
+    ((cout << setw( *pw++ ) << args), ...);  cout << endl;
+}
+
+auto main()
+    -> int
+{
+    $use_std( bitset );
+    $use_cppx( Unsigned_int_, intlog2, intlog2r );
+
+    const unsigned short_pattern = 42 >> 1;
+    const int n_left_zeroes = n_bits - (intlog2( short_pattern ) + 1);
+    Unsigned_int_<n_bits> bits = 0;
+    display_row( "Bits:", "intlog2:", "intlog2r:" );
+    $repeat_times( n_left_zeroes + 2 ) {
+        switch( _i ) {
+            case 0:     { break; }      // Use bitpattern all zeros for first row.
+            case 1:     { bits = short_pattern;  break; }
+            default:    { bits <<= 1;  break; }
+        }
+        display_row( bitset<n_bits>( bits ), intlog2( bits ), intlog2r( bits ) );
+    }
+}
+~~~
+
+Here the `$repeat_times` macro evaluates the argument just once and provides that value to the loop body as `_n`, and the current loop index as `_i`, both `[[maybe_unused]]`.
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+           Bits:  intlog2: intlog2r:
+0000000000000000        -1        -1
+0000000000010101         4         0
+0000000000101010         5         1
+0000000001010100         6         2
+0000000010101000         7         3
+0000000101010000         8         4
+0000001010100000         9         5
+0000010101000000        10         6
+0000101010000000        11         7
+0001010100000000        12         8
+0010101000000000        13         9
+0101010000000000        14        10
+1010100000000000        15        11
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::(intlog2, intlog2r)
+#include <cppx-core-language/syntax/flow-control.hpp>       // $repeat_times
+#include <cppx-core-language/types/Int_.hpp>                // cppx::Unsigned_int_
+~~~
 
 #### 3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.
 

@@ -64,7 +64,7 @@ namespace cppx::_ {
         -> int
     {
         static_assert( std::is_unsigned_v<Unsigned> );
-        return (x == 0? -1 : impl::log2( x ^ (x - 1) );
+        return (x == 0? -1 : impl::log2( Unsigned( x ^ Unsigned(x - 1) ) ));
     }
 }  // namespace cppx::_
 
@@ -72,7 +72,10 @@ namespace cppx::_ {
 namespace cppx {
     namespace bitlevel
     {
-        CPPX_USE_CPPX( _::intlog2 );
+        CPPX_USE_FROM_NAMESPACE( _,
+            intlog2, 
+            intlog2r
+            );
     }  // namespace bitlevel
 
     using namespace bitlevel;
