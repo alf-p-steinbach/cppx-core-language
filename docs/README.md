@@ -1038,7 +1038,7 @@ xxx asd
 
 In C++17 and earlier C++ standards the standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
 
-To help with that “syntax/macro-items_of.hpp” includes the standard library’s `<iterator>` header and defines the `$item_of` macro as
+To help with that “syntax/macro-items_of.hpp” includes the standard library’s `<iterator>` header and defines the `$items_of` macro as
 
 ~~~cpp
 #ifndef CPPX_NO_DOLLARS_PLEASE
