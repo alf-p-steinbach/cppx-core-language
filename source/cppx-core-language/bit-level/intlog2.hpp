@@ -46,6 +46,7 @@ namespace cppx::_ {
     /// @endcond
 
     /// \brief The position of the most significant bit in an unsigned value, or -1 for value zero.
+    // For the general case this is the same as the bit width minus number of leftmost zeroes, minus 1.
     //
     template< class Unsigned >
     constexpr inline auto intlog2( const Unsigned x ) noexcept
@@ -53,6 +54,17 @@ namespace cppx::_ {
     {
         static_assert( std::is_unsigned_v<Unsigned> );
         return impl::log2( x );
+    }
+
+    /// \brief The position of the least significant bit in an unsigned value, or -1 for value zero.
+    // For the general case this is the same as the number of rightmost zeroes.
+    //
+    template< class Unsigned >
+    constexpr inline auto intlog2r( const Unsigned x ) noexcept
+        -> int
+    {
+        static_assert( std::is_unsigned_v<Unsigned> );
+        return (x == 0? -1 : impl::log2( x ^ (x - 1) );
     }
 }  // namespace cppx::_
 

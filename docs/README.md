@@ -324,7 +324,18 @@ Specific headers:
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
-The “intlog2.hpp” header provides the `constexpr` function `intlog2`, which returns the bit position of the most signficant `1` in the binary representation of the argument.
+The “intlog2.hpp” header provides the `constexpr` function `intlog2`, which, using a number of steps logarithmic in the bit width, returns the zero based bit position of the most signficant `1` in the binary representation of the unsigned argument. I.e., it returns the integer part of the two’s logarithm.
+
+The corresponding convenience wrapper function `intlog2r` (“r” for “reverse”) returns the bit position of the least significant `1`. For the general non-zero `x` case `intlog2r(x)` can be expressed as just `intlog2(x^(x-1))`. But to many code readers the name `intlog2r` is probably considerably less cryptic, and it can provide tooltip documentation in an editor.
+
+Both functions return -1 when the argument is zero.
+
+C++20 will provide a number of bit level functions via [header `<bit>`](https://en.cppreference.com/w/cpp/header/bit), also these functions restricted to unsigned:
+
+| *C++20 function* | *Rough `intlog2` equivalence* |
+|----------------|------------------|
+| `std::log2pl` | `log2pl(x)` = `intlog2(x) + 1` |
+| `std::countr_zero` | `countr_zero(x)` = `(x==0? value_bits_per_<decltype(x)> : intlog2r(x))` |
 
 
 #### 3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.
