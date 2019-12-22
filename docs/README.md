@@ -326,7 +326,7 @@ Specific headers:
 
 The “intlog2.hpp” header provides the `constexpr` function `intlog2`, which, using a number of steps logarithmic in the bit width, returns the zero based bit position of the most signficant `1` in the binary representation of the unsigned argument. I.e., it returns the integer part of the two’s logarithm.
 
-The corresponding convenience wrapper function `intlog2r` (“r” for “reverse”) returns the bit position of the least significant `1`. For the general non-zero `x` case `intlog2r(x)` can be expressed as just `intlog2(x^(x-1))`. But to many code readers the name `intlog2r` is probably considerably less cryptic, and it can provide tooltip documentation in an editor.
+The corresponding convenience function `intlog2r` (“r” for “reverse”) returns the bit position of the least significant `1`. For the general non-zero `x` case `intlog2r(x)` can be expressed as just `intlog2(x^(x-1))`. But to many code readers the name `intlog2r` is probably considerably less cryptic, and it can provide tooltip documentation in an editor.
 
 Both functions return -1 when the argument is zero.
 
