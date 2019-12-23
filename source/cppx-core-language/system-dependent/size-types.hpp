@@ -19,14 +19,14 @@
 /// here will be 16 bits on a 16-bit system (but I have no 16-bit system to test on).
 
 #include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_CPPX
-#include <cppx-core-language/tmp/type-modifiers.hpp>        // cppx::Signed_
+#include <cppx-core-language/tmp/type-modifiers.hpp>        // cppx::As_signed_
 
 #include <c/stddef.hpp>     // size_t
 
 namespace cppx
 {
     /// \brief A \make_name_ref{cppx,Signed_} equivalent of `size_t`.
-    using Size                  = Signed_< size_t >;    // ~ptrdiff_t
+    using Size                  = As_signed_< size_t >;     // ~ptrdiff_t
 
     /// \brief Same as \make_name_ref{cppx,Size} but with name signifying use as index.
     using Index                 = Size;

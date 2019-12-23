@@ -17,8 +17,8 @@ namespace cppx
     {
         // Wrapping the type keeps any top level CV-qualification in the result.
         const string raw = type_name_from( typeid( Type_carrier_<Type> ) );
-        const int i_first = 1 + raw.find_first_of( '<' );
-        const int i_beyond = raw.find_last_of( '>' );
+        const int i_first = 1 + int( raw.find_first_of( '<' ) );
+        const int i_beyond = int( raw.find_last_of( '>' ) );
         return raw.substr( i_first, i_beyond - i_first );
     }
 
