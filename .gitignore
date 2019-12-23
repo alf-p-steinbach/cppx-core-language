@@ -1,3 +1,4 @@
 build/Visual Studio 2019/*
 *.exe
 *.obj
+examples/bit-level/x
