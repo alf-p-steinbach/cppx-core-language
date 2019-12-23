@@ -21,34 +21,63 @@
 
 namespace cppx
 {
+    //-------------------------------------------------------------- Deprecated:
+
     /// \brief Reduces a type `T*` to just `T`.
-    template< class Some_pointer_type >
+    template< class Some_pointer_type >             [[deprecated( "New name As_pointee_" )]]
     using Unptr_        = std::remove_pointer_t<Some_pointer_type>;
 
     /// \brief Reduces a type `T&` or `T&&` to just `T`.
-    template< class Some_reference_type >
+    template< class Some_reference_type >           [[deprecated( "New name As_referent_" )]]
     using Unref_        = std::remove_reference_t<Some_reference_type>;
 
     /// \brief For an integer type, produces the corresponding signed type.
-    template< class Integer >
+    template< class Integer >                       [[deprecated( "New name As_signed_" )]]
     using Signed_       = std::make_signed_t< Integer >;
 
     /// \brief For an integer type, produces the corresponding unsigned type.
-    template< class Integer >
+    template< class Integer >                       [[deprecated( "New name As_unsigned_" )]]
     using Unsigned_     = std::make_unsigned_t< Integer >;
 
     /// \brief For a type `T` produces `const T`.
-    template< class Some_type >
+    template< class Some_type >                     [[deprecated( "New name As_const_" )]]
     using Const_        = std::add_const_t< Some_type >;
 
     /// \brief For a type `const T` produces plain `T`.
-    template< class Some_type >
+    template< class Some_type >                     [[deprecated( "New name As_unconst_" )]]
     using Unconst_      = std::remove_const_t< Some_type >;
+
+    //-------------------------------------------------------------- New names:
+
+    /// \brief Reduces a type `T*` to just `T`.
+    template< class Some_pointer_type >
+    using As_pointee_   = std::remove_pointer_t<Some_pointer_type>;
+
+    /// \brief Reduces a type `T&` or `T&&` to just `T`.
+    template< class Some_reference_type >
+    using As_referent_  = std::remove_reference_t<Some_reference_type>;
+
+    /// \brief For an integer type, produces the corresponding signed type.
+    template< class Integer >
+    using As_signed_    = std::make_signed_t< Integer >;
+
+    /// \brief For an integer type, produces the corresponding unsigned type.
+    template< class Integer >
+    using As_unsigned_  = std::make_unsigned_t< Integer >;
+
+    /// \brief For a type `T` produces `const T`.
+    template< class Some_type >
+    using As_const_     = std::add_const_t< Some_type >;
+
+    /// \brief For a type `const T` produces plain `T`.
+    template< class Some_type >
+    using As_unconst_   = std::remove_const_t< Some_type >;
 
     namespace type_modifiers
     {
         CPPX_USE_CPPX(
-            Unptr_, Unref_, Signed_, Unsigned_, Const_, Unconst_
+            Unptr_, Unref_, Signed_, Unsigned_, Const_, Unconst_,
+            As_unptr_, As_unref_, As_signed_, As_unsigned_, As_const_, As_unconst_
         );
     }  // namespace type_modifiers
 }  // namespace cppx
