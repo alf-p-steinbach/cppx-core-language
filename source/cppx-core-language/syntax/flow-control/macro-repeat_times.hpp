@@ -1,4 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
 #include <cppx-core-language/syntax/types/Sequence_.hpp>            // cppx::zero_to
 #include <cppx-core-language/system-dependent/size-types.hpp>       // cppx::Index

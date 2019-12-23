@@ -1,4 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 /// \file
 /// \brief \make_name_ref{cppx,sum_of_bits}, the number of 1-bits in a `std::bitset` or
 /// unsigned value.

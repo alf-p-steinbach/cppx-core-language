@@ -1,4 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 /// \file
 /// \brief Concise, clear & consistent notation for number type properties:
 /// \make_name_ref{cppx,is_ieee754_format_},

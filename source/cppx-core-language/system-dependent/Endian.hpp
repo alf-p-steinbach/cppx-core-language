@@ -1,4 +1,5 @@
-﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
+#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 /// \file
 /// \brief Essentially the same functionality as C++20 `std::endian`, namely
 /// \make_name_ref{cppx,Endian},

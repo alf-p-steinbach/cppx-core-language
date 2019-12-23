@@ -1,4 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
+
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
 #include <cppx-core-language/tmp/Type_carrier_.hpp>             // cppx::Type_carrier_
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::Unref_

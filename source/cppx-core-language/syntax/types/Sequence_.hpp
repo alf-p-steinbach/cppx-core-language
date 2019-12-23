@@ -1,4 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a firstcase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
+
 #include <cppx-core-language/mix-in/Adapt_as_forward_iterator_.hpp> // cppx::mix_in::Adapt_as_forward_iterator_
 #include <cppx-core-language/types/Truth.hpp>                       // cppx::Truth
 #include <cppx-core-language/tmp/Enable_if_.hpp>                    // cppx::Enable_if_

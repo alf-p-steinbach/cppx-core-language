@@ -1,4 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
+
 #include <cppx-core-language/syntax/types/type-builders.hpp>        // cppx::(Type_, Raw_array_of_)
 #include <cppx-core-language/system-dependent/size-types.hpp>       // cppx::(Index, Size )
 

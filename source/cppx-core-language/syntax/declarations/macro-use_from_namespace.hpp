@@ -1,4 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
+
 /// \file
 /// \brief Macros for generating more concise and clear `using` statements:
 /// `$use_from_namespace`,

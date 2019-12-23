@@ -1,9 +1,11 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 /// \file
 /// \brief
 /// \make_name_ref{cppx,bits_per_},
 /// \make_name_ref{cppx,value_bits_per_} and
 /// \make_name_ref{cppx,magnitude_bits_per_}.
+
 
 #include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_CPPX
 #include <cppx-core-language/system-dependent/Byte.hpp>     // cppx::bits_per_byte
