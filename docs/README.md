@@ -434,6 +434,8 @@ There is also an overload for a `std::bitset` as argument.
 
 This is generally known as a “**pop count**”, short for “population count”, which presumably refers to the bits as representing a set. With the g++ compiler the function can possibly be optimized in terms of the intrinsic `__builtin_popcount` and family, and with the Visual C++ compiler it can possibly be optimized in terms of the intrinsic `__popcnt` and family. The header provides a rough outline of these optimizations as dead code in a preprocessor `#if 0` conditional, but I haven’t measured, and chances are that `std::bitset::count` is expressed via an intrinsic anyway.
 
+C++20 will provide a  `std::popcount` function via [header `<bit>`](https://en.cppreference.com/w/cpp/header/bit). Unlike the present `cppx::sum_of_bits` the C++20 function will be `constexpr`. Probably this library will follow suit.
+
 ---
 
 ***Sum of bits & integral log₂***  
