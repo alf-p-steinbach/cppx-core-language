@@ -1098,7 +1098,7 @@ The syntax support is intended to give you an even more joyful and [DRY](https:/
 * easy ways to express constraints such as a `const` loop variable, and
 * recognizable common abstractions of coding patterns such as `throw` with source location.
 
-There are 5 main areas, each in a sub-folder with a small set of detail headers. These detail headers are not documented here; see the source code for detail header names etc.. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes the detail headers from that sub-folder, and it has an exporting namespace `cppx::`*X*.
+There are 5 main areas, each in a sub-folder with a small set of detail headers. These detail headers are not documented here; see the source code for detail header names etc. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes the detail headers from that sub-folder, and it has an exporting namespace `cppx::`*X*.
 
 | Area | *X*.hpp | Functionality |
 |------|---------|---------------|
