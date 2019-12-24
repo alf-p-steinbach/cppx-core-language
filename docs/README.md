@@ -1180,7 +1180,7 @@ PC machine code in Intel assembly notation with 64-bit MinGW g++ 9.2, generated 
     g++ -std=c++17 c-style-versus-range-based-with-Sequence.cpp -S -masm=intel -O
 
 ~~~assembly
-; The loop in c_style():             | ; The loop in cppx_range_based():
+; The loop in c_style():             | ; The loop in cpp_range_based():
                                      |
     mov ebx, 100                     |     mov ebx, 200
     lea rsi, .LC0[rip]               |     lea rsi, .LC0[rip]
@@ -1198,7 +1198,7 @@ PC machine code in Intel assembly notation with 64-bit Visual C++ 2019, generate
     cl /std:c++17 /Zc:__cplusplus /FI"iso646.h" /EHsc c-style-versus-range-based-with-Sequence.cpp /FA /O1
 
 ~~~assembly
-; The loop in c_style():                            | ; The loop in cppx_range_based():
+; The loop in c_style():                            | ; The loop in cpp_range_based():
                                                     |
     xor ebx, ebx                                    |     xor ebx, ebx
 $LL4@c_style:                                       | $LL4@cpp_range_:
