@@ -2,3 +2,4 @@ build/Visual Studio 2019/*
 *.exe
 *.obj
 x
+*.asm
