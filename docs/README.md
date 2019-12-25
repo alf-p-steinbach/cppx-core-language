@@ -276,11 +276,11 @@ void display_info_for_type_()
 template< cppx::Bitness::Enum... n_bits >
 void display_info_for_()
 {
-    $use_cppx( Int_, As_unsigned_int_ );
+    $use_cppx( Int_, Unsigned_int_ );
     display_row( "Type:", "Bits per value:", "Value repr. bits:", "Magnitude bits:" );
     cout << endl;
     (display_info_for_type_< Int_<n_bits> >(), ...);
-    (display_info_for_type_< As_unsigned_int_<n_bits> >(), ...);
+    (display_info_for_type_< Unsigned_int_<n_bits> >(), ...);
 }
 
 auto main()
@@ -310,14 +310,14 @@ Data addresses in this process are 64-bit.
   unsigned long long                  64                  64                  64
 ~~~
 
-The standard library has nothing like `Int_<n>` and `As_unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro, and gives the ability to obtain readable names of types. That ability is based on `typeid(T).name()`, just with added demangling applied for the g++ compiler and with removal of `struct`, `class` and `enum` keywords for Visual C++ and other compilers.
+The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro, and gives the ability to obtain readable names of types. That ability is based on `typeid(T).name()`, just with added demangling applied for the g++ compiler and with removal of `struct`, `class` and `enum` keywords for Visual C++ and other compilers.
 
 Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
 #include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
-#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, As_unsigned_int_)
+#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
 ~~~
 
 
@@ -367,11 +367,11 @@ auto main()
     -> int
 {
     $use_std( bitset );
-    $use_cppx( As_unsigned_int_, intlog2, intlog2r );
+    $use_cppx( Unsigned_int_, intlog2, intlog2r );
 
     const unsigned short_pattern = 42 >> 1;
     const int n_left_zeroes = n_bits - (intlog2( short_pattern ) + 1);
-    As_unsigned_int_<n_bits> bits = 0;
+    Unsigned_int_<n_bits> bits = 0;
     display_row( "Bits:", "intlog2:", "intlog2r:" );
     $repeat_times( n_left_zeroes + 2 ) {
         switch( _i ) {
@@ -410,7 +410,7 @@ Specific headers:
 ~~~cpp
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::(intlog2, intlog2r)
 #include <cppx-core-language/syntax/flow-control.hpp>       // $repeat_times
-#include <cppx-core-language/types/Int_.hpp>                // cppx::As_unsigned_int_
+#include <cppx-core-language/types/Int_.hpp>                // cppx::Unsigned_int_
 ~~~
 
 #### 3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.
