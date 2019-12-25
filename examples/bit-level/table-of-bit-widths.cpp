@@ -21,7 +21,7 @@ void display_info_for_type_()
         );
 }
 
-template< cppx::Bitness::Enum... n_bits >
+template< cppx::Bit_width::Enum... n_bits >
 void display_info_for_()
 {
     $use_cppx( Int_, Unsigned_int_ );
@@ -34,8 +34,8 @@ void display_info_for_()
 auto main()
     -> int
 {
-    $use_cppx( Bitness );
-    cout << "Data addresses in this process are " << Bitness::system << "-bit." << endl;
+    $use_cppx( Bit_width );
+    cout << "Data addresses in this process are " << Bit_width::system << "-bit." << endl;
     cout << endl;
-    display_info_for_<Bitness::_8, Bitness::_16, Bitness::_32, Bitness::_64>();
+    display_info_for_<Bit_width::_8, Bit_width::_16, Bit_width::_32, Bit_width::_64>();
 }

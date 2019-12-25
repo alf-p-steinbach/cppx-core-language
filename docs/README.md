@@ -9,9 +9,11 @@
   - [3. Examples & details.](#3-examples--details)
     - [3.0. About the examples — availability, order, notation, headers, namespaces.](#30-about-the-examples--availability-order-notation-headers-namespaces)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
-      - [3.1.1. Examples for header “bit-level/bits_per_.hpp”.](#311-examples-for-header-bit-levelbits_per_hpp)
-      - [3.1.2. Examples for header “bit-level/intlog2.hpp”.](#312-examples-for-header-bit-levelintlog2hpp)
-      - [3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.](#313-examples-for-header-bit-levelsum_of_bitshpp)
+      - [3.1.1. Examples for header “bit-level/Bits_width_.hpp”.](#311-examples-for-header-bit-levelbits_width_hpp)
+      - [3.1.2. Examples for header “bit-level/bits_per_.hpp”.](#312-examples-for-header-bit-levelbits_per_hpp)
+      - [3.1.3. Examples for header “bit-level/Int_.hpp”.](#313-examples-for-header-bit-levelint_hpp)
+      - [3.1.4. Examples for header “bit-level/intlog2.hpp”.](#314-examples-for-header-bit-levelintlog2hpp)
+      - [3.1.5. Examples for header “bit-level/sum_of_bits.hpp”.](#315-examples-for-header-bit-levelsum_of_bitshpp)
     - [3.2. The calculation stuff.](#32-the-calculation-stuff)
       - [3.2.1. Examples for header “calc/floating-point-operations.hpp”.](#321-examples-for-header-calcfloating-point-operationshpp)
       - [3.2.2. Header “calc/general-operations.hpp”.](#322-header-calcgeneral-operationshpp)
@@ -183,69 +185,29 @@ Mostly things are *defined* in a special namespace `cppx::_`. A lot of names fro
 Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *Exporting namespace: `cppx::bitlevel`.*
 
 Headers:
-- 3.1.1. “bit-level/[bits_per_.hpp](#311-examples-for-header-bit-levelbits_per_hpp)”
-- 3.1.2. “bit-level/Int_.hpp”
-- 3.1.3. “bit-level/[intlog2.hpp](#313-examples-for-header-bit-levelintlog2hpp)”
-- 3.1.4. “bit-level/[sum_of_bits.hpp](#314-examples-for-header-bit-levelsum_of_bitshpp)”
+- 3.1.1. “bit-level/Bit_width.hpp”
+- 3.1.2. “bit-level/[bits_per_.hpp](#312-examples-for-header-bit-levelbits_per_hpp)”
+- 3.1.3. “bit-level/Int_.hpp”
+- 3.1.4. “bit-level/[intlog2.hpp](#314-examples-for-header-bit-levelintlog2hpp)”
+- 3.1.5. “bit-level/[sum_of_bits.hpp](#315-examples-for-header-bit-levelsum_of_bitshpp)”
 
-#### 3.1.1. Examples for header “bit-level/bits_per_.hpp”.
+#### 3.1.1. Examples for header “bit-level/Bits_width_.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
-The “bits_per_.hpp” header provides convenient notation for the bit widths of fundamental types, as `int` values: `bits_per_<T>`, `value_bits_per_<T>` and `magnitude_bits_per_<T>`.
-
----
-
-***Bits per int***  
-<small>*examples/bit-level/bit-widths-of-int.cpp*</small>
-~~~cpp
-#include <cppx-core-language/all.hpp>
-#include <c/stdio.hpp>
-
-auto main()
-    -> int
-{
-    const auto& s =
-        "Data addresses in this process are %d-bit.\n"
-        "\n"
-        "With this compiler an `int` is %d bits. %d of those are value representation\n"
-        "bits, and of those again %d bits encode the magnitude.\n";
-
-    using namespace cppx;
-    printf( s,
-        Bit_width::system, bits_per_<int>, value_bits_per_<int>, magnitude_bits_per_<int>
-        );
-}
-~~~
-
-Result with 64-bit MinGW g++ in Windows 10:
-
-~~~txt
-Data addresses in this process are 64-bit.
-
-With this compiler an `int` is 32 bits. 32 of those are value representation
-bits, and of those again 31 bits encode the magnitude.
-~~~
-
-Without the Core Language Extensions library you could do this using `std::numeric_limits` and perhaps the `CHAR_BIT` constant from C.
-
-Specific header:
+The `Bit_width::Enum` type, defined as
 
 ~~~cpp
-#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+struct Bit_width{ enum Enum {
+    _8 = 8, _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
+}; };
 ~~~
 
+… is intended as a formal parameter type where you want the argument value constrained to one in this list.
 
 ---
 
 ***Types from bit widths***  
-The `Bit_width::Enum` enumeration type, defined as
-
->     struct Bit_width{ enum Enum {
->         _8 = 8, _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
->         }; };
-
-… is intended as a formal parameter type where you want the argument value constrained to one in this list.
 
 For example as in the `display_info_for_` function template below:
 
@@ -316,20 +278,69 @@ The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go fro
 Specific headers:
 
 ~~~cpp
-#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+#include <cppx-core-language/bit-level/Bit_width.hpp>           // cppx::Bit_width
+#include <cppx-core-language/bit-level/bits_per_.hpp>           // cppx::bits_per...
+#include <cppx-core-language/bit-level/Int_.hpp>                // cppx::(Int_, Unsigned_int_)
 #include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
-#include <cppx-core-language/bit-level/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
 ~~~
 
 
-#### 3.1.2. Examples for header “bit-level/Int_.hpp”.
+#### 3.1.2. Examples for header “bit-level/bits_per_.hpp”.
+
+*Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
+
+The “bits_per_.hpp” header provides convenient notation for the bit widths of fundamental types, as `int` values: `bits_per_<T>`, `value_bits_per_<T>` and `magnitude_bits_per_<T>`.
+
+---
+
+***Bits per int***  
+<small>*examples/bit-level/bit-widths-of-int.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <c/stdio.hpp>
+
+auto main()
+    -> int
+{
+    const auto& s =
+        "Data addresses in this process are %d-bit.\n"
+        "\n"
+        "With this compiler an `int` is %d bits. %d of those are value representation\n"
+        "bits, and of those again %d bits encode the magnitude.\n";
+
+    using namespace cppx;
+    printf( s,
+        Bit_width::system, bits_per_<int>, value_bits_per_<int>, magnitude_bits_per_<int>
+        );
+}
+~~~
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+Data addresses in this process are 64-bit.
+
+With this compiler an `int` is 32 bits. 32 of those are value representation
+bits, and of those again 31 bits encode the magnitude.
+~~~
+
+Without the Core Language Extensions library you could do this using `std::numeric_limits` and perhaps the `CHAR_BIT` constant from C.
+
+Specific header:
+
+~~~cpp
+#include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
+~~~
+
+
+#### 3.1.3. Examples for header “bit-level/Int_.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
 The “Int_.hpp” header provides a correspondence from bit width to integer type, via the template aliases `Int_` and `Unsigned_int_`.
 
 
-#### 3.1.3. Examples for header “bit-level/intlog2.hpp”.
+#### 3.1.4. Examples for header “bit-level/intlog2.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
@@ -421,7 +432,7 @@ Specific headers:
 #include <cppx-core-language/bit-level/Int_.hpp>                // cppx::Unsigned_int_
 ~~~
 
-#### 3.1.4. Examples for header “bit-level/sum_of_bits.hpp”.
+#### 3.1.5. Examples for header “bit-level/sum_of_bits.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
