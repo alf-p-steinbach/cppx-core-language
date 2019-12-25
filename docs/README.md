@@ -317,7 +317,7 @@ Specific headers:
 ~~~cpp
 #include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
 #include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
-#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
+#include <cppx-core-language/bit-level/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
 ~~~
 
 
@@ -410,7 +410,7 @@ Specific headers:
 ~~~cpp
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::(intlog2, intlog2r)
 #include <cppx-core-language/syntax/flow-control.hpp>       // $repeat_times
-#include <cppx-core-language/types/Int_.hpp>                // cppx::Unsigned_int_
+#include <cppx-core-language/bit-level/Int_.hpp>                // cppx::Unsigned_int_
 ~~~
 
 #### 3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.
