@@ -1082,7 +1082,23 @@ asdlkj
 
 Folder: “**[syntax](../source/cppx%2Dcore%2Dlanguage/syntax)**”. *Exporting namespace: `syntax`.*
 
-Headers:
+Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::string_operators`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
+
+---
+
+Contains the direct support for expressing things in ways that feel like a new syntax, and/or that expose strong potentials for improvements in the existing C++ syntax.
+
+An example: though the purely *syntactical* aspect was introduced in C++11, the indexing loop `for(const int i: zero_to(n))` can feel like a new syntax. The shortcoming of C++17 here isn’t syntactical, it’s just the lack of a function like `zero_to` (C++20 will introduce the less than intelligently named [`std::views::iota`](https://en.cppreference.com/w/cpp/ranges/iota_view)). Also as an example, the declaration `$use_std(cout,endl,setw);` exposes a strong potential for improvement in the existing C++ syntax, namely its requirement that you repeat the namespace name for each name that you want to use unqualified.
+
+The syntax support is intended to give you a more [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and even more joyful C++ coding experience, via
+
+* automation of required repetitions of information, e.g. for `using` declarations,
+* easy ways to express constraints such as a `const` loop variable, and
+* recognizable common abstractions of coding patterns such as `throw` with source location.
+
+I’ve tried to collect these things so that it could, if necessary, be separated out as a distinct sub-library.
+
+Main headers:
 
 - 3.4.1. “syntax/[declarations.hpp](#341-examples-for-header-syntaxdeclarationshpp)”
 - 3.4.2. “syntax/[exception-throwing.hpp](#342-examples-for-header-syntaxexception-throwinghpp)”
@@ -1092,13 +1108,9 @@ Headers:
 - 3.4.6. “syntax/[string-expressions.hpp](#346-examples-for-header-syntaxstring-expressionshpp)”
 - 3.4.7. “syntax/[types.hpp](#347-examples-for-header-syntaxtypeshpp)”
 
-The syntax support is intended to give you an even more joyful and [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) C++ coding experience, via
+---
 
-* automation of required repetitions of information, e.g. for `using` declarations,
-* easy ways to express constraints such as a `const` loop variable, and
-* recognizable common abstractions of coding patterns such as `throw` with source location.
-
-There are 5 main areas, each in a sub-folder with a small set of detail headers. These detail headers are not documented here; see the source code for detail header names etc. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes the detail headers from that sub-folder, and it has an exporting namespace `cppx::`*X*.
+There are 5 main areas, each in a sub-folder with a small set of detail headers. The detail headers are not documented here; see the source code for detail header names etc. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes the detail headers from that sub-folder, and it has an exporting namespace `cppx::`*X*.
 
 | Area | *X*.hpp | Functionality |
 |------|---------|---------------|
@@ -1111,12 +1123,6 @@ There are 5 main areas, each in a sub-folder with a small set of detail headers.
 Outside the above categories, in their own headers, the lvalue-restricted macro `$items_of` and sibling `$reverse_items_of` allow you to write things like `std::sort($items_of(v))` instead of `std::sort(begin(v),end(v))`. With C++20 the Ranges sub-library of the standard library will define overloads of `sort` etc. that admit similarly or even more concise & DRY calls. However, that doesn’t help with 3ʳᵈ party libraries that require iterator pairs, while `$items_of` does help in general.
 
 For an rvalue expression one can write `$with(expression){foobar($items_of(_));}`.
-
-Some headers in this folder have their own smaller exporting namespaces in addition to `syntax`, e.g. namespace `cppx::string_operators`. These per-header namespaces provide more fine grained control over which identifiers you bring in unqualified. And of course, in the other direction, just `using namespace cppx;` brings in everything plus plus.
-
----
-
-xxx asd
 
 #### 3.4.1. Examples for header “syntax/declarations.hpp”.
 #### 3.4.2. Examples for header “syntax/exception-throwing.hpp”.
