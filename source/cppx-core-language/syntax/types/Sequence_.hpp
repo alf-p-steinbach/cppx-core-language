@@ -5,7 +5,7 @@
 #include <cppx-core-language/types/Truth.hpp>                       // cppx::Truth
 #include <cppx-core-language/tmp/Enable_if_.hpp>                    // cppx::Enable_if_
 #include <cppx-core-language/tmp/type-traits.hpp>                   // cppx::is_integral_
-#include <cppx-core-language/tmp/type-modifiers.hpp>                // cppx::Unsigned_
+#include <cppx-core-language/tmp/type-modifiers.hpp>                // cppx::As_unsigned_
 #include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::(min_, max_)
 
 #include <c/assert.hpp>
@@ -18,7 +18,7 @@ namespace cppx::_{
         >
     class Sequence_
     {
-        using Unsigned = Unsigned_<Integer>;
+        using Unsigned = As_unsigned_<Integer>;
 
         Unsigned    m_first;
         Unsigned    m_last;

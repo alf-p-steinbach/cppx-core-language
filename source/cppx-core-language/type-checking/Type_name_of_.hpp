@@ -3,7 +3,7 @@
 
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
 #include <cppx-core-language/tmp/Type_carrier_.hpp>             // cppx::Type_carrier_
-#include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::Unref_
+#include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::As_referent_
 #include <cppx-core-language/type-checking/type_name_from.hpp>  // cppx::type_name_from
 
 #include <string>       // std::string
@@ -27,6 +27,6 @@ namespace cppx
     template< class Type >
     inline auto type_name_of( Type&& expr )
         -> string
-    { return type_name_of_<Unref_<decltype( forward<Type>( expr ) )>>(); }
+    { return type_name_of_<As_referent_<decltype( forward<Type>( expr ) )>>(); }
 
 }  // namespace cppx

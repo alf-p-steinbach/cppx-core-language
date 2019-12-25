@@ -22,7 +22,7 @@
 ///
 /// RAII examples:  
 /// `$with( Lock( mutex ) ) access_resource();`  
-/// `$with( Const_<Lock>( mutex ) ) access_resource();`
+/// `$with( As_const_<Lock>( mutex ) ) access_resource();`
 
 #define CPPX_WITH( ... ) \
     if ( auto&& _ [[maybe_unused]] = __VA_ARGS__; true )

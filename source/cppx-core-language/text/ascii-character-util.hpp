@@ -8,7 +8,7 @@
 #include <cppx-core-language/text/ascii-character-names.hpp>    // cppx::ascii::/names/
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 #include <cppx-core-language/tmp/type-traits.hpp>               // cppx::(is_integral_, is_a_char_type_)
-#include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::(Unsigned_)
+#include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::(As_unsigned_)
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
 
 #include <c/assert.hpp>         // assert
@@ -29,7 +29,7 @@ namespace cppx::_::ascii_impl
         -> Truth
     {
         static_assert( is_integral_<Code> );
-        return (Unsigned_<Code>( v ) < unsigned( ascii::n_values ));
+        return (As_unsigned_<Code>( v ) < unsigned( ascii::n_values ));
     }
 
     template< class Code >

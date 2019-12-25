@@ -32,7 +32,7 @@ namespace cppx::c_level_stuff
     template< class Char >
     using C_str_            = const Char*;
 
-    // Note: Unconst_ introduces an indirection that foils template arg deduction.
+    // Note: As_unconst_ introduces an indirection that foils template arg deduction.
     template< class Char >
     using Mutable_c_str_    = Char*;
 

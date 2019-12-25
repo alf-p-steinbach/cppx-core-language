@@ -3,9 +3,9 @@
 /// \file
 /// \brief Integer types templated on exact number of bits:
 /// \make_name_ref{cppx,Int_} and
-/// \make_name_ref{cppx,Unsigned_int_}.
+/// \make_name_ref{cppx,As_unsigned_int_}.
 
-#include <cppx-core-language/tmp/type-modifiers.hpp>    // cppx::Unsigned_
+#include <cppx-core-language/tmp/type-modifiers.hpp>    // cppx::As_unsigned_
 
 #include <c/stdint.hpp>     // ::intN_t
 
@@ -31,6 +31,6 @@ namespace cppx
     #endif
 
     /// \brief Unsigned integer types parameterized by exact width in bits.
-    template< int n_bits >  using Unsigned_int_ = Unsigned_<Int_<n_bits>>;
+    template< int n_bits >  using As_unsigned_int_ = As_unsigned_<Int_<n_bits>>;
 
 }  // namespace cppx

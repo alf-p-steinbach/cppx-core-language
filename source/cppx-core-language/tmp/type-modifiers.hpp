@@ -2,12 +2,12 @@
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 /// \file
 /// \brief
-/// \make_name_ref{cppx,Unptr_},
-/// \make_name_ref{cppx,Unref_},
-/// \make_name_ref{cppx,Signed_},
-/// \make_name_ref{cppx,Unsigned_},
-/// \make_name_ref{cppx,Const_} and
-/// \make_name_ref{cppx,Unconst_}.
+/// \make_name_ref{cppx,As_pointee_},
+/// \make_name_ref{cppx,As_referent_},
+/// \make_name_ref{cppx,As_signed_},
+/// \make_name_ref{cppx,As_unsigned_},
+/// \make_name_ref{cppx,As_const_} and
+/// \make_name_ref{cppx,As_unconst_}.
 
 /// The template aliases defined in this file generally do not support template argument
 /// deduction. In contrast, the basic type assemblers like
@@ -77,7 +77,7 @@ namespace cppx
     namespace type_modifiers
     {
         CPPX_USE_CPPX(
-            Unptr_, Unref_, Signed_, Unsigned_, Const_, Unconst_,
+            As_pointee_, As_referent_, As_signed_, As_unsigned_, As_const_, As_unconst_,
             As_pointee_, As_referent_, As_signed_, As_unsigned_, As_const_, As_unconst_
         );
     }  // namespace type_modifiers

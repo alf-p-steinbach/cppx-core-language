@@ -4,8 +4,8 @@
 /// \brief Signed
 /// \make_name_ref{cppx,Size} and
 /// \make_name_ref{cppx,Index}, plus unsigned equivalents
-/// \make_name_ref{cppx,Unsigned_size} and
-/// \make_name_ref{cppx,Unsigned_index}.
+/// \make_name_ref{cppx,As_unsigned_size} and
+/// \make_name_ref{cppx,As_unsigned_index}.
 ///
 /// For historical reasons the standard library often (but not always) uses the unsigned
 /// size type `size_t`. In expressions that mix signed and unsigned types this can cause
@@ -26,19 +26,19 @@
 
 namespace cppx
 {
-    /// \brief A \make_name_ref{cppx,Signed_} equivalent of `size_t`.
+    /// \brief A \make_name_ref{cppx,As_signed_} equivalent of `size_t`.
     using Size                  = As_signed_< size_t >;     // ~ptrdiff_t
 
     /// \brief Same as \make_name_ref{cppx,Size} but with name signifying use as index.
     using Index                 = Size;
 
-    using Unsigned_size         = size_t;
-    using Unsigned_index        = Unsigned_size;
+    using As_unsigned_size         = size_t;
+    using As_unsigned_index        = As_unsigned_size;
 
     // Documented in the <all.hpp> header.
     namespace system
     {
-        CPPX_USE_CPPX( Size, Index, Unsigned_size, Unsigned_index );
+        CPPX_USE_CPPX( Size, Index, As_unsigned_size, As_unsigned_index );
     }
 
 }  // namespace cppx

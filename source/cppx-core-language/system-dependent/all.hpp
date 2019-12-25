@@ -8,7 +8,7 @@
 namespace cppx{
     /// \brief Provides
     /// \make_name_ref{cppx,Byte},
-    /// \make_name_ref{cppx,Signed_byte},
+    /// \make_name_ref{cppx,As_signed_byte},
     /// \make_name_ref{cppx,bytes_per_},
     /// \make_name_ref{cppx,as_byte_ptr},
     /// \make_name_ref{cppx,as_signedbyte_ptr},
@@ -18,8 +18,8 @@ namespace cppx{
     /// \make_name_ref{cppx,as_std_byte};
     /// \make_name_ref{cppx,Size} and
     /// \make_name_ref{cppx,Index}, plus unsigned equivalents
-    /// \make_name_ref{cppx,Unsigned_size} and
-    /// \make_name_ref{cppx,Unsigned_index};
+    /// \make_name_ref{cppx,As_unsigned_size} and
+    /// \make_name_ref{cppx,As_unsigned_index};
     /// \make_name_ref{cppx,Endian},
     /// \make_name_ref{cppx,is_little_endian},
     /// \make_name_ref{cppx,is_big_endian} and

@@ -95,7 +95,7 @@ To benefit the most from the examples and discussion you may read the [informati
 |[calc](../source/cppx%2Dcore%2Dlanguage/calc)        | Calculations. Here are names of common constants such as *&pi;* (although C++20 will also provide that), floating point ops such as `squared`, `cubed` and `intpow`, and integer arithmetic ops such as `div_up` and `is_even` (and more). Plus a set of *consistent* numerical type properties, e.g. `min_<T>` is always the most negative value of type `T` and `smallest_<T>` is always the smallest strictly positive value of `T`.<br>[*Discussion and code examples.*](#32-the-calculation-stuff)
 |[mix-in](../source/cppx%2Dcore%2Dlanguage/mix%2Din)        | Mix-in classes such as `mix_in::Adapt_as_forward_iterator_`.
 |[syntax](../source/cppx%2Dcore%2Dlanguage/syntax)        | Mostly about *reduction of verbosity* for safe or best-practice constructs. For example, the `zero_to` function produces a `Sequence` which supports loops such as `for(const int i: zero_to(n))`, where there is no chance of inadvertent modification of the loop variable. With a reasonably good compiler it&rsquo;s as efficient as an ordinary counting loop &mdash; just less verbose and more safe. Some other syntax support is in the form of macros. E.g. `$use_std(A, B, C);` brings in the specified items from the standard library as if by `using std::A, std::B, std::C;`.  Perhaps of most practical utility to a new library user, here is `<<`-like support for assembling strings from parts. E.g. calls like `fail("Unable to open door "s << n)`.<br>[*Discussion and code examples.*](#34-the-syntax-support)|
-|[system-dependent](../source/cppx%2Dcore%2Dlanguage/system%2Ddependent)      | System-dependent stuff. The type `Byte` + support; the enumeration `Endian` (more precisely it&rsquo;s a `struct` with an inner `enum`)  ; and the signed types `Size` and `Index` plus the corresponding `Unsigned_size` and `Unsigned_index`. These four are all the same size as `size_t`.
+|[system-dependent](../source/cppx%2Dcore%2Dlanguage/system%2Ddependent)      | System-dependent stuff. The type `Byte` + support; the enumeration `Endian` (more precisely it&rsquo;s a `struct` with an inner `enum`)  ; and the signed types `Size` and `Index` plus the corresponding `As_unsigned_size` and `As_unsigned_index`. These four are all the same size as `size_t`.
 |[text](../source/cppx%2Dcore%2Dlanguage/text)    | Mainly ASCII text handling support, such as names of control characters (plus the name `bad_char` defined as `DEL`), ASCII range checking, widening, uppercasing and lowercasing, and whitespace checking and other classification functions. The C standard library defines some of this but in a form that&rsquo;s difficult to use correctly. Also, the `to_hex` function lives here.
 |[tmp](../source/cppx%2Dcore%2Dlanguage/tmp)         | Template meta-programming support, or just, support for defining templates. A number of type traits such as `is_integral_`, type modifiers such as `As_referent_` and `As_unsigned_`, and the class templates `Enable_if_`, `Type_choice_` and `Type_carrier_`. The two first templates are simple wrappers around `std::enable_if_t` and `std::conditional_t`, mostly for readability. |
 |[type‑checking](../source/cppx%2Dcore%2Dlanguage/type%2Dchecking) | `downcasted_to` guarantees a downcast as opposed to a sideways cast, using a safe `dynamic_cast`; `is_of_derived_class` checks whether a pure downcast is possible; and `array_size_of` and `length_of_literal` do compile time size checking. The `type_name_of_` function template obtains a readable description of a type, based on `typeid(T).name()`. For the g++ compiler it translates to readable form like *c++filt* does, and for the Visual C++ compiler (and possibly other compilers) it removes that compiler’s `struct`, `class` and `enum` keyword verbiage. |
@@ -276,11 +276,11 @@ void display_info_for_type_()
 template< cppx::Bitness::Enum... n_bits >
 void display_info_for_()
 {
-    $use_cppx( Int_, Unsigned_int_ );
+    $use_cppx( Int_, As_unsigned_int_ );
     display_row( "Type:", "Bits per value:", "Value repr. bits:", "Magnitude bits:" );
     cout << endl;
     (display_info_for_type_< Int_<n_bits> >(), ...);
-    (display_info_for_type_< Unsigned_int_<n_bits> >(), ...);
+    (display_info_for_type_< As_unsigned_int_<n_bits> >(), ...);
 }
 
 auto main()
@@ -310,14 +310,14 @@ Data addresses in this process are 64-bit.
   unsigned long long                  64                  64                  64
 ~~~
 
-The standard library has nothing like `Int_<n>` and `Unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro, and gives the ability to obtain readable names of types. That ability is based on `typeid(T).name()`, just with added demangling applied for the g++ compiler and with removal of `struct`, `class` and `enum` keywords for Visual C++ and other compilers.
+The standard library has nothing like `Int_<n>` and `As_unsigned_int_<n>` to go from bit width to type, and also the standard library lacks a portable way to get a readable name of a type, like `type_name_of_`. I can’t think of a good simple way to do the latter directly, but without the Core Language Extensions library one could go from bit widths to types by defining the main code here as a macro. Then a bit width specified as macro argument could just be concatened with a prefix and suffix, forming e.g. `int8_t` and `uint8_t` (type names from the `<stdint.h>` header). So essentially, for the above program the library helps avoid coding the main stuff as a macro, and gives the ability to obtain readable names of types. That ability is based on `typeid(T).name()`, just with added demangling applied for the g++ compiler and with removal of `struct`, `class` and `enum` keywords for Visual C++ and other compilers.
 
 Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/bit-level/bits_per_.hpp>           // ” Bit-level stuff.
 #include <cppx-core-language/type-checking/Type_name_of_.hpp>   // cppx::type_name_of_
-#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, Unsigned_int_)
+#include <cppx-core-language/types/Int_.hpp>            // cppx::(Int_, As_unsigned_int_)
 ~~~
 
 
@@ -367,11 +367,11 @@ auto main()
     -> int
 {
     $use_std( bitset );
-    $use_cppx( Unsigned_int_, intlog2, intlog2r );
+    $use_cppx( As_unsigned_int_, intlog2, intlog2r );
 
     const unsigned short_pattern = 42 >> 1;
     const int n_left_zeroes = n_bits - (intlog2( short_pattern ) + 1);
-    Unsigned_int_<n_bits> bits = 0;
+    As_unsigned_int_<n_bits> bits = 0;
     display_row( "Bits:", "intlog2:", "intlog2r:" );
     $repeat_times( n_left_zeroes + 2 ) {
         switch( _i ) {
@@ -410,7 +410,7 @@ Specific headers:
 ~~~cpp
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::(intlog2, intlog2r)
 #include <cppx-core-language/syntax/flow-control.hpp>       // $repeat_times
-#include <cppx-core-language/types/Int_.hpp>                // cppx::Unsigned_int_
+#include <cppx-core-language/types/Int_.hpp>                // cppx::As_unsigned_int_
 ~~~
 
 #### 3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.
