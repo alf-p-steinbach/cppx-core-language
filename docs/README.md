@@ -184,14 +184,15 @@ Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *
 
 Headers:
 - 3.1.1. “bit-level/[bits_per_.hpp](#311-examples-for-header-bit-levelbits_per_hpp)”
-- 3.1.2. “bit-level/[intlog2.hpp](#312-examples-for-header-bit-levelintlog2hpp)”
-- 3.1.3. “bit-level/[sum_of_bits.hpp](#313-examples-for-header-bit-levelsum_of_bitshpp)”
+- 3.1.2. “bit-level/Int_.hpp”
+- 3.1.3. “bit-level/[intlog2.hpp](#313-examples-for-header-bit-levelintlog2hpp)”
+- 3.1.4. “bit-level/[sum_of_bits.hpp](#314-examples-for-header-bit-levelsum_of_bitshpp)”
 
 #### 3.1.1. Examples for header “bit-level/bits_per_.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
-The “bits_per_.hpp” header provides convenient notation for the bit widths of fundamental types, as `int` values.
+The “bits_per_.hpp” header provides convenient notation for the bit widths of fundamental types, as `int` values: `bits_per_<T>`, `value_bits_per_<T>` and `magnitude_bits_per_<T>`.
 
 ---
 
@@ -212,7 +213,7 @@ auto main()
 
     using namespace cppx;
     printf( s,
-        Bitness::system, bits_per_<int>, value_bits_per_<int>, magnitude_bits_per_<int>
+        Bit_width::system, bits_per_<int>, value_bits_per_<int>, magnitude_bits_per_<int>
         );
 }
 ~~~
@@ -238,9 +239,9 @@ Specific header:
 ---
 
 ***Types from bit widths***  
-The `Bitness::Enum` enumeration type, defined as
+The `Bit_width::Enum` enumeration type, defined as
 
->     struct Bitness{ enum Enum {
+>     struct Bit_width{ enum Enum {
 >         _8 = 8, _16 = 16, _32 = 32, _64 = 64, _128 = 128, system = bits_per_<void*>
 >         }; };
 
@@ -273,7 +274,7 @@ void display_info_for_type_()
         );
 }
 
-template< cppx::Bitness::Enum... n_bits >
+template< cppx::Bit_width::Enum... n_bits >
 void display_info_for_()
 {
     $use_cppx( Int_, Unsigned_int_ );
@@ -286,10 +287,10 @@ void display_info_for_()
 auto main()
     -> int
 {
-    $use_cppx( Bitness );
-    cout << "Data addresses in this process are " << Bitness::system << "-bit." << endl;
+    $use_cppx( Bit_width );
+    cout << "Data addresses in this process are " << Bit_width::system << "-bit." << endl;
     cout << endl;
-    display_info_for_<Bitness::_8, Bitness::_16, Bitness::_32, Bitness::_64>();
+    display_info_for_<Bit_width::_8, Bit_width::_16, Bit_width::_32, Bit_width::_64>();
 }
 ~~~
 
@@ -321,7 +322,14 @@ Specific headers:
 ~~~
 
 
-#### 3.1.2. Examples for header “bit-level/intlog2.hpp”.
+#### 3.1.2. Examples for header “bit-level/Int_.hpp”.
+
+*Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
+
+The “Int_.hpp” header provides a correspondence from bit width to integer type, via the template aliases `Int_` and `Unsigned_int_`.
+
+
+#### 3.1.3. Examples for header “bit-level/intlog2.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
@@ -413,7 +421,7 @@ Specific headers:
 #include <cppx-core-language/bit-level/Int_.hpp>                // cppx::Unsigned_int_
 ~~~
 
-#### 3.1.3. Examples for header “bit-level/sum_of_bits.hpp”.
+#### 3.1.4. Examples for header “bit-level/sum_of_bits.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 

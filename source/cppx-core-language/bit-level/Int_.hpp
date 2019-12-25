@@ -9,16 +9,15 @@
 
 #include <c/stdint.hpp>     // ::intN_t
 
-namespace cppx
-{
-    namespace impl
-    {
+namespace cppx::_ {
+    namespace impl {
         template< int n_bits >  struct Int_t_;
 
         template<> struct Int_t_<8>{   using T = int8_t;   };
         template<> struct Int_t_<16>{  using T = int16_t;  };
         template<> struct Int_t_<32>{  using T = int32_t;  };
         template<> struct Int_t_<64>{  using T = int64_t;  };
+        // TODO: conditional definition for 128-bits.
     }  // namespace impl
 
     // The Doxygen \hideinitializer command doesn't work here, so.
@@ -33,4 +32,16 @@ namespace cppx
     /// \brief Unsigned integer types parameterized by exact width in bits.
     template< int n_bits >  using Unsigned_int_ = As_unsigned_<Int_<n_bits>>;
 
+}  // namespace cppx::_
+
+// Exporting namespaces:
+namespace cppx {
+    namespace bit_level {
+        CPPX_USE_FROM_NAMESPACE( _,
+            Int_,
+            Unsigned_int_
+        );
+    }  // namespace bit_level
+
+    using namespace bit_level;
 }  // namespace cppx
