@@ -1117,8 +1117,6 @@ The syntax support is intended to give you a more [DRY](https://en.wikipedia.org
 * easy ways to express constraints such as a `const` loop variable, and
 * recognizable common abstractions of coding patterns such as `throw` with source location.
 
-I’ve tried to collect these things so that it could, if necessary, be separated out as a distinct sub-library.
-
 Main headers:
 
 - 3.4.1. “syntax/[declarations.hpp](#341-examples-for-header-syntaxdeclarationshpp)”
