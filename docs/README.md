@@ -339,6 +339,8 @@ Specific header:
 
 The “Int_.hpp” header provides a correspondence from bit width to integer type, via the template aliases `Int_` and `Unsigned_int_`.
 
+An example “Types from bit widths”  is given in [3.1.1 Examples for header “bit-level/Bit_width.hpp”](#311-examples-for-header-bit-levelbit_widthhpp).
+
 
 #### 3.1.4. Examples for header “bit-level/intlog2.hpp”.
 
