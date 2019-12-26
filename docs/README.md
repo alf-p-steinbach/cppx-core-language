@@ -1111,7 +1111,7 @@ This folder contains the direct support for expressing things in ways that feel 
 
 An example: though the purely *syntactical* aspect was introduced in C++11, the indexing loop `for(const int i: zero_to(n))` can feel like a new syntax. The shortcoming of C++17 here isn’t syntactical, it’s just the lack of a function like `zero_to` (C++20 will introduce the less than intelligently named [`std::views::iota`](https://en.cppreference.com/w/cpp/ranges/iota_view)). Also as an example, the declaration `$use_std(cout,endl,setw);` exposes a strong potential for improvement in the existing C++ syntax, namely its requirement that you repeat the namespace name for each name that you want to use unqualified.
 
-The syntax support is intended to give you a more [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and even more joyful C++ coding experience, via
+The syntax support is intended to give you a more [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and more joyful C++ coding experience, via
 
 * automation of required repetitions of information, e.g. for `using` declarations,
 * easy ways to express constraints such as a `const` loop variable, and
