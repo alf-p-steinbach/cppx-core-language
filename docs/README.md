@@ -9,7 +9,7 @@
   - [3. Examples & details.](#3-examples--details)
     - [3.0. About the examples — availability, order, notation, headers, namespaces.](#30-about-the-examples--availability-order-notation-headers-namespaces)
     - [3.1. The bit-level stuff.](#31-the-bit-level-stuff)
-      - [3.1.1. Examples for header “bit-level/Bits_width.hpp”.](#311-examples-for-header-bit-levelbits_widthhpp)
+      - [3.1.1. Examples for header “bit-level/Bit_width.hpp”.](#311-examples-for-header-bit-levelbit_widthhpp)
       - [3.1.2. Examples for header “bit-level/bits_per_.hpp”.](#312-examples-for-header-bit-levelbits_per_hpp)
       - [3.1.3. Examples for header “bit-level/Int_.hpp”.](#313-examples-for-header-bit-levelint_hpp)
       - [3.1.4. Examples for header “bit-level/intlog2.hpp”.](#314-examples-for-header-bit-levelintlog2hpp)
@@ -185,13 +185,13 @@ Mostly things are *defined* in a special namespace `cppx::_`. A lot of names fro
 Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *Exporting namespace: `cppx::bitlevel`.*
 
 Headers:
-- 3.1.1. “bit-level/[Bit_width.hpp](#311-examples-for-header-bit-levelbits_widthhpp)”
+- 3.1.1. “bit-level/[Bit_width.hpp](#311-examples-for-header-bit-levelbit_widthhpp)”
 - 3.1.2. “bit-level/[bits_per_.hpp](#312-examples-for-header-bit-levelbits_per_hpp)”
 - 3.1.3. “bit-level/[Int_.hpp](#313-examples-for-header-bit-levelint_hpp)”
 - 3.1.4. “bit-level/[intlog2.hpp](#314-examples-for-header-bit-levelintlog2hpp)”
 - 3.1.5. “bit-level/[sum_of_bits.hpp](#315-examples-for-header-bit-levelsum_of_bitshpp)”
 
-#### 3.1.1. Examples for header “bit-level/Bits_width.hpp”.
+#### 3.1.1. Examples for header “bit-level/Bit_width.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::bitlevel`, the library’s `cppx`.*
 
