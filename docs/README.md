@@ -185,9 +185,9 @@ Mostly things are *defined* in a special namespace `cppx::_`. A lot of names fro
 Folder: “**[bit‑level](../source/cppx%2Dcore%2Dlanguage/bit%2Dlevel)**”. *Exporting namespace: `cppx::bitlevel`.*
 
 Headers:
-- 3.1.1. “bit-level/Bit_width.hpp”
+- 3.1.1. “bit-level/[Bit_width.hpp](#311-examples-for-header-bit-levelbits_width_hpp)”
 - 3.1.2. “bit-level/[bits_per_.hpp](#312-examples-for-header-bit-levelbits_per_hpp)”
-- 3.1.3. “bit-level/Int_.hpp”
+- 3.1.3. “bit-level/[Int_.hpp](#313-examples-for-header-bit-levelint_hpp)”
 - 3.1.4. “bit-level/[intlog2.hpp](#314-examples-for-header-bit-levelintlog2hpp)”
 - 3.1.5. “bit-level/[sum_of_bits.hpp](#315-examples-for-header-bit-levelsum_of_bitshpp)”
 
