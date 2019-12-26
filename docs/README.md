@@ -429,9 +429,9 @@ Result with 64-bit MinGW g++ in Windows 10:
 Specific headers:
 
 ~~~cpp
+#include <cppx-core-language/bit-level/Int_.hpp>            // cppx::Unsigned_int_
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::(intlog2, intlog2r)
 #include <cppx-core-language/syntax/flow-control.hpp>       // $repeat_times
-#include <cppx-core-language/bit-level/Int_.hpp>            // cppx::Unsigned_int_
 ~~~
 
 #### 3.1.5. Examples for header “bit-level/sum_of_bits.hpp”.
