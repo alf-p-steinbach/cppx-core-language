@@ -1,6 +1,6 @@
-#include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::(intlog2, intlog2r)
-#include <cppx-core-language/syntax/flow-control.hpp>       // $repeat_times
-#include <cppx-core-language/types/Int_.hpp>                // cppx::Unsigned_int_
+#include <cppx-core-language/bit-level/Int_.hpp>        // cppx::Unsigned_int_
+#include <cppx-core-language/bit-level/intlog2.hpp>     // cppx::(intlog2, intlog2r)
+#include <cppx-core-language/syntax/flow-control.hpp>   // $repeat_times
 #include <c/stdint.hpp>     // uint32_t
 #include <bitset>           // std::bitset
 #include <iomanip>          // std::setw
