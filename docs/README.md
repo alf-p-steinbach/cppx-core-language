@@ -1107,7 +1107,7 @@ Some headers in this folder have their own smaller exporting namespaces in addit
 
 ---
 
-Contains the direct support for expressing things in ways that feel like a new syntax, and/or that expose strong potentials for improvements in the existing C++ syntax.
+This folder contains the direct support for expressing things in ways that feel like a new syntax, and/or that expose strong potentials for improvements in the existing C++ syntax.
 
 An example: though the purely *syntactical* aspect was introduced in C++11, the indexing loop `for(const int i: zero_to(n))` can feel like a new syntax. The shortcoming of C++17 here isn’t syntactical, it’s just the lack of a function like `zero_to` (C++20 will introduce the less than intelligently named [`std::views::iota`](https://en.cppreference.com/w/cpp/ranges/iota_view)). Also as an example, the declaration `$use_std(cout,endl,setw);` exposes a strong potential for improvement in the existing C++ syntax, namely its requirement that you repeat the namespace name for each name that you want to use unqualified.
 
