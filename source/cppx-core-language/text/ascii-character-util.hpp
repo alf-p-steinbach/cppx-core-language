@@ -171,7 +171,7 @@ namespace cppx::_::ascii_impl
     template< class Char >
     inline auto is_punctuation( const Char ch )
         -> bool
-    { return ascii_contains( ch ) and punctuation_character_bits()[Byte( ch )]; }
+    { return is_ascii( ch ) and punctuation_character_bits()[Byte( ch )]; }
 }  // namespace cppx::_::ascii_impl
 
 // Exporting namespaces

@@ -7,9 +7,14 @@
 #include <cppx-core-language/syntax/declarations.hpp>                   // CPPX_USE_...
 #include <cppx-core-language/syntax/types/type-builders.hpp>            // cppx::Type_
 #include <cppx-core-language/system-dependent/size-types.hpp>           // cppx::Size
+#include <cppx-core-language/tmp/type-traits.hpp>                       // cppx::is_a_
 #include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 
+#include <iterator>     // std::(iterator_traits, random_access_iterator_tag)
+
 namespace cppx::_ {
+    $use_std( iterator_traits, random_access_iterator_tag );
+
     template< class Iterator >
     class Span_
         : public mix_in::Adapt_as_iterable_collection_<Span_<Iterator>>
@@ -20,7 +25,16 @@ namespace cppx::_ {
     public:
         auto first() const      -> Iterator { return m_first; }
         auto beyond() const     -> Iterator { return m_beyond; }
-        auto n_items() const    -> Size     { return distance( m_first, m_beyond ); }
+
+        auto n_items() const
+            -> Size
+        {
+            static_assert( is_a_<
+                random_access_iterator_tag,
+                typename iterator_traits<Iterator>::iterator_category
+                > );
+            return distance( m_first, m_beyond );
+        }
 
         auto front() const      -> auto&    { return *m_first; }
         auto is_empty() const   -> Truth    { return (m_first == m_beyond); }
