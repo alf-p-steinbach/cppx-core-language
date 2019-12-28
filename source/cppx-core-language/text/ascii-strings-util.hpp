@@ -1,6 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::spaces
 #include <cppx-core-language/text/ascii-character-names.hpp>    // cppx::ascii::*
 #include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
@@ -162,6 +163,25 @@ namespace cppx::ascii
         static_assert( is_a_char_type_<Char> );
         return to_wide( basic_string_view<Char>( s ) );
     }
+
+
+    //----------------------------------------  Adjustment (mostly for console output):
+
+    inline auto at_left_in( const int width, const string_view& s )
+        -> string
+    { return string( s ) + spaces( width - int( s.length() ) ); }
+
+    inline auto at_left_in( const int width, const char ch )
+        -> string
+    { return ch + spaces( width - 1 ); }
+
+    inline auto at_right_in( const int width, const string_view& s )
+        -> string
+    { return spaces( width - int( s.length() ) ) + string( s ); }
+
+    inline auto at_right_in( const int width, const char ch )
+        -> string
+    { return spaces( width - 1 ) + ch; }
 
 
     //----------------------------------------  Misc:
