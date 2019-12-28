@@ -191,6 +191,6 @@ namespace cppx::ascii
         const char              ch,
         const char              quote_char  = '"',
         const char              escape_char = '\\'
-    )  -> string
+        )  -> string
     { return quoted( string_view( &ch, 1 ), quote_char, escape_char ); }
 }  // namespace cppx::ascii
