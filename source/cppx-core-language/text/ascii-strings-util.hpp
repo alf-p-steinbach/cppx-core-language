@@ -1,6 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
+#include <cppx-core-language/text/ascii-character-names.hpp>    // cppx::ascii::*
 #include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
 #include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
 
@@ -165,18 +166,31 @@ namespace cppx::ascii
 
     //----------------------------------------  Misc:
 
-    inline auto quoted( const string_view& sv )
-        -> string
+    // The intent is to yield the same result as produced by `std::quoted`, but in a string.
+    inline auto quoted(
+        const string_view&      sv,
+        const char              quote_char  = '"',
+        const char              escape_char = '\\'
+        ) -> string
     {
         string s;
-        s = "\"";
-        s += sv;
+        const int fudge_factor = 7;
+        s.reserve( sv.length() + fudge_factor );
+        s = quote_char;
+        for( const char ch: sv ) {
+            if( ch == quote_char or ch == escape_char ) {
+                s += escape_char;
+            }
+            s += ch;
+        }
         s += "\"";
         return s;
     }
 
-    inline auto quoted( const char ch )
-        -> string
-    { return quoted( string_view( &ch, 1 ) ); }
-
+    inline auto quoted(
+        const char              ch,
+        const char              quote_char  = '"',
+        const char              escape_char = '\\'
+    )  -> string
+    { return quoted( string_view( &ch, 1 ), quote_char, escape_char ); }
 }  // namespace cppx::ascii
