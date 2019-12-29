@@ -1,8 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-namespace cppx::ascii
-{
+namespace cppx::text::ascii {
     // Standard but unfortunately uppercase abbreviations as per ASCII '67:
     constexpr char      NUL         = '\0';         
     constexpr char      BEL         = '\a';         
@@ -61,9 +60,15 @@ namespace cppx::ascii
     // indication character:
 
     constexpr char      bad_char    = del;
-}  // namespace cppx::ascii
+}  // namespace cppx::text::ascii
 
+// Exporting namespaces:
+namespace cppx {
+    using namespace text;
+}
+   
+// Additional strongly related info but not specifically ASCII:
 namespace cppx{
     constexpr char      std_ascii_bad_char      = ascii::end_of_text;       // Ungood.
     constexpr wchar_t   std_unicode_bad_char    = L'\uFFFD';                // Ungood.
-}  // namespace cppx
+}

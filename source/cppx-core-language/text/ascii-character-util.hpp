@@ -176,7 +176,7 @@ namespace cppx::_::ascii_impl
 
 // Exporting namespaces
 namespace cppx {
-    namespace ascii {
+    namespace text::ascii {
         CPPX_USE_FROM_NAMESPACE( _::ascii_impl,
             Bitset,
             contains,
@@ -194,11 +194,7 @@ namespace cppx {
             to_uppercase,
             whitespace_characters
             );
-    }  // namespace ascii
-
-    namespace text {
-        namespace ascii = cppx::ascii;
-    }
+    }  // namespace text::ascii
 
     using namespace text;
 }  // namespace cppx

@@ -14,7 +14,7 @@
 #include <string_view>          // std::string_view
 #include <functional>           // std::invoke
 
-namespace cppx::ascii
+namespace cppx::_::ascii_impl
 {
     CPPX_USE_STD(
         basic_string, basic_string_view, string, string_view, wstring, wstring_view
@@ -253,4 +253,23 @@ namespace cppx::ascii
             return string( t );
         }
     }
-}  // namespace cppx::ascii
+}  // namespace cppx::_::ascii_impl
+
+// Exporting namespaces:
+namespace cppx {
+    namespace text::ascii {
+        CPPX_USE_FROM_NAMESPACE( _::ascii_impl,
+            at_left_in,
+            at_right_in,
+            contains_all_of,
+            is_all_whitespace,
+            quoted,
+            to_lowercase,
+            to_uppercase,
+            to_wide,
+            trimmed
+        );
+    }  // namespace text::ascii
+
+    using namespace text;
+}  // namespace cppx
