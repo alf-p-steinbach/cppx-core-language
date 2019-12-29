@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/macro-items_of.hpp>         // CPPX_ITEMS_OF
+#include <cppx-core-language/syntax/collection-util.hpp>        // CPPX_ITEMS_OF
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
 #include <cppx-core-language/syntax/flow-control.hpp>           // cppx::(Sequence_, zero_to, span_of)
 #include <cppx-core-language/system-dependent/Byte.hpp>         // cppx::Byte
