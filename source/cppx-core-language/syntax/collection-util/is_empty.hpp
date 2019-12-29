@@ -16,7 +16,6 @@ namespace cppx::_
     template< class Collection >
     class Has_method_empty_
     {
-        // TODO: Check that result type of `empty` converts to `bool`.
         template< class C, int x = sizeof( declval<C>().empty() == true ) >
         static auto test( const C& ) -> true_type;
 
