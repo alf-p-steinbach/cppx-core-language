@@ -1,10 +1,12 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::spaces
-#include <cppx-core-language/text/ascii-character-names.hpp>    // cppx::ascii::*
-#include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
-#include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
+#include <cppx-core-language/syntax/collection-util.hpp>            // cppx::is_empty
+#include <cppx-core-language/syntax/string-expressions.hpp>         // cppx::spaces
+#include <cppx-core-language/text/ascii-character-names.hpp>        // cppx::ascii::*
+#include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii::*
+#include <cppx-core-language/text/string_view-util.hpp>             // cppx::(ptr_to_first_in, ptr_to_beyond)
+#include <cppx-core-language/types/C_str_.hpp>                      // cppx::C_str_
 
 #include <c/string.hpp>         // strlen
 #include <c/ctype.hpp>          // isspace
@@ -213,4 +215,42 @@ namespace cppx::ascii
         const char              escape_char = '\\'
         )  -> string
     { return quoted( string_view( &ch, 1 ), quote_char, escape_char ); }
+
+    inline auto trimmed( const string_view& sv )
+        -> string_view
+    {
+        if( is_empty( sv ) )
+        {
+            return sv;
+        }
+        P_<const char> p_first      = ptr_to_first_in( sv );
+        P_<const char> p_beyond     = ptr_to_beyond( sv );
+        while( p_first != p_beyond and ascii::is_whitespace( *p_first ) )
+        {
+            ++p_first;
+        }
+        while( p_beyond != p_first and ascii::is_whitespace( *p_beyond ) )
+        {
+            --p_beyond;
+        }
+        return string_view( p_first, p_beyond - p_first );
+    }
+
+    inline auto trimmed( const string& s )
+        -> string
+    { return string( trimmed( string_view( s ) ) ); }
+
+    inline auto trimmed( string&& s )
+        -> string
+    {
+        const string_view t = trimmed( string_view( s ) );
+        if( t.length() == s.length() )
+        {
+            return move( s );
+        }
+        else
+        {
+            return string( t );
+        }
+    }
 }  // namespace cppx::ascii

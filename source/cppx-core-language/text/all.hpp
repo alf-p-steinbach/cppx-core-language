@@ -6,8 +6,8 @@
 #include <cppx-core-language/text/ascii-strings-util.hpp>
 #include <cppx-core-language/text/format-specs.hpp>
 #include <cppx-core-language/text/hex-digits.hpp>
-#include <cppx-core-language/text/pointers-from-string_view.hpp>
 #include <cppx-core-language/text/remove_leading_zeroes_in.hpp>
 #include <cppx-core-language/text/string_to_.hpp>
+#include <cppx-core-language/text/string_view-util.hpp>
 #include <cppx-core-language/text/to-hex-in-buffer.hpp>
 #include <cppx-core-language/text/to-hex-string.hpp>
