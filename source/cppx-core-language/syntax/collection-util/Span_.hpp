@@ -60,9 +60,14 @@ namespace cppx::_ {
     { return Span_<Iterator>( first, beyond ); }
 
     template< class Iterator >
+    inline auto is_empty( const Span_<Iterator>& span )
+        -> Truth
+    { return span.is_empty(); }
+
+    template< class Iterator >
     inline auto n_items_of( const Span_<Iterator>& span )
         -> Size
-    { return distance( span.begin(), span.end() ); }
+    { return span.n_items(); }
 }  // namespace cppx::_
 
 // Exporting namespaces:
