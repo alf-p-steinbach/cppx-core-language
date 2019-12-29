@@ -11,7 +11,6 @@
 #include <c/assert.hpp>
 
 namespace cppx::_{
-    
     template<
         class Integer,
         class = Enable_if_< is_integral_<Integer> >
@@ -57,6 +56,10 @@ namespace cppx::_{
             -> Integer
         { return static_cast<Integer>( 1 + m_last - m_first ); }
 
+        constexpr auto is_empty() const noexcept
+            -> Truth
+        { return n_values() == 0; }
+
         template< class Value_integer >
         constexpr auto contains( const Value_integer x ) const noexcept
             -> Truth
@@ -97,6 +100,25 @@ namespace cppx::_{
 
     using Sequence = Sequence_<int>;
 
+    // Free function notation / convention adapters:
+
+    template< class Integer >
+    inline constexpr auto n_items( const Sequence_<Integer>& seq ) noexcept
+        -> Size
+    { return seq.n_values(); }
+        
+    template< class Integer >
+    inline constexpr auto is_empty( const Sequence_<Integer>& seq ) noexcept
+        -> Size
+    { return seq.is_empty(); }
+
+    template< class Integer, class Value_integer >
+    inline constexpr auto is_in( const Sequence_<Integer>& seq, const Value_integer v ) noexcept
+        -> Truth
+    { return seq.contains( v ); }
+
+    // Factory functions:
+
     template< class Integer >
     inline constexpr auto zero_to( const Integer n ) noexcept
         -> Sequence_<Integer>
@@ -106,12 +128,6 @@ namespace cppx::_{
     inline constexpr auto one_through( const Integer n ) noexcept
         -> Sequence_<Integer>
     { return Sequence_<Integer>( 1, n ); }
-
-    template< class Integer, class Value_integer >
-    inline constexpr auto is_in( const Sequence_<Integer>& seq, const Value_integer v ) noexcept
-        -> Truth
-    { return seq.contains( v ); }
-
 }  // namespace cppx::_
 
 // Exporting namespaces:
