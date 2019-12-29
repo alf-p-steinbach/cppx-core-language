@@ -1,5 +1,6 @@
-#include <cppx-core-language/syntax/macro-items_of.hpp>         // $items_of
+#include <cppx-core-language/syntax/collection-util.hpp>        // $items_of
 #include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::(spaces, n*s)
+
 #include <iostream>         // std::(cout, endl)
 #include <algorithm>        // std::(copy, sort, equal_range)
 #include <string_view>      // std::string_view

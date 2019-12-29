@@ -22,13 +22,12 @@
       - [3.2.5. Examples for header “calc/number-type-properties.hpp”.](#325-examples-for-header-calcnumber-type-propertieshpp)
     - [3.3. Mix-in classes.](#33-mix-in-classes)
     - [3.4. The syntax support.](#34-the-syntax-support)
-      - [3.4.1. Examples for header “syntax/declarations.hpp”.](#341-examples-for-header-syntaxdeclarationshpp)
-      - [3.4.2. Examples for header “syntax/exception-throwing.hpp”.](#342-examples-for-header-syntaxexception-throwinghpp)
-      - [3.4.3. Examples for header “syntax/flow-control.hpp”.](#343-examples-for-header-syntaxflow-controlhpp)
-      - [3.4.4. Examples for header “syntax/macro-items_of.hpp”.](#344-examples-for-header-syntaxmacro-items_ofhpp)
-      - [3.4.5. Examples for header “syntax/macro-reverse_items_of.hpp”.](#345-examples-for-header-syntaxmacro-reverse_items_ofhpp)
-      - [3.4.6. Examples for header “syntax/string-expressions.hpp”.](#346-examples-for-header-syntaxstring-expressionshpp)
-      - [3.4.7. Examples for header “syntax/types.hpp”.](#347-examples-for-header-syntaxtypeshpp)
+      - [3.4.1. Examples for header “syntax/collection-util.hpp”.](#341-examples-for-header-syntaxcollection-utilhpp)
+      - [3.4.2. Examples for header “syntax/declarations.hpp”.](#342-examples-for-header-syntaxdeclarationshpp)
+      - [3.4.3. Examples for header “syntax/exception-throwing.hpp”.](#343-examples-for-header-syntaxexception-throwinghpp)
+      - [3.4.4. Examples for header “syntax/flow-control.hpp”.](#344-examples-for-header-syntaxflow-controlhpp)
+      - [3.4.5. Examples for header “syntax/string-expressions.hpp”.](#345-examples-for-header-syntaxstring-expressionshpp)
+      - [3.4.6. Examples for header “syntax/types.hpp”.](#346-examples-for-header-syntaxtypeshpp)
     - [3.5. The system dependent stuff.](#35-the-system-dependent-stuff)
     - [3.6. The text handling.](#36-the-text-handling)
     - [3.7. The template meta programming support.](#37-the-template-meta-programming-support)
@@ -1119,34 +1118,219 @@ The syntax support is intended to give you a more [DRY](https://en.wikipedia.org
 
 Main headers:
 
-- 3.4.1. “syntax/[declarations.hpp](#341-examples-for-header-syntaxdeclarationshpp)”
-- 3.4.2. “syntax/[exception-throwing.hpp](#342-examples-for-header-syntaxexception-throwinghpp)”
-- 3.4.3. “syntax/[flow-control.hpp](#343-examples-for-header-syntaxflow-controlhpp)”
-- 3.4.4. “syntax/[macro-items_of.hpp](#344-examples-for-header-syntaxmacro-items_ofhpp)”
-- 3.4.5. “syntax/[macro-reverse_items_of.hpp](#345-examples-for-header-syntaxmacro-reverse_items_ofhpp)”
-- 3.4.6. “syntax/[string-expressions.hpp](#346-examples-for-header-syntaxstring-expressionshpp)”
-- 3.4.7. “syntax/[types.hpp](#347-examples-for-header-syntaxtypeshpp)”
+- 3.4.1. “syntax/[collection-util.hpp](#341-examples-for-header-syntaxcollection-utilhpp)”
+- 3.4.2. “syntax/[declarations.hpp](#342-examples-for-header-syntaxdeclarationshpp)”
+- 3.4.3. “syntax/[exception-throwing.hpp](#343-examples-for-header-syntaxexception-throwinghpp)”
+- 3.4.4. “syntax/[flow-control.hpp](#344-examples-for-header-syntaxflow-controlhpp)”
+- 3.4.5. “syntax/[string-expressions.hpp](#345-examples-for-header-syntaxstring-expressionshpp)”
+- 3.4.6. “syntax/[types.hpp](#346-examples-for-header-syntaxtypeshpp)”
 
 ---
 
-There are 5 main areas, each in a sub-folder with a small set of detail headers. The detail headers are not documented here; see the source code for detail header names etc. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes the detail headers from that sub-folder, and it has an exporting namespace `cppx::`*X*.
+There are 6 main areas, each in a sub-folder with a small set of detail headers. The detail headers are not documented here; see the source code for detail header names etc. Each sub-folder *X* has a corresponding header “*X*.hpp” that includes the detail headers from that sub-folder, and it has an exporting namespace `cppx::`*X*.
 
 | Area | *X*.hpp | Functionality |
 |------|---------|---------------|
+| Collection handling | “collection-util.hpp” | Mainly a general `is_empty` function and the `$items_of` syntactic sugar macro. |
 | Declaration statements| “declarations.hpp” | `using` ordinary names from a given namespace unqualified, e.g. via `$use_std`; declaring aliases of nested namespaces without repeating the names, most generally via `$alias_namespaces_from`; defining or redeclaring tag types via `$define_tag`; and the construct `$with` for executing a block with a variable scoped to that block, like the C# and Java auto cleanup constructs (C# `using`, Java `try()`). This is all necessarily macro-based. One wishes for ch-ch-ch-changes. |
 | Exception throwing | “exception-throwing.hpp” | Primarily `fail` for writing things like `do_something() or fail("Oops")`. The `hopefully` function to use in conjunction with `fail`, plus the ditto more advanced syntax `>>` *Property*. Both `hopefully` and `>>` rely on short circuit evaluation of `or` to avoid evaluation of the argument(s) to `fail` except when it’s actually called. |
 | Flow control | “flow-control.hpp” | Class templates `Sequence_` and `Span_`, plus supporting functions such as `zero_to`, let you used safer, shorter and more readable range based `for` loops in a great many cases, with the same efficiency as index based loops. `Sequence_` is for integers and `Span_` is for arrays. However, the types also have other uses and so their definitions reside in the “types” sub-folder. The headers are included here for convenience. This sub-folder itself defines the macro `$repeat_times` to repeat something *n* times; a corresponding non-macro function `repeat_times` (less convenient but it’s just *not a macro*); and the `[[noreturn]]` function `noreturn` that throws integer `666`, which can help to avoid silly­warnings. |
 | Creating or<br> assembling<br> `std::string`s | “string-expressions.hpp” | A `<<` notation in order to assemble text pieces and io-streamable values, which can be very convenient for function arguments, e.g. for `fail`; operator `*` to specify *n* repeats of a string; and pseudo-operator `^sz` to call `.c_str()`. |
 | Type machinery | “types.hpp” | The type builders such as `Type_` let you avoid nasty C type expressions, and let you use prefix `const` consistently. Class templates `Sequence_` and `Span_` are mainly in support of range based `for` loops. However, a `Sequence_` is nice as a simple set of a contiguous range of values, and a `Span_` is useful as a formal parameter type. |
 
-Outside the above categories, in their own headers, the lvalue-restricted macro `$items_of` and sibling `$reverse_items_of` allow you to write things like `std::sort($items_of(v))` instead of `std::sort(begin(v),end(v))`. With C++20 the Ranges sub-library of the standard library will define overloads of `sort` etc. that admit similarly or even more concise & DRY calls. However, that doesn’t help with 3ʳᵈ party libraries that require iterator pairs, while `$items_of` does help in general.
+#### 3.4.1. Examples for header “syntax/collection-util.hpp”.
 
-For an rvalue expression one can write `$with(expression){foobar($items_of(_));}`.
+In C++17 and earlier C++ standards the standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
 
-#### 3.4.1. Examples for header “syntax/declarations.hpp”.
-#### 3.4.2. Examples for header “syntax/exception-throwing.hpp”.
+To help with that the lvalue-restricted macro `$items_of` and its sibling `$reverse_items_of` allow you to write things like `std::sort($items_of(v))` instead of `std::sort(std::begin(v),std::end(v))`. With C++20 the Ranges sub-library of the standard library will define overloads of `sort` etc. that admit similarly or even more concise & DRY calls. However, that doesn’t help with 3ʳᵈ party libraries that require iterator pairs, while `$items_of` does help in general.
 
-#### 3.4.3. Examples for header “syntax/flow-control.hpp”.
+“syntax/collection-util.hpp” includes the standard library’s `<iterator>` header and defines the `$items_of` macro as
+
+
+~~~cpp
+#ifndef CPPX_NO_DOLLARS_PLEASE
+#   define  $items_of CPPX_ITEMS_OF
+#endif
+
+#define CPPX_ITEMS_OF( c ) \
+    std::begin( cppx::lvalue_ref_to( c ) ), \
+    std::end( c )
+~~~
+
+… where `lvalue_ref_to` implements a restriction to lvalue.
+
+`$items_of(c)`, where `c` must be an lvalue expression, produces (as-if) the iterator pair text “`std::begin(c),std::end(c)`”. For example, you can write just `std::sort($items_of(the_numbers))`. The name of a variable is an lvalue expression.
+
+If `c` is an rvalue expression, e.g. a temporary such as a value result of a function call, then by design you get a compilation error. This *lvalue restriction* removes almost all cases where an argument expression could have its side effect or resource usage duplicated. However, for an rvalue expression `c` one can write the non-expression statement
+
+>     $with( expression ) { foobar( $items_of( _ ) ); }
+
+The `$reverse_items_of` macro is mainly for completeness, as a complement of `$items_of`.
+
+Definition:
+
+~~~cpp
+#ifndef CPPX_NO_DOLLARS_PLEASE
+#   define  $reverse_items_of CPPX_REVERSE_ITEMS_OF
+#endif
+
+#define CPPX_REVERSE_ITEMS_OF( c ) \
+    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
+    std::make_reverse_iterator( std::begin( c ) )
+~~~
+
+---
+
+***Sorting and searching of a raw array***  
+
+In the following example I use a raw array for `sorted_digits`, which complicates things a little, in order to show how `$items_of` also works nicely with a raw array:
+
+<small>*examples/syntax/sort-and-search.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <iostream>         // std::(cout, endl)
+#include <algorithm>        // std::(copy, sort, equal_range)
+#include <string_view>      // std::string_view
+
+auto main()
+    -> int
+{
+    $use_std( copy, cout, endl, equal_range, sort, string_view );
+
+    constexpr string_view   pi_digits   = "3141592653589793238462643383279";      // 30 decimals.
+    constexpr int           n_digits    = pi_digits.length();
+    
+    char sorted_digits[n_digits];
+    copy( $items_of( pi_digits ), &sorted_digits[0] );
+    sort( $items_of( sorted_digits ) );
+
+    cout << pi_digits << endl;
+    cout << string_view( sorted_digits, n_digits ) << endl;
+    
+    const auto range_pair = equal_range( $items_of( sorted_digits ), '6' );
+    const int n = range_pair.second - range_pair.first;
+    if( n == 0 ) {
+        cout << "... No 6-digits, weird." << endl;
+    } else {
+        using namespace cppx::syntax;
+        cout << spaces( range_pair.first - &sorted_digits[0] ) << n*"^"s << endl;
+        cout << "The digit 6 occurs " << n << " times." << endl;
+    }
+}
+~~~
+
+C++17’s `string_view` is one of the rare cases (for the standard library) where a span is not specified via a pair of iterators. It could have followed the precedent of the `std::vector` constructor design, but it didn’t. And so `$items_of` could not be used in the construction of the `string_view` in the output of `sorted_digits`.
+
+The output via a `string_view` could alternatively have been accomplished e.g. via `std::copy` and an output stream iterator, which is a more general approach:
+
+>     copy( $items_of( sorted_digits ), ostream_iterator<char>( cout ) );  cout << endl;
+
+Anyway, result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+3141592653589793238462643383279
+1122223333333444555666778889999
+                   ^^^
+The digit 6 occurs 3 times.
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/syntax/collection-util.hpp>        // $items_of
+#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::(spaces, n*s)
+~~~
+
+---
+
+***Direct `$reverse_items_of`, and combined with `span_of`***  
+The following example first shows direct use of `$reverse_items_of` with a standard library function, namely `std::copy`, and then shows it used in combination with the Core Language Extensions library’s `span_of`:
+
+<small>*examples/syntax/palindrome.cpp*</small>
+~~~cpp
+#include <cppx-core-language/all.hpp>
+#include <algorithm>            // std::copy
+#include <iostream>
+#include <iterator>             // std::ostream_iterator
+#include <string>               // std::string
+#include <string_view>          // std::string_view
+#include <vector>               // std::vector
+$use_std( string, string_view, vector );
+$alias_cppx_namespaces( ascii );
+
+struct Classified
+{
+    string          letters;
+    vector<string>  non_letters;
+
+    Classified( const string_view& s ) {
+        for( const char ch: s ) {
+            if( ascii::is_letter( ch ) ) {
+                letters += ch;
+            }
+        }
+
+        non_letters.resize( letters.size() + 1 );
+        int i = 0;
+        for( const char ch: s ) {
+            if( ascii::is_letter( ch ) ) {
+                ++i;
+            } else {
+                non_letters[i] += ch;
+            }
+        }
+    }
+};
+
+auto main()
+    -> int
+{
+    $use_std( ostream_iterator, cout, endl );
+    $use_cppx( span_of );
+    
+    const auto s = string_view( "$$$ A man, a plan, a canal: panama!" );
+
+    copy( $reverse_items_of( s ), ostream_iterator<char>( cout ) );
+    cout << "  (reversed)" << endl;
+    
+    const auto the = Classified( s );
+    int i = 0;
+    cout << the.non_letters[0];
+    for( const char ch: span_of( $reverse_items_of( the.letters ) ) ) {
+        cout << ch;
+        ++i;
+        cout << the.non_letters[i];
+    }
+    cout << "  (smart-reversed)" << endl;
+    
+    cout << s << "  (original)" << endl;
+}
+~~~
+
+Here the `span_of` function creates a little object holding the two iterators and providing them via `.begin()` and `.end()` member functions to the C++ range based `for`, i.e., it’s just shallow (but important) syntactical glue.
+
+Result with 64-bit MinGW g++ in Windows 10:
+
+~~~txt
+!amanap :lanac a ,nalp a ,nam A $$$  (reversed)
+$$$ a man, a plan, a canal: panamA!  (smart-reversed)
+$$$ A man, a plan, a canal: panama!  (original)
+~~~
+
+Specific headers:
+
+~~~cpp
+#include <cppx-core-language/syntax/declarations.hpp>               // $alias.., $use_...
+#include <cppx-core-language/syntax/macro-reverse_items_of.hpp>     // $reverse_items_of
+#include <cppx-core-language/syntax/types.hpp>                      // cppx::span_of
+#include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii
+~~~
+
+
+#### 3.4.2. Examples for header “syntax/declarations.hpp”.
+#### 3.4.3. Examples for header “syntax/exception-throwing.hpp”.
+
+#### 3.4.4. Examples for header “syntax/flow-control.hpp”.
 
 *Exporting namespaces: the folder’s `cppx::syntax`, the library’s `cppx`.*
 
@@ -1242,198 +1426,7 @@ Specific headers:
 ~~~
 
 
-
-#### 3.4.4. Examples for header “syntax/macro-items_of.hpp”.
-
-In C++17 and earlier C++ standards the standard library algorithms that operate on sequences, like `std::sort`, generally take two iterators as arguments: a  “begin” iterator that refers to the start of the sequence, and an “end” iterator that refers to just beyond the sequence. For example, `std::sort(std::begin(the_numbers),std::end(the_numbers))`. The standard is very annoyingly at odds with the Don't Repeat Yourself principle for all these algorithms.
-
-To help with that “syntax/macro-items_of.hpp” includes the standard library’s `<iterator>` header and defines the `$items_of` macro as
-
-~~~cpp
-#ifndef CPPX_NO_DOLLARS_PLEASE
-#   define  $items_of CPPX_ITEMS_OF
-#endif
-
-#define CPPX_ITEMS_OF( c ) \
-    std::begin( cppx::lvalue_ref_to( c ) ), \
-    std::end( c )
-~~~
-
-… where `lvalue_ref_to` implements a restriction to lvalue.
-
-`$items_of(c)`, where `c` must be an lvalue expression, produces (as-if) the iterator pair text “`std::begin(c),std::end(c)`”. For example, you can write just `std::sort($items_of(the_numbers))`. The name of a variable is an lvalue expression.
-
-If `c` is an rvalue expression, e.g. a temporary such as a value result of a function call, then by design you get a compilation error. This *lvalue restriction* removes almost all cases where an argument expression could have its side effect or resource usage duplicated. However, for an rvalue expression `c` one can write the non-expression statement
-
->     $with( expression ) { foobar( $items_of( _ ) ); }
-
-
----
-
-***Sorting and searching of a raw array***  
-
-In the following example I use a raw array for `sorted_digits`, which complicates things a little, in order to show how `$items_of` also works nicely with a raw array:
-
-<small>*examples/syntax/sort-and-search.cpp*</small>
-~~~cpp
-#include <cppx-core-language/all.hpp>
-#include <iostream>         // std::(cout, endl)
-#include <algorithm>        // std::(copy, sort, equal_range)
-#include <string_view>      // std::string_view
-
-auto main()
-    -> int
-{
-    $use_std( copy, cout, endl, equal_range, sort, string_view );
-
-    constexpr string_view   pi_digits   = "3141592653589793238462643383279";      // 30 decimals.
-    constexpr int           n_digits    = pi_digits.length();
-    
-    char sorted_digits[n_digits];
-    copy( $items_of( pi_digits ), &sorted_digits[0] );
-    sort( $items_of( sorted_digits ) );
-
-    cout << pi_digits << endl;
-    cout << string_view( sorted_digits, n_digits ) << endl;
-    
-    const auto range_pair = equal_range( $items_of( sorted_digits ), '6' );
-    const int n = range_pair.second - range_pair.first;
-    if( n == 0 ) {
-        cout << "... No 6-digits, weird." << endl;
-    } else {
-        using namespace cppx::syntax;
-        cout << spaces( range_pair.first - &sorted_digits[0] ) << n*"^"s << endl;
-        cout << "The digit 6 occurs " << n << " times." << endl;
-    }
-}
-~~~
-
-C++17’s `string_view` is one of the rare cases (for the standard library) where a span is not specified via a pair of iterators. It could have followed the precedent of the `std::vector` constructor design, but it didn’t. And so `$items_of` could not be used in the construction of the `string_view` in the output of `sorted_digits`.
-
-The output via a `string_view` could alternatively have been accomplished e.g. via `std::copy` and an output stream iterator, which is a more general approach:
-
->     copy( $items_of( sorted_digits ), ostream_iterator<char>( cout ) );  cout << endl;
-
-Anyway, result with 64-bit MinGW g++ in Windows 10:
-
-~~~txt
-3141592653589793238462643383279
-1122223333333444555666778889999
-                   ^^^
-The digit 6 occurs 3 times.
-~~~
-
-Specific headers:
-
-~~~cpp
-#include <cppx-core-language/syntax/collection-util.hpp>         // $items_of
-#include <cppx-core-language/syntax/string-expressions.hpp>     // cppx::syntax::(spaces, n*s)
-~~~
-
-#### 3.4.5. Examples for header “syntax/macro-reverse_items_of.hpp”.
-
-The `$reverse_items_of` macro is mainly for completeness, as a complement of `$items_of`.
-
-Definition:
-
-~~~cpp
-#ifndef CPPX_NO_DOLLARS_PLEASE
-#   define  $reverse_items_of CPPX_REVERSE_ITEMS_OF
-#endif
-
-#define CPPX_REVERSE_ITEMS_OF( c ) \
-    std::make_reverse_iterator( std::end( cppx::lvalue_ref_to( c ) ) ), \
-    std::make_reverse_iterator( std::begin( c ) )
-~~~
-
-… where `lvalue_ref_to` causes a compilation error for rvalue arguments, because one usually doesn’t want duplication of an expression with side-effects.
-
----
-
-***Direct `$reverse_items_of`, and combined with `span_of`***  
-The following example first shows direct use of `$reverse_items_of` with a standard library function, namely `std::copy`, and then shows it used in combination with the Core Language Extensions library’s `span_of`:
-
-<small>*examples/syntax/palindrome.cpp*</small>
-~~~cpp
-#include <cppx-core-language/all.hpp>
-#include <algorithm>            // std::copy
-#include <iostream>
-#include <iterator>             // std::ostream_iterator
-#include <string>               // std::string
-#include <string_view>          // std::string_view
-#include <vector>               // std::vector
-$use_std( string, string_view, vector );
-$alias_cppx_namespaces( ascii );
-
-struct Classified
-{
-    string          letters;
-    vector<string>  non_letters;
-
-    Classified( const string_view& s ) {
-        for( const char ch: s ) {
-            if( ascii::is_letter( ch ) ) {
-                letters += ch;
-            }
-        }
-
-        non_letters.resize( letters.size() + 1 );
-        int i = 0;
-        for( const char ch: s ) {
-            if( ascii::is_letter( ch ) ) {
-                ++i;
-            } else {
-                non_letters[i] += ch;
-            }
-        }
-    }
-};
-
-auto main()
-    -> int
-{
-    $use_std( ostream_iterator, cout, endl );
-    $use_cppx( span_of );
-    
-    const auto s = string_view( "$$$ A man, a plan, a canal: panama!" );
-
-    copy( $reverse_items_of( s ), ostream_iterator<char>( cout ) );
-    cout << "  (reversed)" << endl;
-    
-    const auto the = Classified( s );
-    int i = 0;
-    cout << the.non_letters[0];
-    for( const char ch: span_of( $reverse_items_of( the.letters ) ) ) {
-        cout << ch;
-        ++i;
-        cout << the.non_letters[i];
-    }
-    cout << "  (smart-reversed)" << endl;
-    
-    cout << s << "  (original)" << endl;
-}
-~~~
-
-Here the `span_of` function creates a little object holding the two iterators and providing them via `.begin()` and `.end()` member functions to the C++ range based `for`, i.e., it’s just shallow (but important) syntactical glue.
-
-Result with 64-bit MinGW g++ in Windows 10:
-
-~~~txt
-!amanap :lanac a ,nalp a ,nam A $$$  (reversed)
-$$$ a man, a plan, a canal: panamA!  (smart-reversed)
-$$$ A man, a plan, a canal: panama!  (original)
-~~~
-
-Specific headers:
-
-~~~cpp
-#include <cppx-core-language/syntax/declarations.hpp>               // $alias.., $use_...
-#include <cppx-core-language/syntax/macro-reverse_items_of.hpp>     // $reverse_items_of
-#include <cppx-core-language/syntax/types.hpp>                      // cppx::span_of
-#include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii
-~~~
-
-#### 3.4.6. Examples for header “syntax/string-expressions.hpp”.
+#### 3.4.5. Examples for header “syntax/string-expressions.hpp”.
 *Exporting namespaces: `string_expressions`, the folder’s `cppx::syntax`, the library’s `cppx`.  
 Smaller functional area exporting namespaces: `basic_string_assembly` and `string_operators`.*
 
@@ -1699,7 +1692,7 @@ Specific headers:
 #include <cppx-core-language/syntax/string-expressions.hpp>         // cppx::syntax::*
 ~~~
 
-#### 3.4.7. Examples for header “syntax/types.hpp”.
+#### 3.4.6. Examples for header “syntax/types.hpp”.
 
 
 ### 3.5. The system dependent stuff.
