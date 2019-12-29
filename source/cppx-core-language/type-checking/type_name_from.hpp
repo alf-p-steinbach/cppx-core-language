@@ -1,12 +1,12 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/types/Sequence_.hpp>        // cppx::Sequence_
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
-#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
-#include <cppx-core-language/text/ascii-character-util.hpp>     // cppx::ascii::*
-#include <cppx-core-language/tmp/Type_carrier_.hpp>             // cppx::Type_carrier_
-#include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::As_referent_
+#include <cppx-core-language/syntax/collection-util/Sequence_.hpp>  // cppx::Sequence_
+#include <cppx-core-language/syntax/types/type-builders.hpp>        // cppx::Type_
+#include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE_...
+#include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii::*
+#include <cppx-core-language/tmp/Type_carrier_.hpp>                 // cppx::Type_carrier_
+#include <cppx-core-language/tmp/type-modifiers.hpp>                // cppx::As_referent_
 
 #include <functional>   // std::invoke
 #include <stdlib.h>     // free

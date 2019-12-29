@@ -521,7 +521,7 @@ Specific headers:
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::intlog2
 #include <cppx-core-language/bit-level/sum_of_bits.hpp>     // cppx::sum_of_bits
-#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::Sequence
+#include <cppx-core-language/syntax/collection-util.hpp>    // cppx::Sequence
 ~~~
 
 
@@ -686,7 +686,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_odd
-#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::(Sequence, zero_to)
+#include <cppx-core-language/syntax/collection-util/Sequence_.hpp>    // cppx::(Sequence, zero_to)
 ~~~
 
 ---
@@ -723,7 +723,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/integer-operations.hpp>   // cppx::is_zero
-#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::zero_to
+#include <cppx-core-language/syntax/collection-util/Sequence_.hpp>    // cppx::zero_to
 ~~~
 
 ---

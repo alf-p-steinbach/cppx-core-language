@@ -4,7 +4,7 @@
 #include <cppx-core-language/text/hex-digits.hpp>               // cppx::(hex_digits*, hex_base)
 #include <cppx-core-language/types/C_buffer_param_.hpp>         // cppx::C_buffer_param_
 #include <cppx-core-language/syntax/flow-control.hpp>           // CPPX_ITEMS_OF, CPPX_REPEAT_TIMES
-#include <cppx-core-language/syntax/types/Span_.hpp>            // cppx::span_of
+#include <cppx-core-language/syntax/collection-util/Span_.hpp>  // cppx::span_of
 #include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
 
 namespace cppx::hex_stuff {

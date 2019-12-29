@@ -2,7 +2,7 @@
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
 #include <cppx-core-language/bit-level/intlog2.hpp>         // cppx::intlog2
 #include <cppx-core-language/bit-level/sum_of_bits.hpp>     // cppx::sum_of_bits
-#include <cppx-core-language/syntax/types.hpp>              // cppx::Sequence
+#include <cppx-core-language/syntax/collection-util.hpp>    // cppx::Sequence
 
 #include <c/stdint.hpp>         // uint8_t
 #include <bitset>               // std::bitset

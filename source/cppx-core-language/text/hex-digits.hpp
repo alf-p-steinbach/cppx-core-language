@@ -1,10 +1,10 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_STD
-#include <cppx-core-language/syntax/types/Sequence_.hpp>    // cppx::(is_in, Sequence)
-#include <cppx-core-language/calc/integer-operations.hpp>   // cppx::div_up
-#include <cppx-core-language/system-dependent/Byte.hpp>     // cppx::bits_per_byte
+#include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE_STD
+#include <cppx-core-language/syntax/collection-util/Sequence_.hpp>  // cppx::(is_in, Sequence)
+#include <cppx-core-language/calc/integer-operations.hpp>           // cppx::div_up
+#include <cppx-core-language/system-dependent/Byte.hpp>             // cppx::bits_per_byte
 
 namespace cppx::hex_stuff {
     constexpr int hex_digits_per_byte   = div_up( bits_per_byte, 4 );

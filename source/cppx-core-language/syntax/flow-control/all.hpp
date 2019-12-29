@@ -6,5 +6,5 @@
 #include <cppx-core-language/syntax/flow-control/repeat_times.hpp>
 
 // Convenience includes to support range based `for` loops.
-#include <cppx-core-language/syntax/types/Sequence_.hpp>
-#include <cppx-core-language/syntax/types/Span_.hpp>
+#include <cppx-core-language/syntax/collection-util/Sequence_.hpp>
+#include <cppx-core-language/syntax/collection-util/Span_.hpp>

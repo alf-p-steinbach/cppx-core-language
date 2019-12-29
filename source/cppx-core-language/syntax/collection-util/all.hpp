@@ -4,3 +4,5 @@
 #include <cppx-core-language/syntax/collection-util/is_empty.hpp>
 #include <cppx-core-language/syntax/collection-util/macro-items_of.hpp>
 #include <cppx-core-language/syntax/collection-util/macro-reverse_items_of.hpp>
+#include <cppx-core-language/syntax/collection-util/Sequence_.hpp>
+#include <cppx-core-language/syntax/collection-util/Span_.hpp>
