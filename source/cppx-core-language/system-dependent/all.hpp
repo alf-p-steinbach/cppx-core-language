@@ -8,7 +8,7 @@
 namespace cppx{
     /// \brief Provides
     /// \make_name_ref{cppx,Byte},
-    /// \make_name_ref{cppx,As_signed_byte},
+    /// \make_name_ref{cppx,Signed_byte},
     /// \make_name_ref{cppx,bytes_per_},
     /// \make_name_ref{cppx,as_byte_ptr},
     /// \make_name_ref{cppx,as_signedbyte_ptr},
