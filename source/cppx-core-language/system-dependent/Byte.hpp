@@ -125,7 +125,7 @@ namespace cppx::_ {
             as_byte_pointer,
             as_signedbyte_pointer,
             as_char_pointer
-            );
+        );
     }  // namespace byte_stuff
 
     namespace system_dependent {
