@@ -115,16 +115,16 @@ namespace cppx::_ {
  namespace cppx {
     namespace byte_stuff {
         CPPX_USE_FROM_NAMESPACE( _,
-            as_byte_pointer,
-            as_char_pointer,
-            as_number,
-            Signed_byte,
-            as_signedbyte_pointer,
-            as_std_byte,
-            bits_per_byte,
             Byte,
+            Signed_byte,
+            bits_per_byte,
             bytes_per_,
-            max_byte
+            max_byte,
+            as_number,
+            as_std_byte,
+            as_byte_pointer,
+            as_signedbyte_pointer,
+            as_char_pointer
             );
     }  // namespace byte_stuff
 
