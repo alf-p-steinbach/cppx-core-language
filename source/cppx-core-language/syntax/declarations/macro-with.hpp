@@ -6,8 +6,8 @@
 
 
 #ifndef CPPX_NO_DOLLARS_PLEASE
-#   define $with        CPPX_WITH               ///< \dollarname{with}
-#   define $with_const  CPPX_WITH_CONST         ///< \dollarname{with_const}
+#   define $with        CPPX_WITH               ///<\dollarname{with}
+#   define $with_const  CPPX_WITH_CONST         ///<\dollarname{with_const}
 #endif
 
 #ifdef _MSC_VER

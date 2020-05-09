@@ -3,7 +3,6 @@
 
 #include <cppx-core-language/syntax/collection-util.hpp>
 #include <cppx-core-language/syntax/declarations.hpp>
-#include <cppx-core-language/syntax/exception-throwing.hpp>
 #include <cppx-core-language/syntax/flow-control.hpp>
 #include <cppx-core-language/syntax/string-expressions.hpp>
-#include <cppx-core-language/syntax/types.hpp>
+#include <cppx-core-language/syntax/type-builders.hpp>

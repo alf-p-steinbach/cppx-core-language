@@ -4,12 +4,12 @@
 #include <cppx-core-language/syntax/collection-util.hpp>        // CPPX_ITEMS_OF
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
 #include <cppx-core-language/syntax/flow-control.hpp>           // cppx::(Sequence_, zero_to, span_of)
-#include <cppx-core-language/system-dependent/Byte.hpp>         // cppx::Byte
+#include <cppx-core-language/types/system-dependent/Byte.hpp>   // cppx::Byte
 #include <cppx-core-language/text/ascii-character-names.hpp>    // cppx::ascii::/names/
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 #include <cppx-core-language/tmp/type-traits.hpp>               // cppx::(is_integral_, is_a_char_type_)
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::(As_unsigned_)
-#include <cppx-core-language/types/C_str_.hpp>                  // cppx::C_str_
+#include <cppx-core-language/text/C_str_.hpp>                   // cppx::C_str_
 
 #include <c/assert.hpp>         // assert
 #include <bitset>               // std::bitset

@@ -1,11 +1,11 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::P_
-#include <cppx-core-language/system-dependent/Byte.hpp>         // cppx::Byte
-#include <cppx-core-language/system-dependent/Endian.hpp>       // cppx::(is_XXX_endian)
-#include <cppx-core-language/tmp/Enable_if_.hpp>                // cppx::Enable_if_
+#include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE_STD
+#include <cppx-core-language/syntax/type-builders.hpp>              // cppx::P_
+#include <cppx-core-language/types/system-dependent/Byte.hpp>       // cppx::Byte
+#include <cppx-core-language/types/system-dependent/Endian.hpp>     // cppx::(is_XXX_endian)
+#include <cppx-core-language/tmp/Enable_if_.hpp>                    // cppx::Enable_if_
 
 #include <algorithm>        // std::(min, reverse)
 #include <string.h>         // memcpy

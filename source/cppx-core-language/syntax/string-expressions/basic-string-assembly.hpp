@@ -1,9 +1,9 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_STD
+#include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_STD, CPPX_USE_FROM_NAMESPACE
 #include <cppx-core-language/text/format-specs.hpp>         // cppx::fp::Format_spec
-#include <cppx-core-language/types/C_str_.hpp>              // cppx::C_str
+#include <cppx-core-language/text/C_str_.hpp>               // cppx::C_str
 #include <cppx-core-language/types/Truth.hpp>               // cppx::Truth
 
 #include <ios>              // std::(fixed, scientific, uppercase)
@@ -13,13 +13,11 @@
 #include <string_view>      // std::string_view
 #include <sstream>          // std::ostringstream
 
-namespace cppx::_
-{
+namespace cppx::definitions_ {
     CPPX_USE_STD(
         ostream, ostringstream, string, string_view,
         fixed, scientific, uppercase, setprecision
         );
-    using namespace std::string_literals;       // E.g. ""s
 
     // General fall-back.
     // Quite inefficient but this is the general case fallback. Client code might specialize
@@ -106,23 +104,15 @@ namespace cppx::_
         -> string&&
     { return move( operator<<( s, value ) ); }
 
-}  // namespace cppx::_
-
-// Exporting namespaces.
-namespace cppx
-{
-    namespace basic_string_assembly {
+    namespace basic_string_expression_exports {
         using namespace std::string_literals;       // E.g. ""s
-        using _::operator<<;
-    }  // basic_string_assembly
+        CPPX_USE_FROM_NAMESPACE( definitions_,
+            operator<<;
+        );
+    }  // basic_string_expression_exports
+}  // namespace cppx::definitions_
 
-    namespace string_expressions {
-        using namespace basic_string_assembly;
-    }  // namespace syntax
-
-    namespace syntax {
-        using namespace string_expressions;
-    }  // namespace syntax
-
-    using namespace syntax;
-}  // namespace cppx
+namespace cppx::basic_string_assembly   { using namespace definitions_::basic_string_expression_exports; }
+namespace cppx::string_expressions      { using namespace definitions_::basic_string_expression_exports; }
+namespace cppx::syntax                  { using namespace definitions_::basic_string_expression_exports; }
+namespace cppx                          { using namespace definitions_::basic_string_expression_exports; }

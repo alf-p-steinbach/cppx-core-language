@@ -2,7 +2,7 @@
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::(Type_)
+#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::(Type_)
 
 #include <string_view>          // std::string_view
 

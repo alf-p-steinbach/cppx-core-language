@@ -6,7 +6,7 @@
 #include <cppx-core-language/text/ascii-character-names.hpp>        // cppx::ascii::*
 #include <cppx-core-language/text/ascii-character-util.hpp>         // cppx::ascii::*
 #include <cppx-core-language/text/string_view-util.hpp>             // cppx::(ptr_to_first_in, ptr_to_beyond)
-#include <cppx-core-language/types/C_str_.hpp>                      // cppx::C_str_
+#include <cppx-core-language/text/C_str_.hpp>                       // cppx::C_str_
 
 #include <c/string.hpp>         // strlen
 #include <c/ctype.hpp>          // isspace

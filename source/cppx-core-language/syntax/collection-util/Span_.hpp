@@ -5,8 +5,8 @@
 
 #include <cppx-core-language/mix-in/Adapt_as_iterable_collection_.hpp>  // cppx::mix_in::*
 #include <cppx-core-language/syntax/declarations.hpp>                   // CPPX_USE_...
-#include <cppx-core-language/syntax/types/type-builders.hpp>            // cppx::Type_
-#include <cppx-core-language/system-dependent/size-types.hpp>           // cppx::Size
+#include <cppx-core-language/syntax/type-builders.hpp>                  // cppx::Type_
+#include <cppx-core-language/types/system-dependent/size-types.hpp>     // cppx::Size
 #include <cppx-core-language/tmp/type-traits.hpp>                       // cppx::is_a_
 #include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 

@@ -892,7 +892,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/named-numbers.hpp>            // cppx::calc::*
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
+#include <cppx-core-language/syntax/type-builders.hpp>    // cppx::Type_
 #include <cppx-core-language-meta-macro/macro-apply.hpp>        // $apply    
 ~~~
 

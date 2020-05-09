@@ -2,7 +2,7 @@
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
 #include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_STD
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
+#include <cppx-core-language/syntax/type-builders.hpp>          // cppx::Type_
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
 #include <iterator>         // std::(begin, end)

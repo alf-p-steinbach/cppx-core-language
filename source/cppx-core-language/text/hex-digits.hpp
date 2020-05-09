@@ -4,7 +4,7 @@
 #include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE_STD
 #include <cppx-core-language/syntax/collection-util/Sequence_.hpp>  // cppx::(is_in, Sequence)
 #include <cppx-core-language/calc/integer-operations.hpp>           // cppx::div_up
-#include <cppx-core-language/system-dependent/Byte.hpp>             // cppx::bits_per_byte
+#include <cppx-core-language/types/system-dependent/Byte.hpp>       // cppx::bits_per_byte
 
 namespace cppx::hex_stuff {
     constexpr int hex_digits_per_byte   = div_up( bits_per_byte, 4 );

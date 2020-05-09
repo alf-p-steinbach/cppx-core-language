@@ -1,13 +1,13 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE_STD
-#include <cppx-core-language/system-dependent/Endian.hpp>           // cppx::
-#include <cppx-core-language/system-dependent/Value_bytes_.hpp>     // cppx::(big_endian_bytes_of, Value_bytes_)
-#include <cppx-core-language/text/remove_leading_zeroes_in.hpp>     // cppx::remove_leading_zeroes_in
-#include <cppx-core-language/text/to-hex-in-buffer.hpp>             // cppx::byte_span_to_hex_in
-#include <cppx-core-language/tmp/Enable_if_.hpp>                    // cppx::Enable_if_
-#include <cppx-core-language/tmp/type-traits.hpp>                   // cppx::(is_xxx_)
+#include <cppx-core-language/syntax/declarations.hpp>                       // CPPX_USE_STD
+#include <cppx-core-language/types/system-dependent/Endian.hpp>             // cppx::
+#include <cppx-core-language/types/system-dependent/Value_bytes_.hpp>       // cppx::(big_endian_bytes_of, Value_bytes_)
+#include <cppx-core-language/text/remove_leading_zeroes_in.hpp>             // cppx::remove_leading_zeroes_in
+#include <cppx-core-language/text/to-hex-in-buffer.hpp>                     // cppx::byte_span_to_hex_in
+#include <cppx-core-language/tmp/Enable_if_.hpp>                            // cppx::Enable_if_
+#include <cppx-core-language/tmp/type-traits.hpp>                           // cppx::(is_xxx_)
 
 #include <c/assert.hpp>     // assert
 #include <string>           // std::string

@@ -15,9 +15,9 @@
 /// \sa Related: the <cppx-core-language/\make_ref{bits_per_.hpp}> header 
 /// defines the general bit size function template `bits_per_byte`.
 
-#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_...
-#include <cppx-core-language/system-dependent/size-types.hpp>   // cppx::Size
-#include <cppx-core-language/syntax/types/type-builders.hpp>    // cppx::Type_
+#include <cppx-core-language/syntax/declarations.hpp>                   // CPPX_USE_...
+#include <cppx-core-language/types/system-dependent/size-types.hpp>     // cppx::Size
+#include <cppx-core-language/syntax/type-builders.hpp>                  // cppx::Type_
 
 #include <c/limits.hpp>     // CHAR_BIT
 #include <c/stddef.hpp>     // std::byte
