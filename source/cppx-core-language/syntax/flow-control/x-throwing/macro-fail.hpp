@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/flow-control/exception-throwing/fail.hpp>   // cppx::fail
-#include <cppx-core-language/introspection/macro-here.hpp>                      // CPPX_HERE
+#include <cppx-core-language/introspection/macro-here.hpp>                  // CPPX_HERE
+#include <cppx-core-language/syntax/flow-control/x-throwing/fail.hpp>       // cppx::fail
 
 /// \file
 /// \brief `$fail` invokes `cppx::fail` with the source location and a specified message.

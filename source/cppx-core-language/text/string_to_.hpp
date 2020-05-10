@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/declarations.hpp>                       // CPPX_USE...
-#include <cppx-core-language/syntax/flow-control/exception-throwing.hpp>    // cppx::(hopefully, fail)
+#include <cppx-core-language/syntax/declarations.hpp>               // CPPX_USE...
+#include <cppx-core-language/syntax/flow-control/x-throwing.hpp>    // cppx::(hopefully, fail)
 
 #include <charconv>         // std::from_chars
 #include <string_view>      // std::string_view
