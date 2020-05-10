@@ -31,5 +31,6 @@ namespace cppx::definitions_ {
 
 }  // namespace cppx::definitions_
 
-namespace cppx::x_throwing  { using definitions_::nest_current_and_throw_; }
-namespace cppx              { using definitions_::nest_current_and_throw_; }
+namespace cppx::x_propagation   { using definitions_::nest_current_and_throw_; }
+namespace cppx::x_throwing      { using definitions_::nest_current_and_throw_; }
+namespace cppx                  { using definitions_::nest_current_and_throw_; }

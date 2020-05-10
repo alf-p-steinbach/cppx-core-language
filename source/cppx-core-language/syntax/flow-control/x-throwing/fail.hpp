@@ -49,7 +49,7 @@ namespace cppx::definitions_ {
     { 
         return fail_<runtime_error>( ""s
             << srcloc.funcname().value_or( "<unknown func>" ) << " - " << message << "\n"
-            << string( 4, ' ' ) << text_location_of( srcloc )
+            << string( 4, ' ' ) << "in " << text_location_of( srcloc )
             );
     }
 

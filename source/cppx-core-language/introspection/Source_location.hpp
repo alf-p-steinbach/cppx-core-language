@@ -119,7 +119,7 @@ namespace cppx::definitions
     {
         using srcloc_impl::operator<<;
 
-        s << "in “"  << loc.filespec_c_str() << "” ";
+        s << "“"  << loc.filespec_c_str() << "” ";
         s << "line " << loc.linenumber();
         if( const auto col = loc.column() ) {
             s << " col " << col.value();
@@ -141,7 +141,7 @@ namespace cppx::definitions
         using srcloc_impl::operator<<;
 
         if( const auto func = loc.funcname_c_str() ) {
-            result << "“" << func << "” ";
+            result << "“" << func << "” in ";
         }
         append_text_location_to( result, loc );
         return result;
