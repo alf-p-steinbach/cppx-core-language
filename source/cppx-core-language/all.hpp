@@ -10,5 +10,6 @@
 #include <cppx-core-language/tmp/all.hpp>
 #include <cppx-core-language/type-checking/all.hpp>
 #include <cppx-core-language/types/all.hpp>
+#include <cppx-core-language/x-propagation/all.hpp>
 
 #include <cppx-core-language-meta-macro/all.hpp>
