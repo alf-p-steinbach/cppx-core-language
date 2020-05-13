@@ -42,10 +42,8 @@ namespace cppx::definitions_ {
         const auto add_it = [&]( const C_str s )
             -> void
         {
-            if( not is_empty( result ) ) {
-                result << '\n';
-            }
-            result << s;
+            const bool is_first = is_empty( result );
+            result << (is_first? "• " : "\n• because ") << s;
         };
 
         for_each_description_line_from( x, add_it );

@@ -39,6 +39,11 @@ namespace cppx::_ {
         auto front() const      -> auto&    { return *m_first; }
         auto is_empty() const   -> Truth    { return (m_first == m_beyond); }
 
+        Span_():
+            m_first(),
+            m_beyond()
+        {}
+
         Span_( const Iterator first, const Iterator beyond ):
             m_first( first ),
             m_beyond( beyond )

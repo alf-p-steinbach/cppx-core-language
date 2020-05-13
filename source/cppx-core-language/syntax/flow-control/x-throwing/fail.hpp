@@ -48,8 +48,8 @@ namespace cppx::definitions_ {
         -> Truth
     { 
         return fail_<runtime_error>( ""s
-            << srcloc.funcname().value_or( "<unknown func>" ) << " - " << message << "\n"
-            << string( 4, ' ' ) << "in " << text_location_of( srcloc )
+            << srcloc.funcname().value_or( "<unknown func>" ) << " reported: “" << message << "”\n"
+            << string( 3, ' ' ) << "in " << text_location_of( srcloc )
             );
     }
 
