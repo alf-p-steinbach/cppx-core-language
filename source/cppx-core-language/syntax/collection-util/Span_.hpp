@@ -10,10 +10,12 @@
 #include <cppx-core-language/tmp/type-traits.hpp>                       // cppx::is_a_
 #include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 
-#include <iterator>     // std::(iterator_traits, random_access_iterator_tag)
+#include <iterator>     // std::(distance, iterator_traits, random_access_iterator_tag)
 
 namespace cppx::_ {
-    $use_std( iterator_traits, random_access_iterator_tag );
+    CPPX_USE_STD(
+        distance, iterator_traits, random_access_iterator_tag
+        );
 
     template< class Iterator >
     class Span_
@@ -63,6 +65,11 @@ namespace cppx::_ {
     inline auto span_of( const Iterator first, const Iterator beyond )
         -> Span_<Iterator>
     { return Span_<Iterator>( first, beyond ); }
+
+    template< class Iterator >
+    inline auto span_of( const Iterator first, const Size size )
+        -> Span_<Iterator>
+    { return Span_<Iterator>( first, first + size ); }
 
     template< class Iterator >
     inline auto is_empty( const Span_<Iterator>& span )
