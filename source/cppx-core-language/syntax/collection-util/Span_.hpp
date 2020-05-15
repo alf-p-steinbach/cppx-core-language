@@ -59,7 +59,7 @@ namespace cppx::_ {
     };
 
     template< class Item >
-    using Array_span_ = Span_<Type_<Item>*>;
+    using Array_span_ = Span_<Item*>;
 
     template< class Iterator >
     inline auto span_of( const Iterator first, const Iterator beyond )
