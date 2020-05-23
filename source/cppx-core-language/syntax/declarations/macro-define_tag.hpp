@@ -1,7 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
-#include <cppx-core-language/syntax/type-builders.hpp>      // cppx::P_
 /// \file
 /// \brief `$define_tag(NAME)` defines `NAME` as a ~unique pointer type in namespace `tag`.
 
@@ -17,6 +16,6 @@
 #define CPPX_DEFINE_TAG( name )                         \
     namespace tag                                       \
     {                                                   \
-        using name = cppx::P_<struct name ## _tag>;     \
+        using name = struct name ## _tag*;              \
     }                                                   \
     static_assert( tag::name() == nullptr, "- support for semicolon - " )
