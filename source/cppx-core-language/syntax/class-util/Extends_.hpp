@@ -9,7 +9,7 @@
 //        {}
 //    };
 //
-//    class Bar: Extends_<Foo>
+//    struct Bar: Extends_<Foo>
 //    {
 //        void something() override
 //        {
