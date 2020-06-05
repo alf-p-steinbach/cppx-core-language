@@ -13,7 +13,7 @@
 
 #include <c/string.hpp>     // strlen
 
-#include <exception>        // std::runtime_error
+#include <stdexcept>        // std::runtime_error
 #include <string>           // std::string
 #include <string_view>      // std::string_view
 

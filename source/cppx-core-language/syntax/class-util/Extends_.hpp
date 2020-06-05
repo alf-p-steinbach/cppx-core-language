@@ -35,6 +35,7 @@ namespace cppx::definitions_ {
         {}
     };
 
+    //-----------------------------------------
     template< class Base_class >
     using Extends_ = Base_<Base_class>;
 
