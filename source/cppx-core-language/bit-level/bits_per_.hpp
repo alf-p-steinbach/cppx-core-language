@@ -40,14 +40,14 @@ namespace cppx::_ {
 
 // Exporting namespaces.
 namespace cppx {
-    namespace bitlevel
+    namespace bit_level
     {
         CPPX_USE_CPPX(
             _::bits_per_,
             _::magnitude_bits_per_,
             _::value_bits_per_
             );
-    }  // namespace bitlevel
+    }  // namespace bit_level
 
-    using namespace bitlevel;
+    using namespace bit_level;
 }  // namespace cppx

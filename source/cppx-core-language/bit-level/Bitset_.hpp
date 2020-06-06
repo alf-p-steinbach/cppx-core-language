@@ -21,7 +21,7 @@ namespace cppx::definitions_ {
     CPPX_USE_CPPX(
         bits_per_, Enable_if_, is_enum_, Truth, Unsigned_int_,
         hopefully,
-        zero_to
+        zero_to, is_in
         );
     CPPX_USE_STD(
         bitset, initializer_list, out_of_range, underlying_type_t
@@ -46,7 +46,7 @@ namespace cppx::definitions_ {
             Ull result = 0;
             for( const Enum v: values_array ) {
                 const auto i = static_cast<long long>( v );
-                hopefully( 0 < i and i < n_bits )
+                hopefully( is_in( zero_to( n_bits ), i ) )
                     or (throw out_of_range( "Enum value outside range of bitset" ), 0);
                 hopefully( i < bits_per_<Ull> )
                     or( throw out_of_range( "Enum value outside bit index range of long long" ), 0 );
@@ -68,7 +68,7 @@ namespace cppx::definitions_ {
             const Enum values_array[] = {arg_1, more_args...};
             for( const Enum v: values_array ) {
                 const auto i = static_cast<Integer>( v );
-                hopefully( 0 < i and i < n_bits )
+                hopefully( is_in( zero_to( n_bits ), i ) )
                     or (throw out_of_range( "Enum value outside range of bitset" ), 0);
                 m_bits.set( i );
             }
@@ -86,7 +86,7 @@ namespace cppx::definitions_ {
             -> int
         { return m_bits.count(); }
 
-        constexpr auto operator[] ( const int i ) const
+        constexpr auto contains( const int i ) const
             -> Truth
         { return m_bits.test( i ); }
 
@@ -100,4 +100,19 @@ namespace cppx::definitions_ {
             }
         }
     };
+
+    template< class Enum, int n_bits >
+    inline auto is_in( const Bitset_<Enum, n_bits>& set, const Enum value )
+        -> Truth
+    { return set.contains( value ); }
+
+    namespace bitset_exports {
+        CPPX_USE_FROM_NAMESPACE( definitions_,
+            Bitset_,
+            is_in
+            );
+    } // namespace bitset_exports 
 }  // namespace cppx::definitions_
+
+namespace cppx::bitlevel            { using namespace cppx::definitions_::bitset_exports; }
+namespace cppx                      { using namespace cppx::definitions_::bitset_exports; }
