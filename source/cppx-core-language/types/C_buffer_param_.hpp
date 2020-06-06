@@ -1,6 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
+#include <c/assert.hpp>     // assert
+
 #include <cppx-core-language/syntax/type-builders.hpp>                  // cppx::(Type_, Raw_array_of_)
 #include <cppx-core-language/types/system-dependent/size-types.hpp>     // cppx::(Index, Size )
 
@@ -41,7 +43,7 @@ namespace cppx::c_level_stuff
         C_buffer_param_( const Size n_units, Raw_array_of_<n, Unit>& buffer ):
             m_p_buffer( buffer )
         { 
-            static_assert( n >= size_for( n_units ) );
+            assert( n >= size_for( n_units ) );
         }
     };
 } // namespace cppx::::c_level_stuff

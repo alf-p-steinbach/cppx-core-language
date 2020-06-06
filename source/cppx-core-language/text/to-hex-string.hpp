@@ -7,7 +7,7 @@
 #include <cppx-core-language/text/remove_leading_zeroes_in.hpp>             // cppx::remove_leading_zeroes_in
 #include <cppx-core-language/text/to-hex-in-buffer.hpp>                     // cppx::byte_span_to_hex_in
 #include <cppx-core-language/tmp/Enable_if_.hpp>                            // cppx::Enable_if_
-#include <cppx-core-language/tmp/type-traits.hpp>                           // cppx::(is_xxx_)
+#include <cppx-core-language/tmp/type-checkers.hpp>                         // cppx::(is_xxx_)
 
 #include <c/assert.hpp>     // assert
 #include <string>           // std::string

@@ -3,7 +3,7 @@
 
 #include <cppx-core-language/syntax/type-builders.hpp>          // cppx::P_
 #include <cppx-core-language/tmp/Enable_if_.hpp>                // cppx::Enable_if_
-#include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_base_and_derived_
+#include <cppx-core-language/tmp/type-checkers.hpp>             // cppx::is_base_and_derived_
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
 namespace cppx

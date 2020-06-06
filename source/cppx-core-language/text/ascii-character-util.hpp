@@ -7,7 +7,7 @@
 #include <cppx-core-language/types/system-dependent/Byte.hpp>   // cppx::Byte
 #include <cppx-core-language/text/ascii-character-names.hpp>    // cppx::ascii::/names/
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
-#include <cppx-core-language/tmp/type-traits.hpp>               // cppx::(is_integral_, is_a_char_type_)
+#include <cppx-core-language/tmp/type-checkers.hpp>             // cppx::(is_integral_, is_a_char_type_)
 #include <cppx-core-language/tmp/type-modifiers.hpp>            // cppx::(As_unsigned_)
 #include <cppx-core-language/text/C_str_.hpp>                   // cppx::C_str_
 

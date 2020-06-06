@@ -4,7 +4,7 @@
 #include <cppx-core-language/mix-in/Adapt_as_forward_iterator_.hpp> // cppx::mix_in::Adapt_as_forward_iterator_
 #include <cppx-core-language/types/Truth.hpp>                       // cppx::Truth
 #include <cppx-core-language/tmp/Enable_if_.hpp>                    // cppx::Enable_if_
-#include <cppx-core-language/tmp/type-traits.hpp>                   // cppx::is_integral_
+#include <cppx-core-language/tmp/type-checkers.hpp>                 // cppx::is_integral_
 #include <cppx-core-language/tmp/type-modifiers.hpp>                // cppx::As_unsigned_
 #include <cppx-core-language/calc/number-type-properties.hpp>       // cppx::(min_, max_)
 

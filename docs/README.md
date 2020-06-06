@@ -1090,7 +1090,7 @@ Specific headers:
 
 ~~~cpp
 #include <cppx-core-language/calc/number-type-properties.hpp>   // cppx::calc::*
-#include <cppx-core-language/tmp/type-traits.hpp>               // cppx::is_floating_point_
+#include <cppx-core-language/tmp/type-checkers.hpp>               // cppx::is_floating_point_
 #include <cppx-core-language/type-checking/type_name_of_.hpp>   // cppx::type_name_of_
 ~~~
 

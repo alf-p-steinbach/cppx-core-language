@@ -6,7 +6,7 @@
 
 #include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_CPPX, CPPX_USE_STD
 #include <cppx-core-language/bit-level/bits_per_.hpp>       // cppx::bits_per_
-#include <cppx-core-language/tmp/type-traits.hpp>           // cppx::is_unsigned_
+#include <cppx-core-language/tmp/type-checkers.hpp>         // cppx::is_unsigned_
 
 #include <bitset>           // std::bitset
 

@@ -7,7 +7,7 @@
 #include <cppx-core-language/syntax/declarations.hpp>                   // CPPX_USE_...
 #include <cppx-core-language/syntax/type-builders.hpp>                  // cppx::Type_
 #include <cppx-core-language/types/system-dependent/size-types.hpp>     // cppx::Size
-#include <cppx-core-language/tmp/type-traits.hpp>                       // cppx::is_a_
+#include <cppx-core-language/tmp/type-checkers.hpp>                     // cppx::is_a_
 #include <cppx-core-language/types/Truth.hpp>                           // cppx::Truth
 
 #include <iterator>     // std::(distance, iterator_traits, random_access_iterator_tag)
