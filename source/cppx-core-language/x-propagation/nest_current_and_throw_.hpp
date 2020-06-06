@@ -15,7 +15,7 @@ namespace cppx::definitions_ {
     );
 
     template< class X, class... More_args >
-    inline auto nest_current_and_throw_( const string& message, More_args&&... more_args )
+    constexpr inline auto nest_current_and_throw_( const string& message, More_args&&... more_args )
         -> Truth
     {
         // This checking is necessary for MinGW g++ 8.2.0. Not sure if the standard

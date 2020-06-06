@@ -15,7 +15,7 @@ namespace cppx::_ {
     //          or fail( "foo - to_wide_from_utf8 failed" );
     //      wide_s.resize( n_values );
 
-    inline auto hopefully( const Truth condition )
+    constexpr inline auto hopefully( const Truth condition )
         -> Truth
     { return condition; }
 

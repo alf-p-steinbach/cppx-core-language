@@ -107,8 +107,8 @@ namespace cppx::definitions_ {
     namespace basic_string_expression_exports {
         using namespace std::string_literals;       // E.g. ""s
         CPPX_USE_FROM_NAMESPACE( definitions_,
-            operator<<;
-        );
+            operator<<
+            );
     }  // basic_string_expression_exports
 }  // namespace cppx::definitions_
 
