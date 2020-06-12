@@ -9,8 +9,8 @@
 /// \make_name_ref{cppx,div_up} and
 /// \make_name_ref{cppx,mod}.
 
-#include <cppx-core-language/calc/general-operations.hpp>       // cppx::(squared, cubed)
-#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_CPPX
+#include <cppx-core-language/calc/general-operations.hpp>       // cppx::(squared, cubed, is_zero)
+#include <cppx-core-language/syntax/declarations.hpp>           // CPPX_USE_FROM_NAMESPACE
 #include <cppx-core-language/types/Truth.hpp>                   // cppx::Truth
 
 #include <c/limits.hpp>     // INT_MAX
@@ -18,7 +18,7 @@
 #include <algorithm>        // std::max
 #include <type_traits>      // std::(common_type_t, is_integral_v, is_unsigned_v)
 
-namespace cppx::_ {
+namespace cppx::definitions_ {
     template< class Int >
     constexpr inline auto is_even( const Int x )
         -> Truth
@@ -28,11 +28,6 @@ namespace cppx::_ {
     constexpr inline auto is_odd( const Int x )
         -> Truth
     { return x % 2 == 1; }
-
-    template< class Int >
-    constexpr inline auto is_zero( const Int x )
-        -> Truth
-    { return x == 0; }
 
     template< class Int >
     constexpr inline auto div_down( const Int a, const Int b ) noexcept
@@ -69,21 +64,19 @@ namespace cppx::_ {
     //    static_assert( (... and std::is_integral_v<Ints> ) );
     //    return std::max( {std::common_type_t<Ints...>( args )...} );
     //}
-}  // namespace cppx::_
 
-// Exporting namespaces.
-namespace cppx{
-    namespace calc
+    namespace integer_operations_exports
     {
-        CPPX_USE_CPPX(
-            _::is_even,
-            _::is_odd,
-            _::is_zero,
-            _::div_down,
-            _::div_up,
-            _::mod
+        CPPX_USE_FROM_NAMESPACE( definitions_,
+            is_even,
+            is_odd,
+            div_down,
+            div_up,
+            mod
         );
-    }  // namespace calc
+    }  // namespace integer_operations_exports
 
-    using namespace calc;
-}  // namespace cppx
+}  // namespace cppx::definitions_
+
+namespace cppx::calc    { using namespace cppx::definitions_::integer_operations_exports; }
+namespace cppx          { using namespace cppx::definitions_::integer_operations_exports; }
