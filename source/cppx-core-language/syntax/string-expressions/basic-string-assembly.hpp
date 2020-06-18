@@ -18,6 +18,7 @@ namespace cppx::definitions_ {
         ostream, ostringstream, string, string_view,
         fixed, scientific, uppercase, setprecision
         );
+    using namespace std::string_literals;
 
     // General fall-back.
     // Quite inefficient but this is the general case fallback. Client code might specialize
@@ -104,10 +105,16 @@ namespace cppx::definitions_ {
         -> string&&
     { return move( operator<<( s, value ) ); }
 
+    template< class Type >
+    inline auto string_from( Type const& value )
+        -> string
+    { return ""s << value; }
+
     namespace basic_string_expression_exports {
         using namespace std::string_literals;       // E.g. ""s
         CPPX_USE_FROM_NAMESPACE( definitions_,
-            operator<<
+            operator<<,
+            string_from
             );
     }  // basic_string_expression_exports
 }  // namespace cppx::definitions_
