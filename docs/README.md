@@ -1619,9 +1619,9 @@ The default iostreams presentation of floating point values, e.g. like `3.14159`
 
 For the `smart` function *n* specifies the total number of digits, while for the other functions it specifies the number of fractional part digits, a.k.a. decimals. For all four functions it defaults to 6 because that’s the iostreams default. The iostreams in turn default to 6 because that was/is the default in C’s `printf` family of functions.
 
-Each function produces an instance of `fp::Format_spec`, which contains the specified value as a `double`, and information about the desired formatting, which is then used by the string assembly `<<` machinery (and can be used in other ways by other code).
+Each function produces an instance of `fp::Text_spec`, which contains the specified value as a `double`, and information about the desired formatting, which is then used by the string assembly `<<` machinery (and can be used in other ways by other code).
 
-The `fp` namespace with these functions and the `Format_spec` class etc. is provided by the  “format-specs.hpp” header in the “text” folder, and that header is included by “string-expressions.hpp”.
+The `fp` namespace with these functions and the `Text_spec` class etc. is provided by the  “format-specs.hpp” header in the “text” folder, and that header is included by “string-expressions.hpp”.
 
 Exporting namespaces for the `fp` namespace:
 * the defining header’s own `cppx::format_specs`,

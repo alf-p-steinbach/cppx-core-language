@@ -2,7 +2,7 @@
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
 #include <cppx-core-language/syntax/declarations.hpp>       // CPPX_USE_STD, CPPX_USE_FROM_NAMESPACE
-#include <cppx-core-language/text/format-specs.hpp>         // cppx::fp::Format_spec
+#include <cppx-core-language/text/format-specs.hpp>         // cppx::fp::Text_spec
 #include <cppx-core-language/text/C_str_.hpp>               // cppx::C_str
 #include <cppx-core-language/types/Truth.hpp>               // cppx::Truth
 
@@ -34,7 +34,7 @@ namespace cppx::definitions_ {
     }
 
     // TODO: Replace with more fast-ish floating point output.
-    inline auto operator<<( string& s, const fp::Format_spec& fv )
+    inline auto operator<<( string& s, const fp::Text_spec& fv )
         -> string&
     {
         ostringstream stream;
@@ -112,6 +112,8 @@ namespace cppx::definitions_ {
 
     namespace basic_string_expression_exports {
         using namespace std::string_literals;       // E.g. ""s
+        using namespace cppx::format_specs;         // fp::*, integral::*
+
         CPPX_USE_FROM_NAMESPACE( definitions_,
             operator<<,
             string_from
