@@ -5,7 +5,7 @@
 
 #include <string>
 
-namespace cppx::_ {
+namespace cppx::definitions_ {
     CPPX_USE_STD( string );
 
     namespace fp {
@@ -34,20 +34,20 @@ namespace cppx::_ {
             ) -> Format_spec
         { return {value, {Scheme::smart, n_digits}}; }
 
-        inline auto fix(
+        inline auto fixed(
             const double        value,
             int                 n_digits        = 6
             ) -> Format_spec
         { return {value, {Scheme::fix, n_digits}}; }
 
-        inline auto sci(
+        inline auto scientific(
             const double        value,
             int                 n_digits        = 6
             ) -> Format_spec
         { return {value, {Scheme::sci, n_digits}}; }
 
 
-        inline auto sci_uc(
+        inline auto scientific_uc(
             const double        value,
             int                 n_digits        = 6
             ) -> Format_spec
@@ -67,23 +67,13 @@ namespace cppx::_ {
         };
     }  // namespace integral
 
-}  // namespace cppx::_
+    namespace format_specs_exports {
+        namespace fp        = definitions_::fp;
+        namespace integral  = definitions_::integral;
+    }  // namespace format_specs_exports
+}  // namespace cppx::definitions_
 
-// Exporting namespaces
-namespace cppx {
-    namespace format_specs {
-        namespace fp        = cppx::_::fp;
-        namespace integral  = cppx::_::integral;
-    }  // namespace format_specs
-
-    namespace text {
-        using namespace format_specs;
-    }  // namespace text
-       
-    // Convenience inclusion.
-    namespace syntax {
-        using namespace format_specs;
-    }  // namespace syntax
-
-    using namespace format_specs;
-}  // namespace cppx
+namespace cppx::format_specs    { using namespace cppx::definitions_::format_specs_exports; }
+namespace cppx::text            { using namespace cppx::definitions_::format_specs_exports; }
+namespace cppx::syntax          { using namespace cppx::definitions_::format_specs_exports; }
+namespace cppx                  { using namespace cppx::definitions_::format_specs_exports; }
