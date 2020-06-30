@@ -2,6 +2,7 @@
 #include <cppx-core-language/assert-cpp/is-c++17-or-later.hpp>
 
 #include <cppx-core-language/tmp/Enable_if_.hpp>
+#include <cppx-core-language/tmp/macro-type_of.hpp>
 #include <cppx-core-language/tmp/Require_.hpp>
 #include <cppx-core-language/tmp/Type_carrier_.hpp>
 #include <cppx-core-language/tmp/type-checkers.hpp>

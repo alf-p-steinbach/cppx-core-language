@@ -4,7 +4,6 @@
 /// \file
 /// \brief `$with` binds the specified declarator to `auto&& _` in the following braces block.
 
-
 #ifndef CPPX_NO_DOLLARS_PLEASE
 #   define $with        CPPX_WITH               ///<\dollarname{with}
 #   define $with_const  CPPX_WITH_CONST         ///<\dollarname{with_const}
@@ -26,6 +25,7 @@
 
 #define CPPX_WITH( ... ) \
     if ( auto&& _ [[maybe_unused]] = __VA_ARGS__; true )
+
 
 /// \brief Binds the specified declarator to `const auto& _` in the following braces block.
 ///
