@@ -36,6 +36,10 @@ namespace cppx::_ {
         -> string
     { return repeated_times( n, s ); }
 
+    inline auto operator*( const string_view& s, const int n )
+        -> string
+    { return repeated_times( n, s ); }
+
     // Optimization & clarity of `repeated_times( n, " " )`.
     inline auto spaces( const int n )
         -> string
